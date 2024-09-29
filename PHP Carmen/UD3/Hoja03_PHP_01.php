@@ -10,13 +10,9 @@
     
     <h2>Ejercicio 1</h2>
     <?php
-        //REVISAR
-        date_default_timezone_set('Europe/Madrid');
-        setlocale(LC_TIME, 'es_ES.UTF-8');
-
-        $fecha=new DateTime();
-        $fechaFormateada = strftime("%A, %d de %B de %Y", $fecha->getTimestamp());
-        echo "La fecha actual es: $fechaFormateada";
+        setlocale(LC_TIME, 'es');
+        $fecha = strftime('%A, %e de %B de %Y');
+        echo ucfirst($fecha);
     ?>
     
     <br><br>
@@ -143,16 +139,20 @@
     
     <h2>Ejercicio 10</h2>
     <?php
-    //Revisar
-        echo "Son numeros primos: ";
-        for($n1=2; $n1<=999; $n1++){
-            for($n2=2; $n2<$n1; $n2++){
-                $resto=$n1%$n2;
-                if($resto!=0){
-                    echo "$n1 ";
-                }
+        $n1=10;
+        $esPrimo=true;
+        for($n2=2; $n2<=sqrt($n1); $n2++){
+            $resto=$n1%$n2;
+            if($resto==0){
+                $esPrimo=false;
                 break;
             }
+        }
+        if($esPrimo){
+            echo "El numero $n1 es primo";
+        }
+        if(!$esPrimo){
+            echo "El numero $n1 no es primo";
         }
     ?>
     
@@ -172,7 +172,20 @@
     
     <h2>Ejercicio 12</h2>
     <?php
-
+        echo "Son numeros primos: ";
+        for($n1=3; $n1<=999; $n1++){
+            $esPrimo=true;
+            for($n2=2; $n2<=sqrt($n1); $n2++){
+                $resto=$n1%$n2;
+                if($resto==0){
+                    $esPrimo=false;
+                    break;
+                }
+            }
+            if($esPrimo){
+                echo "$n1 ";
+            }
+        }
     ?>
     
     <br><br>
