@@ -133,14 +133,20 @@
 
 <h2>Ejercicio 7</h2>
 <?php
-    
+// REVISAR
+    function calcularDigitoControl(string $numero, string $pesos): int{
+        $suma=0;
+        //Calcular la suma de los numeros con sus pesos respectivos
+        for($i=0; $i<count($numero); $i++){
+            $pesos=str_replace(",", "", $pesos);
+        }
+    }
 ?>
 
 <br><br><br>
 
 <h2>Ejercicio 8</h2>
 <?php
-//Revisar
     $variable="Comer algas es realmente sano";
 
     $posicionAlgas=strpos($variable, "algas");
@@ -150,7 +156,7 @@
     echo "La cadena con el reemplazo es: $reemplazoCadena <br>";
 
     $comprobarAnacardo=strpos($variable, "anacardo");
-    if($comprobarAnacardo>=1){
+    if($comprobarAnacardo !== false){
         echo "La palabra 'anacardo' esta en la cadena <br>";
     }else{
         echo "La palabra 'anacardo' no esta en la cadena <br>";
