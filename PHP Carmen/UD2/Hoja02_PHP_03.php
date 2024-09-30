@@ -30,7 +30,7 @@
         $mes=9;
         $año=2024;
 
-        if(checkdate($mes,$dia, $año)){
+        if(checkdate($mes, $dia, $año)){
             echo "La fecha $dia/$mes/$año es valida";
         }else{
             echo "La fecha $dia/$mes/$año no es valida";
