@@ -1,9 +1,0 @@
-function pintaRombo(diagonal){
-    let rombo=[];
-    for(let i=0; i<diagonal; i++){
-        let fila[];
-        for(let col=0; col<m-1; col++){
-            fila[col]=(col<n-i-1);
-        }
-    }//primera columna invertida vacia let fila=['_'];
-}
