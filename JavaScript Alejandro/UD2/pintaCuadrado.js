@@ -1,4 +1,4 @@
-function pintaCuadrado(lado){
+function pintaCuadrado1(lado){
     let result='';
     for(i=0; i<lado; i++){
         result+='* ';
@@ -7,7 +7,7 @@ function pintaCuadrado(lado){
     result+='\n';
 
     for(i=0; i<lado-2; i++){
-        result+='* ' + '  '.repeat(lado-2) + '* \n';
+        result+='* ' + '  '.repeat(lado-2) + '*\n';
     }
 
     for(i=0; i<lado; i++){
@@ -17,4 +17,4 @@ function pintaCuadrado(lado){
     return result;
 }
 
-console.log(pintaCuadrado(6))
+console.log(pintaCuadrado1(6));

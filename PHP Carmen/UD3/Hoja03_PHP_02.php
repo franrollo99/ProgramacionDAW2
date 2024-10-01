@@ -133,14 +133,14 @@
 
 <h2>Ejercicio 7</h2>
 <?php
-// REVISAR
+/* REVISAR
     function calcularDigitoControl(string $numero, string $pesos): int{
         $suma=0;
         //Calcular la suma de los numeros con sus pesos respectivos
         for($i=0; $i<count($numero); $i++){
             $pesos=str_replace(",", "", $pesos);
         }
-    }
+    }*/
 ?>
 
 <br><br><br>
