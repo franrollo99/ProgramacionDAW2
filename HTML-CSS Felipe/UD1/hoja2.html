@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desarrollo Web</title>
+</head>
+<body>
+    <form action="" style="margin-left: 150px; margin-right: 150px;">
+        <fieldset>
+            <legend>Informacion Personal</legend>
+            <fieldset>
+                <legend>Datos Basicos</legend>
+                <p>Nombre: <input type="text" placeholder="Escribe tu nombre"></p>
+                <p>Apellido: <input type="text" placeholder="Escribe tu apellido"></p>
+                <p>Correo Electronico: <input type="text"></p>
+                <p>Telefono: <input type="number" pattern="[0-9]{9}" placeholder="600000000"></p>
+            </fieldset>
+            <fieldset>
+                <legend>Detalles Adicionales</legend>
+                <p>Genero <br>
+                    <input type="radio" name="genero">Masculino <br>
+                    <input type="radio" name="genero">Femenino
+                </p>
+                <p>Fecha de nacimiento: <input type="date"></p>
+                <p>Nacionalidad: <input type="text" placeholder="Escribe tu pais"></p>
+            </fieldset>
+        </fieldset>
+        <fieldset>
+            <legend>Intereses y Habilidades</legend>
+            <fieldset>
+                <legend>Intereses</legend>
+                <p>Selecciona tus intereses: <br>
+                    <input type="checkbox">Deporte <br>
+                    <input type="checkbox">Musica <br>
+                    <input type="checkbox">Arte
+                </p>
+            </fieldset>
+            <fieldset>
+                <legend>Habilidades</legend>
+                <p>Selecciona tus Habilidades: <br>
+                    <select multiple>
+                        <option>Programacion</option>
+                        <option>Diseño</option>
+                        <option>Gestion de proyectos</option>
+                        <option>Comunicacion</option>
+                    </select>
+                </p>
+            </fieldset>
+        </fieldset>
+        <p>Comentarios Adicionales: <br>
+            <textarea placeholder="Escribe aqui tus comentarios..." cols="50" rows="5"></textarea>
+        </p>
+        <input type="submit"> <input type="reset" value="Limpiar">
+    </form>
+</body>
+</html>
