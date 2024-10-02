@@ -127,7 +127,7 @@
 
     <h2>Ejercicio 6</h2>
     <?php
-
+        $verbos=["andar", "comer", "dormir"];
     ?>
 </body>
 </html>

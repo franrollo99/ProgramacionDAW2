@@ -9,7 +9,7 @@
 
     <h2>Ejercicio 1</h2>
     <?php
-        include_once 'fecha.php';
+        include_once 'Hoja03_PHP_02Funciones.php';
         echo fechaEsp();
     ?>
 
