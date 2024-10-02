@@ -1,5 +1,5 @@
 function cuentaCaracteres(cadena){
-    
+        
 
     return resultado;
 }

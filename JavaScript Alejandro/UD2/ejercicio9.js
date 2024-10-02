@@ -1,7 +1,7 @@
-// Crea una función que reciba un número variable de parámetros y que los agrupe por tipo.
-// Después por cada tipo se mostrará el tipo y la colección de parámetros de ese tipo incluyendo
-// la posición original entre los parámetros
-
-function agruparPorTipo(){
+function agruparPorTipo(variable1, variable2){
     
 }
+
+
+variable1=prompt('Define una variable');
+variable2=prompt('Define otra variable');

@@ -31,34 +31,53 @@ function pintaTriangulo(altura){
 
 function pintaRombo(diagonal){
     let resultadoRombo='';
-    for(let i=1; i<=diagonal/2; i++){ //Recorre la altura
+    for(let i=1; i<=(diagonal/2)+0.5; i++){ //Recorre la altura
 
-        resultadoRombo+=' '.repeat(diagonal/2-i)  + '*'.repeat(2*i-1) + '\n';
+        resultadoRombo+=' '.repeat(diagonal/2-i+0.5)  + '*'.repeat(2*i-1) + '\n';
     }
-    for(let i=diagonal/2; i>=1; i--){ //Recorre la altura
+    if(diagonal%2==0){
+        for(let y=(diagonal/2); y>=1; y--){ //Recorre la altura invertida par
 
-        resultadoRombo+=' '.repeat(diagonal/2-i)  + '*'.repeat(2*i-1) + '\n';
+            resultadoRombo+=' '.repeat(diagonal/2-y)  + '*'.repeat(2*y-1) + '\n';
+        }
+    }else{
+        for(let y=(diagonal/2); y>=1; y--){ //Recorre la altura invertida impar
+
+            resultadoRombo+=' '.repeat(diagonal/2-y+1)  + '*'.repeat(2*y-2) + '\n';
+        }
     }
+
+
     return resultadoRombo;
 }
 
 
 
 do{
-    poligono=prompt('Introduce el nombre del poligono a generar ("cuadrado hueco", "triangulo" o "rombo":');
-    do{
-        tamaño=prompt('Introduce el tamaño del poligono siendo 3 el tamaño mas pequeño y 10 el mayor:');
-    }while(tamaño<3 || tamaño>10);
+    menu=parseInt(prompt('Introduce el numero asignado del poligono a generar: \n 1.Cuadrado hueco \n 2.Triangulo \n 3.Rombo \n 4.Borrar consola \n 0.Salir:'));
+    if(menu==1 || menu==2 || menu==3){
+        do{
+            tamaño=prompt('Introduce el tamaño del poligono siendo 3 el tamaño mas pequeño y 10 el mayor:');
+        }while(tamaño<3 || tamaño>10);
+    }
     
-    switch(poligono){
-        case 'cuadrado hueco':
+    switch(menu){
+        case 1:
             console.log(pintaCuadrado(tamaño));
             break;
-        case 'triangulo':
-            console.log(pintaTriangulo(tamaño))
+        case 2:
+            console.log(pintaTriangulo(tamaño));
             break;
-        case 'rombo':
-            alert(pintaRombo(tamaño))
+        case 3:
+            console.log(pintaRombo(tamaño));
             break;
+        case 4:
+            console.clear();
+            break;
+        case 0:
+            alert('Saliendo del programa');
+            break;
+        default:
+            alert('Introduce un numero valido');
     }
-}while(poligono!='cuadrado hueco' && poligono!='triangulo' && poligono!='rombo');
+}while(menu!=0);
