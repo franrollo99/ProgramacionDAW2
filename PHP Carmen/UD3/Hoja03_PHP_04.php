@@ -10,39 +10,21 @@
 
     <h3>Ejercicio 1</h3>
     <?php
-
-    include funciones.php;
-        class Circulo{
-            private $radio;
-
-            public function setRadio(float $radio): void{
-
-            }
-
-            public function getRadio(): float{
-                return $this->radio;
-            }
-
-            //magico set
-            public function __set($name, $value):void{
-                $this->name=$value;
-            }
-
-            //magico get
-            public function __get($name): mixed{
-                return $this->value;
-            }
-        }
+        include 'Hoja03_PHP_04Funciones.php';
 
         //Crear un objeto de la clase circulo
-        $circulo=new Circulo(radio:9);
+        $circulo=new Circulo(9);
+        echo "El radio del circulo es: " . $circulo->getRadio() . "<br>";
+
+        $circulo->setRadio(15);
+        echo "El radio del circulo es: " . $circulo->getRadio();
     ?>
 
     <br><br><br>
     
     <h3>Ejercicio 2</h3>
     <?php
-
+        
     ?>
 
     <br><br><br>
