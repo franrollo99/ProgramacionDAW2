@@ -158,7 +158,7 @@
             private $elementosVoladores;
 
             public function __construct(array $elementosVoladores){
-                $this=>elementosVoladores=$elementosVoladores;
+                //$this=>elementosVoladores=$elementosVoladores;
             }
         }
 
