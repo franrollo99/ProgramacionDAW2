@@ -112,5 +112,35 @@
             }
         }
       ?>
+
+
+
+    <!-- EJERCICIO 2 -->
+    <?php
+        abstract class Medico{
+            protected $nombre;
+            protected $edad;
+            protected $turno;
+
+            public function __construct(string $nombre, int $edad, string $turno){
+                $this->nombre=$nombre;
+                $this->edad=$edad;
+                $this->turno=$turno;
+            }
+        }
+
+        class Familia extends Medico{
+            private $num_pacientes;
+
+            public function __construct(string $nombre, int $edad, string $turno, int $num_pacientes){
+                parent::__construct($nombre, $edad, $turno);
+                $this->num_pacientes=$num_pacientes;
+            }
+        }
+
+        class Urgencia extends Medico{
+            private $unidad;
+        }
+    ?>
 </body>
 </html>
