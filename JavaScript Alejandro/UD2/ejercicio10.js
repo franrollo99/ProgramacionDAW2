@@ -1,9 +1,17 @@
 function cuentaCaracteres(cadena){
-        
+        let contador={}; //Creamos un diccionario para almacenar las apariciones de cada caracter
 
-    return resultado;
+        //Recorremos cada caracter de la cadena
+        for(let caracter of cadena){
+            //Si el caracter ya existe en el diccionario incrementamos su contador
+            if(contador[caracter]){
+                contador[caracter]++;
+            }else{
+                contador[caracter]=1;
+            }
+        }
+
+        return contador;
 }
 
-cadena=prompt("Escribe una cadena de texto")
-
-console.log(cuentaCaracteres(cadena));
+console.log(cuentaCaracteres("Mi nombre es fran y tengo 24 años, un saludo"));
