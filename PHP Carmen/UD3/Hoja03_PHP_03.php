@@ -119,15 +119,99 @@
     <h2>Ejercicio 5</h2>
     <?php
         $articulos=[
-            []
-        ]
+            ["codigo"=>"001", "descripcion"=>"lapiz", "existencias"=>150],
+            ["codigo"=>"002", "descripcion"=>"boli", "existencias"=>200],
+            ["codigo"=>"003", "descripcion"=>"goma", "existencias"=>100],
+            ["codigo"=>"004", "descripcion"=>"cuaderno", "existencias"=>50],
+            ["codigo"=>"005", "descripcion"=>"calculadora", "existencias"=>300]
+        ];
+
+        function mayor($articulos){
+            $articuloMasExistencias=NULL;
+            $maxExistencias=0;
+
+            foreach($articulos as $articulo){
+                if($articulo["existencias"]>$maxExistencias){
+                    $maxExistencias=$articulo["existencias"];
+                    $articuloMasExistencias=$articulo["descripcion"];
+                }
+            }
+
+            return $articuloMasExistencias;
+        }
+
+        function sumar($articulos){
+            $existenciasTotales=0;
+
+            foreach($articulos as $articulo){
+                $existenciasTotales+=$articulo["existencias"];
+            }
+
+            return $existenciasTotales;
+        }
+
+        function mostrar($articulos){
+            foreach($articulos as $articulo){
+                echo "Codigo: " .  $articulo["codigo"] . ", Descripcion: " . $articulo["descripcion"] . ", Existencias: " . $articulo["existencias"] . "<br>";
+            }
+        }
+
+        echo "El articulo con mas existencias es el/la " . mayor($articulos) . "<br>";
+        echo "La suma de todas las existencias es " . sumar($articulos) . "<br><br>";
+        echo "Este es el contenido del array articulos: <br>";
+        mostrar($articulos);
+
+
     ?>
 
     <br><br><br>
 
     <h2>Ejercicio 6</h2>
     <?php
-        $verbos=["andar", "comer", "dormir"];
+        $verbos=["andar", "comer", "vivir", "amar", "beber", "escribir"];
+        $verbo=$verbos[array_rand($verbos)]; //Elegimos un verbo al azar
+
+        function conjugarPresente($verbo){
+            $terminacion=substr($verbo, -2); //Con la funcion "substr" extraemos una parte de una cadena de texto. Con un valor negativo empezamos desde el final y sacamos los ultimos 2 caracteres de los verbos -ar, -er, -ir
+            $raiz=substr($verbo, 0, -2); //Saco la raiz sin la terminacion
+
+            if($terminacion == "ar"){
+                return[
+                    "Yo " . $raiz . "o",
+                    "Tu " . $raiz . "as",
+                    "El " . $raiz . "a",
+                    "Nosotros " . $raiz . "amos",
+                    "Vosotros " . $raiz . "ais",
+                    "Ellos " . $raiz . "an"
+                ];
+            }elseif ($terminacion == "er") {
+                return[
+                    "Yo " . $raiz . "o",
+                    "Tu " . $raiz . "es",
+                    "El " . $raiz . "e",
+                    "Nosotros " . $raiz . "emos",
+                    "Vosotros " . $raiz . "eis",
+                    "Ellos " . $raiz . "en"
+                ];
+                
+            }elseif ($terminacion == "ir") {
+                return[
+                    "Yo " . $raiz . "o",
+                    "Tu " . $raiz . "es",
+                    "El " . $raiz . "e",
+                    "Nosotros " . $raiz . "imos",
+                    "Vosotros " . $raiz . "is",
+                    "Ellos " . $raiz . "en"
+                ];
+            }
+        }
+
+        $conjugacion=conjugarPresente($verbo);
+
+        echo "La conjugacion del presente de indicativo del verbo $verbo es: <br>";
+        foreach($conjugacion as $verboConjugado){
+            echo "$verboConjugado<br>";
+        }
     ?>
 </body>
 </html>

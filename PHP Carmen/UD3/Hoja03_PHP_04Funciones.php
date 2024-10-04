@@ -7,7 +7,7 @@
 </head>
 <body>
 
-    <!-- <h3>Ejercicio 1</h3> -->
+    <!-- EJERCICIO 1 -->
     <?php
         class Circulo{
             private $radio;
@@ -40,7 +40,7 @@
 
 
 
-    <!-- <h3>Ejercicio 2</h3> -->
+    <!-- EJERCICIO 2 -->
     <?php
         class Coche{
             private $matricula;
@@ -96,7 +96,7 @@
 
 
 
-    <!-- <h3>Ejercicio 3</h3> -->
+    <!-- EJERCICIO 3 -->
     <?php
         class Monedero{
             private $dinero; //Euros, sin centimos, sino seria float
