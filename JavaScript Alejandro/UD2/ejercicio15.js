@@ -69,6 +69,5 @@ function CalcularNominaCategoria(trabajador){
     let total1;
     let total2;
     let total3;
-
-    
+    //switch case y for?  
 }
