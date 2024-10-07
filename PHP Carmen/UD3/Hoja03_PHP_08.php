@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desarrollo Web</title>
+</head>
+
+<body>
+
+    <h1>Ejemplo formularios GET</h1> 
+	<form action="ejemplo1.php" method="get">
+        <label for="nombre">Introduzca su nombre:</label>
+		<input type="text" id="nombre" name="nombre">
+		<br/> 
+        <label for="apellido">Introduzca sus apellidos:</label>
+		<input type="text" id="apellido" name="apellidos"><br/> 
+		<input type="submit" name="enviar" value="Enviar">
+	</form>
+
+    <h1>Ejemplo de formularios POST</h1> 
+	<form action="ejemplo1.php" method="post">
+        <label for="nombre">Introduzca su nombre:</label>
+		<input type="text" id="nombre" name="nombre">
+		<br/> 
+        <label for="apellido">Introduzca sus apellidos:</label>
+		<input type="text" id="apellido" name="apellidos"><br/> 
+		<input type="submit" name="enviar" value="Enviar">
+	</form>
+    
+</body>
+</html>
