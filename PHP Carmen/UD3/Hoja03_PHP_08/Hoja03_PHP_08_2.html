@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desarrollo web</title>
+</head>
+<body>
+    <h1>Metodo POST</h1>
+    <form name="input" action="Hoja03_PHP_08_2.php" method="post"> 
+        <label for="nombre">Nombre del alumno: </label>
+        <input type="text" name="nombre" id="nombre" />
+         <br />
+        <p>Módulos que cursa:</p> 
+        <input type="checkbox" name="modulos[]" value="DWES" />Desarrollo web en entorno servidor<br /> 
+        <input type="checkbox" name="modulos[]" value="DWEC" />Desarrollo web en entorno cliente<br /> <br /> 
+        <input type="submit" name="enviar" value="Enviar" />
+    </form>
+
+    <h1>Metodo GET</h1>
+    <form name="input" action="Hoja03_PHP_08_2.php" method="get"> 
+        <label for="nombre">Nombre del alumno: </label>
+        <input type="text" name="nombre" id="nombre" />
+         <br />
+        <p>Módulos que cursa:</p> 
+        <input type="checkbox" name="modulos[]" value="DWES" />Desarrollo web en entorno servidor<br /> 
+        <input type="checkbox" name="modulos[]" value="DWEC" />Desarrollo web en entorno cliente<br /> <br /> 
+        <input type="submit" name="enviar" value="Enviar" />
+    </form>
+</body>
+</html>
