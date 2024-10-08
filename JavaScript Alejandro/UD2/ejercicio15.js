@@ -6,13 +6,13 @@ let trabajadores=[
 
 function listarTrabajadores(trabajadores){
     for(trabajador of trabajadores){
-        //console.log(`Codigo: ${codigo}, Nombre: ${nombre}, Categoria: ${categoria}, Contratacion: ${contratacion}`)
-        console.log('Codigo: ' + trabajador.codigo + ', Nombre:' + trabajador.nombre + ', Categoria: ' + trabajador.categoria + ', Contratacion: ' + trabajador.contratacion);
+        console.log(`Codigo: ${codigo}, Nombre: ${nombre}, Categoria: ${categoria}, Contratacion: ${contratacion}`)
+        //console.log('Codigo: ' + trabajador.codigo + ', Nombre:' + trabajador.nombre + ', Categoria: ' + trabajador.categoria + ', Contratacion: ' + trabajador.contratacion);
     }
 }
 
 function crearTrabajadores(trabajadores){
-    let codigo=incremental>=9 ? `E0${incremental++}` : `E${incremental++}`;
+    let codigo=incremental<=9 ? `E0${incremental++}` : `E${incremental++}`;
     let nombre=prompt('Introduce el nombre del trabajador');
     let categoria=prompt('Introduce la categoria del trabajador');
     let contratacion=prompt('Introduce el año de contratacion');
@@ -25,6 +25,20 @@ function crearTrabajadores(trabajadores){
 
     trabajadores[trabajadores.length]=trabajador;
 }
+
+
+
+function eliminarTrabajador(trabajadores){
+    codigoTrabajador=prompt('Introduce el codigo del trabajador a eliminar');
+    for(trabajador of trabajadores){
+        if(codigoTrabajador===trabajador.codigo){
+            delete trabajador;
+            break;
+        }
+    }
+}
+
+
 
 function modificarTrabajador(trabajadores){
     let codigo=prompt('Introduce el codigo del trabajador');

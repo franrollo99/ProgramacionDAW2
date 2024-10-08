@@ -56,5 +56,3 @@ console.log(c!==5);
 //Operadores logicos
 console.log(true && false, 'operador AND'); //solo es true si ambos son true; es false si cualquiera de los dos es false
 console.log(true || false, 'operador OR'); //es true si cualquiera de los dos es true; solo es false si ambos son false
-
-//short-circuit

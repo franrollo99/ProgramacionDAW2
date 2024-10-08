@@ -28,9 +28,27 @@ let alumnos=[
     }
 ];
 
-function promocionaAlumno(alumno){
+function promocionaAlumno(alumnos, alumnoAprobado){
     for(let alumno of alumnos){
         let totalNotas=0;
         let todasAprobadas=true;
+        for(let asignatura of alumno.asignaturas){
+            totalNotas+=asignatura.nota;
+            
+            if(asignatura.nota<5){
+                todasAprobadas=false;
+            }
+        }
+
+        totalNotas/=alumno.asignaturas.length;
+
+        if(todasAprobadas===true){
+            console.log(`El alumno ${alumno.nombre} ha promocionado con ${totalNotas} de media`)
+        }else{
+            console.log(`El alumno ${alumno.nombre} repite con ${totalNotas} de media`)
+        }
+        
     }
 }
+
+promocionaAlumno(alumnos);
