@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
-        'name' => 'ejercicio/comprobariban',
+        'name' => 'fran/hoja03_composer_01',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '93cb8e01521e943c78b3b244f4207c6dffe9defc',
+        'reference' => '98d92a2fd62d0e5dbd60bc46d057f8cbd069c8a1',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -19,10 +19,10 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
-        'ejercicio/comprobariban' => array(
+        'fran/hoja03_composer_01' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '93cb8e01521e943c78b3b244f4207c6dffe9defc',
+            'reference' => '98d92a2fd62d0e5dbd60bc46d057f8cbd069c8a1',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

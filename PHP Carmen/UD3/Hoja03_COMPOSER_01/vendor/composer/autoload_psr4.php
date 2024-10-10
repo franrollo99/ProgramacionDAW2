@@ -6,5 +6,6 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Fran\\Hoja03Composer01\\' => array($baseDir . '/src'),
     'Brick\\Math\\' => array($vendorDir . '/brick/math/src'),
 );
