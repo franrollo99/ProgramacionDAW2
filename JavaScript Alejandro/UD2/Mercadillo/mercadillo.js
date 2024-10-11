@@ -77,22 +77,16 @@ function actualizarInventario(nombre, cantidad){
 
 // REVISAR
 function ordenarProductosPorPrecio(){
-    let resultado=[];
-    for(producto in inventario){
-        let prod=inventario[producto];
-        inventario[producto].cantidad.sort((a, b) =>{
-            if (a.prod.cantidad < b.prod.cantidad){
-                return -1;
-            }
-            if (a.prod.cantidad > b.prod.cantidad){
-                return 1;
-            }
-            if (a.prod.cantidad < b.prod.cantidad){
-                return -1;
-            }
-        });
-        console.log(inventario);
-    }
+    let arrayProductos=Object.entries(inventario); //Convierto el inventario en un array de productos donde cada elemento es un par [nombreProducto, detallesProducto]
+
+    let productosOrdenados=arrayProductos.sort((a, b) => a[1].precio - b[1].precio); //Ordenar los productos por el precio de forma ascendente
+
+    return productosOrdenados.map(producto => ({
+        nombre: producto[0],
+        cantidad: producto[1].cantidad,
+        precio: producto[1].precio,
+        categoria: producto[1].categoria
+    }));
 }
 
 function imprimirInventario(){
@@ -102,4 +96,11 @@ function imprimirInventario(){
     }
 }
 
-function 
+function filtrarProductosPorCategoria(categoria){
+    for(producto in inventario){
+        let propProd=inventario[producto];
+        if(propProd.categoria===categoria){
+            console.log(`Nombre: ${producto} Cantidad: ${propProd.cantidad} Precio: ${propProd.precio} Categoria; ${propProd.categoria}`);
+        }
+    }
+}
