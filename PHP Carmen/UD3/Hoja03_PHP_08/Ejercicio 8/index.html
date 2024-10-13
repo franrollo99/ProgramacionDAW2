@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desarrollo Web</title>
+</head>
+<body>
+    <form action="index.php" method="post"> 
+        <h1>TABLA DE MULTIPLICAR:</h1>
+        <label for="numero1">Elige el primer numero:</label>
+        <input type="number" name="numero1" id="numero1" required/>
+        <br>
+        <label for="numero2">Elige el segundo numero:</label>
+        <input type="number" name="numero2" id="numero2" required/>
+        <fieldset style="width: 500px;">
+            <legend>Seleccion la operacion:</legend>
+            <label for="suma">Suma</label>
+            <input type="radio" name="operacion" id="suma" value="suma" checked>
+            <label for="resta">Resta</label>
+            <input type="radio" name="operacion" id="resta" value="resta">
+            <label for="producto">Producto</label>
+            <input type="radio" name="operacion" id="producto" value="producto">
+            <label for="cociente">Cociente</label>
+            <input type="radio" name="operacion" id="cociente" value="cociente">
+        </fieldset>
+        <input type="submit" name="enviar" value="Enviar">
+    </form>
+</body>
+</html>

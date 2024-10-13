@@ -1,5 +1,9 @@
 <?php
+    include 'trait.php';
+
     class Aeropuerto{
+        use mensaje;
+
         private $elementosVoladores=[];
 
         public function __construct(){

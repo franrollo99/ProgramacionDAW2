@@ -1,10 +1,9 @@
 <?php
     if (isset($_POST['enviar'])) {
         $numero=$_POST['numero'];
-        if($numero%2===0){
-            echo "El numero $numero es par";
-        }else{
-            echo "El numero $numero es impar";
+        echo "TABLA DE MULTIPLICAR DEL $numero:";
+        for($i=1; $i<=10; $i++){
+            echo "<br>$i x $numero = " . ($i*$numero);
         }
     }else{
         echo $_SERVER['PHP_SELF'];
