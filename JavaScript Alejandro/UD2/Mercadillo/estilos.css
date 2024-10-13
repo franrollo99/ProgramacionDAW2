@@ -1,0 +1,30 @@
+/* Estilo para el contenedor principal */
+.contenedor {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Formularios a la izquierda */
+.izquierda {
+    width: 45%; /* Ajusta el ancho como prefieras */
+}
+
+/* Formulario de imprimir y el div de resultado a la derecha */
+.derecha {
+    width: 45%;
+    margin-left: auto;
+}
+
+/* Estilo general para los formularios */
+form {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+/* Estilo del div donde se mostrarán los resultados */
+#resultado {
+    border: 1px solid #000;
+    padding: 10px;
+    min-height: 100px;
+}

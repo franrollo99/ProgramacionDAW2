@@ -16,3 +16,11 @@ let cuadrado=pintaCuadrado(5);
 for(let lado of cuadrado){
     console.log(lado);
 }
+
+
+
+const autoinvocada=(function(){
+    console.log('hola');
+
+    return function(){console.log('adios');}
+})();
