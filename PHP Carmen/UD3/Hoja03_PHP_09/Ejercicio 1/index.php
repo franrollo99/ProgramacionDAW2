@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Desarrollo Web</title>
-    <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
     <form method="post">
@@ -27,52 +26,56 @@
             <option value="yuan">Yuan</option>
         </select>
         <br><br>
-        <input type="submit" name="convertir" id="convertir" value="Convertir">
+        <input type="submit" name="convertir" value="Convertir">
     </form>
 
     <br><br>
 
 
     <?php
-        $cantidad=$_POST['cantidad'];
-        $origen=$_POST['origen'];
-        $destino=$_POST['destino'];
-        $conversion=0;
+        if (isset($_POST['convertir'])){
+            $cantidad=$_POST['cantidad'];
+            $origen=$_POST['origen'];
+            $destino=$_POST['destino'];
+            $conversion=0;
 
-        switch($origen){
-            case "euros":
-                if($destino==="dolares"){
-                    $conversion=$cantidad*1.09;
-                    echo "$cantidad euros son $conversion dolares";
-                }elseif($destino==="yuan"){
-                    $conversion=$cantidad*7.72;
-                    echo "$cantidad euros son $conversion yuanes";
-                }else{
-                    echo "Has escogido la misma moneda de cambio";
-                }
-                break;
-            case "dolares":
-                if($destino==="euros"){
-                    $conversion=$cantidad*0.92;
-                    echo "$cantidad dolares son $conversion euros";
-                }elseif($destino==="yuan"){
-                    $conversion=$cantidad*7.07;
-                    echo "$cantidad dolares son $conversion yuanes";
-                }else{
-                    echo "Has escogido la misma moneda de cambio";
-                }
-                break;
-            case "yuan":
-                if($destino==="euros"){
-                    $conversion=$cantidad*0.13;
-                    echo "$cantidad yuanes son $conversion euros";
-                }elseif($destino==="dolares"){
-                    $conversion=$cantidad*0.14;
-                    echo "$cantidad yuanes son $conversion dolares";
-                }else{
-                    echo "Has escogido la misma moneda de cambio";
-                }
-                break;
+            switch($origen){
+                case "euros":
+                    if($destino==="dolares"){
+                        $conversion=$cantidad*1.09;
+                        echo "$cantidad euros son $conversion dolares";
+                    }elseif($destino==="yuan"){
+                        $conversion=$cantidad*7.72;
+                        echo "$cantidad euros son $conversion yuanes";
+                    }else{
+                        echo "Has escogido la misma moneda de cambio";
+                    }
+                    break;
+                case "dolares":
+                    if($destino==="euros"){
+                        $conversion=$cantidad*0.92;
+                        echo "$cantidad dolares son $conversion euros";
+                    }elseif($destino==="yuan"){
+                        $conversion=$cantidad*7.07;
+                        echo "$cantidad dolares son $conversion yuanes";
+                    }else{
+                        echo "Has escogido la misma moneda de cambio";
+                    }
+                    break;
+                case "yuan":
+                    if($destino==="euros"){
+                        $conversion=$cantidad*0.13;
+                        echo "$cantidad yuanes son $conversion euros";
+                    }elseif($destino==="dolares"){
+                        $conversion=$cantidad*0.14;
+                        echo "$cantidad yuanes son $conversion dolares";
+                    }else{
+                        echo "Has escogido la misma moneda de cambio";
+                    }
+                    break;
+            }
+        }else{
+            
         }
     ?>
 </body>
