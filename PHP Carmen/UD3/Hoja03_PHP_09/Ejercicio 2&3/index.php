@@ -9,7 +9,8 @@
     <form method="post">
         <h1>Buscador de peliculas</h1>
         <hr>
-        <p>Introduce el nombre de la pelicula en mayusculas</p>
+        <b>Introduce el nombre de la pelicula en mayusculas</b>
+        <br>
         <label for="buscador">Buscador</label>
         <input type="text" name="buscador" id="buscador" required>
         <br><br>
@@ -21,6 +22,14 @@
         if(isset($_POST['buscar'])){
             $busqueda=$_POST['buscador'];
             $peliculas=["EL LOBO DE WALL STREET", "SUPERMAN", "BATMAN", "SPIDERMAN", "ORIGEN", "12 AÑOS DE ESCLAVITUD"];
+            $imagenes=[
+                "EL LOBO DE WALL STREET"=>"imagenes/ellobodewallstreet.jpg",
+                "SUPERMAN"=>"imagenes/superman.jpg",
+                "BATMAN"=>"imagenes/batman.jpg",
+                "SPIDERMAN"=>"imagenes/spiderman.jpg",
+                "ORIGEN"=>"imagenes/origen.jpg",
+                "12 AÑOS DE ESCLAVITUD"=>"imagenes/12añosdeesclavitud.jpg"
+            ];
             $resultados = [];
 
             foreach($peliculas as $pelicula){
@@ -33,7 +42,11 @@
             if (count($resultados) > 0) {
                 echo "<h2>Resultados de búsqueda:</h2><ul>";
                 foreach ($resultados as $resultado) {
-                    echo "<li>$resultado</li>";
+                    echo "<li>$resultado<br>";
+                    // Mostrar la imagen correspondiente
+                    echo "<img src='" . $imagenes[$resultado] . "' alt='$resultado' height=200px>";
+                    echo "</li>";
+                    
                 }
                 echo "</ul>";
             } else {

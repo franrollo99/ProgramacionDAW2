@@ -7,15 +7,19 @@
 </head>
 <body>
     <?php
-        $marcas=array("Peugeot"=>[407, 307], "Toyota"=>["CHR", 444], "Lamborgini"=>["huracan", "aorus"]);
+        $marcas=array(
+            "Peugeot"=>[407, 3008, 508],
+            "Toyota"=>["C-HR", "Rav4", "Corolla Hatchback"],
+            "Lamborghini"=>["Huracan", "Urus", "Aventador"]
+        );
     ?>
     <form method=post>
         <h1>Busca tu coche</h1>
-        <label for="marca">Marca:*</label>
-        <select name="marca" id="marca">
+        <label for="marcas">Marca:*</label>
+        <select name="marcaSeleccionada" id="marcas">
             <?php
-                foreach($marcas as $marca=>$modelo){
-                    echo "<option value='marcas[]'>$marca</option>";
+                foreach($marcas as $marca=>$modelos){
+                    echo "<option value='$marca'>$marca</option>";
                 }
             ?>
         </select>
@@ -24,7 +28,23 @@
         <hr>
         <?php
             if(isset($_POST['mostrar'])){
-                echo "<h3>Coche</h3>";
+                $marcaSeleccionada=$_POST['marcaSeleccionada'];
+
+                echo "<form method='post'>";
+                    echo "<h3>Coche</h3>";
+                    foreach($marcas as $marca=>$modelos){
+                        if($marca===$marcaSeleccionada){
+                            foreach($modelos as $modelo){
+                                echo "<input type='text' value='$modelo'><br><br>";
+                            }
+                        }
+                    }
+                    
+                    echo "<input type='submit' name='actualizar' value='Actualizar'>";
+                echo "</form>";
+            }
+
+            if(isset($_POST['actualizar'])){
                 
             }
         ?>
