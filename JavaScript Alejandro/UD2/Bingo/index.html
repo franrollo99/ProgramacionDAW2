@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bingo</title>
+    <script src="bingo.js"></script>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <h1>Bingo en JavaScript</h1>
+    <form action="">
+        <label>Segundos: <input type="number" name="segundos"></label>
+        <input type="submit" name="comenzarPartida" value="Comenzar partida">
+    </form>
+    <h2>Resumen Jugadores</h2>
+    <!-- Codigo jugadores -->
+
+    <h2>Bolas Sacadas</h2>
+    <!-- Codigo bolas sacadas -->
+
+    <h2>Cartones de los Jugadores</h2>
+    <!-- divs cartones -->
+
+    <h2>Cartón Jugador Humano</h2>
+    <!-- Guardar en un array [[],[],[]] los numeros, huecos en blanco (*) y los recuadros marcados -->
+    <!-- generar 3 numeros por columna con random, quitar 1 numero random a cada columna, quitar 3 numeros random de cualquier columna sin repetir columna -->
+    <!-- ajustar el tamaño del div con witdh y height -->
+     <div> <!-- carton --> <!-- por cada columna meter las decenas correspondientes 0X-1x-2x-3x... -->
+        <div><!-- 9 divs, 1 por cada espacio, un for(9) --></div><!-- filas -->
+        <div></div>
+        <div></div>
+     </div>
+     <form action="">
+        <input type="submit" name="cantarLinea" value="Cantar Línea">
+        <input type="submit" name="cantarBingo" value="Cantar Bingo">
+     </form>
+</body>
+</html>
