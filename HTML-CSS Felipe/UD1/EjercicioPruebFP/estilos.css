@@ -1,0 +1,41 @@
+body{
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+header{
+    background-color: orange;
+    border-radius: 15px;
+}
+
+.button{
+
+}
+
+h1{
+    color: blue;
+    font-family: Arial, sans-serif;
+}
+
+h2{
+    color: white;
+    background-color: orange;
+}
+
+.contenedor{
+    display: flex;
+}
+
+.ContenidoPrincipal{
+    flex:50%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.columnaIzquierda{
+    flex: 25%;
+}
+
+.columnaDerecha{
+    flex: 15%;
+}
