@@ -1,35 +1,31 @@
-function pintaTriangulo(altura) {
-    let resultado = new Array(altura); // Creamos el array con la cantidad de filas=altura
+function pintaTriangulo(altura){
+    let resultado=[];
 
-    for (let i = 0; i < altura; i++) {
-        let fila = new Array(2 * altura - 1); // Creamos el array para cada fila con tamaño máximo del triángulo
-
-        // Inicializamos toda la fila con espacios en blanco
-        for (let col = 0; col < fila.length; col++) {
-            fila[col] = '  ';
+    // Recorremos la altura por filas
+    for (let i = 0; i<altura; i++){
+        let fila=new Array(2*altura-1);
+        
+        for(let col=0; col<fila.length; col++){
+            fila[col]='  ';
         }
 
-        // Añadimos los asteriscos
-        for (let col = altura - i - 1; col < altura + i; col++) {
-            fila[col] = '* ';
+        for(let col=altura-i-1; col<altura+i; col++){
+            fila[col]='* '
         }
 
-        // Construimos la cadena de texto manualmente
-        let filaTexto = '';
-        for (let col = 0; col < fila.length; col++) {
-            filaTexto += fila[col]; // Concatenamos cada elemento de la fila a la cadena
+        let filaTexto=' ';
+        for(let col=0; col<fila.length; col++){
+            filaTexto+=fila[col];
         }
 
-        resultado[i] = filaTexto; // Almacenamos la fila construida en el array resultado
+        resultado[i]=filaTexto;
     }
 
-    return resultado; // Devolvemos el array con las filas del triángulo
+    return resultado;
 }
 
-// Imprimir el triángulo
 let altura = parseInt(prompt('Introduce la altura del triangulo'));
-triangulo=pintaTriangulo(altura);
-
-for (let fila of triangulo) {
-    console.log(fila); // O puedes usar document.write para mostrarlo en la web
+triangulo=(pintaTriangulo(altura));
+for(resultado of triangulo){
+    console.log(resultado);
 }

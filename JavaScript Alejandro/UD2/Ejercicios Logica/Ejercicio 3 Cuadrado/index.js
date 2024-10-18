@@ -1,19 +1,30 @@
-function CuadradoloHueco(lado){
+function pintaCuadrado(lado){
     let resultado=[];
-    for(let i=0; i<lado; i++){
-        for(let h=0; h<lado; h++){
-            if(i===0 || i===lado-1 || h===0 || h===lado-1){
-                resultado+='* ';
+    
+    for(let i=0; i<lado; i++){ //filas
+        let fila=new Array(lado);
+
+        for(let col=0; col<lado; col++){ //columnas
+            if(i==0 || col==0 || i==lado-1 || col==lado-1){
+                fila[col]='* ';
             }else{
-                resultado+='  ';
+                fila[col]='  ';
             }
         }
-        resultado+='\n';
-    }
 
+        let filaTexto='';
+        for(let col=0; col<lado; col++){
+            filaTexto+=fila[col];
+        }
+
+        resultado[i]=filaTexto;
+    }
     return resultado;
 }
 
-let lado=prompt('Introduce el tamaño del lado');
+lado=prompt("Introduce el tamaño del lado del cuadrado");
 
-console.log(CuadradoloHueco(lado));
+cuadrado=pintaCuadrado(lado);
+for(resultado of cuadrado){
+    console.log(resultado);
+}
