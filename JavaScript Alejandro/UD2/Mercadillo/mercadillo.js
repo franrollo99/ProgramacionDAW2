@@ -14,20 +14,6 @@ const $negocio=(function(){
             inventario[nombre]={cantidad: cantidad, precio: precio, categoria: categoria};
             alert('Producto agregado');
         }
-
-        // let productoExiste=false;
-
-        // for(producto in inventario){
-        //     if(producto===nombre){
-        //         alert('El producto ya existe');
-        //         productoExiste=true;
-        //         break;
-        //     }
-        // }
-
-        // if(!productoExiste){
-        //     inventario[nombre]={cantidad: cantidad, precio: precio, categoria: categoria};
-        // }
     }
 
     function eliminarProducto(nombre){
@@ -41,20 +27,6 @@ const $negocio=(function(){
         }else{
             alert('El producto no existe');
         }
-
-        // let productoExiste=false;
-
-        // for(producto in inventario){
-        //     if(producto===nombre){
-        //         delete inventario[producto];
-        //         productoExiste=true;
-        //         break;
-        //     }
-        // }
-
-        // if(!productoExiste){
-        //     alert('El producto no existe');
-        // }
     }
 
     function buscarProducto(nombre){
@@ -65,23 +37,6 @@ const $negocio=(function(){
         }else{
             alert('El producto no existe');
         }
-
-        // let productoExiste=false;
-
-        // for(producto in inventario){
-        //     if(producto===nombre){
-        //         let propProd=inventario[producto];
-        //         for(prop in propProd){
-        //             console.log(`Nombre: ${producto} Cantidad: ${propProd.cantidad} Precio: ${propProd.precio} Categoria; ${propProd.categoria}`);
-        //         }
-        //         productoExiste=true;
-        //         break;
-        //     }
-        // }
-
-        // if(!productoExiste){
-        //     alert('El producto no existe');
-        // }
     }
 
     function actualizarInventario(nombre, cantidad){
@@ -100,37 +55,11 @@ const $negocio=(function(){
         }else{
             alert('El producto no existe');
         }
-
-        // let productoExiste=false;
-
-        // for(producto in inventario){
-        //     if(producto===nombre){
-        //         let prod=inventario[producto];
-        //         if(prod.cantidad+cantidad<=0){
-        //             prod.cantidad=0;
-        //             alert('Hace falta reponer el producto');
-        //         }else{
-        //             prod.cantidad+=cantidad;
-        //             }
-        //         productoExiste=true;
-        //         break;
-        //     }
-        // }
-
-        // if(!productoExiste){
-        //     alert('El producto no existe');
-        // }
     }
 
     function ordenarProductosPorPrecio(){
 
         return Object.entries(inventario).sort((a, b) => a[1].precio - b[1].precio);
-        
-        // let productosOrdenados=Object.entries(inventario).sort((a, b) => a[1].precio - b[1].precio); //Ordenar la matriz de pares clave-valor por el precio de forma ascendente
-
-        // productosOrdenados.forEach(producto=>
-        //     console.log(`Producto: ${producto[0]}, Precio: ${producto[1].precio}, Cantidad: ${producto[1].cantidad}, Categoría: ${producto[1].categoria}`)
-        // );
     }
 
     function imprimirInventario(){
@@ -141,11 +70,6 @@ const $negocio=(function(){
             const prod = inventario[nombre];
             resultadoDiv.innerHTML += `<p>Nombre: ${nombre} - Categoría: ${prod.categoria} - Cantidad: ${prod.cantidad} - Precio: ${prod.precio}</p>`;
         }
-
-        // for(producto in inventario){
-        //     let propProd=inventario[producto];
-        //     console.log(`Nombre: ${producto} Cantidad: ${propProd.cantidad} Precio: ${propProd.precio} Categoria: ${propProd.categoria}`);
-        // }
     }
 
     function filtrarProductosPorCategoria(categoria){
@@ -160,14 +84,6 @@ const $negocio=(function(){
         }
     }
 
-    //     for(producto in inventario){
-    //         let propProd=inventario[producto];
-    //         if(propProd.categoria===categoria){
-    //             console.log(`Nombre: ${producto} Cantidad: ${propProd.cantidad} Precio: ${propProd.precio} Categoria; ${propProd.categoria}`);
-    //         }
-    //     }
-    // }
-
     return {
         agregarProducto,
         eliminarProducto,
@@ -181,7 +97,7 @@ const $negocio=(function(){
 
 
 //Vinculacion de eventos a los formularios
-document.addEventListener('DOMContentLoaded', ()=>{
+document.addEventListener('load', function(){
 
     // El ID del formulario en document.getElementById()
     // Cuando pulso enviar se genera el siguiente evento
