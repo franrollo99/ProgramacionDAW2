@@ -11,5 +11,8 @@
     "minimum-stability": "stable",
     "require": {
         "phpmailer/phpmailer": "^6.9"
+    },
+    "scripts": {
+        "start": "php -s localhost:8001 -t public"
     }
 }
