@@ -1,0 +1,15 @@
+{
+    "name": "usuario/hoja04_bbdd_01",
+    "description": "Conexion a BBDD",
+    "type": "project",
+    "authors": [
+        {
+            "name": "FranPcClaseServidor",
+            "email": "fran.5oct99@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
+}
