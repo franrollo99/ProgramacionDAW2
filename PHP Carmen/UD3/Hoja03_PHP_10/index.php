@@ -7,11 +7,11 @@
 </head>
 <body>
     <?php
-        $marcas=array(
+        $marcas=[
             "Peugeot"=>[407, 3008, 508],
             "Toyota"=>["C-HR", "Rav4", "Corolla Hatchback"],
             "Lamborghini"=>["Huracan", "Urus", "Aventador"]
-        );
+        ];
     ?>
     <form method=post>
         <h1>Busca tu coche</h1>
