@@ -1,0 +1,11 @@
+{
+    "name": "daw2/ejercicio2",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Ejercicio2\\": "src/"
+        }
+    },
+    "minimum-stability": "stable",
+    "require": {}
+}

@@ -1,0 +1,13 @@
+{
+    "name": "vendor/name",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Vendor\\Name\\": "libreria/"
+        }
+    },
+    "minimum-stability": "stable",
+    "require": {
+        "fakerphp/faker": "^1.23"
+    }
+}
