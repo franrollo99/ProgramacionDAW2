@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1</title>
+    <link rel="stylesheet" href="ejercicio1.css">
+</head>
+<body>
+    <header>
+        <h1>Blog de Tecnología</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Articulos</a></li>
+                <li><a href="#">Tutoriales</a></li>
+                <li><a href="#">Contactos</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="articulos">
+            <article>
+                <h2>Guía de CSS</h2>
+                <p>Una guía rápida para aprender</p>
+                <p>En este artículo, te mostramos como comenzar a diseñar sitios web usando CSS.</p>
+                <a href="#" class="leer-mas">Leer más</a>
+            </article>
+            <article>
+                <h2>Introduccion a JavaScript</h2>
+                <p>Conceptos básicos sobre JavaScript</p>
+                <p>JavaScript es el lenguaje de programación de la web. Aprende cómo funciona</p>
+                <ul>
+                    <li><a href="#">Variables</a></li>
+                    <li><a href="#">Funciones</a></li>
+                    <li><a href="#">Eventos</a></li>
+                </ul>
+                <a href="#" class="leer-mas">Leer más</a>
+            </article>
+            <article>
+                <h2>Cómo usar HTML5</h2>
+                <p>Domina las nuevas etiquetas de HTML5</p>
+                <p>En este artículo aprenderás sobre las nuevas capacidades que ofrece HTML5</p>
+                <a href="#" class="leer-mas">Leer más</a>
+            </article>
+        </section>
+
+        <aside class="barra-lateral">
+            <h3>Últimos comentarios</h3>
+            <ul>
+                <li><strong>Juan:</strong> Excelente artículo de JavaScript.</li>
+                <li><strong>Ana:</strong> Muy útil la guía de CSS.</li>
+                <li><strong>Carlos:</strong> HTML5 está revolucionando el desarrollo web.</li>
+            </ul>
+        </aside>
+
+        <section class="formulario-contacto">
+            <h2>Formulario de Contacto</h2>
+            <form action="#" method="post">
+                <label for="nombre">Nombre: </label>
+                <input type="text" for="nombre" name="nombre" placeholder="Tu nombre" required>
+                <label>Correo electrónico: <input type="text" name="email" placeholder="tuemail@dominio.com" required></label>
+
+                <label for="mensaje">Mensaje:</label>
+                <textarea name="mensaje" id="mensaje" placeholder="Escribe tu mensaje" rows="4"></textarea>
+
+                <fieldset>
+                    <legend>Preferencia de contacto</legend>
+                    <label for="preferencia-email"></label>
+                    <input type="radio" name="preferencia" id="preferencia-email" value="email">Correo electrónico
+
+                    <label for="preferencia-teléfono"></label>
+                    <input type="radio" name="preferencia" id="preferencia-teléfono" value="teléfono">Teléfono
+                </fieldset>
+                
+                <label for="newsletter"></label>
+                <input type="checkbox" name="newsletter" id="newsletter" checked>Suscribirse a la newsletter
+
+                <input type="submit" name="enviar">
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Blog de Tecnología</p>
+        <p><a href="mailto:info@blogdetecnologia.com">Contacto</a></p>
+    </footer>
+</body>
+</html>

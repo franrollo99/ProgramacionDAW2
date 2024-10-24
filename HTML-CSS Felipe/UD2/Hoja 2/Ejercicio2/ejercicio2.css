@@ -1,0 +1,53 @@
+h1{
+    font-family: Arial;
+    font-size: 38px;
+    color: #333333;
+}
+
+h2{
+    font-family: Verdana;
+    font-size: 24px;
+    color: #1a5eab;
+}
+
+p{
+    font-family: 'Times New Roman';
+    font-size: 14px;
+    color: #444444;
+}
+
+.categories li{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#main-header{
+    background-color: #f8f8f8f8;
+}
+
+article header{
+    margin: 15px;
+    border-bottom: 1px solid #dddddd;
+}
+
+section>article{
+    padding: 20px;
+}
+
+.categories a:hover{
+    color: #ff0000;
+}
+
+tr:nth-child(odd){
+    background-color: #f2f2f2;
+}
+
+p::first-letter{
+    font-size: 22px;
+    color: #1a5eab;
+}
+
+article > header h2::before{
+    content: "-";
+}
+
