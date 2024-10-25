@@ -9,8 +9,21 @@
 <body>
     <?php
         include_once 'validaciones.php';
+
+        $contactos = [
+            ["nombre"=>"Juan Perez", "email"=>"juan.perez@gmail.com", "telefono"=>652678987],
+            ["nombre"=>"Maria Lopez", "email"=>"maria.lopez@gmail.com", "telefono"=>656714560],
+        ];
+
+        if(isset($_POST['agregarContacto'])){
+            $nombre=$_POST['nombre'];
+            $correo=$_POST['correo'];
+            $telefono=$_POST['telefono'];
+
+            $contacto[]=["nombre"=>$nombre, "email"=>$correo, "telefono"=>$telefono];
+        }
     ?>
-    <form action="" method="POST">
+    <form action="" method="post">
         <h1>Gestion de Contactos</h1>
         <label for="nombre">Nombre: </label>
         <input type="text" name="nombre" id="nombre" required>
@@ -25,16 +38,6 @@
     </form>
     
     <br>
-    
-    <?php
-        include_once 'validaciones.php';
-
-        $contactos = [
-            ["nombre"=>"Juan Perez", "email"=>"juan.perez@gmail.com", "telefono"=>652678987],
-            ["nombre"=>"Maria Lopez", "email"=>"maria.lopez@gmail.com", "telefono"=>656714560],
-        ];
-
-    ?>
 
     <table>
         <tr>

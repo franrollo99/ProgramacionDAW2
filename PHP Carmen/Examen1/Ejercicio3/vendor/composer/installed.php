@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
-        'name' => 'vendor/name',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => null,
+        'name' => 'usuario/ejercicio3',
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
+        'reference' => 'b515deae24515eb6f5dcfafdaf0d425b11204983',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -37,10 +37,10 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
-        'vendor/name' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => null,
+        'usuario/ejercicio3' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => 'b515deae24515eb6f5dcfafdaf0d425b11204983',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
