@@ -11,25 +11,50 @@
         include_once 'validaciones.php';
 
         $contactos = [
-            ["nombre"=>"Juan Perez", "email"=>"juan.perez@gmail.com", "telefono"=>652678987],
-            ["nombre"=>"Maria Lopez", "email"=>"maria.lopez@gmail.com", "telefono"=>656714560],
+            [
+                "nombre"=>"Juan Perez",
+                "email"=>"juan.perez@gmail.com",
+                "telefono"=>652678987
+            ],
+            [
+                "nombre"=>"Maria Lopez",
+                "email"=>"maria.lopez@gmail.com",
+                "telefono"=>656714560
+            ]
         ];
 
-        if(isset($_POST['agregarContacto'])){
-            $nombre=$_POST['nombre'];
-            $correo=$_POST['correo'];
-            $telefono=$_POST['telefono'];
+        $mensaje=0;
 
-            $contacto[]=["nombre"=>$nombre, "email"=>$correo, "telefono"=>$telefono];
+        if(isset($_POST['agregarContacto'])){
+            $nombreVal=validarNombre($_POST['nombre']);
+            $emailVal=validarEmail($_POST['email']);
+            $telefonoVal=validarTelefono($_POST['telefono']);
+
+
+            if($nombreVal && $emailVal && $telefonoVal){
+                $nuevoContacto[]=[
+                    "nombre"=>$_POST['nombre'],
+                    "email"=>$_POST['email'],
+                    "telefono"=>$_POST['telefono']
+                ];
+
+                $contacto[]=$nuevoContacto;
+
+            }else{
+                
+            }
         }
     ?>
+
+
+
     <form action="" method="post">
         <h1>Gestion de Contactos</h1>
         <label for="nombre">Nombre: </label>
         <input type="text" name="nombre" id="nombre" required>
         <br><br>
-        <label for="correo">Correo Electronico: </label>
-        <input type="text" name="correo" id="correo" required>
+        <label for="email">Correo Electronico: </label>
+        <input type="text" name="email" id="email" required>
         <br><br>
         <label for="telefono">Telefono: </label>
         <input type="text" name="telefono" id="telefono">
