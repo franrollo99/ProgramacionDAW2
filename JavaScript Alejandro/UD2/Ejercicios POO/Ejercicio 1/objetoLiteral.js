@@ -12,7 +12,7 @@ const persona={
     },
     saludar: function(){
         let saludo=`Hola, me llamo ${this.nombre} y me gusta `;
-        for(hobbie of this.hobbies){
+        for(let hobbie of this.hobbies){
             saludo+=hobbie + ' ';
         }
         return saludo;
