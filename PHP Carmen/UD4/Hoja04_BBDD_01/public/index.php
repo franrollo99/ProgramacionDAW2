@@ -6,34 +6,31 @@
     <title>Document</title>
 </head>
 <body>
+    <?php
+        require_once "../vendor/autoload.php";
+        use Src\funcionesBD;
+    ?>
+
     <h1>Jugadores de la NBA</h1>
     <p>Equipo: 
         <select>
             <?php
-            // require_once dirname(__DIR__) . "/vendor/autoload.php";
-            // use Src\clases\funcionesBD;
-
-            // $equipos=funcionesBD::getEquipos();
-
-            // foreach($equipos as $equipo){
-            //     echo "<option>" . $equipo . "</option>";
-            // }
-            ?>
-        <select>
-    </p>
-
-
-    
-    <?php
-            require_once dirname(__DIR__) . "/vendor/autoload.php";
-            use Src\funcionesBD;
-
             $equipos=funcionesBD::getEquipos();
 
             foreach($equipos as $equipo){
-                echo "<p>" . $equipo . "</p>";
+                echo '<option>' . $equipo . '</option>';
             }
             ?>
-    
+        </select>
+        <br><br>
+        <input type="submit" name="mostrar" id="mostrar" value="Mostrar">
+        <hr>
+        <?php
+            $jugadores=funcionesBD::getJugadores();
+            foreach($jugadores as $jugador){
+                echo '<p>' . $jugador . '</p>';
+            }
+        ?>
+    </p>
 </body>
 </html>

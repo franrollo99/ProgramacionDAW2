@@ -6,15 +6,24 @@
     use PDOException;
 
     final class funcionesBD{
-        function getEquipos():array{
-            $dwes = ConexionBD::getConection();
-            $registros = $dwes‐>query("SELECT nombre FROM equipos");
+        static function getEquipos():array{
+            $dwes = conexionBD::getConnection();
+            $registros = $dwes->query("SELECT nombre from equipos");
             $resultado=[];
-            while($registro=$registros->fetch(PDO::FETCH_ASSOC)){
-                $resultado[]=$registro['nombre'];
+            while($registro=$registros->fetch(PDO::FETCH_OBJ)){
+                $resultado[]=$registro->nombre;
             }
     
             return $resultado;
+        }
+
+        static function getJugadores():array{
+            $dwes = conexionBD::getConnection();
+            $registrosJugadores=$dwes->query("SELECT nombre from jugadores");
+            $resultadoJugadores=[];
+            while($registroJugadores=$registroJugadoress->fetch(PDO::FETCH_OBJ)){
+                $resultadoJugadores[]=$registroJugadores->nombre;
+            }
         }
     }
 ?>
