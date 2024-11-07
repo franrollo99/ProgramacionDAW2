@@ -60,7 +60,11 @@ header h1, header h3{
     /* border: 3px solid blue; */
 }
 
-table, td{
+.secciones{
+    border: 3px solid red;
+}
+
+table{
     border-collapse: collapse;
     border: 1px solid black;
     background-color: rgb(95, 221, 147);
@@ -68,9 +72,31 @@ table, td{
     width: 100%;
 }
 
+td{
+    border: 1px solid black;
+    width: 50%;
+    text-align: center;
+}
+
 td a{
     font-size: 20px;
 }
+
+#foto1{
+    float: left;
+    margin-right: 1em;
+    width: 100px;
+}
+
+.secciones p{
+    text-align: justify;
+}
+
+
+
+
+
+
 
 .seccionDerecha{
     width: 20%;
