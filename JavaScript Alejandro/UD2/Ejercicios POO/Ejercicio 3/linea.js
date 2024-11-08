@@ -1,3 +1,5 @@
+import {Factura} from "./factura";
+
 class Linea{
     constructor(concepto, cantidad, precioUnitario){
         this.concepto=concepto;
@@ -5,3 +7,5 @@ class Linea{
         this.precioUnitario=precioUnitario;
     }
 }
+
+export {Linea};

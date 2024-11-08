@@ -7,3 +7,5 @@ class Utilidades{
         
     }
 }
+
+export {Utilidades};

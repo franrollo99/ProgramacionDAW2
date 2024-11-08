@@ -1,4 +1,6 @@
-class factura{
+
+
+class Factura{
     #clienteNIF;
 
     constructor(clienteNIF, fecha, hora, pagada, lineas){
@@ -29,3 +31,5 @@ class factura{
         
     }
 }
+
+export {Factura};
