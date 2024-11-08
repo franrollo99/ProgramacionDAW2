@@ -17,13 +17,17 @@
             return $resultado;
         }
 
-        static function getJugadores():array{
+        static function getJugadores(string $equipo): array {
             $dwes = conexionBD::getConnection();
-            $registrosJugadores=$dwes->query("SELECT nombre from jugadores");
-            $resultadoJugadores=[];
-            while($registroJugadores=$registroJugadoress->fetch(PDO::FETCH_OBJ)){
-                $resultadoJugadores[]=$registroJugadores->nombre;
+            $stmt = $dwes->prepare("SELECT nombre FROM jugadores WHERE equipo = :equipo");
+            $stmt->execute(['equipo' => $equipo]);
+            
+            $resultadoJugadores = [];
+            while ($registroJugadores = $stmt->fetch(PDO::FETCH_OBJ)) {
+                $resultadoJugadores[] = $registroJugadores->nombre;
             }
+            
+            return $resultadoJugadores;
         }
     }
 ?>
