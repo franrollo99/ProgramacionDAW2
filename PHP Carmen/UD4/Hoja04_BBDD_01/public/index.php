@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../estilos/estilo.css">
 </head>
 <body>
     <?php
@@ -12,15 +13,19 @@
     ?>
 
     <h1>Jugadores de la NBA</h1>
-    <form action="" method="POST">
+    <form action="" method="post">
         <label for="equipo">Equipo: </label>
         <select name="equipo" id="equipo">
 
                 <?php
                 $equipos=funcionesBD::getEquipos();
 
-                foreach($equipos as $equipo){
-                    echo '<option>' . $equipo . '</option>';
+                if(count($equipos)>0){
+                    foreach($equipos as $equipo){
+                        // Dejo el equipo seleccionado
+                        $selected = (isset($_POST['equipo']) && $_POST['equipo'] === $equipo) ? 'selected' : '';
+                        echo "<option value='$equipo' $selected>$equipo</option>";
+                    }
                 }
                 ?>
 
@@ -28,24 +33,23 @@
             <br><br>
             <input type="submit" name="mostrar" id="mostrar" value="Mostrar">
         </form>
-        <hr>
 
         <?php
             if (isset($_POST['mostrar'])) {
                 $equipoSeleccionado = $_POST['equipo'];
                 $jugadores = funcionesBD::getJugadores($equipoSeleccionado);
+                $peso = funcionesBD::getPeso($equipoSeleccionado);
                 
-                if ($jugadores) {
-                    echo "<h2>Jugadores del equipo: $equipoSeleccionado</h2>";
-                    echo "<table border='1'>";
-                    echo "<tr><th>Nombre</th></tr>";
-                    foreach ($jugadores as $jugador) {
-                        echo "<tr><td>" . htmlspecialchars($jugador) . "</td></tr>";
-                    }
-                    echo "</table>";
-                } else {
-                    echo "<p>No se encontraron jugadores para el equipo seleccionado.</p>";
+                echo "<table border='1'>";
+                echo "<tr><th>Nombre</th><th>Peso</th></tr>";
+                for($i=0; $i<count($jugadores); $i++){
+                    echo "<tr><td>$jugadores[$i]</td>";
+                    echo "<td>$peso[$i]</td></tr>";
                 }
+                // foreach ($jugadores as $jugador) {
+                //     echo "<tr><td>" . $jugador . "</td></tr>";
+                // }
+                echo "</table>";
             }
         ?>
 
