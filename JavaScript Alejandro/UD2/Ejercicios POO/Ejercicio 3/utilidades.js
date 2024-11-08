@@ -1,9 +1,9 @@
 class Utilidades{
-    serializarFactura(facturaOBJ){
+    static serializarFactura(facturaOBJ){
 
     }
 
-    deserializarFactura(facturaJSON){
+    static deserializarFactura(facturaJSON){
         
     }
 }
