@@ -1,0 +1,59 @@
+body{
+    background-color: #146356;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.pagina{
+    /* border: 3px solid blue; */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+.formulario{
+    /* border: 3px solid red; */
+    width: 45em;
+}
+
+form{
+    background-color: #F3C892;
+    border: 10px solid white;
+}
+
+h1, h3{
+    text-align: center;
+}
+
+h1, h1 + h3, h3 + h3{
+    color: #146356;
+}
+
+label[for="nombre"] + input{
+    width: 10em;
+    margin-right: 1em;
+}
+
+label[for="apellidos"] + input{
+    width: 20em;
+}
+
+label[for="correo"] + input{
+    width: 25em;
+}
+
+.labelOscuro, legend{
+    font-weight: bold;
+}
+
+fieldset{
+    border: 1px solid black;
+}
+
+input[type="submit"] + input{
+    margin-left: 1em;
+}
+
+p{
+    margin-bottom: 20px;
+    text-align: center;
+}
