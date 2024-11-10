@@ -4,64 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
+    <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
+    <div class="container">
+        <fieldset>
+            <legend><h1>Factura</h1></legend>
+            <form action="" id="formularioFactura">
+                <label for="clienteNif">NIF Cliente</label>
+                <input type="text" name="clienteNif" id="clienteNif">
+                <br><br>
+                <label for="fecha">Fecha</label>
+                <input type="date" name="fecha" id="fecha">
+                <br><br>
+                <label for="hora">Hora</label>
+                <input type="time" name="hora" id="hora">
+                <br><br>
+                <label for="pagado?">Pagado</label>
+                <input type="checkbox" name="pagado?" id="pagado?">
+                <br><br>
+                <input type="button" name="actualizar" id="actualizar" value="Actualizar">
+            </form>
+        </fieldset>
+        
+        <fieldset>
+            <legend><h1>Lineas de factura</h1></legend>
+            <form action="" id="formularioLinea">
+                <label for="concepto">Concepto</label>
+                <input type="text" name="concepto" id="concepto">
+                <br><br>
+                <label for="cantidad">Cantidad</label>
+                <input type="number" name="cantidad" id="cantidad">
+                <br><br>
+                <label for="precio">Precio</label>
+                <input type="number" name="precio" id="precio">
+                <br><br>
+                <input type="button" value="Agregar linea" name="agregarLinea" id="agregarLinea">
+                <input type="button" value="Eliminar linea" name="eliminarLinea" id="eliminarLinea">
+            </form>
+        </fieldset>
 
-    <fieldset>
-        <legend><h1>Factura</h1></legend>
-        <form action="" id="formularioFactura">
-            <label for="clienteNif">NIF Cliente</label>
-            <input type="text" name="clienteNif" id="clienteNif">
-            <br><br>
-            <label for="fecha">Fecha</label>
-            <input type="date" name="fecha" id="fecha">
-            <br><br>
-            <label for="hora">Hora</label>
-            <input type="time" name="hora" id="hora">
-            <br><br>
-            <label for="pagado?">Pagado</label>
-            <input type="checkbox" name="pagado?" id="pagado?">
-            <br><br>
-            <input type="button" name="actualizar" id="actualizar" value="Actualizar">
-        </form>
-    </fieldset>
-    
-    <br><br>
-    
-    <fieldset>
-        <legend><h1>Lineas de factura</h1></legend>
-        <form action="" id="formularioLinea">
-            <label for="concepto">Concepto</label>
-            <input type="text" name="concepto" id="concepto">
-            <br><br>
-            <label for="cantidad">Cantidad</label>
-            <input type="number" name="cantidad" id="cantidad">
-            <br><br>
-            <label for="precio">Precio</label>
-            <input type="number" name="precio" id="precio">
-            <br><br>
-            <input type="button" value="Agregar linea" name="agregarLinea" id="agregarLinea">
-            <input type="button" value="Eliminar linea" name="eliminarLinea" id="eliminarLinea">
-        </form>
-    </fieldset>
+        <fieldset>
+            <legend><h1>Serializacion y deserializacion</h1></legend>
+            <form action="" id="SerializarDeserializar">
+                <label for="entrada">Entrada</label>
+                <input type="text" name="entrada" id="entrada">
+                <br>
+                <input type="button" name="serializar" id="serializar" value="Serializar">
+                <br><br>
+                <label for="salida">Salida</label>
+                <input type="text" name="salida" id="salida">
+                <br>
+                <input type="button" name="deserializar" id="deserializar" value="Deserializar">
+            </form>
+        </fieldset>
 
-    <br><br>
-    
-    <fieldset>
-        <legend><h1>Gestion de serializacion y deserializacion</h1></legend>
-        <form action="" id="SerializarDeserializar">
-            <label for="entrada">Entrada</label>
-            <input type="text" name="entrada" id="entrada">
-            <input type="button" name="serializar" id="serializar" value="Serializar">
-            <br><br>
-            <label for="salida">Salida</label>
-            <input type="text" name="salida" id="salida">
-            <input type="button" name="deserializar" id="deserializar" value="Deserializar">
-        </form>
-    </fieldset>
-
-    <div id="impresion"></div>
-
+        <div id="impresion"></div>
+    </div>
 </body>
 </html>
