@@ -29,7 +29,8 @@ document.addEventListener("DOMContentLoaded", function(){
     });
 
     document.getElementById("eliminarTarea").addEventListener("click", function(){
-        const indice=parseInt(document.getElementById("eliminarIndice").value); // Convertimos a entero el valor del input ya que se obtiene como cadena
+        // Convertimos a entero el valor del input ya que se obtiene como cadena
+        const indice=parseInt(document.getElementById("eliminarIndice").value);
         eliminarTarea(indice);
         document.getElementById("eliminarIndice").value='';
     });

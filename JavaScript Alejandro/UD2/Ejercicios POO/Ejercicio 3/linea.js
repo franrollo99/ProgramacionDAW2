@@ -1,9 +1,9 @@
-class Linea{
-    constructor(concepto, cantidad, precioUnitario){
-        this.concepto=concepto;
-        this.cantidad=cantidad;
-        this.precioUnitario=precioUnitario;
+class Linea {
+    constructor(concepto, cantidad, precioUnitario) {
+        this.concepto = concepto;
+        this.cantidad = cantidad;
+        this.precioUnitario = precioUnitario;
     }
 }
 
-export {Linea};
+export { Linea };
