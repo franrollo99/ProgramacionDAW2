@@ -37,19 +37,27 @@
         <?php
             if (isset($_POST['mostrar'])) {
                 $equipoSeleccionado = $_POST['equipo'];
-                $jugadores = funcionesBD::getJugadores($equipoSeleccionado);
-                $peso = funcionesBD::getPeso($equipoSeleccionado);
+                // $jugadores = funcionesBD::getJugadores($equipoSeleccionado);
+                // $peso = funcionesBD::getPeso($equipoSeleccionado);
                 
-                echo "<table border='1'>";
-                echo "<tr><th>Nombre</th><th>Peso</th></tr>";
-                for($i=0; $i<count($jugadores); $i++){
-                    echo "<tr><td>$jugadores[$i]</td>";
-                    echo "<td>$peso[$i]</td></tr>";
-                }
-                // foreach ($jugadores as $jugador) {
-                //     echo "<tr><td>" . $jugador . "</td></tr>";
+                // echo "<table border='1'>";
+                // echo "<tr><th>Nombre</th><th>Peso</th></tr>";
+                // for($i=0; $i<count($jugadores); $i++){
+                //     echo "<tr><td>$jugadores[$i]</td>";
+                //     echo "<td>$peso[$i]</td></tr>";
                 // }
-                echo "</table>";
+                // echo "</table>";
+
+                $jugadores = funcionesBD::getJugadoresConPeso($equipoSeleccionado);
+            
+                if (count($jugadores) > 0) {
+                    echo "<table border='1'>";
+                    echo "<tr><th>Nombre</th><th>Peso</th></tr>";
+                    foreach ($jugadores as $jugador) {
+                        echo "<tr><td>{$jugador['nombre']}</td><td>{$jugador['peso']}</td></tr>";
+                    }
+                    echo "</table>";
+                }
             }
         ?>
 
