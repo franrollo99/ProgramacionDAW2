@@ -1,88 +1,67 @@
-/* Estilos generales */
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f9;
-    color: #333;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     min-height: 100vh;
+    background-color: #f3f3f3;
 }
 
-/* Contenedor principal */
-.container {
-    width: 50%;
+#container {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
     padding: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    gap: 20px;
 }
 
-/* Estilos para cada fieldset */
-fieldset {
-    border: 2px solid #4CAF50;
-    border-radius: 8px;
-    padding: 15px;
-    margin-bottom: 20px;
+#formularios {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-legend h1 {
-    font-size: 1.2em;
-    color: #4CAF50;
+#formularios fieldset {
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+#formularios h1 {
     margin: 0;
+    font-size: 1.5em;
 }
 
 label {
     display: inline-block;
     width: 100px;
     font-weight: bold;
-    margin-top: 8px;
 }
 
 input[type="text"],
 input[type="date"],
 input[type="time"],
 input[type="number"],
-#entrada,
-#salida {
-    width: calc(100% - 120px);
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-top: 4px;
-    margin-bottom: 10px;
-}
-
+input[type="button"],
 input[type="checkbox"] {
-    transform: scale(1.2);
-    margin-left: 4px;
+    margin-top: 5px;
+    padding: 8px;
+    font-size: 1em;
+    width: calc(100% - 120px);
 }
 
-input[type="button"] {
-    background-color: #4CAF50;
-    color: white;
-    padding: 8px 16px;
-    margin: 5px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.9em;
-}
-
-input[type="button"]:hover {
-    background-color: #45a049;
-}
-
-/* Estilos específicos para el formulario de líneas de factura */
-#formularioLinea input[type="button"] {
-    margin-right: 10px;
-}
-
-/* Estilo del div de impresión */
 #impresion {
-    border-top: 1px solid #ddd;
-    padding-top: 15px;
-    margin-top: 20px;
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
 }
