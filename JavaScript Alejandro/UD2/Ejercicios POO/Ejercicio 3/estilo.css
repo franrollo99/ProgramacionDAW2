@@ -1,0 +1,67 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    background-color: #f3f3f3;
+}
+
+#container {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+    gap: 20px;
+}
+
+#formularios {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#formularios fieldset {
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+#formularios h1 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+label {
+    display: inline-block;
+    width: 100px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="time"],
+input[type="number"],
+input[type="button"],
+input[type="checkbox"] {
+    margin-top: 5px;
+    padding: 8px;
+    font-size: 1em;
+    width: calc(100% - 120px);
+}
+
+#impresion {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
