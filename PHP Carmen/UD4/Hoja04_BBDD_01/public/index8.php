@@ -14,6 +14,7 @@
 
     <h1>Traspaso de jugadores</h1>
     <hr>
+    <!-- En action pones la ubicacion del fichero -->
     <form action="" method="post">
         <label for="equipo">Equipo: </label>
         <select name="equipo" id="equipo">
@@ -25,6 +26,8 @@
                 foreach($equipos as $equipo){
                     // Dejo el equipo seleccionado
                     $selected = (isset($_POST['equipo']) && $_POST['equipo'] === $equipo) ? 'selected' : '';
+                    // Con la siguiente linea se bloquea la seleccion y fija la que has seleccionado
+                    //  " . (isset($_REQUEST['mostrar']) ? 'disabled' : '') . "
                     echo "<option value='$equipo' $selected>$equipo</option>";
                 }
             }
@@ -37,14 +40,14 @@
     </form>
 
     <?php
-            if (isset($_POST['mostrar'])) {
+            if (isset($_POST['mostrar']) || isset($_POST['traspaso'])) {
                 $equipoSeleccionado = $_POST['equipo'];
                 $jugadores = funcionesBD::getJugadores($equipoSeleccionado);
                 
                 echo "<table border='1'>";
                 echo "<tr><th>Nombre</th></tr>";
-                for($i=0; $i<count($jugadores); $i++){
-                    echo "<tr><td>$jugadores[$i]</td></tr>";
+                foreach ($jugadores as $jugador) {
+                    echo "<tr><td>$jugador</td></tr>";
                 }
                 echo "</table>";
 
@@ -76,6 +79,11 @@
     <h3>Baja y alta de jugadores:</h3>
     <hr>
     <form action="" method="post">
+
+        <!-- Creo un campo oculto para mantener el equipo seleccionado en el segundo formulario ya que cuando
+          se envia el segundo formulario, el boton mostrar del primer formulario no esta seleccinoado -->
+        <input type="hidden" name="equipo" value="<?php echo $equipoSeleccionado ?>">
+
         <label for="bajaJugador">Baja de jugador:</label>
         <select name="bajaJugador" id="bajaJugador">
 

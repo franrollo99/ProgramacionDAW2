@@ -62,18 +62,28 @@
 
         static function addJugador(string $equipo, string $nombre, string $procedencia, int $altura, int $peso, string $posicion): bool{
             $dwes = conexionBD::getConnection();
-            $insertado = $dwes->exec("INSERT INTO jugadores (nombre, procedencia, altura, peso, posicion, nombre_equipo) VALUES ('$nombre', '$procedencia', '$altura', '$peso', '$posicion', '$equipo')");
+
+            $consultaCodigo = $dwes->query("SELECT max(codigo)+1 FROM jugadores");
+
+            $siguienteCodigo = $consultaCodigo -> fetchColumn(); //Obtenemos el valor de la columna
+
+            $insertado = $dwes->exec("INSERT INTO jugadores (codigo, nombre, procedencia, altura, peso, posicion, nombre_equipo) VALUES ('$siguienteCodigo', '$nombre', '$procedencia', '$altura', '$peso', '$posicion', '$equipo')");
             return $insertado > 0;
         }
 
-        public static function actualizarPesoJugador($idJugador, $pesoNuevo) {
-            
-            $sql = "UPDATE jugadores SET peso = :peso WHERE id = :idJugador";
-            $stmt = $db->prepare($sql);
-            $stmt->bindParam(':peso', $pesoNuevo);
-            $stmt->bindParam(':idJugador', $idJugador);
-            
-            return $stmt->execute();
-        }
+        // try{
+            //     // $conexion->comit();
+            // // return "conexion exitosa";
+            // }catch(Exception $e)
+            // // $conexion->rollBack();
+            // // return "error en la transaccion: $e
+
+
+            // mejor en usarlo asi
+            // prepare
+            // bindParam
+            // execute
+
+        
     }
 ?>

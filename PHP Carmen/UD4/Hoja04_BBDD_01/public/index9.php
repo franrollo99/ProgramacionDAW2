@@ -48,7 +48,7 @@
                         // Crear un campo de texto para modificar el peso de cada jugador
                         echo "<tr>
                                 <td>{$jugador['nombre']}</td>
-                                <td><input type='number' name='pesoModificar[{$jugador['id']}]' value='{$jugador['peso']}' step='0.01'></td>
+                                <td><input type='number' name='pesoModificar' value='{$jugador['peso']}' step='0.01'></td>
                               </tr>";
                     }
                     echo "</table>";

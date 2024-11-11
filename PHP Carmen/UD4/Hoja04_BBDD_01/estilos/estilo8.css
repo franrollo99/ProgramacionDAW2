@@ -1,0 +1,102 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fc;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+    padding: 20px;
+    background-color: #007bff;
+    color: white;
+    margin: 0;
+}
+
+form {
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+label {
+    font-size: 1.1em;
+    color: #333;
+    margin-bottom: 10px;
+    display: block;
+}
+
+select, input[type="text"], input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    width: 100%;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+table {
+    width: 70%;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+th, td {
+    padding: 12px;
+}
+
+th {
+    background-color: #007bff;
+    color: white;
+}
+
+td {
+    background-color: #f9f9f9;
+}
+
+td:hover {
+    background-color: #f1f1f1;
+}
+
+hr {
+    border: 1px solid #ddd;
+    margin: 30px 0;
+}
+
+h3 {
+    color: #333;
+    font-size: 1.3em;
+    margin-bottom: 10px;
+}
+
+.no-players {
+    text-align: center;
+    font-size: 1.2em;
+    color: #666;
+}

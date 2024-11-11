@@ -1,0 +1,17 @@
+{
+    "name": "usuario/hoja04_bbdd_02",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Src\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "FranPcClaseServidor",
+            "email": "fran.5oct99@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
