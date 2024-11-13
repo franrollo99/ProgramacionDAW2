@@ -4,8 +4,7 @@
 
     $connection = conexionBD::getConnection();
     
-    if ($connection instanceof PDO)
-    {
+    if ($connection instanceof PDO){
         echo 'Conexión establecida correctamente';
     }
 ?>
