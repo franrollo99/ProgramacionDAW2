@@ -7,8 +7,8 @@
     $dotenv = \Dotenv\Dotenv::createImmutable(dirname(__DIR__, 1));
     $dotenv->load();
 
-    final class conexionBD
-    {
+    final class conexionBD{
+        
         private static ?PDO $connection = null;
 
         final private function __construct() {}
