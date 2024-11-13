@@ -1,15 +1,18 @@
 <?php
-    require_once dirname(__DIR__) . '/vendor/autoload.php';
-
-    $dotenv = \Dotenv\Dotenv::createImmutable(__DIR__);
-    $dotenv->load();
+    namespace Src;
     
-    final class ConnectionPDODotenv
+    use PDO;
+    use PDOException;
+
+    $dotenv = \Dotenv\Dotenv::createImmutable(dirname(__DIR__, 1));
+    $dotenv->load();
+
+    final class conexionBD
     {
         private static ?PDO $connection = null;
-    
+
         final private function __construct() {}
-    
+
         final public static function getConnection(): ?PDO
         {
             try {
@@ -19,6 +22,7 @@
                         username: $_ENV['DB_USERNAME'],
                         password: $_ENV['DB_PASSWORD'],
                     );
+                    self::$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 }
             } catch (PDOException $e) {
                 echo match ($e->getCode()) {
@@ -28,16 +32,9 @@
                     default => 'Error desconocido',
                 };
             }
-    
+
             return self::$connection;
         }
-         private function __clone() {}
-    }
-    
-    $connection = ConnectionPDODotenv::getConnection();
-    
-    if ($connection instanceof PDO)
-    {
-        echo 'Conexión establecida correctamente';
+        private function __clone() {}
     }
 ?>
