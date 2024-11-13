@@ -4,10 +4,8 @@ class Utilidades {
     }
 
     static deserializarFactura(facturaJSON) {
-        const obj = JSON.parse(facturaJSON); //Convertimos la cadena JSON en un objeto
-        const factura = new Factura(obj.clienteNIF, obj.fecha, obj.hora, obj.pagada); //Creamos un nuevo objeto de clase factura
-        obj.líneas.forEach(linea => factura.agregarLinea(linea.concepto, linea.cantidad, linea.precioUnitario));
-        return factura;
+        return JSON.parse(facturaJSON); //Convertimos la cadena JSON en un objeto
+        
     }
 }
 

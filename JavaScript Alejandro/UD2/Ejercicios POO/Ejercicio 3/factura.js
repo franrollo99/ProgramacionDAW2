@@ -1,4 +1,4 @@
-import { Linea } from "./linea";
+import { Linea } from "./linea.js";
 
 class Factura {
 
@@ -12,11 +12,9 @@ class Factura {
 
     get importeTotal() {
         let importeTotal = 0;
-
         for (let linea of this.lineas) {
             importeTotal += (linea.cantidad * linea.precioUnitario);
         }
-
         return importeTotal;
     }
 
@@ -25,14 +23,11 @@ class Factura {
     }
 
     imprimirFactura() {
-        let factura = `NIF Cliente: ${this.clienteNIF} \n Fecha: ${this.fecha} \n Hora: ${this.hora} \n Pagado: ${this.pagado} \n Lista de líneas: \n`;
-
+        let factura = `<p>NIF Cliente: ${this.clienteNIF} <br> Fecha: ${this.fecha} <br> Hora: ${this.hora} <br> Pagado: ${this.pagada ? 'Si' : 'No'}<br> Líneas:</p>`;
         for (let linea of this.lineas) {
-            factura += `Concepto: ${linea.concepto} - Cantidad: ${linea.cantidad} - Precio unitario: ${linea.precioUnitario} \n`;
+            factura += `<ul><li>Concepto: ${linea.concepto}</li> <li>Cantidad: ${linea.cantidad}</li> <li>Precio unitario: ${linea.precioUnitario}</li></ul>`;
         }
-
-        factura += `Importe total: ${this.importeTotal}`;
-
+        factura += `<p>Importe total: ${this.importeTotal}</p>`;
         return factura;
     }
 

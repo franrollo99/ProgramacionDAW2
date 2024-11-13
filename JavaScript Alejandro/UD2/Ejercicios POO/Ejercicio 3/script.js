@@ -1,22 +1,17 @@
-import { Factura } from "./factura";
-import { Utilidades } from "./utilidades";
+import { Factura } from "./factura.js";
+import { Utilidades } from "./utilidades.js";
 
 let factura = new Factura('', '', '', false);
 
 document.addEventListener('DOMContentLoaded', function () {
 
-  document.getElementById('actualizar').addEventListener('click', function () {
-    let divImprimir=document.getElementById('impresion');
-    divImprimir.innerHTML+='Hola';
+  document.getElementById('actualizarFactura').addEventListener('click', function () {
+    factura.clienteNIF = document.getElementById('clienteNIF').value;
+    factura.fecha = document.getElementById('fecha').value;
+    factura.hora = document.getElementById('hora').value;
+    factura.pagada = document.getElementById('pagada').checked;
+    imprimirFactura();
   });
-
-  // document.getElementById('actualizar').addEventListener('click', function () {
-  //   factura.clienteNif = document.getElementById('clienteNif').value;
-  //   factura.fecha = document.getElementById('fecha').value;
-  //   factura.hora = document.getElementById('hora').value;
-  //   factura.pagada = getElementById('pagado?').checked;
-  //   imprimirFactura();
-  // });
 
   document.getElementById('agregarLinea').addEventListener('click', function () {
     const concepto = document.getElementById('concepto').value;
@@ -27,23 +22,21 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   document.getElementById('eliminarLinea').addEventListener('click', function () {
-    factura.eliminarLínea();
+    factura.eliminarLinea();
     imprimirFactura();
   });
 
-  document.getElementById('serializar').addEventListener('click', function () {
+  document.getElementById('serializarFactura').addEventListener('click', function () {
     document.getElementById('salida').value = Utilidades.serializarFactura(factura);
   });
 
-  document.getElementById('deserializar').addEventListener('click', function () {
-    const jsonInput = document.getElementById('entrada').value;
-    factura = Utilidades.deserializararFactura(jsonInput);
+  document.getElementById('deserializarFactura').addEventListener('click', function () {
+    const JSON = document.getElementById('entrada').value;
+    factura = Utilidades.deserializarFactura(JSON);
     imprimirFactura();
   });
 
   function imprimirFactura() {
-    const resultadoDiv = document.getElementById('impresion');
-    resultadoDiv.innerHTML = '';
-    resultadoDiv.innerHTML = factura.imprimirFactura;
+    document.getElementById('impresion').innerHTML = factura.imprimirFactura();
   }
 });

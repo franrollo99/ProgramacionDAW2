@@ -1,0 +1,97 @@
+/* Estilo general para el cuerpo de la página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 20px;
+}
+
+h2 {
+    color: #333;
+}
+
+/* Estilo para los fieldsets */
+fieldset {
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #fff;
+}
+
+legend {
+    font-weight: bold;
+    color: #555;
+    padding: 0 10px;
+}
+
+/* Estilo para los formularios */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="time"],
+input[type="number"],
+input[type="checkbox"] {
+    padding: 8px;
+    margin: 5px 0 15px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+input[type="checkbox"] {
+    width: auto;
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Estilo para la impresión de la factura */
+#impresion {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;              /* Usamos flexbox para alinear los elementos horizontalmente */
+    flex-wrap: wrap;            /* Permite que se ajusten en varias líneas si es necesario */
+    margin: 0;
+}
+
+li {
+    margin-right: 20px;         /* Espaciado entre los elementos de la lista */
+    margin-bottom: 10px;        /* Espaciado inferior en caso de que se ajusten a nuevas líneas */
+}
+
+li::before {
+    content: '• ';              /* Añade un punto antes de cada línea */
+    color: #4CAF50;             /* Color verde */
+    font-size: 18px;            /* Tamaño del punto */
+    margin-right: 5px;          /* Espacio entre el punto y el texto */
+}
