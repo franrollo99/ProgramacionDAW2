@@ -20,7 +20,7 @@ class Libro{
     }
 
     generarHTMLCreacion(){
-
+        
     }
 
     generarHTMLPropiedades(){
