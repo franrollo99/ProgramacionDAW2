@@ -1,0 +1,16 @@
+ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    width: 50%;
+}
+
+li {
+    background-color: aquamarine;
+    flex: 1;
+    border: 1px solid white;
+}
+
+p{
+    font-family: Arial, Helvetica, sans-serif;
+}
