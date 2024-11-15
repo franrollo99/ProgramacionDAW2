@@ -3,6 +3,8 @@ import { Autor } from './autor';
 import { Biblioteca } from './biblioteca.js';
 import datos from './datos.js';
 
+const app = document.getElementById('app');
+
 $biblio = (function () {
     function generarHTMLListadoAutores() {
         return `
@@ -35,7 +37,14 @@ $biblio = (function () {
 
     }
 
+    
+});
+
+
+document.addEventListener('DOMContentLoaded', function () {
+
     document.getElementById('listadoAutores').addEventListener('click', function(){
-        app.innerHTML = $biblio.generarHTMLListadoLibros();
+        app.innerHTML = $biblio.generarHTMLListadoAutores();
     })
+
 });
