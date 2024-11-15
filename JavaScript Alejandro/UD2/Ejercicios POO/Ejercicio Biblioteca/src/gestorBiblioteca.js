@@ -6,15 +6,13 @@ import datos from './datos.js';
 const app = document.getElementById('app');
 
 $biblio = (function () {
+
     function generarHTMLListadoAutores() {
-        return `
-            <p>Autor: ${autor.nombre}</p>
-            <p>Nacionalidad: ${autor.nacionalidad}</p>
-            <p>Biografia: ${autor.biografia}</p>
-            <button>Ver</button>
-            <button>Editar</button>
-            <button>Borrar</button>
-        `;
+/* <div id="resultados"> tabla
+        <div>autor1</div> fila 1
+        <div>autor2</div> fila 2
+</div> */
+
     }
 
     function generarHTMLListadoBibliotecas() {

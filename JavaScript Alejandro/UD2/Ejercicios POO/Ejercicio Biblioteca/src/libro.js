@@ -19,8 +19,7 @@ class Libro {
             <form id="crearLibro">
                 <label>Titulo: <input type="text" id="titulo"></label>
                 <label>ISBN: <input type="text" id="isbn"></label>
-                <label>Autor ID: <input type="text" id="autorId"></label>
-                <label>Biblioteca ID: <input type="text" id="bibliotecaId"></label>
+                <button type="submit">Crear libro</button>
             </form>
         `;
     }
@@ -29,11 +28,11 @@ class Libro {
         return `
             <p>Titulo: ${this.titulo}</p>
             <p>ISBN: ${this.ISBN}</p>
-            <button id="editarLibro">Editar</button>
-            <button id="borrarLibro">Borrar</button>
-            <button id="listarPrestamos">Listar prestamos</button>
-            <button id="crearPrestamo">Crear prestamo</button>
-            <button id="devolverPrestamos">Devolver prestamo</button>
+            <button data-action="editar-libro">Editar</button>
+            <button data-action="borrar-libro">Borrar</button>
+            <button data-action="listar-prestamos">Listar prestamos</button>
+            <button data-action="crear-prestamo">Crear prestamo</button>
+            <button data-action="devolver-prestamo">Devolver prestamo</button>
         `;
     }
 
@@ -50,8 +49,13 @@ class Libro {
     generarHTMLListadoPrestamos() {
         return `
             <ul>
-                
-            </ul>
+            ${this.prestamos.map(prestamo => `
+                <li>
+                    <p>Fecha de Préstamo: ${prestamo.fechaPrestamo}</p>
+                    <p>Fecha de Devolución: ${prestamo.fechaDevolucion}</p>
+                </li>
+            `).join('')}
+        </ul>
         `;
     }
 }
