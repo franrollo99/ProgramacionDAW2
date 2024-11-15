@@ -7,12 +7,25 @@ const app = document.getElementById('app');
 
 $biblio = (function () {
 
-    function generarHTMLListadoAutores() {
-/* <div id="resultados"> tabla
-        <div>autor1</div> fila 1
-        <div>autor2</div> fila 2
-</div> */
+    let libros = datos.libros;
+    let autores = datos.autores;
+    let bibliotecas = datos.bibliotecas;
 
+    function generarHTMLListadoAutores() {
+    /* <div id="resultados"> tabla
+            <div>autor1</div> fila 1
+            <div>autor2</div> fila 2
+    </div> */
+
+        let html='';
+        html +='<h2>Autores</h2>';
+        autores.forEach(autor => {
+            html += `
+                <p>${autor.nombre}</p>
+                <p>${autor.nacionalidad}</p>
+                
+                `;
+        });
     }
 
     function generarHTMLListadoBibliotecas() {
