@@ -6,7 +6,7 @@ class Autor{
         this.nombre=nombre;
         this.nacionalidad=nacionalidad;
         this.bibiografia=bibiografia;
-        this.libros=[];
+        this.libros=[]; //map
     }
 
     generarHTMLCreacion(){

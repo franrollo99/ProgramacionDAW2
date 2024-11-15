@@ -1,36 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script type="module" src="gestorBiblioteca.js"></script>
+    <!-- <link rel="stylesheet" href="estilo.css"> -->
 </head>
+
 <body>
     <h1>Gestion de Biblioteca</h1>
 
-    <nav>
-        <ul>
-            <li><a href="#" onclick="">Listado de Autores</a></li>
-            <li><a href="#" onclick="">Listado de Libros</a></li>
-            <li><a href="#" onclick="">Listado de Bibliotecas</a></li>
-        </ul>
-    </nav>
-
-    <form action="">
-        <label for="nombreBuscar">Nombre</label>
-        <input type="text" name="nombreBuscar" id="nombreBuscar">
-        <br><br>
-        <label for="libro">Libro</label>
-        <input type="radio" name="libro" id="libro">
-        <label for="autor">Autor</label>
-        <input type="radio" name="autor" id="autor">
-        <br><br>
-        <button id="buscador">Mostrar</button>
-    </form>
-
-    <div id="app">
-        <!-- Formulario solicitado -->
-    </div>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#" id="listadoAutores">Listado de Autores</a></li>
+                <li><a href="#" id="listadoLibros">Listado de Libros</a></li>
+                <li><a href="#" id="listadoBibliotecas">Listado de Bibliotecas</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <form id="buscador">
+            <input type="text" id="buscarInput" placeholder="Buscar...">
+            <select id="buscarTipo">
+                <option value="libros">Libros</option>
+                <option value="autores">Autores</option>
+            </select>
+            <button type="submit">Buscar</button>
+        </form>
+        <div id="app"></div>
+    </main>
 </body>
+
 </html>
