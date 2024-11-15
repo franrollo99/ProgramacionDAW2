@@ -1,31 +1,40 @@
-import { Libro } from './libro';
-import { Autor } from './autor';
+import { Libro } from './libro.js';
+import { Autor } from './autor.js';
 import { Biblioteca } from './biblioteca.js';
 import datos from './datos.js';
 
-const app = document.getElementById('app');
 
-$biblio = (function () {
+const $biblio = (function () {
 
     let libros = datos.libros;
     let autores = datos.autores;
     let bibliotecas = datos.bibliotecas;
 
-    function generarHTMLListadoAutores() {
     /* <div id="resultados"> tabla
             <div>autor1</div> fila 1
             <div>autor2</div> fila 2
     </div> */
 
-        let html='';
-        html +='<h2>Autores</h2>';
+    function generarHTMLListadoAutores() {
+
+        const html = document.getElementById('app');
+        html.innerHTML = '';
+        html.innerHTML += `<table>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Nacionalidad</th>
+                    <th>Biografia</th>
+                </tr>`;
         autores.forEach(autor => {
-            html += `
-                <p>${autor.nombre}</p>
-                <p>${autor.nacionalidad}</p>
-                
-                `;
+            html.innerHTML += `
+                <tr>
+                    <td>${autor.nombre}</td>
+                    <td>${autor.nacionalidad}</td>
+                    <td>${autor.biografia}</td>
+                </tr>
+            `;
         });
+        html.innerHTML += `</table>`;
     }
 
     function generarHTMLListadoBibliotecas() {
@@ -48,14 +57,23 @@ $biblio = (function () {
 
     }
 
-    
-});
+    return {
+        generarHTMLListadoAutores,
+        generarHTMLListadoBibliotecas,
+        generarHTMLListadoLibros,
+        buscarLibrosPorTitulo,
+        buscarLibrosPorAutor,
+        generarHTMLResultadoBuscador
+    };
+})();
 
 
 document.addEventListener('DOMContentLoaded', function () {
 
-    document.getElementById('listadoAutores').addEventListener('click', function(){
-        app.innerHTML = $biblio.generarHTMLListadoAutores();
-    })
+    document.getElementById('listadoAutores').addEventListener('click', function(event) {
+        event.preventDefault();
+        $biblio.generarHTMLListadoAutores();
+
+    });
 
 });
