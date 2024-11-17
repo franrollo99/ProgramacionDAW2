@@ -1,0 +1,19 @@
+{
+    "name": "usuario/hoja04_bbdd_03",
+    "type": "project",
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Src\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Fran",
+            "email": "fran.5oct99@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable"
+}
