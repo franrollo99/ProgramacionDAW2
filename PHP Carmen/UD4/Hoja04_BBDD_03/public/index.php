@@ -8,9 +8,9 @@
 <body>
     <h1>Gestion del funicular</h1>
     <h2>Elige una opcion:</h2>
-    <a href="llegada.php">Realizar una reserva</a>
+    <a href="reserva.php">Realizar una reserva</a>
     <hr>
-    <a href="">Llegada al destino</a>
+    <a href="llegada.php">Llegada al destino</a>
     <hr>
     <a href="">Gestion de plazas</a>
     <hr>

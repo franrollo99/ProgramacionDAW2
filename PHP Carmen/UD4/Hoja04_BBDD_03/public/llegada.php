@@ -24,5 +24,8 @@
         }
     ?>
 
+    <br>
+    <a href="index.php">Pagina de inicio</a>
+
 </body>
 </html>
