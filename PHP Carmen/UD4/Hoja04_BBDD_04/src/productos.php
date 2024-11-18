@@ -1,21 +1,22 @@
 <?php
     namespace Src;
 
-    class Producto{
-        protected  $codigo;
-        protected  $precio;
-        protected  $nombre;
-        protected  $categoria;
+    abstract class Producto{
+        protected  int $codigo;
+        protected  float $precio;
+        protected  string $nombre;
+        protected  Categoria $categoria;
 
-        public function __construct($codigo, $precio, $nombre, $categoria){
+        public function __construct(int $codigo, float $precio, string $nombre, Categoria $categoria){
             $this->codigo=$codigo;
             $this->precio=$precio;
             $this->nombre=$nombre;
             $this->categoria=$categoria;
         }
 
-        public function __toString():string{
-            return "Codigo: $this->codigo, Nombre: $this->nombre, Precio: $this->precio, Categoria: $this->categoria";
-        }
+        //getters y setters
+        // public function __toString():string{
+        //     // return "Codigo: $this->getCodigo, Nombre: $this->nombre, Precio: $this->precio, Categoria: $this->categoria";
+        // }
     }
 ?>

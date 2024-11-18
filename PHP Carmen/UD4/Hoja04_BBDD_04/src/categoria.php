@@ -2,15 +2,15 @@
     namespace Src;
 
     class Categoria{
-        private $id;
-        private $nombre;
+        private int $id;
+        private string $nombre;
 
-        public function __construct($id, $nombre){
+        public function __construct(int $id, string $nombre){
             $this->id=$id;
             $this->nombre=$nombre;
         }
 
-        public function setId($id):void{
+        public function setId(int $id):void{
             $this->id=$id;
         }
 
@@ -18,7 +18,7 @@
             return $this->id;
         }
 
-        public function setNombre($nombre):void{
+        public function setNombre(string $nombre):void{
             $this->nombre=$nombre;
         }
 

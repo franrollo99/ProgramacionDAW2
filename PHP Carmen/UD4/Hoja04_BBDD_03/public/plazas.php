@@ -28,7 +28,6 @@
 
         <hr>
         <input type="submit" name="actualizar" value="Actualizar">
-        <button id="actualizar">Actualizar</button>
     </form>
     <br>
     <a href="index.html">Pagina de inicio</a>
@@ -60,7 +59,9 @@
 
         //Recargamos la pagina despues de usar el formulario para que se actualicen los datos
         // header("Location: " . $_SERVER['PHP_SELF']);
-        // exit;
+        header("Location: plazas.php?mensaje-$mensajeC");
+        exit;
+
     }
     ?>
 </body>
