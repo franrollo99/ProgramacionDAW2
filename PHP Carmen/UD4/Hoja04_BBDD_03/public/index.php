@@ -12,7 +12,7 @@
     <hr>
     <a href="llegada.php">Llegada al destino</a>
     <hr>
-    <a href="">Gestion de plazas</a>
+    <a href="plazas.php">Gestion de plazas</a>
     <hr>
 </body>
 </html>

@@ -33,6 +33,21 @@
             return $resultado;
         }
 
+        static function getPlazas(){
+            $conexion=conexionBD::getConnection();
+            $consulta=$conexion->query('SELECT numero, precio from plazas');
+            $resultado=[];
+
+            while($registro=$consulta->fetch(PDO::FETCH_OBJ)){
+                $resultado[]=['numero'=>$registro->numero, 'precio'=>$registro->precio];
+            }
+            return $resultado;
+        }
+
+        static function actualizarPrecios($precios){
+            $conexion=conexionBD::getConnection();
+        }
+
         static function reserva($nombre, $dni, $asiento){
             $conexion=conexionBD::getConnection();
             $ok=true;
