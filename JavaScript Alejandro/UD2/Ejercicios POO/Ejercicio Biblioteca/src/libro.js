@@ -3,7 +3,7 @@ class Libro {
         this.libroId = libroId;
         this.titulo = titulo;
         this.ISBN = ISBN;
-        this.autorId = autorId;  // Corregido de autorld a autorId
+        this.autorId = autorId;
         this.bibliotecaId = bibliotecaId;
         this.prestamos = prestamos;
     }
