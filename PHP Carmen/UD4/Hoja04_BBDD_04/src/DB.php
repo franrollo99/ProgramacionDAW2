@@ -10,15 +10,12 @@
 
         }
 
-        public function getInstance():DB{
-            return;
-        }
+        // public function getInstance():DB{
+        //     return;
+        // }
 
         private function getConexion(){
 
         }
-
-        public function 
-
     }
 ?>

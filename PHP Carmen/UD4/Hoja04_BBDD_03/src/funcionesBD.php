@@ -84,6 +84,7 @@ final class funcionesBD
 
         if ($ok) {
             $conexion->commit();
+            //Hay que recargar manualmente para ver que se han actualizado los datos
             echo "Los precios han sido actualizados correctamente.<br>";
         } else {
             $conexion->rollBack();

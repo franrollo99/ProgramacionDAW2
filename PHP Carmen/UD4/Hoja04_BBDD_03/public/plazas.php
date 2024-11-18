@@ -28,8 +28,9 @@
 
         <hr>
         <input type="submit" name="actualizar" value="Actualizar">
+        <button id="actualizar">Actualizar</button>
     </form>
-    <br><br>
+    <br>
     <a href="index.html">Pagina de inicio</a>
     <br><br>
 
