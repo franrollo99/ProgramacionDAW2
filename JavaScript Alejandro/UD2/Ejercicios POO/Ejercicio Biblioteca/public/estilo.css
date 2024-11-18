@@ -1,74 +1,203 @@
+/* Estilos básicos del cuerpo */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 h1 {
-    color: #333;
-    margin: 20px 20px;
+    padding-left: 1em;
 }
 
+/* Encabezado */
 header {
-    background-color: #007acc;
-    color: white;
-    padding: 10px 0;
+    background-color: #2c3e50;
+    color: #fff;
+    padding: 1rem;
+    text-align: center;
 }
 
 nav ul {
-    list-style: none;
+    list-style-type: none;
     padding: 0;
-    margin: 0;
 }
 
 nav ul li {
     display: inline;
-    margin: 0 15px;
+    margin: 0 1rem;
 }
 
-nav ul li a {
-    color: white;
-    text-decoration: none;
-}
-
-nav ul li a:hover {
-    text-decoration: underline;
-}
-
-main {
-    max-width: 800px;
-    margin: 20px 20px;
-    padding: 20px;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-}
-
-form#buscador {
-    margin-bottom: 20px;
-}
-
-form#buscador input,
-form#buscador select,
-form#buscador button {
-    padding: 10px;
-    margin: 0 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-form#buscador button {
-    background-color: #007acc;
+button {
+    background-color: #3498db;
     color: white;
     border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
     cursor: pointer;
+    border-radius: 5px;
 }
 
-form#buscador button:hover {
-    background-color: #005fa3;
+button:hover {
+    background-color: #2980b9;
+}
+
+.buscador {
+    margin-top: 1rem;
+}
+
+.buscador input {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 70%;
+}
+
+.buscador button {
+    padding: 0.5rem;
+    margin-left: 1rem;
+}
+
+/* Estilos principales del contenido */
+main {
+    flex: 1;
+    padding: 2rem;
 }
 
 #app {
-    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-around;
+}
+
+/* Estilo de los contenedores de autor, libro y biblioteca */
+div.autor-item, div.libro-item, div.biblioteca-item {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    width: 250px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+div.autor-item h3, div.libro-item h3, div.biblioteca-item h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+div.autor-item p, div.libro-item p, div.biblioteca-item p {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+button.editar-autor, button.editar-libro, button.editar-biblioteca {
+    background-color: #2ecc71;
+    border: none;
+    color: white;
+    padding: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+button.editar-autor:hover, button.editar-libro:hover, button.editar-biblioteca:hover {
+    background-color: #27ae60;
+}
+
+button.eliminar-libro, button.eliminar-autor, button.eliminar-biblioteca {
+    background-color: #e74c3c;
+    border: none;
+    color: white;
+    padding: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+button.eliminar-libro:hover, button.eliminar-autor:hover, button.eliminar-biblioteca:hover {
+    background-color: #c0392b;
+}
+
+/* Formularios de creación y edición */
+form {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    max-width: 400px;
+    margin: 2rem auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+form input[type="text"] {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 1rem;
+}
+
+form button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+}
+
+form button:hover {
+    background-color: #2980b9;
+}
+
+/* Estilo para la tabla de préstamos */
+.table-prestamos {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.table-prestamos th, .table-prestamos td {
+    padding: 0.5rem;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.table-prestamos th {
+    background-color: #f4f4f4;
+}
+
+/* Estilos para mensajes de error o éxito */
+.mensaje {
+    padding: 1rem;
+    margin: 1rem;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+}
+
+.mensaje-error {
+    background-color: #e74c3c;
+}
+
+.mensaje-exito {
+    background-color: #2ecc71;
 }

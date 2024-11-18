@@ -6,31 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script type="module" src="../src/gestorBiblioteca.js"></script>
-    <!-- <link rel="stylesheet" href="estilo.css"> -->
+    <link rel="stylesheet" href="estilo.css">
 </head>
 
 <body>
     <h1>Gestion de Biblioteca</h1>
-
     <header>
         <nav>
             <ul>
-                <li><a href="#" id="listadoAutores">Listado de Autores</a></li>
-                <!-- <li><button type="submit" id="listadoAutores">Listado autores</button></li> -->
-                <li><a href="#" id="listadoLibros">Listado de Libros</a></li>
-                <li><a href="#" id="listadoBibliotecas">Listado de Bibliotecas</a></li>
+                <li><button id="btn-autores">Listado de Autores</button></li>
+                <li><button id="btn-libros">Listado de Libros</button></li>
+                <li><button id="btn-bibliotecas">Listado de Bibliotecas</button></li>
             </ul>
         </nav>
+        <div class="buscador">
+            <input type="text" id="buscador" placeholder="Buscar por autor o libro">
+            <button id="btn-buscar">Buscar</button>
+        </div>
     </header>
+
     <main>
-        <form id="buscador">
-            <input type="text" id="buscarInput" placeholder="Buscar...">
-            <select id="buscarTipo">
-                <option value="libros">Libros</option>
-                <option value="autores">Autores</option>
-            </select>
-            <button type="submit">Buscar</button>
-        </form>
         <div id="app"></div>
     </main>
 </body>
