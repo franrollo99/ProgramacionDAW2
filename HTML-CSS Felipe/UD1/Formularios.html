@@ -1,30 +1,32 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Probando formularios</title>
 </head>
+
 <body>
 
-<form action="">
-    <fieldset>
-        <legend><input type="checkbox" checked>Utilizar tajeta del club</legend>
-        <p>Nombre de la tarjeta: <input type="text"></p>
+    <form action="">
         <fieldset>
-            <legend><input type="radio" checked>Mi tarjeta contiene numeros</legend>
-            <p>Numero de la tarjeta: <input type="text"></p>
+            <legend><input type="checkbox" checked>Utilizar tajeta del club</legend>
+            <p>Nombre de la tarjeta: <input type="text"></p>
+            <fieldset>
+                <legend><input type="radio" checked>Mi tarjeta contiene numeros</legend>
+                <p>Numero de la tarjeta: <input type="text"></p>
+            </fieldset>
+            <fieldset>
+                <legend><input type="radio">Mi tarjeta contiene letras</legend>
+                <p>Codigo de la tarjeta: <input type="text"></p>
+            </fieldset>
         </fieldset>
-        <fieldset>
-            <legend><input type="radio">Mi tarjeta contiene letras</legend>
-            <p>Codigo de la tarjeta: <input type="text"></p>
-        </fieldset>
-    </fieldset>
-</form>
+    </form>
 
 
 
-<br><br><br>
+    <br><br><br>
 
 
 
@@ -39,24 +41,28 @@
 
         <h3>Selecciona el tipo de cine</h3>
         <input type="radio">Accion
-        <input type="radio"checked>Comedia
+        <input type="radio" checked>Comedia
         <input type="radio">Ciencia-ficcion
         <input type="radio">Drama
     </fieldset>
-    
+
     <br><br><br>
-    
+
     <form action="">
         <fieldset>
-            <legend><h2>Teclea datos de entrada</h2></legend>
+            <legend>
+                <h2>Teclea datos de entrada</h2>
+            </legend>
             <p>Teclea nombre de alumno: <input type="text" name="datosAlumno"></p>
             <p>Teclea numero matricula: <input type="text" name="datosAlumno"></p>
             <p>Teclea direccion: <input type="text" name="datosAlumno"></p>
             <p>Teclea poblacion: <input type="text" name="datosAlumno"></p>
             <p>Teclea telefono: <input type="text" name="datosAlumno"></p>
-            <p>Selecciona el sexo: <input type="radio" name="datosAlumno">Masculino <input type="radio" name="datosAlumno">Femenino</p>
+            <p>Selecciona el sexo: <input type="radio" name="datosAlumno">Masculino <input type="radio"
+                    name="datosAlumno">Femenino</p>
             <hr><!-- Linea negra -->
-            <input type="submit" name="datosAlumno"> <input type="reset" name="datosAlumno"> <input type="button" value="Cerrar ventana"> <input type="button" value="Siguiente formulario">
+            <input type="submit" name="datosAlumno"> <input type="reset" name="datosAlumno"> <input type="button"
+                value="Cerrar ventana"> <input type="button" value="Siguiente formulario">
         </fieldset>
     </form>
     <br><br><br>
@@ -66,14 +72,25 @@
         <fieldset>
             <h3>Teclea mas datos</h3>
             <b>Teclea fecha de nacimiento:</b>
-            <p>Teclea dia de nacimiento: <input type="text" name="datosAlumno"> Selecciona mes de nacimiento: <!-- Para seleccionar solo el mes ambiar a tipo desplegable y añadir todos los meses --><input type="month" name="datosAlumno"> Teclea año de nacimiento: <input type="number" name="datosAlumno"></p>
-            <p>Selecciona el curso: <select name="datosAlumno"><option>ASIR</option><option>DAW</option><option value="DAM"></option></select> </p>
+            <p>Teclea dia de nacimiento: <input type="text" name="datosAlumno"> Selecciona mes de nacimiento:
+                <!-- Para seleccionar solo el mes ambiar a tipo desplegable y añadir todos los meses --><input
+                    type="month" name="datosAlumno"> Teclea año de nacimiento: <input type="number" name="datosAlumno">
+            </p>
+            <p>Selecciona el curso: <select name="datosAlumno">
+                    <option>ASIR</option>
+                    <option>DAW</option>
+                    <option value="DAM"></option>
+                </select> </p>
             <hr>
-            <p>Elige 3 materias optativas: <input type="checkbox" name="">Ingles <input type="checkbox" name="" id="">Frances <input type="checkbox" name="">Deporte <input type="checkbox">Astronomia <input type="checkbox">Historia <input type="checkbox">Paginas web <input type="checkbox">Redes</p>
+            <p>Elige 3 materias optativas: <input type="checkbox" name="">Ingles <input type="checkbox" name=""
+                    id="">Frances <input type="checkbox" name="">Deporte <input type="checkbox">Astronomia <input
+                    type="checkbox">Historia <input type="checkbox">Paginas web <input type="checkbox">Redes</p>
             <hr>
-            <p>Selecciona el turno: <input type="radio">Diurno <input type="radio">Nocturno <input type="radio">Vespertino</p>
+            <p>Selecciona el turno: <input type="radio">Diurno <input type="radio">Nocturno <input
+                    type="radio">Vespertino</p>
             <hr>
-            <input type="submit" name="datosAlumno"> <input type="reset" name="datosAlumno"> <input type="button" value="Cerrar ventana"> <input type="button" value="Anterior formulario">
+            <input type="submit" name="datosAlumno"> <input type="reset" name="datosAlumno"> <input type="button"
+                value="Cerrar ventana"> <input type="button" value="Anterior formulario">
         </fieldset>
     </form>
 
@@ -87,13 +104,14 @@
             <p>Genero <input type="radio">Hombre <input type="radio">Mujer</p>
             <p>Edad <input type="number"></p>
             <p>Ocupacion <select>
-                <option value="">Trabajador</option>
-                <option value="">Trabajador2</option>
-                <option value="">Trabajador3</option>
-            </select></p>
+                    <option value="">Trabajador</option>
+                    <option value="">Trabajador2</option>
+                    <option value="">Trabajador3</option>
+                </select></p>
             <p>Comentarios <textarea cols="30" rows="3"></textarea></p>
             <input type="submit">
         </fieldset>
     </form>
 </body>
+
 </html>

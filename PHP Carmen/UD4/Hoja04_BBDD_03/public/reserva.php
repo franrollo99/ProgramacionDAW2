@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reserva de plazas</title>
 </head>
+
 <body>
 
     <?php
-        require_once dirname(__DIR__) . "/vendor/autoload.php";
-        use Src\funcionesBD;
+    require_once dirname(__DIR__) . "/vendor/autoload.php";
+
+    use Src\funcionesBD;
     ?>
 
     <h1>Reserva de asiento</h1>
@@ -19,15 +22,15 @@
         <hr>
         <label>DNI: <input type="text" name="dni" pattern="^[0-9]{8}[A-Z]{1}$" required> El formato debera ser 01234567A</label>
         <hr>
-        <label>Asiento: 
+        <label>Asiento:
             <select name="asiento">
-                
-                <?php
-                    $asientos=funcionesBD::getAsientos();
 
-                    foreach($asientos as $asiento){
-                        echo "<option value='{$asiento['numero']}'>{$asiento['numero']} ({$asiento['precio']}€)</option>";
-                    }
+                <?php
+                $asientos = funcionesBD::getAsientos();
+
+                foreach ($asientos as $asiento) {
+                    echo "<option value='{$asiento['numero']}'>{$asiento['numero']} ({$asiento['precio']}€)</option>";
+                }
                 ?>
             </select>
         </label>
@@ -36,16 +39,17 @@
     </form>
 
     <?php
-        if(isset($_POST['reservar'])){
-            $nombre=$_POST['nombre'];
-            $dni=$_POST['dni'];
-            $asiento=$_POST['asiento'];
+    if (isset($_POST['reservar'])) {
+        $nombre = $_POST['nombre'];
+        $dni = $_POST['dni'];
+        $asiento = $_POST['asiento'];
 
-            funcionesBD::reserva($nombre, $dni, $asiento);
-        }
+        funcionesBD::reserva($nombre, $dni, $asiento);
+    }
     ?>
 
     <br><br>
     <a href="index.php">Pagina de inicio</a>
 </body>
+
 </html>
