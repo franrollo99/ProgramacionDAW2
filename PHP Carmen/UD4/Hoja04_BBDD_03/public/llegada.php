@@ -28,7 +28,7 @@
     ?>
 
     <br>
-    <a href="index.php">Pagina de inicio</a>
+    <a href="index.html">Pagina de inicio</a>
 
 </body>
 

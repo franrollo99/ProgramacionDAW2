@@ -13,6 +13,12 @@
     require_once dirname(__DIR__) . "/vendor/autoload.php";
 
     use Src\funcionesBD;
+    // FUNCION VALIDAR DNI
+    //modulo 23
+    // if(!validarDNI($dni)){
+    //     $dniError="Error en el DNI. El formato debera ser 01234567A";
+    // }
+
     ?>
 
     <h1>Reserva de asiento</h1>
@@ -20,7 +26,7 @@
     <form method="post">
         <label>Nombre: <input type="text" name="nombre" required></label>
         <hr>
-        <label>DNI: <input type="text" name="dni" pattern="^[0-9]{8}[A-Z]{1}$" required> El formato debera ser 01234567A</label>
+        <label>DNI: <input type="text" name="dni" pattern="^[0-9]{8}[A-Z]{1}$" required></label>
         <hr>
         <label>Asiento:
             <select name="asiento">
@@ -49,7 +55,7 @@
     ?>
 
     <br><br>
-    <a href="index.php">Pagina de inicio</a>
+    <a href="index.html">Pagina de inicio</a>
 </body>
 
 </html>

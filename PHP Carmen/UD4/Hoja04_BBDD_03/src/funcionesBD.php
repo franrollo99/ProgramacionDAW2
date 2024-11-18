@@ -115,6 +115,7 @@ final class funcionesBD
             }
 
             //Comprobar si el DNI ya existe
+            //Tambien se puede hacer sin count y usar $consultaDni->rowCount();
             $consultaDni = $conexion->prepare('SELECT COUNT(*) FROM pasajeros WHERE dni = :dni'); //Cuenta el numero de filas con el dni
             $consultaDni->bindParam(':dni', $dni);
             $consultaDni->execute();
@@ -128,9 +129,9 @@ final class funcionesBD
 
             //Insertar el pasajero en la tabla
             $insertPasajero = $conexion->prepare('INSERT INTO pasajeros (dni, nombre, sexo, numero_plaza) VALUES (:dni, :nombre, "-", :numero_plaza)');
-            $insertPasajero->bindParam(':dni', $dni);
-            $insertPasajero->bindParam(':nombre', $nombre);
-            $insertPasajero->bindParam(':numero_plaza', $asiento);
+            $insertPasajero->bindParam(':dni', $dni, PDO::PARAM_STR);
+            $insertPasajero->bindParam(':nombre', $nombre, PDO::PARAM_STR);
+            $insertPasajero->bindParam(':numero_plaza', $asiento, PDO::PARAM_INT);
 
             if (!$insertPasajero->execute()) {
                 $ok = false;

@@ -30,10 +30,11 @@
         <input type="submit" name="actualizar" value="Actualizar">
     </form>
     <br><br>
-    <a href="index.php">Pagina de inicio</a>
+    <a href="index.html">Pagina de inicio</a>
     <br><br>
 
     <?php
+    // if($_SERVER['REQUEST_METHOD']==='POST')
     if (isset($_POST['actualizar'])) {
         $preciosActualizados = [];
 
@@ -57,8 +58,8 @@
         funcionesBD::actualizarPrecios($preciosActualizados);
 
         //Recargamos la pagina despues de usar el formulario para que se actualicen los datos
-        header("Location: " . $_SERVER['PHP_SELF']);
-        exit;
+        // header("Location: " . $_SERVER['PHP_SELF']);
+        // exit;
     }
     ?>
 </body>
