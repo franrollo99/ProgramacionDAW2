@@ -11,4 +11,4 @@ class Reparacion{
     }
 }
 
-export {Reparacion};
+export default Reparacion;

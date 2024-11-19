@@ -6,4 +6,4 @@ class Propietario{
     }
 }
 
-export {Propietario};
+export default Propietario;

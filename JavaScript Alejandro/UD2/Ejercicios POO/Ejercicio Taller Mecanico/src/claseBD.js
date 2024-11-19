@@ -11,4 +11,36 @@ class BD {
         this.#siguienteReparacionId;
     }
 
+    obtenerVehiculos(){
+
+    }
+
+    obtenerVehiculo(filtro, valor){
+
+    }
+
+    crearVehiculo(vehiculo){
+
+    }
+
+    borraVehiculo(vehiculoId){
+
+    }
+
+    obtenerReparaciones(filtro, valor){
+
+    }
+
+    obtenerReparacion(reparacionId){
+
+    }
+
+    crearReparacion(vehiculoId, reparacion){
+
+    }
+
+    borrarReparacion(reparacionId){
+        
+    }
+
 }

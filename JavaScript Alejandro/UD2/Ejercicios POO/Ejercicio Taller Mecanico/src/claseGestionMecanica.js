@@ -1,3 +1,9 @@
+import datos from './datos-taller.js'
+import Vehiculo from './claseVehiculo.js'
+import Propietario from './clasePropietario.js'
+import Reparacion from './claseReparacion.js'
+import Trabajo from './claseTrabajo.js'
+
 class GestionMecanica{
     #clienteBD;
     #contenedor;
@@ -8,12 +14,14 @@ class GestionMecanica{
     }
 
     iniciarApp(selector){
-        document.addEventListener('DOMContentLoaded', () => {
-            const contenedor = document.getElementById('contenedor'); // Contenedor en el HTML
-            const clienteBD = new BD(); // Crear una instancia de la base de datos
-            const gestionMecanica = new GestionMecanica(clienteBD, contenedor);
-            gestionMecanica.iniciarApp(); // Inicializar la aplicación
-        });
+        const contenedor = document.querySelector(selector);
+        if(!contenedor){
+            console.error('Error: no se ha podido iniciar la aplicacion');
+            return;
+        }
+
+        this.#contenedor = contenedor;
+        this.#contenedor.innerHTML = this.#generarHTMLBase();
     }
 
     #generarHTMLBase(){
@@ -50,24 +58,132 @@ class GestionMecanica{
         return vehiculos.map(vehiculo =>{
             return `
                 <div class='vehiculos'>
-                    <h3>Matricula: ${vehiculo.matricula}</h3>
+                    <p>Id vehiculo: ${vehiculo.vehiculoId}</p>
+                    <p>Matricula: ${vehiculo.matricula}</p>
                     <p>Marca: ${vehiculo.marca}</p>
                     <p>Modelo: ${vehiculo.modelo}</p>
                     <p>Año: ${vehiculo.año}</p>
                     <p>Motor: ${vehiculo.motor}</p>
-                    <button  class="btn-ver-vehiculo" data-vehiculo-id="${vehiculo.vehiculoId}>Ver</button>
-                    <button  class="btn-ver-reparaciones-vehiculo" data-reparaciones-vehiculo-id="${vehiculo.vehiculoId}>Ver</button>
-                    <button  class="btn-borrar-vehiculo" data-borrar-vehiculo-id="${vehiculo.vehiculoId}>Ver</button>
+                    <button id="verVehiculo${vehiculo.vehiculoId}>Ver vehiculo</button>
+                    <button id="verReparaciones${vehiculo.vehiculoId}>Ver reparaciones</button>
+                    <button id="borrarVehiculo${vehiculo.vehiculoId}>Borrar vehiculo</button>
+                    
                 </div>
             `;
         }).join(''); //Para concatenar los elementos del array
         
+        // <button  class="btn-borrar-vehiculo" data-borrar-vehiculo-id="${vehiculo.vehiculoId}>Ver</button>
+    }
+
+    #generarHTMLVehiculo(vehiculoID=null){
+        return `
+            <form method='post'>
+                <fieldset>
+                    <label for='vehiculoId'>Id vehiculo:</label>
+                    <input type='text' id='vehiculoId'>
+                    <br><br>
+                    <label for='matricula'>Matricula:</label>
+                    <input type='text' id='matricula'>
+                    <br><br>
+                    <label for='marca'>Marca:</label>
+                    <input type='text' id='marca'>
+                    <br><br>
+                    <label for='modelo'>Modelo:</label>
+                    <input type='text' id='modelo'>
+                    <br><br>
+                    <label for='año'>Año:</label>
+                    <input type='text' id='año'>
+                    <br><br>
+                    <label for='motor'>Motor:</label>
+                    <input type='text' id='motor'>
+                    <fieldset>
+                        <label for='nombrePropietario'>Nombre propietario:</label>
+                        <input type='text' id='nombrePropietario'>
+                        <br><br>
+                        <label for='telefono'>Telefono:</label>
+                        <input type='text' id='telefono'>
+                        <br><br>
+                        <label for='email'>email:</label>
+                        <input type='text' id='email'>
+                    </fieldset>
+                </fieldset>
+                <button id="crearNuevoVehiculo">Nuevo coche</button>
+            </form>
+        `;
+    }
+
+    #generarHTMLReparacionesVehiculo(vehiculoId){
+        return `
+            
+        `;
+    }
+
+    #generarHTMLReparaciones(reparaciones){
+        return reparaciones.map(reparacion =>{
+            return `
+                <div class='reparaciones'>
+                    <p>Id reparacion: ${reparacion.reparacionId}</hp>
+                    <p>Id vehiculo: ${reparacion.vehiculoId}</p>
+                    <p>Descripcion: ${reparacion.descripcion}</p>
+                    <p>Fecha: ${reparacion.fecha}</p>
+                    <p>Kilometros: ${reparacion.kilometros}</p>
+                    <p>Presupuesto: ${reparacion.presupuesto ? 'Si' : 'No'}</p>
+                    <p>Aprobada: ${reparacion.aprobada ? 'Si' : 'No'}</p>
+                    <p>Pagado: ${reparacion.pagado ? 'Si' : 'No'}</p>
+                    <p>Terminado: ${reparacion.terminado ? 'Si' : 'No'}</p>
+                    <button id="verVehiculo${vehiculo.vehiculoId}>Ver vehiculo</button>
+                    <button id="verReparaciones${vehiculo.vehiculoId}>Ver reparaciones</button>
+                    <button id="borrarVehiculo${vehiculo.vehiculoId}>Borrar vehiculo</button>
+                    
+                </div>
+            `;
+        }).join('');
+    }
+
+    #generarHTMLReparacion(reparacionId=0, vehiculoId=0){
+        return `
+            <form method='post'>
+                <fieldset>
+                    <label for='reparacionId'>Id reparacion:</label>
+                    <input type='text' id='reparacionId'>
+                    <br><br>
+                    <label for='descripcion'>Descripcion:</label>
+                    <input type='text' id='descripcion'>
+                    <br><br>
+                    <label for='fecha'>Fecha:</label>
+                    <input type='date' id='fecha'>
+                    <br><br>
+                    <label for='kilometros'>Kilometros:</label>
+                    <input type='int' id='kilometros'>
+                    <br><br>
+                    <label for='presupuesto'>Presupuesto:</label>
+                    <input type='checkbox' id='presupuesto'>
+                    <br><br>
+                    <label for='aprobada'>Aprobada:</label>
+                    <input type='checkbox' id='aprobada'>
+                    <br><br>
+                    <label for='pagado'>Pagado:</label>
+                    <input type='checkbox' id='pagado'>
+                    <label for='terminado'>Terminado:</label>
+                    <input type='checkbox' id='terminado'>
+                    <fieldset>
+                        <label for='concepto'>Concepto:</label>
+                        <input type='text' id='concepto'>
+                        <br><br>
+                        <label for='precioUnitario'>Precio unitario:</label>
+                        <input type='int' id='precioUnitario'>
+                        <br><br>
+                        <label for='cantidad'>Cantidad:</label>
+                        <input type='int' id='cantidad'>
+                    </fieldset>
+                </fieldset>
+                <button id="crearNuevaReparacion">Nueva reparacion</button>
+            </form>
+        `;
     }
 }
 
 document.addEventListener('DOMContentLoaded', function(){
-    const contenedor = document.getElementById('contenedor');
-    const clienteBD = new BD();
-    const gestionMecanica = new GestionMecanica(clienteBD, contenedor);
-    gestionMecanica.iniciarApp(); 
+    const contenedor = document.getElementById('app');
+    
 });

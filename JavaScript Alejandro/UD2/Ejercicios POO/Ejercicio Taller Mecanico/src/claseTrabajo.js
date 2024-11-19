@@ -7,4 +7,4 @@ class Trabajo{
     }
 }
 
-export {Trabajo};
+export default Trabajo;
