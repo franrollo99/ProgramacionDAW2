@@ -1,15 +1,15 @@
 .pagina{
     display: flex;
     font-family: Arial, Helvetica, sans-serif;
-    height: 300px;
+    gap: 2px;
+    height: 98vh; /* ViewPort ventana visible del navegador */
 }
 
 .sidebar{
     background-color: #74d8d8;
-    padding: 1.5em;
-    width: 150px;
-    margin: 1px;
-
+    padding: 12px 24px;
+    height: auto;
+    flex: 1;
 }
 
 a{
@@ -18,9 +18,14 @@ a{
 
 }
 
-.contenidoPrincipal{
-    margin: 1px;
+hr{
+    border: 1px solid gray;
+}
+
+.contenido{
     background-color: rgb(144, 252, 176);
-    padding: 1em;
+    padding: 12px 24px;
+    height: auto;
+    flex: 9;
 
 }

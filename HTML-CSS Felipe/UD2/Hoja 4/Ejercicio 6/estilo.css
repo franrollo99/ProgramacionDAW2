@@ -1,0 +1,38 @@
+.pagina{
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    text-align: center;
+    gap: 1em;
+    
+}
+
+nav{
+    background-color: black;
+    color: white;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+footer{
+    background-color: gray;
+    color: white;
+    height: 30px;
+    margin-top: auto; /* Empujo el footer al final del div */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+p{
+    padding: 0px 12px;
+}
+
+.tarjeta1, .tarjeta2, .tarjeta3{
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+}
