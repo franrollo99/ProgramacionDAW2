@@ -1,6 +1,5 @@
 class Reparacion{
     constructor(vehiculoId, descripcion, fecha, kilometros){
-        this.reparacionId=0;
         this.vehiculoId=vehiculoId;
         this.descripcion=descripcion;
         this.fecha=fecha;

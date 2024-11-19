@@ -8,7 +8,12 @@ class GestionMecanica{
     }
 
     iniciarApp(selector){
-
+        document.addEventListener('DOMContentLoaded', () => {
+            const contenedor = document.getElementById('contenedor'); // Contenedor en el HTML
+            const clienteBD = new BD(); // Crear una instancia de la base de datos
+            const gestionMecanica = new GestionMecanica(clienteBD, contenedor);
+            gestionMecanica.iniciarApp(); // Inicializar la aplicación
+        });
     }
 
     #generarHTMLBase(){
@@ -55,10 +60,14 @@ class GestionMecanica{
                     <button  class="btn-borrar-vehiculo" data-borrar-vehiculo-id="${vehiculo.vehiculoId}>Ver</button>
                 </div>
             `;
-        });
+        }).join(''); //Para concatenar los elementos del array
         
     }
 }
 
-
-        
+document.addEventListener('DOMContentLoaded', function(){
+    const contenedor = document.getElementById('contenedor');
+    const clienteBD = new BD();
+    const gestionMecanica = new GestionMecanica(clienteBD, contenedor);
+    gestionMecanica.iniciarApp(); 
+});
