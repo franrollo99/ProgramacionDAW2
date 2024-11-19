@@ -2,7 +2,7 @@
     font-family: Arial, Helvetica, sans-serif;
     display: flex;
     text-align: center;
-    gap: 1em;
+    gap: 20px;
     
 }
 
@@ -35,4 +35,5 @@ p{
     border: 1px solid black;
     display: flex;
     flex-direction: column;
+
 }
