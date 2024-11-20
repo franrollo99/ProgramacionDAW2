@@ -35,9 +35,9 @@ function limpiarEntrada(){
     return;
 }
 
-function redireccionar(string $path):void{
-    header("http://" . $path);
-    exit();
+function redireccionar(string $path):bool{
+    $url="http://" . $path;
+    return file_get_contents($url);
 }
 
 ?>
