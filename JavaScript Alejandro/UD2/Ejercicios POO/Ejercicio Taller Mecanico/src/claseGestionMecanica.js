@@ -1,189 +1,236 @@
-import datos from './datos-taller.js'
-import Vehiculo from './claseVehiculo.js'
-import Propietario from './clasePropietario.js'
-import Reparacion from './claseReparacion.js'
-import Trabajo from './claseTrabajo.js'
+import Vehiculo from './claseVehiculo.js';
+import Propietario from './clasePropietario.js';
+import Reparacion from './claseReparacion.js';
+import Trabajo from './claseTrabajo.js';
+import BD from './datos-taller.js';
 
-class GestionMecanica{
+
+class GestionMecanica {
     #clienteBD;
     #contenedor;
 
-    constructor(clienteBD, contenedor){
-        this.#clienteBD=clienteBD;
-        this.#contenedor=contenedor;
+    constructor() {
+        this.#clienteBD = null;
+        this.#contenedor = null;
     }
 
-    iniciarApp(selector){
-        const contenedor = document.querySelector(selector);
-        if(!contenedor){
-            console.error('Error: no se ha podido iniciar la aplicacion');
+    iniciarApp(selector) {
+        this.#contenedor = document.querySelector(selector);
+
+        if (!this.#contenedor) {
+            console.error("No se pudo iniciar la aplicación, contenedor no encontrado.");
             return;
         }
 
-        this.#contenedor = contenedor;
+        // Insertamos el HTML base en el contenedor
         this.#contenedor.innerHTML = this.#generarHTMLBase();
+
+        // Añadimos los eventos de navegación
+        this.#asignarEventos();
     }
 
-    #generarHTMLBase(){
+    #generarHTMLBase() {
         return `
             <nav>
                 <ul>
-                    <li><a href='#'>Inicio</a></li>
-                    <li><a href='#'>Listado vehiculos</a></li>
-                    <li><a href='#'>Listado no terminadas</a></li>
-                    <li><a href='#'>Listado no pagadas</a></li>
-                    <li><a href='#'>Listado presupuestos</a></li>
+                    <li><a href="#" data-action="inicio">Inicio</a></li>
+                    <li><a href="#" data-action="vehiculos">Listado Vehículos</a></li>
+                    <li><a href="#" data-action="no-terminadas">Listado No Terminadas</a></li>
+                    <li><a href="#" data-action="no-pagadas">Listado No Pagadas</a></li>
+                    <li><a href="#" data-action="presupuestos">Listado Presupuestos</a></li>
                 </ul>
             </nav>
-            <main>
-                <div class='resultados'></div>
-            </main>
+            <div id="resultados"></div>
         `;
     }
 
-    #generarHTMLInicio(){
+    // Métodos de generación HTML
+    #generarHTMLInicio() {
         return `
-            <form method='get'>
-                <label for='buscador'>Buscador</label>
-                <input type='text' id='buscador'>
-                <select id='filtro'>
-                    <option>Matricula</option>
-                    <option>Telefono</option>
-                </select>
-            </form>
-        `;
-    }
-
-    #generarHTMLVehiculos(vehiculos){
-        return vehiculos.map(vehiculo =>{
-            return `
-                <div class='vehiculos'>
-                    <p>Id vehiculo: ${vehiculo.vehiculoId}</p>
-                    <p>Matricula: ${vehiculo.matricula}</p>
-                    <p>Marca: ${vehiculo.marca}</p>
-                    <p>Modelo: ${vehiculo.modelo}</p>
-                    <p>Año: ${vehiculo.año}</p>
-                    <p>Motor: ${vehiculo.motor}</p>
-                    <button id="verVehiculo${vehiculo.vehiculoId}>Ver vehiculo</button>
-                    <button id="verReparaciones${vehiculo.vehiculoId}>Ver reparaciones</button>
-                    <button id="borrarVehiculo${vehiculo.vehiculoId}>Borrar vehiculo</button>
-                    
-                </div>
-            `;
-        }).join(''); //Para concatenar los elementos del array
-        
-        // <button  class="btn-borrar-vehiculo" data-borrar-vehiculo-id="${vehiculo.vehiculoId}>Ver</button>
-    }
-
-    #generarHTMLVehiculo(vehiculoID=null){
-        return `
-            <form method='post'>
-                <fieldset>
-                    <label for='vehiculoId'>Id vehiculo:</label>
-                    <input type='text' id='vehiculoId'>
-                    <br><br>
-                    <label for='matricula'>Matricula:</label>
-                    <input type='text' id='matricula'>
-                    <br><br>
-                    <label for='marca'>Marca:</label>
-                    <input type='text' id='marca'>
-                    <br><br>
-                    <label for='modelo'>Modelo:</label>
-                    <input type='text' id='modelo'>
-                    <br><br>
-                    <label for='año'>Año:</label>
-                    <input type='text' id='año'>
-                    <br><br>
-                    <label for='motor'>Motor:</label>
-                    <input type='text' id='motor'>
-                    <fieldset>
-                        <label for='nombrePropietario'>Nombre propietario:</label>
-                        <input type='text' id='nombrePropietario'>
-                        <br><br>
-                        <label for='telefono'>Telefono:</label>
-                        <input type='text' id='telefono'>
-                        <br><br>
-                        <label for='email'>email:</label>
-                        <input type='text' id='email'>
-                    </fieldset>
-                </fieldset>
-                <button id="crearNuevoVehiculo">Nuevo coche</button>
-            </form>
-        `;
-    }
-
-    #generarHTMLReparacionesVehiculo(vehiculoId){
-        return `
+            <label for="buscador">Utiliza el buscador para encontrar vehículos por matrícula o teléfono:</label>
+            <input type="text" id="buscador">
+            <button id="buscarBtn">Buscar</button>
             
+            <div id="resultadoBusqueda"></div>
         `;
     }
 
-    #generarHTMLReparaciones(reparaciones){
-        return reparaciones.map(reparacion =>{
-            return `
-                <div class='reparaciones'>
-                    <p>Id reparacion: ${reparacion.reparacionId}</hp>
-                    <p>Id vehiculo: ${reparacion.vehiculoId}</p>
-                    <p>Descripcion: ${reparacion.descripcion}</p>
-                    <p>Fecha: ${reparacion.fecha}</p>
-                    <p>Kilometros: ${reparacion.kilometros}</p>
-                    <p>Presupuesto: ${reparacion.presupuesto ? 'Si' : 'No'}</p>
-                    <p>Aprobada: ${reparacion.aprobada ? 'Si' : 'No'}</p>
-                    <p>Pagado: ${reparacion.pagado ? 'Si' : 'No'}</p>
-                    <p>Terminado: ${reparacion.terminado ? 'Si' : 'No'}</p>
-                    <button id="verVehiculo${vehiculo.vehiculoId}>Ver vehiculo</button>
-                    <button id="verReparaciones${vehiculo.vehiculoId}>Ver reparaciones</button>
-                    <button id="borrarVehiculo${vehiculo.vehiculoId}>Borrar vehiculo</button>
-                    
-                </div>
-            `;
-        }).join('');
+    #generarHTMLVehiculos(vehiculos) {
+        let html = `
+        <div>
+            <button id="nuevoVehiculoBtn">Crear nuevo vehículo</button>
+        </div>
+        <ul id="listadoVehiculos">`;
+
+        vehiculos.forEach(vehiculo => {
+            html += `
+                <li class="vehiculo-item">
+                    <div>
+                          <p>Matricula: ${vehiculo.matricula}</p>
+                        <p>Marca: ${vehiculo.marca}</p>
+                        <p>Modelo: ${vehiculo.modelo}</p>
+                        <p>Año: ${vehiculo.año}</p>
+                        <p>Motor: ${vehiculo.motor}</p>
+                        <p>Propietario: ${vehiculo.propietario.nombre}</p>
+                    </div>
+                    <div>
+                        <button class="ver-vehiculo" data-id="${vehiculo.vehiculoId}">Ver vehículo</button>
+                        <button class="ver-reparaciones" data-id="${vehiculo.vehiculoId}">Ver reparaciones</button>
+                        <button class="borrar-vehiculo" data-id="${vehiculo.vehiculoId}">Borrar vehículo</button>
+                    </div>
+                </li>`;
+        });
+
+        html += `</ul>`;
+        return html;
     }
 
-    #generarHTMLReparacion(reparacionId=0, vehiculoId=0){
-        return `
-            <form method='post'>
-                <fieldset>
-                    <label for='reparacionId'>Id reparacion:</label>
-                    <input type='text' id='reparacionId'>
-                    <br><br>
-                    <label for='descripcion'>Descripcion:</label>
-                    <input type='text' id='descripcion'>
-                    <br><br>
-                    <label for='fecha'>Fecha:</label>
-                    <input type='date' id='fecha'>
-                    <br><br>
-                    <label for='kilometros'>Kilometros:</label>
-                    <input type='int' id='kilometros'>
-                    <br><br>
-                    <label for='presupuesto'>Presupuesto:</label>
-                    <input type='checkbox' id='presupuesto'>
-                    <br><br>
-                    <label for='aprobada'>Aprobada:</label>
-                    <input type='checkbox' id='aprobada'>
-                    <br><br>
-                    <label for='pagado'>Pagado:</label>
-                    <input type='checkbox' id='pagado'>
-                    <label for='terminado'>Terminado:</label>
-                    <input type='checkbox' id='terminado'>
-                    <fieldset>
-                        <label for='concepto'>Concepto:</label>
-                        <input type='text' id='concepto'>
-                        <br><br>
-                        <label for='precioUnitario'>Precio unitario:</label>
-                        <input type='int' id='precioUnitario'>
-                        <br><br>
-                        <label for='cantidad'>Cantidad:</label>
-                        <input type='int' id='cantidad'>
-                    </fieldset>
-                </fieldset>
-                <button id="crearNuevaReparacion">Nueva reparacion</button>
-            </form>
-        `;
-    }
-}
-
-document.addEventListener('DOMContentLoaded', function(){
-    const contenedor = document.getElementById('app');
+    #generarHTMLVehiculo(vehiculoId = null) {
+        let html = '';
     
+        if (vehiculoId === null) {
+            // Formulario para crear un nuevo vehículo
+            html = `
+                <h2>Nuevo vehículo</h2>
+                <form id="formularioVehiculo">
+                    <div>
+                        <label for="matricula">Matrícula:</label>
+                        <input type="text" id="matricula" name="matricula" required>
+                    </div>
+                    <div>
+                        <label for="marca">Marca:</label>
+                        <input type="text" id="marca" name="marca" required>
+                    </div>
+                    <div>
+                        <label for="modelo">Modelo:</label>
+                        <input type="text" id="modelo" name="modelo" required>
+                    </div>
+                    <div>
+                        <label for="año">Año:</label>
+                        <input type="number" id="año" name="año" required>
+                    </div>
+                    <div>
+                        <label for="motor">Motor:</label>
+                        <input type="text" id="motor" name="motor" required>
+                    </div>
+                    <div>
+                        <h3>Datos del propietario</h3>
+                        <label for="nombrePropietario">Nombre:</label>
+                        <input type="text" id="nombrePropietario" name="nombrePropietario" required>
+                    </div>
+                    <div>
+                        <label for="telefonoPropietario">Teléfono:</label>
+                        <input type="text" id="telefonoPropietario" name="telefonoPropietario" required>
+                    </div>
+                    <div>
+                        <label for="emailPropietario">Email:</label>
+                        <input type="email" id="emailPropietario" name="emailPropietario" required>
+                    </div>
+                    <button type="submit">Guardar vehículo</button>
+                </form>
+            `;
+        } else {
+            const vehiculo = this.clienteBD.obtenerVehiculoPorId(vehiculoId);
+            html = `
+                <h2>Detalles del vehículo</h2>
+                <form id="formularioVehiculo">
+                    <div>
+                        <p>Matrícula: ${vehiculo.matricula}</p>
+                        <p>Marca: ${vehiculo.marca}</p>
+                        <p>Modelo: ${vehiculo.modelo}</p>
+                        <p>Año: ${vehiculo.año}</p>
+                        <p>Motor: ${vehiculo.motor}</p>
+                        <h3>Propietario</h3>
+                        <p>Nombre: ${vehiculo.propietario.nombre}</p>
+                        <p>Teléfono: ${vehiculo.propietario.telefono}</p>
+                        <p>Email: ${vehiculo.propietario.email}</p>
+                        <button class="ver-reparaciones" data-id="${vehiculoId}">Ver reparaciones</button>
+                    </div>
+                </form>
+            `;
+        }
+    
+        return html;
+    }
+
+    #generarHTMLReparacionesVehiculo(vehiculoId) {
+        const vehiculo = this.clienteBD.obtenerVehiculoPorId(vehiculoId); // Obtener el vehículo por ID
+        const reparaciones = this.clienteBD.obtenerReparacionesPorVehiculo(vehiculoId); // Obtener reparaciones asociadas al vehículo
+        
+        let html = `
+            <h2>Reparaciones de vehículo: ${vehiculo.matricula}</h2>
+            <p>Propietario: ${vehiculo.propietario.nombre}</p>
+            <p>Teléfono: ${vehiculo.propietario.telefono}</p>
+            <button class="ver-vehiculo" data-id="${vehiculoId}">Ver vehículo</button>
+            <h3>Listado de Reparaciones</h3>
+            <ul>
+        `;
+        
+        reparaciones.forEach(reparacion => {
+            html += `
+                <li>
+                    <p>Descripción: ${reparacion.descripcion}</p>
+                    <p>Fecha: ${reparacion.fecha}</p>
+                    <p>Kilómetros: ${reparacion.kilometros}</p>
+                    <button class="ver-reparacion" data-id="${reparacion.reparacionId}">Ver reparación</button>
+                    <button class="borrar-reparacion" data-id="${reparacion.reparacionId}">Borrar reparación</button>
+                </li>
+            `;
+        });
+    
+        html += `
+            </ul>
+            <button class="nueva-reparacion" data-id="${vehiculoId}">Crear nueva reparación</button>
+        `;
+    
+        return html;
+    }
+
+    
+    // Métodos privados para eventos
+
+    #asignarEventos() {
+        const enlaces = this.#contenedor.querySelectorAll('nav a[data-action]');
+        
+        enlaces.forEach((enlace) => {
+            enlace.addEventListener('click', (event) => {
+                event.preventDefault();
+                const action = enlace.dataset.action;
+                console.log(`Acción seleccionada: ${action}`);
+                this.#navegar(action);
+            });
+        });
+    }
+
+    #navegar(action) {
+        // Este método puede actualizar el contenido de #resultados
+        const resultados = this.#contenedor.querySelector('#resultados');
+
+        switch (action) {
+            case 'inicio':
+                resultados.innerHTML = '<p>Bienvenido a la gestión del taller mecánico.</p>';
+                break;
+            case 'vehiculos':
+                resultados.innerHTML = '<p>Aquí aparecerá el listado de vehículos.</p>';
+                break;
+            case 'no-terminadas':
+                resultados.innerHTML = '<p>Reparaciones no terminadas.</p>';
+                break;
+            case 'no-pagadas':
+                resultados.innerHTML = '<p>Reparaciones no pagadas.</p>';
+                break;
+            case 'presupuestos':
+                resultados.innerHTML = '<p>Listado de presupuestos.</p>';
+                break;
+            default:
+                resultados.innerHTML = '<p>Sección no encontrada.</p>';
+                break;
+        }
+    }
+
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+    const gestion = new GestionMecanica();
+    gestion.iniciarApp('.app');
 });
