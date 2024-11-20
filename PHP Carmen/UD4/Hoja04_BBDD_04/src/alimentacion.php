@@ -5,15 +5,30 @@
         private int $mesCaducidad;
         private int $añoCaducidad;
 
-        public function __construct(int $codigo, float $precio, string $nombre, int $mesCaducidad, int $añoCaducidad, string $categoria){
+        public function __construct(int $codigo, float $precio, string $nombre, int $mesCaducidad, int $añoCaducidad, Categoria $categoria){
             parent::__construct($codigo, $precio, $nombre, $categoria);
             $this->mesCaducidad=$mesCaducidad;
             $this->añoCaducidad=$añoCaducidad;
         }
 
-        //getters y setters
         public function __toString():string{
-            return "Codigo: $this->codigo, Nombre: $this->nombre, Precio: $this->precio, Categoria: $this->categoria, Mes de caducidad: $this->mesCaducidad, Año de Caducidad: $this->añoCaducidad";
+            return parent::__toString() . ", Mes de caducidad: $this->mesCaducidad, Año de Caducidad: $this->añoCaducidad";
+        }
+
+        public function setMesCaducidad(int $mesCaducidad):void{
+            $this->mesCaducidad=$mesCaducidad;
+        }
+
+        public function getMesCaducidad():int{
+            return $this->mesCaducidad;
+        }
+
+        public function setAñoCaducidad(int $añoCaducidad):void{
+            $this->añoCaducidad=$añoCaducidad;
+        }
+
+        public function getAñoCaducidad():int{
+            return $this->añoCaducidad;
         }
     }
 ?>

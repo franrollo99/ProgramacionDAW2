@@ -1,3 +1,5 @@
+import datos from './datos-taller.js';
+
 class BD {
     #vehiculos;
     #reparaciones;
@@ -5,42 +7,58 @@ class BD {
     #siguienteReparacionId;
 
     constructor() {
-        this.#vehiculos = [];
-        this.#reparaciones = [];
-        this.#siguienteVehiculoId;
-        this.#siguienteReparacionId;
+        this.#vehiculos = [...datos.vehiculos];
+        this.#reparaciones = [...datos.reparaciones];
+        // Establecer el siguiente ID autoincremental según el máximo ID actual
+        this.#siguienteVehiculoId = Math.max(...this.#vehiculos.map(vehiculo => vehiculo.vehiculoId)) + 1;
+        this.#siguienteReparacionId = Math.max(...this.#reparaciones.map(reparacion => reparacion.reparacionId)) + 1;
     }
 
-    obtenerVehiculos(){
-
+    get siguienteVehiculoId() {
+        return this.#siguienteVehiculoId;
     }
 
-    obtenerVehiculo(filtro, valor){
-
+    get siguienteReparacionId() {
+        return this.#siguienteReparacionId;
     }
 
-    crearVehiculo(vehiculo){
-
+    obtenerVehiculos() {
+        return [...this.#vehiculos];
     }
 
-    borraVehiculo(vehiculoId){
-
+    obtenerVehiculo(filtro, valor) {
+        return this.#vehiculos.find(vehiculo => vehiculo[filtro] === valor);
     }
 
-    obtenerReparaciones(filtro, valor){
-
+    crearVehiculo(vehiculo) {
+        vehiculo.vehiculoId = this.#siguienteVehiculoId++;
+        this.#vehiculos.push(vehiculo);
     }
 
-    obtenerReparacion(reparacionId){
-
+    borrarVehiculo(vehiculoId) {
+        this.#vehiculos = this.#vehiculos.filter(vehiculo => vehiculo.vehiculoId !== vehiculoId);
     }
 
-    crearReparacion(vehiculoId, reparacion){
-
+    obtenerReparaciones(filtro = null, valor = null) {
+        if (filtro && valor) {
+            return this.#reparaciones.filter(reparacion => reparacion[filtro] === valor);
+        }
+        return [...this.#reparaciones];
     }
 
-    borrarReparacion(reparacionId){
-        
+    obtenerReparacion(reparacionId) {
+        return this.#reparaciones.find(reparacion => reparacion.reparacionId === reparacionId);
     }
 
+    crearReparacion(vehiculoId, reparacion) {
+        reparacion.reparacionId = this.#siguienteReparacionId++;
+        reparacion.vehiculoId = vehiculoId;
+        this.#reparaciones.push(reparacion);
+    }
+
+    borrarReparacion(reparacionId) {
+        this.#reparaciones = this.#reparaciones.filter(reparacion => reparacion.reparacionId !== reparacionId);
+    }
 }
+
+export default BD;
