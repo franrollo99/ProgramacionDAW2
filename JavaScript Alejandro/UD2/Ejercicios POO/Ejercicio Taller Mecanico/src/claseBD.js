@@ -41,7 +41,7 @@ class BD {
 
     obtenerReparaciones(filtro = null, valor = null) {
         if (filtro && valor) {
-            return this.#reparaciones.filter(reparacion => reparacion[filtro] === valor);
+        return this.#reparaciones.filter(reparacion => reparacion[filtro] === valor);
         }
         return [...this.#reparaciones];
     }

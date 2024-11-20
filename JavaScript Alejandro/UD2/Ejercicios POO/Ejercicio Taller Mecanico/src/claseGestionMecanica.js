@@ -2,7 +2,7 @@ import Vehiculo from './claseVehiculo.js';
 import Propietario from './clasePropietario.js';
 import Reparacion from './claseReparacion.js';
 import Trabajo from './claseTrabajo.js';
-import BD from './datos-taller.js';
+import BD from './claseBD.js';
 
 
 class GestionMecanica {
@@ -10,7 +10,7 @@ class GestionMecanica {
     #contenedor;
 
     constructor() {
-        this.#clienteBD = null;
+        this.#clienteBD = new BD();
         this.#contenedor = null;
     }
 
@@ -44,10 +44,10 @@ class GestionMecanica {
         `;
     }
 
-    // Métodos de generación HTML
     #generarHTMLInicio() {
         return `
             <label for="buscador">Utiliza el buscador para encontrar vehículos por matrícula o teléfono:</label>
+            <br><br>
             <input type="text" id="buscador">
             <button id="buscarBtn">Buscar</button>
             
@@ -187,50 +187,51 @@ class GestionMecanica {
     }
 
     
-    // Métodos privados para eventos
-
     #asignarEventos() {
+        // Almaceno los data-action de los enlaces
         const enlaces = this.#contenedor.querySelectorAll('nav a[data-action]');
         
         enlaces.forEach((enlace) => {
             enlace.addEventListener('click', (event) => {
                 event.preventDefault();
                 const action = enlace.dataset.action;
-                console.log(`Acción seleccionada: ${action}`);
                 this.#navegar(action);
             });
         });
     }
 
+    // Este método puede actualizar el contenido de #resultados
     #navegar(action) {
-        // Este método puede actualizar el contenido de #resultados
         const resultados = this.#contenedor.querySelector('#resultados');
 
         switch (action) {
             case 'inicio':
-                resultados.innerHTML = '<p>Bienvenido a la gestión del taller mecánico.</p>';
+                resultados.innerHTML = this.#generarHTMLInicio();
                 break;
             case 'vehiculos':
-                resultados.innerHTML = '<p>Aquí aparecerá el listado de vehículos.</p>';
+                resultados.innerHTML = this.#generarHTMLVehiculos(BD.vehiculos);
                 break;
             case 'no-terminadas':
-                resultados.innerHTML = '<p>Reparaciones no terminadas.</p>';
+                const reparacionesNoTerminadas = this.#clienteBD.obtenerReparaciones('terminado', false);
+                resultados.innerHTML = this.#generarHTMLReparacionesVehiculo(reparacionesNoTerminadas);
                 break;
+                // resultados.innerHTML = this.#clienteBD.obtenerReparaciones('terminado', true);
+                // break;
             case 'no-pagadas':
-                resultados.innerHTML = '<p>Reparaciones no pagadas.</p>';
+                resultados.innerHTML = this.#clienteBD.obtenerReparaciones('pagado', false);
                 break;
             case 'presupuestos':
-                resultados.innerHTML = '<p>Listado de presupuestos.</p>';
+                resultados.innerHTML = this.#clienteBD.obtenerReparaciones('presupuesto', true);;
                 break;
             default:
-                resultados.innerHTML = '<p>Sección no encontrada.</p>';
+                resultados.innerHTML = '';
                 break;
         }
     }
 
 };
 
-document.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('load', function() {
     const gestion = new GestionMecanica();
     gestion.iniciarApp('.app');
 });
