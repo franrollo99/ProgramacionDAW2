@@ -1,0 +1,25 @@
+.principal{
+    display: grid;
+    grid-template-columns: 100px repeat(2, 200px);
+    grid-template-rows: 1fr 1fr 1fr;
+    height: 200px;
+    gap: 1px;
+}
+
+.principal>div{
+    background-color: gray;
+    color: white;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    align-content: center;
+}
+
+.principal>div:first-child{
+    grid-area: 1 / 1 / 1 / 4; /* row start column start row end column end*/
+}
+
+.sidebar{
+    grid-area: 2 / 1 / 4 / 1; 
+    
+}

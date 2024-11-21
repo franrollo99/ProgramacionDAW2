@@ -1,0 +1,25 @@
+.principal{
+    display: grid;
+    gap: 1px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    height: 200px;
+
+}
+
+.principal>div{
+    background-color: gray;
+    color: white;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    align-content: center;
+}
+
+.header{
+    grid-area: 1 / 1 / 1 / 4; /* rs cs re ce */
+}
+
+.aside{
+    grid-area: 1 / 4 / 3 / 4;
+}
