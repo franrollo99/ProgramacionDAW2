@@ -1,5 +1,5 @@
 <?php
-namespace Usuario\Src;
+namespace Src;
 
 class Turno{
     private string $tipo;
@@ -20,7 +20,7 @@ class Turno{
         $this->tipo=$tipo;
     }
 
-    public function __toString(){
+    public function __toString():string{
         return "Tipo: $this->tipo";
     }
 }
