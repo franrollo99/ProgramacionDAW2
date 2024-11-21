@@ -1,27 +1,72 @@
 .principal{
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    height: 100vh;
+    
+}
+
+.caja{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     text-align: center;
-    height: 300px;
-    width: 500px;
-}
-
-img{
-    height: 100%;
-}
-
-.principal>div{
-}
-
-.div1{
-    background-color: black;
-    grid-column: 1/4;
+    padding: 30px;
     color: white;
-    font-family: Arial, Helvetica, sans-serif;
-    align-content: center;
 }
 
-.div2{
-    background-color: rgb(0, 0, 255);
+.caja img{
+    width: 90px;
+    display: block;
+    margin: 0 auto;
+}
+
+.caja1{
+    background-color: black;
+    grid-area: 1/1/2/4;
+    text-align: left;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.caja1 span{
+    color: aquamarine;
+}
+
+.caja2{
+    background-color: rgb(0, 81, 255);
+}
+
+.caja5{
+    background-color: rgb(43, 153, 255);
+}
+
+.caja6{
+    background-color: rgb(152, 215, 252);
+
+}
+
+.caja8{
+    background-color: yellow;
+}
+
+.caja9{
+    grid-column: 1/3;
+    background-image: url("img/empleo.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.caja10{
+    background-color: rgb(0, 81, 255);
+    background-image: url("img/icon-message.png");
+    background-repeat: no-repeat;
+    background-size: 100%
+}
+
+
+
+.caja11{
+    grid-column: 4/6;
+    background-image: url("img/redes.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%
 }
