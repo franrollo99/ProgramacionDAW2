@@ -33,8 +33,8 @@ function limpiarTexto(string $texto):string{
     return strip_tags($texto, $etiquetasPermitidas);
 }
 
-function limpiarEntrada(){
-
+function limpiarEntrada(string $entrada){
+    
     return;
 }
 
