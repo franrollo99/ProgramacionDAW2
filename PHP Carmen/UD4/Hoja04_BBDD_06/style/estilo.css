@@ -1,0 +1,75 @@
+/* Estilos globales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    color: #333;
+}
+
+/* Título principal */
+h1 {
+    font-size: 2rem;
+    color: #555;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Estilos del formulario */
+form {
+    background: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Inputs y textarea */
+input[type="text"],
+input[type="number"],
+input[type="file"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: #fdfdfd;
+    box-sizing: border-box;
+}
+
+textarea {
+    resize: vertical;
+    height: 80px;
+}
+
+/* Botón de envío */
+input[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    text-transform: uppercase;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Espaciado entre elementos */
+form input[type="text"] + input,
+form input[type="number"] + textarea {
+    margin-top: 10px;
+}

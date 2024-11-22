@@ -1,3 +1,5 @@
+<!-- sin namespace, se carga como si fuera un fichero -->
+
 <?php
 
 //Si existe un valor devuelve true
@@ -32,9 +34,12 @@ function limpiarTexto(string $texto):string{
 }
 
 function limpiarEntrada(){
+
     return;
 }
 
+
+// $files("campo name de la imgagen") da  informacion del archivo subido
 function redireccionar(string $path):bool{
     $url="http://" . $path;
     return file_get_contents($url);
