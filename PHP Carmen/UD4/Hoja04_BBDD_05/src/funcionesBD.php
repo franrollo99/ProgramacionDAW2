@@ -36,7 +36,6 @@ final class funcionesBD{
             }else{
                 $resultado[]=new Urgencia($registro->codigo, $registro->nombre, $registro->edad, $turnoMedico, $registro->unidad);
             }
-
         }
 
         return $resultado;
