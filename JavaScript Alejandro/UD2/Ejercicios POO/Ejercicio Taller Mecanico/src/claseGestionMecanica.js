@@ -62,11 +62,12 @@ class GestionMecanica {
         </div>
         <ul id="listadoVehiculos">`;
 
-        vehiculos.forEach(vehiculo => {
+        // mirar si es foreach o map
+        vehiculos.map(vehiculo => {
             html += `
                 <li class="vehiculo-item">
                     <div>
-                          <p>Matricula: ${vehiculo.matricula}</p>
+                        <p>Matricula: ${vehiculo.matricula}</p>
                         <p>Marca: ${vehiculo.marca}</p>
                         <p>Modelo: ${vehiculo.modelo}</p>
                         <p>Año: ${vehiculo.año}</p>
@@ -79,7 +80,7 @@ class GestionMecanica {
                         <button class="borrar-vehiculo" data-id="${vehiculo.vehiculoId}">Borrar vehículo</button>
                     </div>
                 </li>`;
-        });
+        }).join("");
 
         html += `</ul>`;
         return html;
