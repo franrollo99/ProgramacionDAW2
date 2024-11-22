@@ -23,10 +23,10 @@
     <?php
     if(isset($_GET['mostrar'])){
         $medicos=funcionesBD::getMedicos();
-        echo "<table><tr><th>Nombre</th><th>Edad</th></tr>";
+        echo "<table><tr><th>Medicos</th></tr>";
 
         foreach($medicos as $medico){
-            echo "<tr><td>{$medico['nombre']}</td><td>{$medico['edad']}</td></tr>";
+            echo "<tr><td>{$medico}</td></tr>";
         }
         echo "</table>";
     }
