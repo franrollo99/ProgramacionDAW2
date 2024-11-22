@@ -1,11 +1,17 @@
 <?php
 namespace Src;
 
+use Exception;
+
 class Turno{
     private string $tipo;
 
     public function __construct(string $tipo){
         $this->setTipo($tipo);
+    }
+
+    public function __toString():string{
+        return "Tipo: $this->tipo";
     }
 
     public function getTipo():string{
@@ -15,13 +21,9 @@ class Turno{
     public function setTipo(string $tipo):void{
         $valoresPermitidos=['mañana', 'tarde', '24h'];
         if(!in_array($tipo, $valoresPermitidos)){
-            echo "Turno invalido";
+            throw new Exception("Turno invalido");
         }
         $this->tipo=$tipo;
-    }
-
-    public function __toString():string{
-        return "Tipo: $this->tipo";
     }
 }
 ?>
