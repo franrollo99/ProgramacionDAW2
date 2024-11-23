@@ -23,12 +23,17 @@
     <?php
     if(isset($_GET['mostrar'])){
         $medicos=funcionesBD::getMedicos();
-        echo "<table><tr><th>Medicos</th></tr>";
+        
+        if(count($medicos)>0){
+            echo "<table><tr><th>Medicos</th></tr>";
 
-        foreach($medicos as $medico){
-            echo "<tr><td>{$medico}</td></tr>";
+            foreach($medicos as $medico){
+                echo "<tr><td>{$medico}</td></tr>";
+            }
+            echo "</table>";
+        }else{
+            echo "No hay registrado ningun medico";
         }
-        echo "</table>";
     }
     ?>
 

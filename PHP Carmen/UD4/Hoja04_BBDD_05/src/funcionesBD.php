@@ -9,21 +9,21 @@ final class funcionesBD{
 
     static function getMedicos():array{
         $conexion=conexionBD::getConexion();
-        $consulta=$conexion->query("SELECT m.codigo, m.nombre, m.edad, m.turno_id, f.numPacientes, u.unidad from medicos m join turnos t on m.turno_id=t.id left join familia f on m.codigo=f.medico_codigo left join urgencias u on m.codigo=u.medico_codigo");
+        $consulta=$conexion->query("SELECT m.codigo, m.nombre, m.edad, t.tipo, f.numPacientes, u.unidad from medicos m join turnos t on m.turno_id=t.id left join familia f on m.codigo=f.medico_codigo left join urgencias u on m.codigo=u.medico_codigo");
         $resultado=[];
-        $turnos=self::getTurnos();
+        // $turnos=self::getTurnos();
         
 
         while($registro=$consulta->fetch(PDO::FETCH_OBJ)){
-            $turnoMedico=null;
-            $encontrado=false;
+            // $turnoMedico=null;
+            // $encontrado=false;
 
-            for($i=0; $i<count($turnos) && !$encontrado; $i++){
-                if($turnos[$i]->getId()===$registro->turno_id){
-                    $turnoMedico=$turnos[$i];
-                    $encontrado=true;
-                }
-            }
+            // for($i=0; $i<count($turnos) && !$encontrado; $i++){
+            //     if($turnos[$i]->getId()===$registro->turno_id){
+            //         $turnoMedico=$turnos[$i];
+            //         $encontrado=true;
+            //     }
+            // }
 
             // foreach($turnos as $turno){
             //     if($turno->getId()===$registro->turno_id){
@@ -31,10 +31,10 @@ final class funcionesBD{
             //     }
             // }
 
-            if($registro->unidad==null){
-                $resultado[]=new Familia($registro->codigo, $registro->nombre, $registro->edad, $turnoMedico, $registro->numPacientes);
+            if($registro->unidad===null){
+                $resultado[]=new Familia($registro->codigo, $registro->nombre, $registro->edad, $registro->tipo, $registro->numPacientes);
             }else{
-                $resultado[]=new Urgencia($registro->codigo, $registro->nombre, $registro->edad, $turnoMedico, $registro->unidad);
+                $resultado[]=new Urgencia($registro->codigo, $registro->nombre, $registro->edad, $registro->tipo, $registro->unidad);
             }
         }
 
@@ -55,13 +55,17 @@ final class funcionesBD{
 
     static function getMedicosPorTurno($turno):array{
         $conexion=conexionBD::getConexion();
-        $consulta=$conexion->prepare("SELECT m.nombre, m.edad from medicos m join turnos t on m.turno_id=t.id where t.tipo=:turno");
+        $consulta=$conexion->prepare("SELECT m.codigo, m.nombre, m.edad, t.tipo, f.numPacientes, u.unidad from medicos m join turnos t on m.turno_id=t.id left join familia f on m.codigo=f.medico_codigo left join urgencias u on m.codigo=u.medico_codigo where t.tipo=:turno");
         $consulta->bindParam(':turno', $turno, PDO::PARAM_STR);
         $consulta->execute();
         $resultado=[];
 
         while($registro=$consulta->fetch(PDO::FETCH_OBJ)){
-            $resultado[]=['nombre'=>$registro->nombre, 'edad'=>$registro->edad];
+            if($registro->unidad===null){
+                $resultado[]=new Familia($registro->codigo, $registro->nombre, $registro->edad, $registro->tipo, $registro->numPacientes);
+            }else{
+                $resultado[]=new Urgencia($registro->codigo, $registro->nombre, $registro->edad, $registro->tipo, $registro->unidad);
+            }
         }
 
         return $resultado;
@@ -69,13 +73,15 @@ final class funcionesBD{
 
     static function getMedicosPorPacientes($numPacientes):array{
         $conexion=conexionBD::getConexion();
-        $consulta=$conexion->prepare("SELECT m.nombre, m.edad from medicos m join familia f on m.codigo=f.medico_codigo where numPacientes=:numPacientes");
+        $consulta=$conexion->prepare("SELECT m.codigo, m.nombre, m.edad, t.tipo, f.numPacientes, u.unidad from medicos m join turnos t on m.turno_id=t.id left join familia f on m.codigo=f.medico_codigo left join urgencias u on m.codigo=u.medico_codigo where f.numPacientes=:numPacientes");
         $consulta->bindParam(':numPacientes', $numPacientes, PDO::PARAM_INT);
         $consulta->execute();
         $resultado=[];
 
         while($registro=$consulta->fetch(PDO::FETCH_OBJ)){
-            $resultado[]=['nombre'=>$registro->nombre, 'edad'=>$registro->edad];
+            if($registro->unidad===null){
+                $resultado[]=new Familia($registro->codigo, $registro->nombre, $registro->edad, $registro->tipo, $registro->numPacientes);
+            }
         }
 
         return $resultado;

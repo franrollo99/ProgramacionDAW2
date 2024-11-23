@@ -4,7 +4,7 @@ namespace Src;
 class Urgencia extends Medico{
     private string $unidad;
 
-    public function __construct(int $codigo, string $nombre, int $edad, Turno $turno, string $unidad){
+    public function __construct(int $codigo, string $nombre, int $edad, string $turno, string $unidad){
         parent::__construct($codigo, $nombre, $edad, $turno);
         $this->unidad=$unidad;
     }

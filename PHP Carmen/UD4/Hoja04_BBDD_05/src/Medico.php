@@ -5,9 +5,9 @@ abstract class Medico{
     private int $codigo;
     private string $nombre;
     private int $edad;
-    private Turno $turno;
+    private string $turno;
 
-    public function __construct(int $codigo, string $nombre, int $edad, Turno $turno){
+    public function __construct(int $codigo, string $nombre, int $edad, string $turno){
         $this->codigo=$codigo;
         $this->nombre=$nombre;
         $this->edad=$edad;
@@ -42,11 +42,11 @@ abstract class Medico{
         return $this->edad;
     }
 
-    public function setTurno(Turno $turno):void{
+    public function setTurno(string $turno):void{
         $this->turno=$turno;
     }
 
-    public function getTurno():Turno{
+    public function getTurno():string{
         return $this->turno;
     }
 }

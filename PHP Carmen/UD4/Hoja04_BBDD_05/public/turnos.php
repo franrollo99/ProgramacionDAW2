@@ -18,8 +18,9 @@
             <?php
             $turnos=funcionesBD::getTurnos();
             foreach($turnos as $turno){
-                $selected=(isset($_GET['turno']) && $_GET['turno']===$turno)? 'selected' : '';
-                echo "<option value='$turno' $selected>$turno</option>";
+                $selected=(isset($_GET['turno']) && $_GET['turno']===$turno->getTipo())? 'selected' : '';
+                echo "<option value='{$turno->getTipo()}' $selected>{$turno->getTipo()}</option>"; //Mejor esta opcion
+                // echo '<option value="'.$turno->getTipo().'" '.$selected.'>'.$turno->getTipo().'</option>';
             }
             ?>
         </select>
@@ -29,13 +30,19 @@
 
     <?php
     if(isset($_GET['mostrar'])){
-        $medicosPorTurno=funcionesBD::getMedicosPorTurno($turno);
-        echo "<table><tr><th>Nombre</th><th>Edad</th></tr>";
+        $turnoSeleccionado=$_GET['turno'];
+        $medicosPorTurno=funcionesBD::getMedicosPorTurno($turnoSeleccionado);
 
-        foreach($medicosPorTurno as $medico){
-            echo "<tr><td>{$medico['nombre']}</td><td>{$medico['edad']}</td></tr>";
+        if(count($medicosPorTurno)>0){
+            echo "<table><tr><th>Medicos</th></tr>";
+
+            foreach($medicosPorTurno as $medico){
+                echo "<tr><td>{$medico}</td></tr>";
+            }
+            echo "</table>";
+        }else{
+            echo "No hay ningun medico registrado en el turno de $turnoSeleccionado";
         }
-        echo "</table>";
     }
     ?>
 </body>

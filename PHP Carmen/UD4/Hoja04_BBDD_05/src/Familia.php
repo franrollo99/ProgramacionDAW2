@@ -4,7 +4,7 @@ namespace Src;
 class Familia extends Medico{
     private int $numPacientes;
 
-    public function __construct(int $codigo, string $nombre, int $edad, Turno $turno, int $numPacientes){
+    public function __construct(int $codigo, string $nombre, int $edad, string $turno, int $numPacientes){
         parent::__construct($codigo, $nombre, $edad, $turno);
         $this->numPacientes=$numPacientes;
     }
