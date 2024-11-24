@@ -1,4 +1,5 @@
-<!-- sin namespace, se carga como si fuera un fichero -->
+<!-- sin namespace, se carga como si fuera un fichero al no ser una clase, aunque podria serla -->
+ 
 
 <?php
 
@@ -33,16 +34,21 @@ function limpiarTexto(string $texto):string{
     return strip_tags($texto, $etiquetasPermitidas);
 }
 
+//Elimina espacios innecesarios
+//Convierte caracteres especiales a HTML
 function limpiarEntrada(string $entrada){
-    
-    return;
+    $entrada = trim($entrada);
+    $entrada = htmlspecialchars($entrada, ENT_QUOTES, 'UTF-8');
+    return limpiarTexto($entrada);
 }
 
 
 // $files("campo name de la imgagen") da  informacion del archivo subido
-function redireccionar(string $path):bool{
-    $url="http://" . $path;
-    return file_get_contents($url);
+function redireccionar(string $path):void{
+    header("Location: $path");
+    exit;
+    // $url="http://" . $path;
+    // return file_get_contents($url);
 }
 
 ?>
