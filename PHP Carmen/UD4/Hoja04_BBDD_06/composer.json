@@ -6,8 +6,11 @@
     },
     "autoload": {
         "psr-4": {
-            "Fran\\Src\\": "src/"
-        }
+            "Src\\": "src/"
+        },
+        "files": [
+            "src/helper.php"
+        ]
     },
     "authors": [
         {

@@ -7,17 +7,23 @@
     <link rel="stylesheet" href="../style/estilo.css">
 </head>
 <body>
+
+    <?php
+    require_once '../vendor/autoload.php';
+    ?>
+
     <h1>Alta de Productos</h1>
     <form method="post" enctype="multipart/form-data">
-    <input type="text" name="nombreProducto" placeholder="Nombre de producto" required>
+    <input type="text" name="nombreProducto" placeholder="Nombre de producto" >
     <br><br>
-    <input type="file" name="imagenProducto" value="Examinar..." required>
+    <input type="file" name="imagenProducto" value="Examinar..." >
     <br><br>
-    <input type="number" name="precio" step="0.01" min="0.01" placeholder="Precio" required>
+    <input type="number" name="precio" step="0.01" min="0.01" placeholder="Precio" >
     <br><br>
-    <textarea name="descripcionProducto" placeholder="Descripcion..." required></textarea>
+    <textarea name="descripcionProducto" placeholder="Descripcion..." ></textarea>
     <br><br>
     <input type="submit" name="enviar" value="Enviar">
     </form>
+    
 </body>
 </html>
