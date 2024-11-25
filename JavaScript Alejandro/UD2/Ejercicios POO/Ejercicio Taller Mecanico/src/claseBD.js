@@ -55,6 +55,21 @@ class BD {
         return this.#reparaciones;
     }
 
+    obtenerReparaciones(filtro = null, valor = null) {
+        if (filtro && valor !== null) {
+            return this.#reparaciones.filter(reparacion => {
+                // Se usa un valor booleano explícito para evitar errores de tipo
+                if (typeof reparacion[filtro] === 'boolean') {
+                    return reparacion[filtro] === valor;
+                }
+                // Si no es booleano, no lo filtramos
+                return false;
+            });
+        }
+        // Si no hay filtro, devolvemos todas las reparaciones
+        return this.#reparaciones;
+    }
+
     obtenerReparacion(reparacionId) {
         return this.#reparaciones.find(reparacion => reparacion.reparacionId === reparacionId);
     }
