@@ -49,7 +49,7 @@
                         $descripcion = limpiarEntrada($descripcion);
             
                         // Manejo del archivo de imagen
-                        $directorio = '/productos/';
+                        $directorio = '../productos/';
                         $nombreUnico = uniqid() . '-' . basename($imagen['name']);
                         $rutaArchivo = $directorio . $nombreUnico;
             

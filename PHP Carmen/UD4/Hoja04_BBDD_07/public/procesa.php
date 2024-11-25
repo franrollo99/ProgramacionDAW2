@@ -98,6 +98,8 @@
     <br><br>
     <input type="submit" name="enviar" value="Enviar">
     </form>
+
+    <a href="index.php">Volver a la pagina principal</a>
     
 </body>
 </html>

@@ -74,3 +74,12 @@ form input[type="text"] + input,
 form input[type="number"] + textarea {
     margin-top: 10px;
 }
+
+a{
+    background-color: #007bff;
+    margin-top: 20px;
+    padding: 10px;
+    text-decoration: none;
+    color: white;
+    border-radius: 4px;
+}
