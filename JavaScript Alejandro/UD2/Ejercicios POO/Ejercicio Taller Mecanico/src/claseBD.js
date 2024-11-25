@@ -49,13 +49,6 @@ class BD {
     }
 
     obtenerReparaciones(filtro = null, valor = null) {
-        if (filtro && valor) {
-        return this.#reparaciones.filter(reparacion => reparacion[filtro] === valor);
-        }
-        return this.#reparaciones;
-    }
-
-    obtenerReparaciones(filtro = null, valor = null) {
         if (filtro && valor !== null) {
             return this.#reparaciones.filter(reparacion => {
                 // Se usa un valor booleano explícito para evitar errores de tipo

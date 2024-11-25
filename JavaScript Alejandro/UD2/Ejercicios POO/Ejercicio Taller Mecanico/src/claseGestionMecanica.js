@@ -386,9 +386,9 @@ class GestionMecanica {
     }
 
     #mostrarVehiculo(vehiculoId) {
-        const vehiculo = this.#clienteBD.obtenerVehiculoPorId(vehiculoId);
+        const vehiculo = this.#clienteBD.obtenerVehiculo('vehiculoId', vehiculoId);
         const resultados = this.#contenedor.querySelector('#resultados');
-        resultados.innerHTML = this.#generarHTMLVehiculo(vehiculo);
+        resultados.innerHTML = this.#generarHTMLVehiculo(vehiculoId);
     }
 
     #mostrarReparacionesVehiculo(vehiculoId) {
@@ -403,9 +403,10 @@ class GestionMecanica {
     }
     
     #borrarVehiculo(vehiculoId) {
-        if (confirm('¿Está seguro de que desea borrar este vehículo?')) {
+        const confirmacion = window.confirm('¿Estás seguro de que quieres borrar este vehículo?');
+        if (confirmacion) {
             this.#clienteBD.borrarVehiculo(vehiculoId);
-            this.#navegar('vehiculos');
+            this.#navegar('vehiculos'); // Recarga el listado de vehículos
         }
     }
 
