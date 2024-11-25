@@ -1,17 +1,17 @@
-class Reparacion{
+class Reparacion {
 
-    constructor(vehiculoId, descripcion, fecha, kilometros) {
+    constructor(vehiculoId, descripcion, fecha, kilometros, presupuesto = false, aprobada = false, pagado = false, terminado = false, trabajos = []) {
         this.reparacionId = null;
         this.vehiculoId = vehiculoId;
         this.descripcion = descripcion;
         this.fecha = fecha;
         this.kilometros = kilometros;
-        this.presupuesto = false;
-        this.aprobada = false;
-        this.pagado = false;
-        this.terminado = false;
-        this.trabajos = [];
-      }
+        this.presupuesto = presupuesto;
+        this.aprobada = aprobada;
+        this.pagado = pagado;
+        this.terminado = terminado;
+        this.trabajos = trabajos;
+    }
 
     agregarTrabajo(trabajo) {
         this.trabajos.push(trabajo);
