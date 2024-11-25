@@ -1,6 +1,5 @@
-<!-- sin namespace, se carga como si fuera un fichero al no ser una clase, aunque podria serla -->
-
 <?php
+// Sin namespace, se carga como si fuera un fichero al no ser una clase, aunque podria serla
 
 //Si existe un valor devuelve true
 function validarRequerido(string $param):bool{

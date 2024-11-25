@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alta de productos</title>
-    <link rel="stylesheet" href="../style/estilo.css">
+    <link rel="stylesheet" href="../style/estiloProcesa.css">
 </head>
 <body>
 
@@ -49,7 +49,7 @@
                         $descripcion = limpiarEntrada($descripcion);
             
                         // Manejo del archivo de imagen
-                        $directorio = '/productos/';
+                        $directorio = 'productos/';
                         $nombreUnico = uniqid() . '-' . basename($imagen['name']);
                         $rutaArchivo = $directorio . $nombreUnico;
             
