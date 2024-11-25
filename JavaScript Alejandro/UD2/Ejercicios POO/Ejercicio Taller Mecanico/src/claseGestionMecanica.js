@@ -320,6 +320,8 @@ class GestionMecanica {
         
         enlaces.forEach((enlace) => {
             enlace.addEventListener('click', (event) => {
+                //previene que se recargue la pagina
+                //usarlo con enlaces y submit
                 event.preventDefault();
                 const action = enlace.dataset.action;
                 this.#navegar(action);
@@ -353,6 +355,7 @@ class GestionMecanica {
                 resultados.innerHTML = this.#generarHTMLReparaciones(reparacionesPresupuestos);
                 break;
             default:
+                // consoleError mejor
                 resultados.innerHTML = '';
                 break;
         }
