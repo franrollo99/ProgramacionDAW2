@@ -1,7 +1,14 @@
+body{
+    height: 100vh;
+
+}
+
 .principal{
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    height: 100vh;
+    grid-template-rows: repeat(3, 200px);
+    /* overflow: hidden; */
+    /* position: relative; */
     
 }
 
@@ -14,8 +21,15 @@
     color: white;
 }
 
+/* .caja3 img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+} */
+
 .caja img{
-    width: 90px;
+    width: 50%;
     display: block;
     margin: 0 auto;
 }
@@ -45,7 +59,7 @@
 }
 
 .caja8{
-    background-color: yellow;
+    background-color: rgb(248, 198, 89);
 }
 
 .caja9{
@@ -53,13 +67,18 @@
     background-image: url("img/empleo.jpg");
     background-repeat: no-repeat;
     background-size: 100%;
+
+}
+
+.caja9 p{
+    background-color: rgba(45, 59, 255, 0.5);
+    background-blend-mode: ;
+    font-style: italic;
+    font-size: 30px;
 }
 
 .caja10{
     background-color: rgb(0, 81, 255);
-    background-image: url("img/icon-message.png");
-    background-repeat: no-repeat;
-    background-size: 100%
 }
 
 
@@ -69,4 +88,11 @@
     background-image: url("img/redes.jpg");
     background-repeat: no-repeat;
     background-size: 100%
+}
+
+.caja11 p{
+    background-color: rgba(45, 59, 255, 0.5);
+    background-blend-mode: ;
+    font-style: italic;
+    font-size: 30px;
 }
