@@ -25,12 +25,18 @@
     if(isset($_GET['mostrar'])){
         $numPacientes=$_GET['numPacientes'];
         $medicosPorPacientes=funcionesBD::getMedicosPorPacientes($numPacientes);
-        echo "<table><tr><th>Nombre</th><th>Edad</th></tr>";
 
-        foreach($medicosPorPacientes as $medico){
-            echo "<tr><td>{$medico['nombre']}</td><td>{$medico['edad']}</td></tr>";
+        if($medicosPorPacientes){
+            echo "<table><tr><th>Medicos</th></tr>";
+
+            foreach($medicosPorPacientes as $medico){
+                echo "<tr><td>$medico</td></tr>";
+            }
+            echo "</table>";
+        }else{
+            echo "No hay ningún médico con $numPacientes " . ($numPacientes == 1 ? "paciente" : "pacientes");
         }
-        echo "</table>";
+        
     }
     ?>
 

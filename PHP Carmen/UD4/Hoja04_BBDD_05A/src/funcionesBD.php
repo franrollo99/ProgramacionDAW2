@@ -66,16 +66,19 @@ final class funcionesBD{
     }
 
     static function getMedicosPorPacientes($numPacientes):array{
-        $conexion=conexionBD::getConexion();
-        $consulta=$conexion->prepare("SELECT m.nombre, m.edad from medicos m join familia f on m.codigo=f.medico_codigo where numPacientes=:numPacientes");
-        $consulta->bindParam(':numPacientes', $numPacientes, PDO::PARAM_INT);
-        $consulta->execute();
         $resultado=[];
+        $medicos=self::getMedicos();
 
-        while($registro=$consulta->fetch(PDO::FETCH_OBJ)){
-            $resultado[]=['nombre'=>$registro->nombre, 'edad'=>$registro->edad];
+        foreach($medicos as $medico){
+            // Verifico si cada medico tiene el metodo getNumPacientes, si es así entonces 
+            // es un medico de familia y se realiza la comparacion de numero de pacientes
+            if(method_exists($medico, 'getNumPacientes')){
+                if($medico->getNumPacientes()==$numPacientes){
+                    $resultado[]=$medico;
+                }
+            }
         }
-
+        
         return $resultado;
     }
 }
