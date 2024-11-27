@@ -12,15 +12,14 @@
     use Src\funcionesBD;
     ?>
 
-    <form method="get">
+    <form method="post">
         <label for="turno">Turno: </label>
         <select name="turno" id="turno">
             <?php
             $turnos=funcionesBD::getTurnos();
             foreach($turnos as $turno){
-                $tipoTurno=$turno->getTipo();
-                $selected=(isset($_GET['turno']) && $_GET['turno']===$tipoTurno)? 'selected' : '';
-                echo "<option value='$tipoTurno' $selected>$tipoTurno</option>";
+                $selected=(isset($_POST['turno']) && $_POST['turno']==$turno->getId())? 'selected' : '';
+                echo "<option value='".$turno->getId()."' ".$selected.">".$turno->getTipo()."</option>";
             }
             ?>
         </select>
@@ -29,8 +28,8 @@
     <p><a href="principal.php">Volver a la pagina principal</a></p>
 
     <?php
-    if(isset($_GET['mostrar'])){
-        $turnoSeleccionado=$_GET['turno'];
+    if(isset($_POST['mostrar'])){
+        $turnoSeleccionado=$_POST['turno'];
         $medicosPorTurno=funcionesBD::getMedicosPorTurno($turnoSeleccionado);
 
         if($medicosPorTurno){

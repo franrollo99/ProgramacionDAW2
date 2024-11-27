@@ -53,25 +53,26 @@ final class funcionesBD{
         return $resultado;
     }
 
-    static function getMedicosPorTurno($turno):array{
+    static function getMedicosPorTurno(int $turno):array{
         $resultado=[];
         $medicos=self::getMedicos();
 
         foreach($medicos as $medico){
-            if($medico->getTurno()->getTipo()===$turno){
+            if($medico->getTurno()->getId()===$turno){
                 $resultado[]=$medico;
             }
         }
         return $resultado;
     }
 
-    static function getMedicosPorPacientes($numPacientes):array{
+    static function getMedicosPorPacientes(int $numPacientes):array{
         $resultado=[];
         $medicos=self::getMedicos();
 
         foreach($medicos as $medico){
             // Verifico si cada medico tiene el metodo getNumPacientes, si es así entonces 
             // es un medico de familia y se realiza la comparacion de numero de pacientes
+            // Hacerlo con instance of
             if(method_exists($medico, 'getNumPacientes')){
                 if($medico->getNumPacientes()==$numPacientes){
                     $resultado[]=$medico;

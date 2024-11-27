@@ -13,7 +13,7 @@
     use Src\funcionesBD;
     ?>
 
-    <form method="get">
+    <form method="post">
         <p>Pulsa el boton para mostrar todos los medicos</p>
         <input type="submit" name="mostrar" value="Mostrar">
     </form>
@@ -21,7 +21,7 @@
     <p><a href="medicosFamilia.php">Ver medicos de familia</a></p>
 
     <?php
-    if(isset($_GET['mostrar'])){
+    if(isset($_POST['mostrar'])){
         $medicos=funcionesBD::getMedicos();
         echo "<table><tr><th>Medicos</th></tr>";
 

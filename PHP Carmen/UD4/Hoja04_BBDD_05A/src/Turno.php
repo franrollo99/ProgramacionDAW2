@@ -9,7 +9,7 @@ class Turno{
 
     public function __construct(int $id, string $tipo){
         $this->id=$id;
-        $this->setTipo($tipo);
+        $this->tipo=$tipo;
     }
 
     public function __toString():string{
@@ -22,14 +22,6 @@ class Turno{
 
     public function getTipo():string{
         return $this->tipo;
-    }
-
-    public function setTipo(string $tipo):void{
-        // $valoresPermitidos=['mañana', 'tarde', '24h'];
-        // if(!in_array($tipo, $valoresPermitidos)){
-        //     throw new Exception("Turno invalido");
-        // }
-        $this->tipo=$tipo;
     }
 }
 ?>

@@ -13,7 +13,7 @@
     use Src\funcionesBD;
     ?>
 
-    <form method="get">
+    <form method="post">
         <label for="numPacientes">Introduce un numero de pacientes:</label>
         <input type="number" name="numPacientes" id="numPacientes">
         <br><br>
@@ -22,8 +22,8 @@
     <p><a href="principal.php">Volver a la pagina principal</a></p>
 
     <?php
-    if(isset($_GET['mostrar'])){
-        $numPacientes=$_GET['numPacientes'];
+    if(isset($_POST['mostrar'])){
+        $numPacientes=$_POST['numPacientes'];
         $medicosPorPacientes=funcionesBD::getMedicosPorPacientes($numPacientes);
 
         if($medicosPorPacientes){
