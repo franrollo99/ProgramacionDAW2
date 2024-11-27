@@ -5,7 +5,7 @@ namespace Src;
 use Src\conexionBD;
 use PDO;
 use PDOException;
-
+// 
 final class funcionesBD
 {
 
