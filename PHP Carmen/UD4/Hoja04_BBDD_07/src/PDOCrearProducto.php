@@ -29,6 +29,23 @@ class PDOCrearProducto implements RepositorioProducto{
             return false;
         }
     }
+
+    public function obtenerTodos():array{
+        $consulta = $this->conexion->query("SELECT id, nombre, precio, descripcion, imagen from productos");
+        $resultado=[];
+
+        while($registro = $consulta->fetch(PDO::FETCH_OBJ)){
+            $resultado[]=['id'=>$registro->id ,'nombre'=>$registro->nombre, 'precio'=>$registro->precio, 'descripcion'=>$registro->descripcion, 'imagen'=>$registro->imagen];
+            // $resultado[]=$registro;
+        }
+        return $resultado;
+    }
+
+    public function eliminar(int $id):bool{
+        $consulta = $this->conexion->prepare("DELETE from productos where id=:id");
+        $consulta->bindParam(":id", $id, PDO::PARAM_INT);
+        return $consulta->execute();
+    }
 }
 
 ?>
