@@ -9,6 +9,16 @@ use PDOException;
 final class funcionesBD
 {
 
+    static function registro(string $usuario, string $contraseña):bool{
+        $conexion=conexionBD::getConnection();
+        $contraseñaEncriptada=password_hash($contraseña, PASSWORD_BCRYPT);
+
+        $consulta=$conexion->prepare("INSERT INTO usuarios (usuario, contraseña) VALUES (:usuario, :contraseña)");
+        $consulta->bindParam(":usuario", $usuario, PDO::PARAM_STR);
+        $consulta->bindParam(":contraseña", $contraseña, PDO::PARAM_STR);
+        return $consulta->execute();
+    }
+
     static function llegada()
     {
         $conexion = conexionBD::getConnection();
