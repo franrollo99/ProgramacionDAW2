@@ -41,11 +41,24 @@ class PDOCrearProducto implements RepositorioProducto{
         return $resultado;
     }
 
+    public function obtenerProducto($id):?array{
+        // Convertimos el id que viene como string a tipo int, sino habra que comparar solo por valor y no por tipo tambien
+        // $id = (int)$id;
+        $productos = $this->obtenerTodos();
+    
+        foreach ($productos as $producto) {
+            if ($producto['id'] == $id) {
+                return $producto;
+            }
+        }
+
+        return null;
+    }
+
     public function eliminar(int $id):bool{
         $consulta = $this->conexion->prepare("DELETE from productos where id=:id");
         $consulta->bindParam(":id", $id, PDO::PARAM_INT);
         return $consulta->execute();
     }
 }
-
 ?>

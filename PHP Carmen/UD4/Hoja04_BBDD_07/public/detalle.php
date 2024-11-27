@@ -9,8 +9,8 @@
 <body>
     <?php
     require_once "../vendor/autoload.php";
-    use Src\PDOCrearProducto;
     use Src\conexionBD;
+    use Src\PDOCrearProducto;
     ?>
 
     <h1>Detalle del producto</h1>
@@ -21,20 +21,16 @@
 
             $conexion = ConexionBD::getConexion();
             $repositorioProducto = new PDOCrearProducto($conexion);
-            $productos = $repositorioProducto->obtenerTodos();
-            $productoEncontrado = null;
-            
-            foreach ($productos as $producto) {
-                if ($producto['id'] == $id) {
-                    $productoEncontrado = $producto;
-                    break;
-                }
-            }
+            $producto = $repositorioProducto->obtenerProducto($id);
 
-            echo "<p><strong>Nombre: </strong>{$producto['nombre']}</p>";
-            echo "<p><strong>Precio: </strong>{$producto['precio']}</p>";
-            echo "<p><strong>Descripcion: </strong>{$producto['descripcion']}</p>";
-            echo "<img src='productos/{$producto['imagen']}'</img>";
+            if($producto){
+                echo "<p><strong>Nombre: </strong>{$producto['nombre']}</p>";
+                echo "<p><strong>Precio: </strong>{$producto['precio']}</p>";
+                echo "<p><strong>Descripcion: </strong>{$producto['descripcion']}</p>";
+                echo "<img src='productos/{$producto['imagen']}' alt='No se ha encontrado la imagen'>";
+            }else{
+                echo "<p>No se ha podido mostrar el producto</p>";
+            }
         }
         ?>
         <br>

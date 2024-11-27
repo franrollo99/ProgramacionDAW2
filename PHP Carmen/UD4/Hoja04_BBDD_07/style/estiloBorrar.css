@@ -6,15 +6,10 @@ body {
     height: 100vh;
 }
 
-fieldset{
-    max-width: 500px;
-    padding: 0 30px 30px;
-}
-
-img{
-    width: 300px;
-    margin-bottom: 20px;
-
+p{
+    background-color: greenyellow;
+    padding: 20px;
+    max-width: max-content;
 }
 
 a{
