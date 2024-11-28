@@ -72,8 +72,8 @@ final class funcionesBD{
         foreach($medicos as $medico){
             // Verifico si cada medico tiene el metodo getNumPacientes, si es así entonces 
             // es un medico de familia y se realiza la comparacion de numero de pacientes
-            // Hacerlo con instance of
-            if(method_exists($medico, 'getNumPacientes')){
+            // if(method_exists($medico, 'getNumPacientes')){
+            if($medico instanceof Familia){
                 if($medico->getNumPacientes()==$numPacientes){
                     $resultado[]=$medico;
                 }

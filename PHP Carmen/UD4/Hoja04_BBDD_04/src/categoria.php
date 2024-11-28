@@ -10,16 +10,12 @@
             $this->nombre=$nombre;
         }
 
-        public function setId(int $id):void{
-            $this->id=$id;
+        public function __toString(){
+            return "Id: $this->id, Nombre: $this->nombre";
         }
 
         public function getId():int{
             return $this->id;
-        }
-
-        public function setNombre(string $nombre):void{
-            $this->nombre=$nombre;
         }
 
         public function getnombre():string{

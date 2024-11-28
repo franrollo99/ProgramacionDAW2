@@ -5,8 +5,8 @@
         private int $mesCaducidad;
         private int $añoCaducidad;
 
-        public function __construct(int $codigo, float $precio, string $nombre, int $mesCaducidad, int $añoCaducidad, Categoria $categoria){
-            parent::__construct($codigo, $precio, $nombre, $categoria);
+        public function __construct(int $codigo, string $nombre, float $precio, int $mesCaducidad, int $añoCaducidad, Categoria $categoria){
+            parent::__construct($codigo, $nombre, $precio, $categoria);
             $this->mesCaducidad=$mesCaducidad;
             $this->añoCaducidad=$añoCaducidad;
         }

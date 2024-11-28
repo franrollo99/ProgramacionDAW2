@@ -9,28 +9,37 @@
 
 <body>
     <?php
-
+    require_once "../vendor/autoload.php";
+    use Src\FuncionesBD;
     ?>
 
     <form method="post">
-        <select name="categoria" required>
-            <option value="-1" selected disable>Selecciona una categoria</option>
+        <label for="categoria">Filtro de productos por categoria</label>
+        <select name="categoria" id="categoria">
             <?php
-            foreach ($categorias as $categoria) {
-                echo '<option value="' . $categoria->getId() . '" ' . (isset($_POST['categoria']) && $_POST['categoria'] == $categoria->getId() ? 'selected' : '') . '>';
-
+            $categorias=FuncionesBD::obtenerCategorias();
+            foreach ($categorias as $categoria){
+                $selected=$_POST['categoria']==$categoria->getId()? 'selected' : '';
+                echo "<option value='" . $categoria->getId() . "' $selected>".$categoria->getNombre()."</option>";
             }
             ?>
         </select>
-        <button type="submit">Filtrar</button>
+        <input type="submit" name="mostrarProductos" value="Filtrar">
     </form>
 
     <?php
-      if(isset($_GET['mostrarProductos'])){
-            
+      if(isset($_POST['mostrarProductos'])){
+            $categoria=$_POST['categoria'];
+            $productos=FuncionesBD::obtenerProductosCategorias($categoria);
+
+            echo "<ul>";
+            foreach($productos as $producto){
+                echo "<li>$producto</li>";
+            }
+            echo "</ul>";
       }
     ?>
-
+    <br>
     <a href="principal.php">Pagina principal</a>
 </body>
 

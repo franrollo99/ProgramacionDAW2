@@ -19,7 +19,7 @@
             $turnos=funcionesBD::getTurnos();
             foreach($turnos as $turno){
                 $selected=(isset($_POST['turno']) && $_POST['turno']==$turno->getId())? 'selected' : '';
-                echo "<option value='".$turno->getId()."' ".$selected.">".$turno->getTipo()."</option>";
+                echo "<option value='".$turno->getId()."' $selected>".$turno->getTipo()."</option>";
             }
             ?>
         </select>

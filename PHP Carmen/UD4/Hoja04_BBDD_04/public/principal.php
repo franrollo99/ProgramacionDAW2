@@ -6,16 +6,27 @@
     <title>Supermercado</title>
 </head>
 <body>
+    <?php
+    require_once "../vendor/autoload.php";
+    use Src\FuncionesBD;
+    ?>
     <h1>Supermercado</h1>
-    <form action="" method="get">
-        <button type="submit" name="mostrarProductos">Mostrar productos</button>
+    <p>Pulsa el boton para mostrar todos los productos</p>
+    <form method="get">
+        <input type="submit" name="mostrarProductos" value="Mostrar">
     </form>
     <br>
     <a href="categorias.php">Categorias</a>
-
+    
     <?php
         if(isset($_GET['mostrarProductos'])){
-            
+            $productos=FuncionesBD::obtenerProductos();
+
+            echo "<ul>";
+            foreach($productos as $producto){
+                echo "<li>$producto</li>";
+            }
+            echo "</ul>";
         }
     ?>
 </body>
