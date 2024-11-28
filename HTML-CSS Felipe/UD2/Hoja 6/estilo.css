@@ -1,0 +1,100 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100vh;
+}
+
+.pagina{
+
+}
+
+img{
+    width: 400px;
+}
+
+header div{
+    background: url(img/img1.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0 50px;
+}
+
+h1{
+    color: white;
+}
+
+h1+a{
+    color: white;
+    text-decoration: none;
+    border: 1px solid white;
+    border-radius: 50px;
+    background-color: rgb(2, 101, 250);
+    padding: 5px 75px;
+}
+
+nav ul{
+    display: flex;
+    align-items: center;
+    background-color: rgb(66, 153, 253);
+    height: 30px;
+}
+
+nav li{
+    padding: 0 30px 0 20px;
+}
+
+li, a{
+    list-style-type: none;
+    text-decoration: none;
+}
+
+main{
+    margin: 0 auto;
+    padding: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    border: 1px solid black;
+}
+
+footer{
+    margin: 0 auto;
+    padding: 30px;
+    display: flex;
+    justify-content: space-around;
+    align-content: flex-end;
+    border: 1px solid black;
+}
+
+footer div{
+}
+
+footer form label{
+    display: inline-block;
+}
+
+.socialMedia img{
+    width: 30px;
+}
+
+
+@media screen and (max-with:767px){
+    header a{
+        padding: 10px;
+    }
+
+    li{
+        text-align: center;
+        padding: 10px;
+    }
+
+
+}
