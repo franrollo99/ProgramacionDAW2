@@ -32,23 +32,23 @@
 
     <?php
     if(isset($_POST['registrar'])){
-        $nombre=$_POST['nombre'];
+        $usuario=$_POST['nombre'];
         $contraseña=$_POST['contraseña'];
         $repetirContraseña=$_POST['repetirContraseña'];
 
         if($contraseña===$repetirContraseña){
-            $registro=funcionesBD::registro($usuario, $contraseña);
+            $contraseñaHash=password_hash($contraseña, PASSWORD_BCRYPT);
+            $registro=funcionesBD::registro($usuario, $contraseñaHash);
+
             if($registro){
                 echo "<p>El usuario se ha registrado correctamente</p>";
             }else{
                 echo "<p>Ha habido un error en el registro del usuario</p>";
             }
         }else{
-            echo "<p>Las contraseñas introducidas no coinciden</p>";
+            echo "<p>Claves incorrectas</p>";
         }
     }
-
-
     ?>
 </body>
 </html>
