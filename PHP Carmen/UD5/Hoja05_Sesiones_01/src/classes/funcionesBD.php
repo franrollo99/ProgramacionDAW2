@@ -20,7 +20,25 @@ final class funcionesBD
     }
 
     static function verificarCredenciales(string $usuario, string $contraseña):bool{
-        return false;
+        try{
+            $conexion = conexionBD::getConnection();
+
+            $consulta = $conexion->prepare("SELECT usuario, password from usuarios where usuario = :usuario");
+            $consulta->bindParam(':usuario', $usuario, PDO::PARAM_STR);
+            $consulta->execute();
+    
+            if ($consulta->rowCount() > 0) {
+                $usuarioDatos = $consulta->fetch(PDO::FETCH_ASSOC);
+                $hash = $usuarioDatos['password'];
+                // password_verify() se utiliza para comparar una contraseña en texto claro con un hash de contraseña
+                return password_verify($contraseña, $hash);
+            }
+    
+            return false;
+        } catch (PDOException $e) {
+            echo "Error al verificar credenciales: " . $e->getMessage();
+            return false;
+        }
     }
 
     static function llegada()

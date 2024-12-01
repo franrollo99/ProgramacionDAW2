@@ -14,13 +14,21 @@
 
     use Src\classes\funcionesBD;
 
-    $usuario = $_SERVER['PHP_AUTH_USER'];
-    $contraseña = $_SERVER['PHP_AUTH_PW'];
+    header('Cache-Control: no-cache, must-revalidate, max-age=0');
+    header('Pragma: no-cache');
+
+    // Comprobamos si la variable $_SERVER['PHP_AUTH_USER'] esta definida, es ese caso se asigna su valor a usuario, sino es null
+    $usuario = isset($_SERVER['PHP_AUTH_USER']) ? $_SERVER['PHP_AUTH_USER'] : null;
+
+    // Usamos el operador de coalescencia nula, mas moderno y legible
+    // Comprueba si la variable $_SERVER esta definida, sino es null
+    $contraseña = $_SERVER['PHP_AUTH_USER'] ?? null;
     
-    if (!funcionesBD::verificarCredenciales($usuario, $contraseña)) {
+    if (!$usuario || !$contraseña || !funcionesBD::verificarCredenciales($usuario, $contraseña)) {
         header('WWW-Authenticate: Basic Realm="Contenido restringido"');
         header('HTTP/1.0 401 Unauthorized');
-        echo "Usuario no reconocido!";
+        echo "Debe autenticarse para acceder al contenido! <br><br>";
+        echo "<a href='index.html'>Pagina de inicio</a>";
         exit();
     }
     ?>
