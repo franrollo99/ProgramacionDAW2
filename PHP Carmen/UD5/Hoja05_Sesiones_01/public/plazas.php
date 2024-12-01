@@ -13,6 +13,16 @@
     require_once dirname(__DIR__) . "/vendor/autoload.php";
 
     use Src\classes\funcionesBD;
+
+    $usuario = $_SERVER['PHP_AUTH_USER'];
+    $contraseña = $_SERVER['PHP_AUTH_PW'];
+    
+    if (!funcionesBD::verificarCredenciales($usuario, $contraseña)) {
+        header('WWW-Authenticate: Basic Realm="Contenido restringido"');
+        header('HTTP/1.0 401 Unauthorized');
+        echo "Usuario no reconocido!";
+        exit();
+    }
     ?>
 
     <h1>Gestion de plazas</h1>

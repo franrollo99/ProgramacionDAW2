@@ -12,10 +12,15 @@ final class funcionesBD
     static function registro(string $usuario, string $contraseña):bool{
         $conexion=conexionBD::getConnection();
 
-        $consulta=$conexion->prepare("INSERT INTO usuarios (usuario, password) VALUES (:usuario, :contraseña)");
+        // No usar Ñ en consultas SQL, da error
+        $consulta=$conexion->prepare("INSERT INTO usuarios (usuario, password) VALUES (:usuario, :contrasena)");
         $consulta->bindParam(":usuario", $usuario, PDO::PARAM_STR);
-        $consulta->bindParam(":contraseña", $contraseña, PDO::PARAM_STR);
+        $consulta->bindParam(":contrasena", $contraseña, PDO::PARAM_STR);
         return $consulta->execute();
+    }
+
+    static function verificarCredenciales(string $usuario, string $contraseña):bool{
+        return false;
     }
 
     static function llegada()
