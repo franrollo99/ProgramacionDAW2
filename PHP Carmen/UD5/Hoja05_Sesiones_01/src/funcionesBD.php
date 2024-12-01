@@ -8,7 +8,7 @@ use PDOException;
 // 
 final class funcionesBD
 {
-a
+
     static function registro(string $usuario, string $contraseña):bool{
         $conexion=conexionBD::getConnection();
 
