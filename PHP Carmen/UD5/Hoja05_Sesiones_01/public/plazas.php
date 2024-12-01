@@ -14,15 +14,15 @@
 
     use Src\classes\funcionesBD;
 
-    header('Cache-Control: no-cache, must-revalidate, max-age=0');
-    header('Pragma: no-cache');
+    // header('Cache-Control: no-cache, must-revalidate, max-age=0');
+    // header('Pragma: no-cache');
 
     // Comprobamos si la variable $_SERVER['PHP_AUTH_USER'] esta definida, es ese caso se asigna su valor a usuario, sino es null
     $usuario = isset($_SERVER['PHP_AUTH_USER']) ? $_SERVER['PHP_AUTH_USER'] : null;
 
     // Usamos el operador de coalescencia nula, mas moderno y legible
     // Comprueba si la variable $_SERVER esta definida, sino es null
-    $contraseña = $_SERVER['PHP_AUTH_USER'] ?? null;
+    $contraseña = $_SERVER['PHP_AUTH_PW'] ?? null;
     
     if (!$usuario || !$contraseña || !funcionesBD::verificarCredenciales($usuario, $contraseña)) {
         header('WWW-Authenticate: Basic Realm="Contenido restringido"');
