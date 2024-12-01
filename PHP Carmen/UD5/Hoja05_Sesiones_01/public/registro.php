@@ -9,7 +9,7 @@
 
     <?php
     require_once dirname(__DIR__) . "/vendor/autoload.php";
-    use Src\funcionesBD;
+    use Src\classes\funcionesBD;
     ?>
 
     <h1>Registro de usuarios</h1>

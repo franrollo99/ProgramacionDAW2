@@ -1,10 +1,10 @@
 <?php
-    namespace Src;
+    namespace Src\classes;
     
     use PDO;
     use PDOException;
 
-    $dotenv = \Dotenv\Dotenv::createImmutable(dirname(__DIR__, 1));
+    $dotenv = \Dotenv\Dotenv::createImmutable(dirname(__DIR__, 2));
     $dotenv->load();
 
     final class conexionBD{

@@ -1,6 +1,6 @@
 <?php
     require_once dirname(__DIR__) . "/vendor/autoload.php";
-    use Src\conexionBD;
+    use Src\classes\conexionBD;
 
     $conexion = conexionBD::getConnection();
     

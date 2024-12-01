@@ -1,8 +1,8 @@
 <?php
 
-namespace Src;
+namespace Src\classes;
 
-use Src\conexionBD;
+use Src\classes\conexionBD;
 use PDO;
 use PDOException;
 // 

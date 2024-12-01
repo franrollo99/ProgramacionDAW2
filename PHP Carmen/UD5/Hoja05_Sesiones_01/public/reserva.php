@@ -12,7 +12,7 @@
     <?php
     require_once dirname(__DIR__) . "/vendor/autoload.php";
 
-    use Src\funcionesBD;
+    use Src\classes\funcionesBD;
     // FUNCION VALIDAR DNI
     //modulo 23
     // if(!validarDNI($dni)){

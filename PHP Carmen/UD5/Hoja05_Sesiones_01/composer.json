@@ -9,7 +9,7 @@
             "Src\\": "src/"
         },
         "files": [
-            "src/funciones.php"
+            "src/functions/funciones.php"
         ]
     },
     "authors": [
