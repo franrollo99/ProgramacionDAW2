@@ -8,32 +8,32 @@ class Juguete{
         this.precio=precio;
     }
 
-    #getJugueteId(){
+    getJugueteId(){
         return this.#jugueteId;
     }
 
     set nombre(nombreNuevo){
-        this.nombre=nombreNuevo;
+        this._nombre=nombreNuevo;
     }
 
     get nombre(){
-        return this.nombre;
+        return this._nombre;
     }
 
     set marca(marcaNueva){
-        this.marca=marcaNueva;
+        this._marca=marcaNueva;
     }
 
-    get nombre(){
-        return this.nombre;
+    get marca(){
+        return this._marca;
     }
 
     set precio(precioNuevo){
-        this.precio=precioNuevo;
+        this._precio=precioNuevo;
     }
 
     get precio(){
-        return this.precio;
+        return this._precio;
     }
 
     generarHTMLPropiedades(){

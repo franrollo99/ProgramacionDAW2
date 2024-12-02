@@ -1,70 +1,76 @@
-import datos from './datos';
+import datos from './datos.js';
 import Juguete from './juguete.js';
 
-class Jugueteria{
+class Jugueteria {
     #contenedor;
     #juguetes;
     #contador;
 
-    constructor(){
-        this.#contenedor=null;
-        this.#juguetes= datos.map(datos => new Juguete(datos.jugueteId, datos.nombre, datos.marca, datos.precio));
-        this.#contador=Math.max(...this.#juguetes.map(juguete => juguete.jugueteId));
+    constructor() {
+        this.#contenedor = null;
+        this.#juguetes = datos.map(dato => new Juguete(dato.jugueteId, dato.nombre, dato.marca, dato.precio));
+        this.#contador = Math.max(...this.#juguetes.map(juguete => juguete.jugueteId), 0);
     }
 
-    iniciarApp(selector){
+    iniciarApp(selector) {
         this.#contenedor = document.querySelector(selector);
-
         if (!this.#contenedor) {
-            alert("No se pudo iniciar la aplicación, contenedor no encontrado.");
+            alert('No se encontró el contenedor especificado');
             return;
         }
-
-        this.#contenedor.innerHTML = this.#navegarInicio();
+        this.#navegarInicio();
     }
 
-    obtenerJuguetes(filtro){
-        return this.#juguetes.filter(juguete=>$juguete.nombre.toLowerCase().includes(filtro.tolowerCase()));
-    }
-
-    obtenerJuguete(jugueteId){
-        return this.#juguetes.find(juguete=>juguete.jugueteId===jugueteId);
-    }
-
-    crearjuguete(nuevo){
-        const nuevoJuguete = new Juguete(
-            ++this.#contador,
-            nuevo.nombre,
-            nuevo.marca,
-            nuevo.precio
+    obtenerJuguetes(filtro = '') {
+        if (!filtro) return this.#juguetes;
+        return this.#juguetes.filter(juguete =>
+            juguete.nombre.toLowerCase().includes(filtro.toLowerCase())
         );
-
-        this.#juguetes.push(nuevoJuguete);
     }
 
-    borrarJuguete(jugueteId){
-        this.#juguetes = this.#juguetes.filter(juguete=>$juguete.id !==jugueteId);
+    obtenerJuguete(jugueteId) {
+        return this.#juguetes.find(juguete => juguete.jugueteId === jugueteId);
     }
 
-    #navegarInicio(){
-
+    crearJuguete(nuevo) {
+        this.#contador++;
+        const juguete = new Juguete(this.#contador, nuevo.nombre, nuevo.marca, nuevo.precio);
+        this.#juguetes.push(juguete);
+        // Actualizar vista
+        this.#navegarListadoJuguetes();
     }
 
-    
-
-    #navegarListadoJuguetes(){
-
+    borrarJuguete(jugueteId) {
+        this.#juguetes = this.#juguetes.filter(j => j.jugueteId !== jugueteId);
+        this.#navegarListadoJuguetes(); // Actualizar vista
     }
 
-    #navegarPropiedades(juguete){
-
+    #navegarInicio() {
+        this.#contenedor.innerHTML = `
+            ${this.generarHTMLNavegacion()}
+            ${this.generarHTMLBuscador()}
+            ${this.#generarHTMLListado(this.#juguetes)}
+        `;
+        this.#asignarEventos();
     }
 
-    #asignarEventos(){
-
+    #navegarListadoJuguetes() {
+        this.#contenedor.innerHTML = `
+        ${this.generarHTMLNavegacion()}
+        ${this.generarHTMLListado(this.#juguetes)}
+    `;
+        this.#asignarEventos();
     }
 
-    generarHTMLNavegacion(){
+    #navegarPropiedades(juguete) {
+        this.#contenedor.innerHTML = `
+            ${this.generarHTMLNavegacion()}
+            ${juguete.generarHTMLPropiedades()}
+        `;
+        this.#asignarEventos();
+    }
+
+    generarHTMLNavegacion() {
         return `
             <nav data-componente="navegacion" class="jg-navegacion">
                 <ul>
@@ -75,7 +81,7 @@ class Jugueteria{
         `;
     }
 
-    generarHTMLBuscador(){
+    generarHTMLBuscador() {
         return `
             <form data-componente="buscador" name="jg-buscador">
                 <input type="text" id="jg-buscador-filtro" placeholder="Buscar por nombre..." />
@@ -84,12 +90,65 @@ class Jugueteria{
         `;
     }
 
-    generarHTMLListado(listaJuguetes){
+    #generarHTMLListado(listaJuguetes) {
         return `
-            <div data-componente="listado" class="jg-tabla">
-                <div class="jg-tabla-fila jg-cabecera">
-                <div>Nombre</div><div>Marca</div><div>Precio</div>
+          <div class="jg-tabla">
+            <div class="jg-tabla-fila jg-cabecera">
+              <div>Nombre</div><div>Marca</div><div>Precio</div><div>Acciones</div>
             </div>
+            ${listaJuguetes.map(juguete => `
+              <div class="jg-tabla-fila">
+                <div>${juguete.nombre}</div>
+                <div>${juguete.marca}</div>
+                <div>$${juguete.precio.toFixed(2)}</div>
+                <div>
+                  <button data-accion="ver" data-id="${juguete.jugueteId}">Ver</button>
+                  <button data-accion="borrar" data-id="${juguete.jugueteId}">Borrar</button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
         `;
     }
+
+    #asignarEventos() {
+        // Navegación
+        this.#contenedor.querySelectorAll('[data-destino]').forEach(enlace => {
+            enlace.addEventListener('click', (e) => {
+                e.preventDefault();
+                const destino = enlace.dataset.destino;
+                if (destino === 'inicio') this.#navegarInicio();
+                if (destino === 'listadojuguetes') this.#navegarListadoJuguetes();
+            });
+        });
+
+        // Buscador
+        const buscador = this.#contenedor.querySelector('#jg-buscador');
+        if (buscador) {
+            buscador.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const filtro = buscador.querySelector('#jg-buscador-filtro').value;
+                const juguetesFiltrados = this.obtenerJuguetes(filtro);
+                this.#contenedor.querySelector('[data-componente="listado"]').innerHTML = this.#generarHTMLListado(juguetesFiltrados);
+            });
+        }
+
+        // Acciones de listado
+        this.#contenedor.querySelectorAll('[data-accion]').forEach(boton => {
+            boton.addEventListener('click', (e) => {
+                const id = parseInt(boton.dataset.id, 10);
+                const accion = boton.dataset.accion;
+                if (accion === 'ver') {
+                    const juguete = this.obtenerJuguete(id);
+                    if (juguete) this.#navegarPropiedades(juguete);
+                }
+                if (accion === 'borrar') this.borrarJuguete(id);
+            });
+        });
+    }
 }
+
+const jugueteria = new Jugueteria();
+jugueteria.iniciarApp('#app');
+
+export default Jugueteria;
