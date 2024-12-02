@@ -36,16 +36,16 @@ class Jugueteria {
         this.#contador++;
         const juguete = new Juguete(this.#contador, nuevo.nombre, nuevo.marca, nuevo.precio);
         this.#juguetes.push(juguete);
-        // Actualizar vista
+        // Actualizo la vista
         this.#navegarListadoJuguetes();
     }
 
     borrarJuguete(jugueteId) {
         this.#juguetes = this.#juguetes.filter(j => j.jugueteId !== jugueteId);
-        //Actualizar vista
         this.#navegarListadoJuguetes();
     }
 
+    // Cuenta con la navegacion, el busador y el listado
     #navegarInicio() {
         this.#contenedor.innerHTML = `
             ${this.generarHTMLNavegacion()}
@@ -54,7 +54,6 @@ class Jugueteria {
         `;
         this.#asignarEventos();
     }
-
     #navegarListadoJuguetes() {
         this.#contenedor.innerHTML = `
         ${this.generarHTMLNavegacion()}
@@ -76,7 +75,7 @@ class Jugueteria {
             <nav data-componente="navegacion" class="jg-navegacion">
                 <ul>
                     <li><a href="#" data-destino="inicio">Inicio</a></li>
-                    <li><a href="#" datadestino="listadojuguetes">Listado</a></li>
+                    <li><a href="#" data-destino="listadojuguetes">Listado</a></li>
                 </ul>
             </nav>
         `;
@@ -84,7 +83,7 @@ class Jugueteria {
 
     generarHTMLBuscador() {
         return `
-            <form data-componente="buscador" name="jg-buscador">
+            <form data-componente="buscador" id="jg-buscador">
                 <input type="text" id="jg-buscador-filtro" placeholder="Buscar por nombre..." />
                 <button type="submit">Buscar</button>
             </form>
@@ -92,6 +91,7 @@ class Jugueteria {
     }
 
     #generarHTMLListado(listaJuguetes) {
+        // MAQUETAR CON DIVS no con tablas
         return `
           <div class="jg-tabla">
             <div class="jg-tabla-fila jg-cabecera">
@@ -113,10 +113,10 @@ class Jugueteria {
     }
 
     #asignarEventos() {
-        // Navegación
+        // Navegación inicio y listado
         this.#contenedor.querySelectorAll('[data-destino]').forEach(enlace => {
-            enlace.addEventListener('click', (e) => {
-                e.preventDefault();
+            enlace.addEventListener('click', () => {
+                event.preventDefault();
                 const destino = enlace.dataset.destino;
                 if (destino === 'inicio') this.#navegarInicio();
                 if (destino === 'listadojuguetes') this.#navegarListadoJuguetes();
@@ -126,17 +126,19 @@ class Jugueteria {
         // Buscador
         const buscador = this.#contenedor.querySelector('#jg-buscador');
         if (buscador) {
-            buscador.addEventListener('submit', (e) => {
-                e.preventDefault();
+            buscador.addEventListener('submit', () => {
+                event.preventDefault();
                 const filtro = buscador.querySelector('#jg-buscador-filtro').value;
                 const juguetesFiltrados = this.obtenerJuguetes(filtro);
+                ////////////////////
                 this.#contenedor.querySelector('[data-componente="listado"]').innerHTML = this.#generarHTMLListado(juguetesFiltrados);
             });
         }
 
         // Acciones de listado
         this.#contenedor.querySelectorAll('[data-accion]').forEach(boton => {
-            boton.addEventListener('click', (e) => {
+            boton.addEventListener('click', () => {
+                event.preventDefault();
                 const id = parseInt(boton.dataset.id, 10);
                 const accion = boton.dataset.accion;
                 if (accion === 'ver') {
