@@ -42,7 +42,8 @@ class Jugueteria {
 
     borrarJuguete(jugueteId) {
         this.#juguetes = this.#juguetes.filter(j => j.jugueteId !== jugueteId);
-        this.#navegarListadoJuguetes(); // Actualizar vista
+        //Actualizar vista
+        this.#navegarListadoJuguetes();
     }
 
     #navegarInicio() {
