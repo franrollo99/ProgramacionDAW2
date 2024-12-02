@@ -57,7 +57,7 @@ class Jugueteria {
     #navegarListadoJuguetes() {
         this.#contenedor.innerHTML = `
         ${this.generarHTMLNavegacion()}
-        ${this.generarHTMLListado(this.#juguetes)}
+        ${this.#generarHTMLListado(this.#juguetes)}
     `;
         this.#asignarEventos();
     }
