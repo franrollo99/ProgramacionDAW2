@@ -1,0 +1,164 @@
+*{
+    margin: 0;
+    padding: 0;
+    /* box-sizing para que no se sume el tamaño del margin y del padding */
+    box-sizing: border-box;
+}
+
+html{
+    font-family: Arial, Helvetica, sans-serif;
+    /* con las barras se crea una variable para usarla luego en otras partes*/
+    --green-50:#e7ffe4;
+}
+
+header{
+    background-color: #00b809;
+    height: 50px;
+}
+
+.cabecera{
+    margin: 0 15%;
+    background-color: #00e606;
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    border-radius: 0 0 5px 5px;
+    align-items: flex-end;
+}
+
+#logoNav{
+    margin-left: 5px;
+    display: flex;
+    align-items: center;
+}
+
+#logoNav img{
+    width: 2.5em;
+    margin-right: 0.5em;
+}
+
+nav a{
+    text-decoration: none;
+}
+
+nav ul{
+    list-style-type: none;
+    margin: 30px 0 6px;
+    display: flex;
+    justify-content: space-between;
+}
+
+nav li{
+    padding: 5px;
+}
+
+nav ul li:hover{
+    outline-style: solid;
+    outline-width: 1px;
+    background-color: #00ff00;
+    border-radius: 5px;
+    color: #00b809;
+}
+
+main{
+    margin: 10px 15%;
+    display: flex;
+    flex-direction: row;
+}
+
+aside{
+    background-color: #e7ffe4;
+    padding: 10px;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    /* align-self para que se alinee solo el aside */
+    align-self: flex-start;
+    margin-left: 5px;
+}
+
+aside ul{
+    list-style-type: none;
+}
+
+aside h3{
+    text-decoration: underline;
+}
+
+aside li{
+    padding-top: 5px;
+}
+
+aside a{
+    text-decoration: none;
+}
+
+aside a:hover{
+    text-decoration: underline overline;
+
+}
+
+#contenidoPrincipal{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+#contenidoPrincipal article{
+    /* los articulos no crecen si hay mas espacio disponible, y tampoco disminuyen */
+    flex: 0 0 200px;
+    background-color: #f8f8f8;
+    padding: 10px;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+}
+
+#contenidoPrincipal article h2{
+    margin-top: 0;
+}
+
+#contenidoPrincipal article p{
+    text-align: justify;
+}
+
+footer{
+    margin: 0 15%;
+    background-color: #00b809;
+    padding: 20px;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-around;
+    align-items: start;
+}
+
+footer section{
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    flex-basis: 45%;
+    background-color: #00e606;
+}
+
+nav ul li{
+    display: inline-block;
+    /* Posicion en funcion del elemento padre, del li en este caso */
+    position: relative;
+    padding: 5px 15px;
+    margin-right: 10px;
+}
+
+nav ul li .submenu{
+    display: none;
+    position: absolute;
+    top: 100%;
+    list-style-type: none;
+    border-radius: 5px;
+    margin: 0;
+    width: 150px;
+    z-index: 10;
+    background-color: #00e606;
+}
+
+nav ul li:hover .submenu{
+    display: block;
+}

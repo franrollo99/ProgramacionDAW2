@@ -1,6 +1,8 @@
 *{
     margin: 0;
     padding: 0;
+    /* box-sizing para que no se sume el tamaño del margin y del padding */
+    box-sizing: border-box;
 }
 
 body{
