@@ -5,9 +5,8 @@ namespace Src\classes;
 use Src\classes\conexionBD;
 use PDO;
 use PDOException;
-// 
-final class funcionesBD
-{
+
+final class funcionesBD{
 
     static function registro(string $usuario, string $contraseña):bool{
         $conexion=conexionBD::getConnection();

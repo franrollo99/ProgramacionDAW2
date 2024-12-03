@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plazas</title>
+    <link rel="stylesheet" href="../style/estilo.css">
 </head>
 
 <body>
@@ -13,9 +14,6 @@
     require_once dirname(__DIR__) . "/vendor/autoload.php";
 
     use Src\classes\funcionesBD;
-
-    // header('Cache-Control: no-cache, must-revalidate, max-age=0');
-    // header('Pragma: no-cache');
 
     // Comprobamos si la variable $_SERVER['PHP_AUTH_USER'] esta definida, es ese caso se asigna su valor a usuario, sino es null
     $usuario = isset($_SERVER['PHP_AUTH_USER']) ? $_SERVER['PHP_AUTH_USER'] : null;
