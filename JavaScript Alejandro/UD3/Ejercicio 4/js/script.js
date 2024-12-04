@@ -37,13 +37,21 @@ function generarAlumnos() {
     const email = document.createElement("p");
     email.textContent = `Email: ${alumno.email}`;
 
-    divAlumno.appendChild(nombre);
+
+    //Inserto cada nodo como ultimo hijo del elemento padre que en este caso es el div principal
+    // divAlumno.appendChild(nombre);
     divAlumno.appendChild(dni);
     divAlumno.appendChild(curso);
-    divAlumno.appendChild(telefono);
-    divAlumno.appendChild(email);
     divAlumno.appendChild(asignaturas);
     divAlumno.appendChild(listaAsignaturas);
+    divAlumno.appendChild(email);
+    
+
+    //Añado el nodo email por delante del nodo de asignaturas
+    divAlumno.insertBefore(telefono, email);
+
+    //Añado el nodo nombre como primer hijo del elemento padre
+    divAlumno.prepend(nombre);
 
     contenedor.appendChild(divAlumno);
   });

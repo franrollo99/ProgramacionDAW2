@@ -1,3 +1,7 @@
+body{
+    margin: 30px;
+}
+
 .principal{
     display: flex;
     flex: 1;
