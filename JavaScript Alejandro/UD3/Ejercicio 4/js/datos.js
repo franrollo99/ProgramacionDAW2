@@ -33,4 +33,4 @@ const alumnos = [
     }
 ];
 
-export { alumnos };
+export default alumnos;

@@ -1,0 +1,25 @@
+.principal{
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.principal div{
+    width: 200px;
+    /* height: max-content; */
+    border: 1px solid gray;
+    background-color: lightgrey;
+    padding: 0 20px;
+    border-radius: 10px;
+}
+
+li{
+    padding: 5px 0;
+}
+
+p {
+    white-space: nowrap; /* Evita que el texto haga salto de linea si no cabe en la misma linea */
+    overflow: hidden; /* Oculta el texto que se sale del div */
+    text-overflow: ellipsis; /* Pone puntos al final del texto que se sale del div */
+  }
