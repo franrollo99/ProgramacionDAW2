@@ -1,0 +1,100 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header{
+    display: flex;
+    flex-direction: column;
+}
+
+header div{
+    display: flex;
+    background-color: greenyellow;
+    align-items: center;
+    height: 100px;
+}
+
+header img{
+    height: 100%;
+    width: auto;
+    padding-right: 20px;
+}
+
+nav ul{
+    display: flex;
+    list-style-type: none;
+}
+
+nav ul li{
+    padding: 15px;
+}
+
+.servicios{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.servicios div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    padding: 5%;
+    
+}
+
+.servicios img{
+    width: 100%;
+}
+
+.productos{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.productos div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 25%;
+    padding: 2%;
+
+}
+
+.productos img{
+    width: 100%;
+}
+
+section{
+    padding: 50px;
+}
+
+footer{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.contactanos{
+    background: url(img/DIW_U03_IN_A01.jpg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    height: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 30px;
+}
+
+.politica{
+    display: flex;
+    flex-direction: column;
+    background-color: lightgrey;
+    width: 100%;
+    align-items: center;
+    padding: 25px;
+}
