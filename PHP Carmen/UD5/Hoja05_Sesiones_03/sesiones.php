@@ -1,6 +1,16 @@
 <?php
 session_start();
 
+$usuario =$_SERVER['PHP_AUTH_USER'] ?? null;
+$contraseña = $_SERVER['PHP_AUTH_PW'] ?? null;
+if (!$usuario || !$contraseña){
+    header('WWW-Authenticate: Basic Realm="Contenido restringido"');
+    header('HTTP/1.0 401 Unauthorized');
+    echo "Debe autenticarse para acceder al contenido! <br><br>";
+    echo "<a href='index.html'>Pagina de inicio</a>";
+    exit();
+}
+
 //Comprobar si ya existe la variable de sesión contador
 if (isset($_SESSION['contador'])) {
     $_SESSION['contador']++;
