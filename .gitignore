@@ -1,1 +1,4 @@
 **/vendor/
+**/*.png
+**/*.jpg
+**/*.jpng

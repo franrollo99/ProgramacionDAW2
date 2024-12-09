@@ -1,0 +1,17 @@
+<?php
+namespace Src\Clases\producto;
+use Src\Interfaces\InterfazRepositorioProducto;
+
+final class IProducto{
+
+    private InterfazRepositorioProducto $productoRepositorio;
+    public function __construct(InterfazRepositorioProducto $productoRepositorio){
+        $this->productoRepositorio=$productoRepositorio;
+    }
+
+    public function crearProducto(){
+
+    }
+}
+
+?>
