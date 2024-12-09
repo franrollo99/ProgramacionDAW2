@@ -1,0 +1,38 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+nav ul{
+    padding: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+    gap: 3px;
+}
+
+nav li{
+    background-color:rgb(75, 168, 255);
+    border-radius: 10px;
+    border: 1px solid gray;
+
+}
+
+nav a{
+    display: block; /* Hace que el enlace sea un bloque completo */
+    padding: 10px;
+    color: black;
+    text-decoration: none;
+}
+
+.buscarVehiculo{
+    padding: 30px;
+}
+
+.buscarVehiculo form *{
+    padding: 3px;
+}
