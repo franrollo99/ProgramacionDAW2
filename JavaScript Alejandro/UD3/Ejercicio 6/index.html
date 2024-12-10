@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario dinámico</title>
+    <link rel="stylesheet" href="estilo.css">
+    <script type="module" src="script.js"></script>
+</head>
+<body>
+    <form action="">
+        <div class="bloqueSuperior">
+            <label for="ciclos">Filtrar por ciclo: </label>
+            <select name="ciclos" id="ciclos">
+                <option value="todos">Todos</option>
+                <option value="asir">ASIR</option>
+                <option value="dam">DAM</option>
+                <option value="daw">DAW</option>
+            </select>
+        </div>
+        <div class="bloqueCentral">
+            <div class="tablaListaAlumnos">
+                <div><h2>Lista de Alumnos</h2></div>
+                <div class="th1">
+                    <div><h3>Nombre</h3></div>
+                    <div><h3>Ciclo</h3></div>
+                </div>
+                <div class="listaAlumnos">
+
+                </div>
+            </div>
+            <div class="tablaBotones">
+                <button>→</button>
+                <button>←</button>
+            </div>
+            <div class="tablaAlumnosSeleccionados">
+                <div><h2>Formulario Seleccionados</h2></div>
+                <div class="th2">
+                    <div><h3>Nombre</h3></div>
+                    <div><h3>Ciclo</h3></div>
+                    <div><h3>Acciones</h3></div>
+                </div>
+                <div class="alumnosSeleccionados">
+
+                </div>
+            </div>
+        </div>
+        <div class="bloqueInferior">
+            <button>Enviar</button>
+        </div>
+    </form>
+</body>
+</html>
