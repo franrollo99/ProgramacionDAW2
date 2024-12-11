@@ -7,11 +7,11 @@ use PDOException;
 
 class Autenticarse{
 
-    static public function inicializar():void{
+    public static function inicializar():void{
         iniciar_sesion();
     }
 
-    static public function configurar():void{
+    public static function configurar():void{
         // Guardo en una variable la query para crear la tabla
         $crearTabla = "
             CREATE TABLE IF NOT EXISTS usuarios (
@@ -31,21 +31,21 @@ class Autenticarse{
         self::crearDatosUsuario();
     }
 
-    static private function crearDatosUsuario():void{
+    public static function crearDatosUsuario():void{
         $usuario="frodriguezl2301@educantabria.es";
         $clave="password";
         $claveHash=password_hash($clave, PASSWORD_BCRYPT);
     }
 
-    static public function autenticar():void{
+    public static function autenticar():void{
 
         if(!esPost()){
             flash("error", "Metodo HTTP no permitido");
-            redireccionar("index.php?action=paginaLogin.php");
+            redireccionar("index.php?action=paginaLogin");
         }
         
         if(estaLogueado()){
-            redireccionar("index.php?action=paginaConectado.php");
+            redireccionar("index.php?action=paginaConectado");
         }
 
         $correo = $_POST['correo'] ?? '';
@@ -59,30 +59,21 @@ class Autenticarse{
         $usuario = $consulta->fetch(PDO::FETCH_ASSOC);
 
         if($consulta->rowCount() > 0){
-            if(password_verify($clave, $usuario['clave'])){
-
+            if(password_verify($contraseña, $usuario['contrasena'])){
+                redireccionar("index.php?action=conectado");
             }else{
-                
+                flash("error", "credenciales incorrectas");
+                flash("correo", $correo);
+                redireccionar("index.php?action=paginaLogin");
             }
-
-
         }else{
             flash("error", "credenciales incorrectas");
             flash("correo", $correo);
             redireccionar("index.php?action=paginaLogin");
         }
-
-        if($consulta->rowCount() === 0 && !password_verify($clave, $usuario['clave'])){
-        
-        $_SESSION['usuario'] = {
-            'id' => $usuario['id'],
-            'correo' => $correo,
-        }
-
-        redireccionar("index.php?action=paginaConectado");
     }
 
-    static public function paginaConectado():void{
+    public static function paginaConectado():void{
         if(estaLogueado()){
             redireccionar("paginaConectado.php");
         }else{
@@ -91,5 +82,21 @@ class Autenticarse{
         }
     }
 
+    public static function desconectarse():void{
+        session_destroy();
+        redireccionar("index.php?action=paginaConectado");
+    }
+
+    public static function paginaLogin():void{
+        if(estaLogueado()){
+            redireccionar("index.php?action=paginaConectado");
+        }else{
+            redireccionar("paginaLogin.php");
+        }
+    }
+
+    public static function runAccion(){
+
+    }
 }
 ?>
