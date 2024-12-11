@@ -41,29 +41,39 @@ class Autenticarse{
 
         if(!esPost()){
             flash("error", "Metodo HTTP no permitido");
-            redireccionar("index.php?action=paginaLogin");
+            redireccionar("index.php?action=paginaLogin.php");
         }
         
         if(estaLogueado()){
-            redireccionar("index.php?action=paginaConectado");
+            redireccionar("index.php?action=paginaConectado.php");
         }
 
         $correo = $_POST['correo'] ?? '';
-        $clave = $_POST['clave'] ?? '';
+        $contraseña = $_POST['contraseña'] ?? '';
 
         $conexion = conexionBD::getConexion();
         $consulta = $conexion->prepare("SELECT id, correo, contrasena from usuarios where correo = :correo");
-        $consulta->bindParam(':correo', $correo);
+        $consulta->bindParam(':correo', $correo, PDO::PARAM_STR);
         $consulta->execute();
 
         $usuario = $consulta->fetch(PDO::FETCH_ASSOC);
 
-        if($consulta->rowCount() === 0 && !password_verify($clave, $usuario['clave'])){
+        if($consulta->rowCount() > 0){
+            if(password_verify($clave, $usuario['clave'])){
+
+            }else{
+                
+            }
+
+
+        }else{
             flash("error", "credenciales incorrectas");
             flash("correo", $correo);
             redireccionar("index.php?action=paginaLogin");
         }
 
+        if($consulta->rowCount() === 0 && !password_verify($clave, $usuario['clave'])){
+        
         $_SESSION['usuario'] = {
             'id' => $usuario['id'],
             'correo' => $correo,
