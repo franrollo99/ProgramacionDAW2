@@ -2,6 +2,7 @@
 
 namespace Fran\App\clases;
 use Fran\App\clases\conexionBD;
+use PDO;
 use PDOException;
 
 class Autenticarse{
@@ -16,7 +17,7 @@ class Autenticarse{
             CREATE TABLE IF NOT EXISTS usuarios (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 correo VARCHAR(255) NOT NULL UNIQUE,
-                clave VARCHAR(255) NOT NULL
+                contrasena VARCHAR(255) NOT NULL
             );
         ";
 
@@ -40,14 +41,44 @@ class Autenticarse{
 
         if(!esPost()){
             flash("error", "Metodo HTTP no permitido");
-            redireccionar("index.php");
-        }else if(estaLogueado()){
-            
+            redireccionar("index.php?action=paginaLogin");
         }
+        
+        if(estaLogueado()){
+            redireccionar("index.php?action=paginaConectado")
+        }
+
+        $correo = $_POST['correo'] ?? '';
+        $clave = $_POST['clave'] ?? '';
+
+        $conexion = conexionBD::getConexion();
+        $consulta = $conexion->prepare("SELECT id, correo, contrasena from usuarios where correo = :correo");
+        $consulta->bindParam(':correo', $correo);
+        $consulta->execute();
+
+        $usuario = $consulta->fetch(PDO::FETCH_ASSOC);
+
+        if($consulta->rowCount() === 0 && !password_verify($clave, $usuario['clave'])){
+            flash("error", "credenciales incorrectas");
+            flash("correo", $correo);
+            redireccionar("index.php?action=paginaLogin");
+        }
+
+        $_SESSION['usuario'] = {
+            'id' => $usuario['id'],
+            'correo' => $correo,
+        }
+
+        redireccionar("index.php?action=paginaConectado");
     }
 
     static public function paginaConectado():void{
-        
+        if(estaLogueado()){
+            redireccionar("paginaConectado.php");
+        }else{
+            flash("error", "No tienes acceso a la pagina");
+            redireccionar("index.php?action=paginaLogin");
+        }
     }
 
 }
