@@ -1,0 +1,21 @@
+{
+    "name": "usuario/hoja05_sesiones_04",
+    "type": "project",
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Fran\\App\\": "src/"
+        },"files":[
+            "helper.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Fran",
+            "email": "fran.5oct99@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable"
+}
