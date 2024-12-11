@@ -45,7 +45,7 @@ class Autenticarse{
         }
         
         if(estaLogueado()){
-            redireccionar("index.php?action=paginaConectado")
+            redireccionar("index.php?action=paginaConectado");
         }
 
         $correo = $_POST['correo'] ?? '';
