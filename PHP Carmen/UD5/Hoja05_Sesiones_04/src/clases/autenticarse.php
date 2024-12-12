@@ -1,7 +1,7 @@
 <?php
 
 namespace Fran\App\clases;
-use Fran\App\clases\conexionBD;
+use Fran\App\clases\ConexionBD;
 use PDO;
 use PDOException;
 
@@ -96,7 +96,24 @@ class Autenticarse{
     }
 
     public static function runAccion(){
+        $accion = $_GET['action'] ?? 'paginaLogin';
 
+        switch ($accion){
+            case 'paginaLogin':
+                self::paginaLogin();
+                break;
+            case 'autenticar':
+                self::autenticar();
+                break;
+            case 'paginaConectado':
+                self::paginaConectado();
+                break;
+            case 'desconectarse':
+                self::desconectarse();
+                break;
+            default:
+                redireccionar("index.php?action=paginaLogin");
+        }
     }
 }
 ?>
