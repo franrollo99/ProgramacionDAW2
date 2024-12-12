@@ -2,7 +2,9 @@
 
 function flash(string $clave, string $mensaje=null):?string{
     
-    session_start();
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
 
     // Si existe la clave nos quedamos con su valor el cual devolvemos y eliminamos la clave
     if(isset($_SESSION['flash'][$clave])){

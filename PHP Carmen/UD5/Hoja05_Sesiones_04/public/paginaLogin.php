@@ -11,15 +11,12 @@
     require_once dirname(__DIR__, 1) . "/vendor/autoload.php";
     use Fran\App\clases\Autenticarse;
 
-    // Iniciar sesión
     iniciar_sesion();
 
-    // Redirigir si ya está logueado
     if (estaLogueado()) {
         redireccionar("index.php?action=paginaConectado");
     }
 
-    // Recuperar datos de error y correo si existen
     $error = flash("error");
     $correo = flash("correo");
     ?>
