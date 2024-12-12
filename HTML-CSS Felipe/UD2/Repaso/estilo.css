@@ -13,7 +13,7 @@ body{
 
 header{
     background-color: rgb(207, 159, 1);
-    border-radius: 10px;
+    border-radius: 15px;
     margin: 10px 30px;
     display: flex;
     justify-content: space-between;
@@ -76,17 +76,17 @@ form{
     flex-direction: column;
 }
 
-form .titulo{
-    width: 90%;
+form{
+    padding-left: 20px;
 }
 
 form input{
-    width: 200px;
+    width: 80%;
 }
 
 form input[type="submit"]{
     width: max-content;
-    padding: 5px;
+    padding: 3px 5px;
 }
 
 form a{
@@ -113,6 +113,14 @@ article .titulo{
     justify-content: space-between;
 }
 
+.contenido{
+    padding-left: 20px;
+}
+
+article p{
+    text-align: justify;
+}
+
 article img{
     float: left;
     padding-right: 20px;
@@ -124,6 +132,8 @@ article a{
 
 hr{
     margin: 10px 0;
+    border: none;
+    border-top: 3px dotted grey;
 }
 
 .autor{
