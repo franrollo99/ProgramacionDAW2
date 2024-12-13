@@ -23,18 +23,28 @@ class Autenticarse{
 
         try {
             $conexion = conexionBD::getConexion();
-            $conexion->exec($crearTabla);
+            if ($conexion->exec($crearTabla) !== false) {
+                echo "Tabla creada correctamente o ya existe. ";
+                // Llamar a la creación del usuario solo si la tabla se creó correctamente
+                self::crearDatosUsuario();
+            }
         } catch (PDOException $e) {
             echo 'Error al crear la tabla: ' . $e->getMessage();
         }
 
-        self::crearDatosUsuario();
+
     }
 
     public static function crearDatosUsuario():void{
-        $usuario="frodriguezl2301@educantabria.es";
+        $correo="frodriguezl2301@educantabria.es";
         $clave="password";
         $claveHash=password_hash($clave, PASSWORD_BCRYPT);
+
+        $conexion = conexionBD::getConexion();
+        $consulta = $conexion->prepare("INSERT into usuarios(correo, contrasena) values(:correo, :contrasena)");
+        $consulta->bindParam(':correo', $correo, PDO::PARAM_STR);
+        $consulta->bindParam(':contrasena', $claveHash, PDO::PARAM_STR);
+        $consulta->execute();
     }
 
     public static function autenticar():void{
