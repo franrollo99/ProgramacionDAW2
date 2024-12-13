@@ -51,12 +51,12 @@ label{
     background-color: rgb(245, 245, 245);
 }
 
-.listaAlumnos, .th1{
+.fila, .th1{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
 }
 
-.listaAlumnos div, .th1 div{
+.fila div, .th1 div{
     border: 1px solid rgb(190, 190, 190);
     border-collapse: collapse;
 }
@@ -74,4 +74,11 @@ label{
 .bloqueInferior{
     display: flex;
     justify-content: center;
+}
+
+
+
+
+.filaSeleccionada{
+    background-color: red;
 }
