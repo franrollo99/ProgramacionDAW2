@@ -68,16 +68,14 @@ class Autenticarse{
 
         $usuario = $consulta->fetch(PDO::FETCH_ASSOC);
 
-        if($consulta->rowCount() > 0){
-            if(password_verify($contraseña, $usuario['contrasena'])){
-                redireccionar("index.php?action=conectado");
-            }else{
-                flash("error", "credenciales incorrectas");
-                flash("correo", $correo);
-                redireccionar("index.php?action=paginaLogin");
-            }
-        }else{
-            flash("error", "credenciales incorrectas");
+        if ($usuario && password_verify($contraseña, $usuario['contrasena'])) {
+            $_SESSION['usuario'] = [
+                'id' => $usuario['id'],
+                'correo' => $usuario['correo']
+            ];
+            redireccionar("index.php?action=paginaConectado");
+        } else {
+            flash("error", "Credenciales incorrectas");
             flash("correo", $correo);
             redireccionar("index.php?action=paginaLogin");
         }
