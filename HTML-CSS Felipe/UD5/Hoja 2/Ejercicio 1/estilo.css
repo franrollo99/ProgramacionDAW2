@@ -1,0 +1,134 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100vh;
+}
+
+
+/* --------------------- HEADER --------------------- */
+
+header{
+    height: 10em;
+    background: url(./img/palaciomagdalena.png);
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+header h1{
+    padding: 1em 0 0 2em;
+    color: rgb(253, 61, 61);
+    font-size: 3em;
+    font-style: oblique;
+}
+
+nav{
+    height: 3em;
+    background-color: rgb(46, 137, 255);
+    display: flex;
+    align-items: center;
+}
+
+nav ul{
+    height: 100%;
+    padding-left: 5em;
+    width: 30em;
+    display: flex;
+    list-style: none;
+}
+
+nav li{
+    width: 100%;
+    display: flex;
+}
+
+nav a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    background-color: rgb(46, 137, 255);
+    border: 5px solid rgb(0, 110, 255);
+    /* PONGO MARGEN NEGATIVO A LOS BORDES DE LOS LATERALES PARA 
+    QUE SU GROSOR NO SE AUMENTE CUANDO SE JUNTE CON OTRO BORDE */
+    margin: 0 -5px; 
+}
+
+nav a:hover{
+    background-color: rgb(253, 61, 61);
+}
+
+
+/* --------------------- MAIN --------------------- */
+
+main{
+    height: auto;
+    padding: 3em 5em;
+    display: flex;
+    flex-direction: column;
+    gap: 3em;
+}
+
+main h2{
+    text-decoration: underline;
+    padding-bottom: 1em;
+}
+
+.seccion1{
+    display: flex;
+    flex-direction: column;
+}
+
+.articulos{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3em;
+}
+
+article{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+article img{
+    width: 100%;
+}
+
+
+/* --------------------- FOOTER --------------------- */
+
+footer{
+    background-color: black;
+    display: flex;
+    align-items: center;
+}
+
+footer form{
+    display: flex;
+    flex-direction: column;
+    padding: 1em 5em;
+}
+
+form label{
+    color: white;
+}
+
+form label, form input[type="submit"]{
+    margin-top: 10px;
+}
+
+form input[type="submit"]{
+    width: max-content;
+    padding: 5px;
+}
