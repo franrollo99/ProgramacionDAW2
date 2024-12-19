@@ -1,0 +1,3 @@
+class ValidarError extends Error{
+
+}

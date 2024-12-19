@@ -1,0 +1,17 @@
+body{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    padding: 30px;
+}
+
+input{
+    margin-bottom: 10px;
+}
