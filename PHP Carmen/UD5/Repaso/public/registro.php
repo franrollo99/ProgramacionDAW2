@@ -3,12 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio</title>
+    <title>Registro</title>
 </head>
 <body>
-    <ul>
-        <li><a href="registro.php">Registro</a></li>
-        <li><a href="autenticacion.php">Pagina con autenticacion</a></li>
-    </ul>
+    
 </body>
 </html>
