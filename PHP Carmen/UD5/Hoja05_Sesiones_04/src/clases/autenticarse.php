@@ -69,6 +69,7 @@ class Autenticarse{
         $usuario = $consulta->fetch(PDO::FETCH_ASSOC);
 
         if ($usuario && password_verify($contraseña, $usuario['contrasena'])) {
+            session_start();
             $_SESSION['usuario'] = [
                 'id' => $usuario['id'],
                 'correo' => $usuario['correo']
