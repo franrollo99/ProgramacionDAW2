@@ -9,7 +9,8 @@
 <body>
 
     <?php
-    require_once 
+    require_once dirname(__DIR__, 1) . "/vendor/autoload.php";
+    use Fran\Src\clases\FuncionesBD;
     ?>
 
     <h1>Formulario de registro</h1>
@@ -18,22 +19,29 @@
         <input type="text" name="usuario" id="usuario" required>
         <label for="contraseña">Contraseña</label>
         <input type="password" name="contraseña" id="contraseña" required>
-        <label for="confirmarContraseña = $_POST['contraseña'];">Confirmar contraseña</label>
+        <label for="confirmarContraseña">Confirmar contraseña</label>
         <input type="password" name="confirmarContraseña" id="confirmarContraseña" required>
         <input type="submit" value="Registrarte" name="registro">
     </form>
 
-    <?php
-    $usuario = $_POST['usuario'] ?? null;
-    $contraseña = $_POST['contraseña'] ?? null;
-    $confirmarContraseña = $_POST['confirmarContraseña'] ?? null;
-    $hashContraseña = password_hash($contraseña, PASSWORD_BCRYPT);
+    <a href="index.html">Pagina de inicio</a>
 
-    if(isset($_POST['registro']) && $contraseña === $confirmarContraseña){
-        echo "hola";
-    }else{
-        echo "La contraseña no coincide";
-    }
+    <?php
+    if(isset($_POST['registro'])){
+        $usuario = $_POST['usuario'] ?? null;
+        $contraseña = $_POST['contraseña'] ?? null;
+        $confirmarContraseña = $_POST['confirmarContraseña'] ?? null;
+
+        if($contraseña === $confirmarContraseña){
+            $hashContraseña = password_hash($contraseña, PASSWORD_BCRYPT);
+
+            if(FuncionesBD::registrarUsuario($usuario, $hashContraseña)){
+                echo "El usuario ha sido registrado correctamente";
+            }
+        }else{
+            echo "La contraseña no coincide";
+        }
+}
     ?>
 
 </body>
