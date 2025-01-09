@@ -1,40 +1,70 @@
 const listaPokemon = document.querySelector('#listaPokemon');
-let URL = "https://pokeapi.co/api/v2/pokemon/";
+const botonesHeader = document.querySelector('.btn-header');
+let URL = 'https://pokeapi.co/api/v2/pokemon/';
 
 for (let i=1; i<=151; i++){
-    fetch(URL + i)
+    // fetch(URL + i)
         .then((response) => response.json())
-        .then(data => mostrarPokemon(data))
+        .then(poke => mostrarPokemon(poke))
 }
 
-function mostrarPokemon(data){
+function mostrarPokemon(poke){
 
-    let tipos = data.types.map(type => `
+    let tipos = poke.types.map(type => `
             <p class="${type.type.name} tipo">${type.type.name}</p>
         `).join('');
+
+    let pokeId = poke.id.toString();
+
+    if(pokeId.length === 1){
+        pokeId = '00' + pokeId;
+    }else if(pokeId.length === 2){
+        pokeId = '0' + pokeId;
+    }
 
     const div = document.createElement("div");
     div.classList.add("pokemon");
     div.innerHTML=`
-        <p class="pokemon-id-back">${data.id}</p>
+        <p class="pokemon-id-back">#${pokeId}</p>
         <div class="pokemon-imagen">
-            <img src="${data.sprites.other["official-artwork"].front_default}" alt="${data.name}">
+            <img src="${poke.sprites.other["official-artwork"].front_default}" alt="${poke.name}">
         </div>
         <div class="pokemon-info">
             <div class="nombre-contenedor">
-                <p class="pokemon-id">${data.id}</p>
-                <h2 class="pokemon-nombre">${data.name}</h2>
+                <p class="pokemon-id">#${pokeId}</p>
+                <h2 class="pokemon-nombre">${poke.name}</h2>
             </div>
             <div class="pokemon-tipos">
                 ${tipos}
             </div>
             <div class="pokemon-stats">
-                <p class="stat">${data.height}</p>
-                <p class="stat">${data.weight}</p>
+                <p class="stat">${poke.height}</p>
+                <p class="stat">${poke.weight}</p>
             </div>
         </div>
     `;
 
     listaPokemon.append(div);
-    
 }
+
+botonesHeader.forEach(boton => boton.addEventoListener('click', (event) => {
+    const botonId = event.currentTarjet.id;
+
+    listaPokemon.innerHTML = '';
+
+    for (let i=1; i<=151; i++){
+        // fetch(URL + i)
+            .then((response) => response.json())
+            .then(poke => {
+
+                if(botonId === 'ver-todos'){
+                    mostrarPokemon(poke);
+                }else{
+                    const tipos = poke.types.map(type => type.type.name)
+                    if(tipos.some(tipo => tipo.includes(botonId))){
+                        mostrarPokemon(poke);
+                    }
+                }
+            })
+    }
+}))
