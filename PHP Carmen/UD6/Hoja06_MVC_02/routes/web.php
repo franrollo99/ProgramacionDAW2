@@ -28,6 +28,8 @@ use App\Http\Controllers\AnimalController;
 //     return 'Modificar el animal ' .$animal;
 // });
 
+
+// Se pone entre corchetes la clase seguido del metodo
 Route::get('/', [InicioController::class, '__invoke'])->name('inicio');
 
 Route::get('animales', [AnimalController::class, 'index'])->name('animales.index');
