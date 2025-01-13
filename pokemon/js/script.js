@@ -8,7 +8,7 @@ let pokemons = []; // Array para almacenar los datos de los pokemons
 function obtenerPokemons() {
     const promises = []; // Array para almacenar todas las promesas de las solicitudes fetch
 
-    for (let i = 1; i <= 10; i++) { // Hacemos un loop para traer los primeros 1025 pokemons
+    for (let i = 1; i <= 151; i++) { // Hacemos un loop para traer los primeros 1025 pokemons
         const fetchPromise = fetch(URL + i) // Hacemos un fetch a la URL de la API con el número del pokemon más el número del loop
             .then(response => response.json()) // Convertimos la respuesta a JSON
             .then(poke => {
