@@ -16,28 +16,6 @@ button {
     border-radius: 0;
 }
 
-.nav-principal{
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    text-align: center;
-
-}
-
-.nav-principal li a{
-    text-decoration: none;
-    border: 1px solid black;
-    padding: 10px;
-    border-radius: 10px;
-    background-color: #1c1c1c;
-    color: white;
-    font-size: large;
-}
-
-.nav-principal li{
-    width: 100%;
-}
-
 .nav {
     display: flex;
     flex-direction: column;
@@ -45,7 +23,7 @@ button {
     align-items: flex-start;
     padding-inline: 2rem;
     max-width: 1000px;
-    margin: 30px auto;
+    margin: 0 auto;
     margin-bottom: 20px;
 }
 
@@ -61,7 +39,8 @@ button {
     gap: .5rem;
 }
 
-.btn-tipo, .btn-gen {
+.btn-tipo,
+.btn-gen {
     background-color: var(--clr-gray);
     padding: .5rem;
     border-radius: 100vmax;
@@ -83,9 +62,8 @@ button {
     gap: 1rem;
 }
 
-.pokemon:hover{
+.pokemon:hover {
     background-color: rgb(200, 200, 200);
-    cursor: pointer;
 }
 
 @media screen and (min-width: 470px) {
@@ -171,7 +149,7 @@ button {
     font-size: 11px;
 }
 
-/*Estilos para la barra de busqueda*/
+/*Estilos para la barra de búsqueda*/
 .buscador {
     width: 100%;
     margin: 20px 0;
@@ -186,4 +164,15 @@ button {
     margin: 10px;
     height: 30px;
     border-radius: 5px;
+}
+
+#botonBuscar {
+    background-color: white;
+    padding: 5px;
+    border-radius: 5px;
+    height: 30px;
+}
+
+#botonBuscar:hover {
+    cursor: pointer;
 }

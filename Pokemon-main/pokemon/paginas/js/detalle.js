@@ -86,9 +86,9 @@ function generarTablaEfectividades(efectividades) {
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="doble-dano efectividad">${crearTiposHTML(efectividades.doble_dano) || 'Ninguno'}</td>
-                        <td class="mitad-dano efectividad">${crearTiposHTML(efectividades.mitad_dano) || 'Ninguno'}</td>
-                        <td class="sin-dano efectividad">${crearTiposHTML(efectividades.sin_dano) || 'Ninguno'}</td>
+                        <td class="doble-dano">${crearTiposHTML(efectividades.doble_dano) || 'Ninguno'}</td>
+                        <td class="mitad-dano">${crearTiposHTML(efectividades.mitad_dano) || 'Ninguno'}</td>
+                        <td class="sin-dano">${crearTiposHTML(efectividades.sin_dano) || 'Ninguno'}</td>
                     </tr>
                 </tbody>
             </table>

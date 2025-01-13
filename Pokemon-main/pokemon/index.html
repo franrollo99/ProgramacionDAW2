@@ -13,14 +13,14 @@
 <body>
 
     <header>
-        <nav class="nav">
-            <ul class="nav-principal">
+        <div class="nav-principal">
+            <ul>
                 <li><a href="#">Pokedex</a></li>
                 <li><a href="#">Comparador</a></li>
                 <li><a href="#">Generador de equipos</a></li>
                 <li><a href="#">Combates</a></li>
             </ul>
-        </nav>
+        </div>
         <nav class="nav">
             <p>Filtrar por Generación</p>
             <ul class="nav-list">
@@ -46,10 +46,10 @@
                 <li><button class="btn-tipo electric" id="electric">Electrico</button></li>
                 <li><button class="btn-tipo ice" id="ice">Hielo</button></li>
                 <li><button class="btn-tipo fighting" id="fighting">Lucha</button></li>
-                <li><button class="btn-tipo poison" id="poison">Veneneo</button></li>
+                <li><button class="btn-tipo poison" id="poison">Veneno</button></li>
                 <li><button class="btn-tipo ground" id="ground">Tierra</button></li>
                 <li><button class="btn-tipo flying" id="flying">Volador</button></li>
-                <li><button class="btn-tipo psychic" id="psychic">Psiquico</button></li>
+                <li><button class="btn-tipo psychic" id="psychic">Psíquico</button></li>
                 <li><button class="btn-tipo bug" id="bug">Bicho</button></li>
                 <li><button class="btn-tipo rock" id="rock">Roca</button></li>
                 <li><button class="btn-tipo ghost" id="ghost">Fantasma</button></li>
@@ -64,13 +64,14 @@
         <div class="buscador">
             <label for="barraBusqueda"><h3>NOMBRE O NÚMERO</h3></label>
             <input id="barraBusqueda" placeholder="Buscar Pokémon" />
-        </div>
-    
-        <div class="pokemon-todos" id="listaPokemon">
-
+            <button id="botonBuscar">Buscar</button>
         </div>
 
-
+        <div id="todos">
+            <div class="pokemon-todos" id="listaPokemon">
+                <!-- Aquí se mostrarán los Pokémon -->
+            </div>
+        </div>
     </main>
 
     <script src="./js/script.js"></script>
