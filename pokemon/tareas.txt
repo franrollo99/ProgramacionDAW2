@@ -1,0 +1,7 @@
+-Arreglar imagenes por delante y por detras (ultimos pokemons)
+-Agregar imagenes hembra?
+-Agregar menu de navegacion principal para navegar entre las diferentes paginas (pokedex, comparador de pokemons, generador de equipos, combates). Añadir menu tambien a detalles?
+-Agregar busqueda por numero de id?
+-Cambiar idioma de los tipos a español
+-No tenemos ninguna clase
+-Reorganizar estructura: meter todo el estilo en la carpeta css, javaScript en js, crear public con todas las paginas .html
