@@ -1,7 +1,18 @@
--Arreglar imagenes por delante y por detras (ultimos pokemons)
--Agregar imagenes hembra?
--Agregar menu de navegacion principal para navegar entre las diferentes paginas (pokedex, comparador de pokemons, generador de equipos, combates). Añadir menu tambien a detalles?
+-Arreglar imagenes por delante y por detras (ultimos pokemons) https://pokeapi.co/api/v2/pokemon/1025/
+-Agregar imagenes hembra? https://pokeapi.co/api/v2/pokemon/heracross/
+
 -Agregar busqueda por numero de id?
--Cambiar idioma de los tipos a español
--No tenemos ninguna clase
+-Agregar ordenar alfabeticamente? por id? https://www.pokemon.com/es/pokedex
+
+-No tenemos ninguna clase, hace falta? 
+    -Clase Pokemon: Para manejar los datos de un Pokémon, sus estadísticas, tipos, etc.
+    -Clase LocalStorageHandler: Para gestionar la interacción con localStorage (almacenar, cargar, limpiar datos).
+    -Clase Paginador: Para gestionar la paginación de los resultados del buscador.
+
+-Agregar menu de navegacion principal para navegar entre las diferentes paginas (pokedex, comparador de pokemons, generador de equipos, combates). Añadir menu tambien a detalles? https://www.pokemon.com/es
 -Reorganizar estructura: meter todo el estilo en la carpeta css, javaScript en js, crear public con todas las paginas .html
+
+-Cambiar el idioma a español de: los tipos, habilidades...
+-Agregar debilidades
+
+
