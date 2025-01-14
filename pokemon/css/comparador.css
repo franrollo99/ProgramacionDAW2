@@ -1,0 +1,27 @@
+main{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* border: 1px solid black; */
+    height: 80vh;
+    padding: 0;
+}
+
+#comparador1{
+}
+
+#comparador2{
+}
+
+.buscador {
+    width: 200px;
+    margin-left: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.barraBusqueda {
+    width: 400px;
+    /* margin: 10px; */
+    height: 30px;
+}

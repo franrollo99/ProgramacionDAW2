@@ -1,129 +1,222 @@
 const listaPokemon = document.querySelector('#listaPokemon'); // Seleccionamos el div donde se van a mostrar los pokemons
 const botonesTipo = document.querySelectorAll('.btn-tipo'); // Seleccionamos los botones del header
-const botonesGen = document.querySelectorAll('.btn-gen');
-let URL = 'https://pokeapi.co/api/v2/pokemon/'; // URL base de la API
+const botonesGen = document.querySelectorAll('.btn-gen'); // Seleccionamos los botones de generación
+const buscador = document.querySelector('#barraBusqueda');
+const loadingIndicator = document.querySelector('#loading');
+const worker = new Worker('js/worker.js');
 let pokemons = []; // Array para almacenar los datos de los pokemons
+let currentPage = 1;
+const pokemonsPerPage = 30;
 
-// Función para obtener los Pokémon
-function obtenerPokemons() {
-    const promises = []; // Array para almacenar todas las promesas de las solicitudes fetch
+buscador.addEventListener('input', (event) => {
+    const searchTerm = event.target.value.toLowerCase();
+    filtrarPokemon(searchTerm);
+});
 
-    for (let i = 1; i <= 200; i++) { // Hacemos un loop para traer los primeros 1025 pokemons
-        const fetchPromise = fetch(URL + i) // Hacemos un fetch a la URL de la API con el número del pokemon más el número del loop
-            .then(response => response.json()) // Convertimos la respuesta a JSON
-            .then(poke => {
-                pokemons.push(poke); // Almacenamos los datos del pokemon en el array
-            });
-
-        promises.push(fetchPromise); // Añadimos la promesa al array
-    }
-
-    // Esperamos que todas las promesas se resuelvan antes de mostrar los Pokémon
-    Promise.all(promises).then(() => {
-        pokemons.sort((a, b) => a.id - b.id); // Ordenamos los pokemons por su ID
-        pokemons.forEach(poke => mostrarPokemon(poke)); // Mostramos los pokemons en el HTML
-    });
-}
-
-function mostrarPokemon(poke) {
-    let tipos = poke.types.map(type => `<p class="${type.type.name} tipo">${type.type.name}</p>`).join('');
-    
-    let pokeId = poke.id.toString().padStart(3, '0'); // Asegura que el ID tenga 3 dígitos
-    // let stats = poke.stats.map(stat => `<p class="stat">${stat.stat.name}: ${stat.base_stat}</p>`).join('');
-
-    const div = document.createElement("div");
-    div.classList.add("pokemon");
-
-    div.innerHTML = `
-        <p class="pokemon-id-back">#${pokeId}</p>
-        <div class="pokemon-imagen">
-            <img src="${poke.sprites.other["official-artwork"].front_default}" alt="${poke.name}">
-        </div>
-        <div class="pokemon-info">
-            <div class="nombre-contenedor">
-                <p class="pokemon-id">#${pokeId}</p>
-                <h2 class="pokemon-nombre">${poke.name}</h2>
-            </div>
-            <div class="pokemon-tipos">
-                ${tipos}
-            </div>
-            
-        </div>
-    `;
-
-    // Quito las estadisticas de las tarjetas para mostrarlas solamente al entrar en detalles de cada pokemon
-
-    // <div class="pokemon-stats">
-    //             ${stats}
-    //         </div>
-
-    // Evento para redirigir a la página de detalles del Pokémon
-    div.addEventListener('click', () => {
-        window.location.href = `./paginas/detalle.html?id=${poke.id}`;
-    });
-
-    // Añadir el Pokémon a la lista
-    listaPokemon.append(div);
-}
-
-const barraBusqueda = document.querySelector('#barraBusqueda'); 
-
-barraBusqueda.addEventListener('input', () => {
-    const searchTerm = barraBusqueda.value.toLowerCase();
-    listaPokemon.innerHTML = ''; 
-
-    const pokemonsFiltrados = pokemons.filter(poke => poke.name.toLowerCase().includes(searchTerm));
-
-    if (pokemonsFiltrados.length > 0) {
-        pokemonsFiltrados.forEach(poke => mostrarPokemon(poke));
+document.addEventListener('DOMContentLoaded', () => {
+    if (!localStorage.getItem('allPokemons')) {
+        worker.postMessage({ tipo: 'cargarTodos' });
     } else {
-        listaPokemon.innerHTML = '<p>No se encontraron Pokémon con ese nombre.</p>';
+        renderPage(1);
     }
 });
 
-//filtrar por generación.
-const generations = {
-    gen1: [0, 151],
-    gen2: [151, 251],
-    gen3: [251, 386],
-    gen4: [386, 494],
-    gen5: [494, 649],
-    gen6: [649, 721],
-    gen7: [721, 809],
-    gen8: [809, 905],
-    gen9: [905, 1025]
+worker.onmessage = function (event) {
+    const pokemones = event.data;
+    localStorage.setItem('allPokemons', JSON.stringify(pokemones));
+    pokemons = pokemones;
+    renderPage(currentPage);
+    loadingIndicator.style.display = 'none';
 };
 
-botonesGen.forEach(button => {
-    button.addEventListener('click', () => {
-        const genId = button.id;
-        const [start, end] = generations[genId];
-        const filteredPokemon = pokemons.slice(start, end);
-        displayPokemon(filteredPokemon);
-    });
-});
+function iniciar() {
+    const cachedPokemones = localStorage.getItem('allPokemons');
+    if (cachedPokemones) {
+        const pokemones = JSON.parse(cachedPokemones);
+        pokemons = pokemones;
+        renderPage(currentPage);
+        loadingIndicator.style.display = 'none';
+    } else {
+        worker.postMessage('loadPokemons');
+        loadingIndicator.style.display = 'block';
+    }
 
-function displayPokemon(pokemon) {
-    listaPokemon.innerHTML = '';
-    pokemon.forEach(poke => {
-        mostrarPokemon(poke);
+    botonesTipo.forEach(boton => {
+        boton.addEventListener('click', (event) => {
+            filtrarPorTipo(event.target.id)
+        });
+    });
+
+    botonesGen.forEach(boton => {
+        boton.addEventListener('click', (event) => {
+            filtrarPorGeneracion(event.target.id);
+        });
     });
 }
 
-botonesTipo.forEach(boton => boton.addEventListener('click', (event) => {
-    const botonId = event.currentTarget.id;
+function mostrarPokemon(pokemons) {
+    listaPokemon.innerHTML = ''; // Clear previous content
+    pokemons.forEach(poke => {
+        let tipos = poke.types.map(type => `<p class="${type} tipo">${type}</p>`).join('');
 
+        let pokeId = poke.id.toString().padStart(3, '0'); // Asegura que el ID tenga 3 dígitos
+
+        const div = document.createElement("div");
+        div.classList.add("pokemon");
+
+        div.innerHTML = `
+            <p class="pokemon-id-back">#${pokeId}</p>
+            <div class="pokemon-imagen">
+                <img src="${poke.image}" alt="${poke.name}">
+            </div>
+            <div class="pokemon-info">
+                <div class="nombre-contenedor">
+                    <p class="pokemon-nombre">${poke.name}</p>
+                </div>
+                <div class="pokemon-tipos">
+                    ${tipos}
+                </div>
+            </div>
+        `;
+
+        div.addEventListener('click', () => {
+            window.location.href = `./detalle.html?id=${poke.id}`;
+        });
+
+        listaPokemon.appendChild(div);
+    });
+}
+
+function renderPage(page) {
+    const start = (page - 1) * pokemonsPerPage;
+    const end = start + pokemonsPerPage;
+    const paginatedPokemons = pokemons.slice(start, end);
+    mostrarPokemon(paginatedPokemons);
+    renderPagination();
+}
+
+function renderPagination() {
+    const totalPages = Math.ceil(pokemons.length / pokemonsPerPage);
+    const paginationContainer = document.querySelector('#pagination');
+    paginationContainer.innerHTML = '';
+
+    const prevButton = document.createElement('button');
+    prevButton.textContent = '❮';
+    prevButton.classList.add('pagination-arrow');
+    prevButton.disabled = currentPage === 1;
+    prevButton.addEventListener('click', () => {
+        if (currentPage > 1) {
+            currentPage--;
+            renderPage(currentPage);
+        }
+    });
+    paginationContainer.appendChild(prevButton);
+
+    const nextButton = document.createElement('button');
+    nextButton.textContent = '❯';
+    nextButton.classList.add('pagination-arrow');
+    nextButton.disabled = currentPage === totalPages;
+    nextButton.addEventListener('click', () => {
+        if (currentPage < totalPages) {
+            currentPage++;
+            renderPage(currentPage);
+        }
+    });
+    paginationContainer.appendChild(nextButton);
+}
+
+function filtrarPokemon(searchTerm) {
+    const pokemones = JSON.parse(localStorage.getItem('allPokemons'));
+    listaPokemon.innerHTML = '';
+    
+    if (searchTerm === '') {
+        renderPage(1);
+        return;
+    }
+
+    const filteredPokemones = isNaN(searchTerm) 
+        ? pokemones.filter(poke => poke.name.toLowerCase().includes(searchTerm.toLowerCase()))
+        : pokemones.filter(poke => poke.id === parseInt(searchTerm));
+    
+    currentPage = 1; // Reset to the first page when filtering
+    renderFilteredPage(filteredPokemones, currentPage);
+}
+
+function filtrarPorGeneracion(generacionId) {
+    const pokemones = JSON.parse(localStorage.getItem('allPokemons'));
     listaPokemon.innerHTML = '';
 
-    if (botonId === 'ver-todos') {
-        pokemons.forEach(poke => mostrarPokemon(poke));
-    } else {
-        const pokemonsFiltrados = pokemons.filter(poke => poke.types.some(type => type.type.name.includes(botonId)));
-        pokemonsFiltrados.forEach(poke => mostrarPokemon(poke));
-    }
-}));
+    const GENERACIONES = {
+        gen1: [1, 151],
+        gen2: [152, 251],
+        gen3: [252, 386],
+        gen4: [387, 493],
+        gen5: [494, 649],
+        gen6: [650, 721],
+        gen7: [722, 809],
+        gen8: [810, 898],
+        gen9: [899, 1025]
+    };
 
-//Al cargar la pagina muestra todos los pokemons como vista predeterminada
-document.addEventListener('DOMContentLoaded', function(){
-    obtenerPokemons();
-})
+    const [inicio, fin] = GENERACIONES[generacionId];
+    const filteredPokemones = pokemones.filter(poke => poke.id >= inicio && poke.id <= fin);
+
+    currentPage = 1; // Reset to the first page when filtering
+    renderFilteredPage(filteredPokemones, currentPage);
+}
+
+function filtrarPorTipo(tipo) {
+    const pokemones = JSON.parse(localStorage.getItem('allPokemons'));
+    listaPokemon.innerHTML = '';
+    
+    if (tipo === 'ver-todos') {
+        renderPage(1);
+        return;
+    }
+    console.log(pokemones);
+    const filteredPokemones = pokemones.filter(poke => poke.types.includes(tipo));
+    
+    currentPage = 1; // Reset to the first page when filtering
+    renderFilteredPage(filteredPokemones, currentPage);
+}
+
+function renderFilteredPage(filteredPokemones, page) {
+    const start = (page - 1) * pokemonsPerPage;
+    const end = start + pokemonsPerPage;
+    const paginatedPokemons = filteredPokemones.slice(start, end);
+    mostrarPokemon(paginatedPokemons);
+    renderFilteredPagination(filteredPokemones);
+}
+
+function renderFilteredPagination(filteredPokemones) {
+    const totalPages = Math.ceil(filteredPokemones.length / pokemonsPerPage);
+    const paginationContainer = document.querySelector('#pagination');
+    paginationContainer.innerHTML = '';
+
+    const prevButton = document.createElement('button');
+    prevButton.textContent = '←';
+    prevButton.classList.add('pagination-arrow');
+    prevButton.disabled = currentPage === 1;
+    prevButton.addEventListener('click', () => {
+        if (currentPage > 1) {
+            currentPage--;
+            renderFilteredPage(filteredPokemones, currentPage);
+        }
+    });
+    paginationContainer.appendChild(prevButton);
+
+    const nextButton = document.createElement('button');
+    nextButton.textContent = '→';
+    nextButton.classList.add('pagination-arrow');
+    nextButton.disabled = currentPage === totalPages;
+    nextButton.addEventListener('click', () => {
+        if (currentPage < totalPages) {
+            currentPage++;
+            renderFilteredPage(filteredPokemones, currentPage);
+        }
+    });
+    paginationContainer.appendChild(nextButton);
+}
+
+// Call iniciar to start the process
+iniciar();
