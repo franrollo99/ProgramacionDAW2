@@ -1,4 +1,5 @@
-const listaPokemon = document.querySelector('#listaPokemon'); // Seleccionamos el div donde se van a mostrar los pokemons
+const listaPokemon1 = document.querySelector('#listaPokemon1');
+const listaPokemon2 = document.querySelector('#listaPokemon2'); // Seleccionamos el div donde se van a mostrar los pokemons
 const buscador1 = document.querySelector('#barraBusqueda1');
 const buscador2 = document.querySelector('#barraBusqueda2');
 const loadingIndicator = document.querySelector('#loading');
@@ -39,7 +40,7 @@ function iniciar() {
 }
 
 function mostrarPokemon(pokemons) {
-    listaPokemon.innerHTML = ''; // Clear previous content
+    listaPokemon1.innerHTML = ''; // Clear previous content
     pokemons.forEach(poke => {
         let tipos = poke.types.map(type => `<p class="${type} tipo">${type}</p>`).join('');
 
@@ -67,13 +68,13 @@ function mostrarPokemon(pokemons) {
             // AGREGAR POKEMON AL COMPARADOR
         });
 
-        listaPokemon.appendChild(div);
+        listaPokemon1.appendChild(div);
     });
 }
 
 function filtrarPokemon(searchTerm) {
     const pokemones = JSON.parse(localStorage.getItem('allPokemons'));
-    listaPokemon.innerHTML = '';
+    listaPokemon1.innerHTML = '';
     
     const filteredPokemones = isNaN(searchTerm) 
         ? pokemones.filter(poke => poke.name.toLowerCase().includes(searchTerm.toLowerCase()))
