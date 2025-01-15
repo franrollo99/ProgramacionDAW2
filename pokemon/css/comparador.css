@@ -1,27 +1,40 @@
 main{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    /* border: 1px solid black; */
-    height: 80vh;
+    margin-top: 2rem;
     padding: 0;
+    display: flex;
+    gap: 1em;
 }
 
-#comparador1{
-}
-
-#comparador2{
+.comparadorDiv{
+    width: 100%;
+    border: 3px solid black;
+    border-radius: 10px;
+    background-color: lightgrey;
+    padding: 1em;
+    height: max-content;
 }
 
 .buscador {
-    width: 200px;
-    margin-left: 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+    margin: 0;
+    }
 
 .barraBusqueda {
-    width: 400px;
-    /* margin: 10px; */
+    width: 200px;
+    margin: 10px;
     height: 30px;
+}
+
+.pokemon-nombre{
+    font-size: large;
+}
+
+.pokemon:hover{
+    background-color: yellow;
+}
+
+.pokemon-seleccionado{
+    margin-top: 1em;
+    padding: 1em;
+    border: 3px solid red;
+    border-radius: 10px;
 }
