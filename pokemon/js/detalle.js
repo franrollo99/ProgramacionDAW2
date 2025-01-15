@@ -196,7 +196,6 @@ function mostrarDetalle(poke, description, speciesData, tipos) {
             </div>
         </div>
     `;
-
     obtenerEfectividades(tipos);
 }
 
