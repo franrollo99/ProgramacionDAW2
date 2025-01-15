@@ -35,6 +35,11 @@ main{
 .pokemon-seleccionado{
     margin-top: 1em;
     padding: 1em;
-    border: 3px solid red;
+    border: 3px solid gray;
     border-radius: 10px;
+}
+
+.pokemon-stats{
+    display: flex;
+    flex-direction: column;
 }

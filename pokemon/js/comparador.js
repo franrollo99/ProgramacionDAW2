@@ -110,6 +110,8 @@ function mostrarPokemonAComparar(poke, divComparador) {
         const statsEsp = statsTraducidas[stat.stat.name] || stat.stat.name;
         return `<p class="stat"><b>${statsEsp}:</b> ${stat.base_stat}</p>`;
     }).join('');
+    let totalStats = 0;
+    // poke.stats.forEach(stat => stat.base_stat);
     
     divComparador.innerHTML = `
         <div class="pokemon-seleccionado">
@@ -117,12 +119,13 @@ function mostrarPokemonAComparar(poke, divComparador) {
                 <img src="${poke.image}" alt="${poke.name}">
             </div>
             <div class="pokemon-info">
-                <h2>${poke.name}</h2>
+                <h2>${poke.name.toUpperCase()}</h2>
                 <div class="pokemon-tipos">
                     ${tipos}
                 </div>
                 <div class="pokemon-stats">
                     ${stats}
+                    <p class="totalStats"><b>Base Total Estadisticas:</b> ${totalStats}</p>
                 </div>
             </div>
         </div>
