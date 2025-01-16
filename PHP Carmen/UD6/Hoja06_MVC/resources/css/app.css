@@ -7,3 +7,28 @@
 .bblanco{
     @apply text-white border border-white py-2.5 px-5 rounded-md hover:bg-white hover:text-green-800 transition duration-500 ease-in-out;
 }
+
+/* SHOW */
+.detalles{
+    display: flex;
+}
+
+button{
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: aliceblue;
+}
+
+
+/* EDIT */
+form{
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+}
+
+input, textarea{
+    border: 1px solid black;
+    border-radius: 5px;
+    padding-bottom: 5px;
+}

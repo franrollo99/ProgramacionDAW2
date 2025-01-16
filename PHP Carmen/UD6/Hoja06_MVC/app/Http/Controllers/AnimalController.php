@@ -35,7 +35,7 @@ class AnimalController extends Controller
      */
     public function show(string $animal)
     {
-        return view('animales.show', ['animal'=>$animal]);
+        return view('animales.show', ['animal'=>$this->animales[$animal]]);
     }
 
     /**
@@ -43,7 +43,7 @@ class AnimalController extends Controller
      */
     public function edit(string $animal)
     {
-        return view('animales.edit', ['animal'=>$animal]);
+        return view('animales.edit', ['animal'=>$this->animales[$animal]]);
     }
 
     /**
