@@ -1,0 +1,43 @@
+body{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    gap: 3em;
+}
+
+h1{
+    animation: deslizamiento 3s linear infinite;
+}
+
+@keyframes deslizamiento{
+    25%{transform: translateY(300px);}
+    75%{transform: translateY(-300px);}
+}
+
+img{
+    width: 100px;
+}
+
+img:hover{
+    scale: 2;
+}
+
+button{
+    background-color: white;
+    width: 300px;
+    height: 150px;
+    animation: brillo 1s linear infinite;
+}
+
+button:hover{
+    animation: tamaño 3s linear infinite, brillo 1s linear infinite;
+}
+
+@keyframes brillo{
+    50%{background-color: yellow;}
+}
+
+@keyframes tamaño{
+    25%{width: 400px; height: 200px;}
+    75%{width: 200px; height: 100px;}
+}

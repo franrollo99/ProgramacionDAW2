@@ -1,0 +1,34 @@
+body{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div{
+    width: 200px;
+    height: 200px;
+    background-color: red;
+    border-radius: 10px;
+    animation: movimientoLateral 3s linear infinite, cambioColor 6s linear infinite;
+    /* animation-name: animacion;
+    animation-duration: 3s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite; */
+}
+
+@keyframes movimientoLateral{
+    0%{transform: translateX(0);}
+    25%{transform: translateX(300px);}
+    50%{transform: translateX(0);}
+    75%{transform: translateX(-300px);}
+    100%{transform: translateX(0);}
+}
+
+@keyframes cambioColor{
+    0%{background-color: red; width: 200px; height: 200px}
+    25%{background-color: blue; width: 300px; height: 300px}
+    50%{background-color: green; width: 200px; height: 200px}
+    75%{background-color: yellow; width: 100px; height: 100px}
+    100%{background-color: red; width: 200px; height: 200px}
+}
