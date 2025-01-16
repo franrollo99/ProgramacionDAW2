@@ -1,0 +1,7 @@
+Copiar el .env.example, renombrarlo a .env y configurarlo en caso de ser necesario
+Migrar la base de datos con el comando "php artisan migrate"
+Instalar la herramienta NPM (Node Pack Manager) con el comando "npm install"
+Generar la clave de aplicacion con el comando "php artisan key:generate"
+
+Ejecutamos el comando "npm run dev" para compilar los activos del frontend
+Ejecutamos el comando "php artisan serve" para iniciar el servidor
