@@ -49,22 +49,36 @@ function obtenerEfectividades(tipos) {
         const efectividades = {
             doble_dano: [],
             mitad_dano: [],
-            sin_dano: []
+            sin_dano: [],
+            inflige_doble_dano: [],
+            inflige_mitad_dano: [], // Agregar mitad de daño infligido
+            inflige_sin_dano: []   // Agregar sin daño infligido
         };
 
         datosTipos.forEach(data => {
+            // Daños recibidos
             data.damage_relations.double_damage_from.forEach(tipo => efectividades.doble_dano.push(tipo.name));
             data.damage_relations.half_damage_from.forEach(tipo => efectividades.mitad_dano.push(tipo.name));
             data.damage_relations.no_damage_from.forEach(tipo => efectividades.sin_dano.push(tipo.name));
+            
+            // Daños infligidos
+            data.damage_relations.double_damage_to.forEach(tipo => efectividades.inflige_doble_dano.push(tipo.name));
+            data.damage_relations.half_damage_to.forEach(tipo => efectividades.inflige_mitad_dano.push(tipo.name)); // Agregar
+            data.damage_relations.no_damage_to.forEach(tipo => efectividades.inflige_sin_dano.push(tipo.name));     // Agregar
         });
 
+        // Elimina duplicados
         efectividades.doble_dano = [...new Set(efectividades.doble_dano)];
         efectividades.mitad_dano = [...new Set(efectividades.mitad_dano)];
         efectividades.sin_dano = [...new Set(efectividades.sin_dano)];
+        efectividades.inflige_doble_dano = [...new Set(efectividades.inflige_doble_dano)];
+        efectividades.inflige_mitad_dano = [...new Set(efectividades.inflige_mitad_dano)];
+        efectividades.inflige_sin_dano = [...new Set(efectividades.inflige_sin_dano)];
 
         generarTablaEfectividades(efectividades);
     }).catch(error => console.error('Error al obtener las efectividades:', error));
 }
+
 
 function generarTablaEfectividades(efectividades) {
     // Crear los tipos con las clases adecuadas sin comas
@@ -92,12 +106,29 @@ function generarTablaEfectividades(efectividades) {
                     </tr>
                 </tbody>
             </table>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Inflige Doble Daño</th>
+                        <th>Inflige Mitad de Daño</th>
+                        <th>No Inflige Daño</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="inflige-doble-dano">${crearTiposHTML(efectividades.inflige_doble_dano) || 'Ninguno'}</td>
+                        <td class="inflige-mitad-dano">${crearTiposHTML(efectividades.inflige_mitad_dano) || 'Ninguno'}</td>
+                        <td class="inflige-sin-dano">${crearTiposHTML(efectividades.inflige_sin_dano) || 'Ninguno'}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     `;
 
     // Insertar la tabla en el contenedor correspondiente
     document.querySelector('.tabla-efect').innerHTML = tablaHTML;
 }
+
 
 
 function mostrarDetalle(poke, description, speciesData, tipos) {
@@ -118,19 +149,30 @@ function mostrarDetalle(poke, description, speciesData, tipos) {
     if (genderRate === -1) {
         genderHTML = "Desconocido";
     } else if (genderRate === 0) {
-        genderHTML = `<img src="../img/macho.png" alt="Macho">`;
+        genderHTML = `<img src="./img/macho.png" alt="Macho">`;
     } else if (genderRate === 8) {
-        genderHTML = `<img src="../img/hembra.png" alt="Hembra">`;
+        genderHTML = `<img src="./img/hembra.png" alt="Hembra">`;
     } else {
-        genderHTML = `<img src="../img/macho.png" alt="Macho"><img src="../img/hembra.png" alt="Hembra">`;
+        genderHTML = `<img src="./img/macho.png" alt="Macho"><img src="./img/hembra.png" alt="Hembra">`;
     }
 
     pokemonDetailDiv.innerHTML = `
         <div class="pokemon">
             <div>
-                <div class="pokemon-imagen">
-                    <img src="${poke.sprites.other["official-artwork"].front_default}" alt="${poke.name}">
+                <div class="imagenes">
+                    <img class="pokemon-imagen" src="${poke.sprites.other["official-artwork"].front_default}" alt="${poke.name}">
+                    
+                    <div class="sprites">
+                        <div class="pokemon-sprites">
+                            <img src="${poke.sprites.front_default}" alt="${poke.name}">
+                            <img src="${poke.sprites.back_default}" alt="${poke.name}">
+                        </div>
+                        <div class="pokemon-sprites-shiny">
+                            <img src="${poke.sprites.front_shiny}" alt="${poke.name}">
+                            <img src="${poke.sprites.back_shiny}" alt="${poke.name}">
+                    </div>
                 </div>
+            </div>
             </div>
             <div class="pokemon-info">
                 <div class="nombre-contenedor">
@@ -172,36 +214,15 @@ function mostrarDetalle(poke, description, speciesData, tipos) {
 
                 </div>
             </div>
-            <div class="sprites">
-                <div class="no-shiny">
-                    <div class="pokemon-sprites">
-                        <img class="sprite" src="${poke.sprites.front_default}" alt="">
-                        <img class="sprite" src="${poke.sprites.back_default}" alt="">
-                    </div>
-                    <div class="pokemon-sprites">
-                        <img class="sprite" src="${poke.sprites.front_female}" alt="">
-                        <img class="sprite" src="${poke.sprites.back_female}" alt="">
-                    </div>
-                </div>
-                <div class="shiny">
-                    <div class="pokemon-sprites-shiny">
-                        <img class="sprite" src="${poke.sprites.front_shiny}" alt="">
-                        <img class="sprite" src="${poke.sprites.back_shiny}" alt="">
-                    </div>
-                    <div class="pokemon-sprites-shiny">
-                        <img class="sprite" src="${poke.sprites.front_shiny_female}" alt="">
-                        <img class="sprite" src="${poke.sprites.back_shiny_female}" alt="">
-                    </div>
-                </div>
-            </div>
         </div>
     `;
+
     obtenerEfectividades(tipos);
 }
 
 // Navegación entre Pokémon
 document.querySelector('.btn-volver').addEventListener('click', () => {
-    window.location.href = './index.html';
+    window.location.href = 'index.html';
 });
 
 document.querySelector('.btn-siguiente').addEventListener('click', () => {
@@ -218,27 +239,4 @@ document.querySelector('.btn-anterior').addEventListener('click', () => {
     } else {
         window.location.href = './detalle.html?id=1025';
     }
-});
-
-document.querySelector('.btn-comparar').addEventListener('click', () => {
-    // Preparar los datos del Pokémon actual
-    const pokemonData = {
-        id: pokemonId,
-        name: pokemonDetailDiv.querySelector('.pokemon-nombre').textContent,
-        image: pokemonDetailDiv.querySelector('.pokemon-imagen img').src,
-        types: [...pokemonDetailDiv.querySelectorAll('.pokemon-tipos p')].map(tipo => tipo.textContent),
-        stats: [...pokemonDetailDiv.querySelectorAll('.pokemon-stats .stat')].map(stat => {
-            const [name, value] = stat.textContent.split(': ');
-            return {
-                name: name.trim(),
-                value: parseInt(value)
-            };
-        })
-    };
-
-    // Guardar en localStorage
-    localStorage.setItem('pokemonParaComparar', JSON.stringify(pokemonData));
-
-    // Redirigir al comparador
-    window.location.href = './comparador.html';
 });

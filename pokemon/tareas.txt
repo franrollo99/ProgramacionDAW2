@@ -23,3 +23,57 @@ combates
 -Reorganizar estructura: meter todo el estilo en la carpeta css, javaScript en js, crear public con todas las paginas .html
 -Agregar debilidades
 -LocalStorage?
+
+
+
+    pokemonDetailDiv.innerHTML = `
+        <div class="pokemon">
+            <div>
+                <div class="imagenes">
+                    <img class="pokemon-imagen" src="${poke.image}" alt="${poke.name}">
+                </div>
+                <div class="sprites">
+                    <img src="${poke.sprites?.front_default || ''}" alt="Frontal">
+                    <img src="${poke.sprites?.back_default || ''}" alt="Trasera">
+                </div>
+            </div>
+            <div class="pokemon-info">
+            <p>#${pokeId}</p>
+                <h2>${poke.name.toUpperCase()}</h2>
+                
+                <h3>Descripción</h3>
+                <div class="pokemon-descripcion">
+                    <p>${poke.description}</p>
+                </div>
+                <p><b>Altura:</b> ${height} m</p>
+                <p><b>Peso:</b> ${weight} kg</p>
+                <p><b>Habilidades:</b> ${abilities}</p>
+                <div class="genero">
+                    <p class="sexo"><span>Sexo:</span></p>
+                    <div class="genero-img">
+                        <p class="sexo"> ${genderHTML}</p>
+                    </div>
+                </div>
+                <div class="pokemon-tipos">${tiposHTML}</div>
+                <div class="pokemon-stats">${stats}</div>
+            </div>
+            <div class="tabla-efect"></div>
+        </div>
+    `;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

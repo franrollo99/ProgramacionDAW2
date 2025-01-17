@@ -1,6 +1,6 @@
 const pokemonDetailDiv = document.querySelector('#detallesPokemon');
 const urlParams = new URLSearchParams(window.location.search);
-const pokemonId = parseInt(urlParams.get('id')); // Se asegura de que sea un número entero
+const pokemonId = parseInt(urlParams.get('id')); // Obtener el ID del Pokémon
 
 const statsTraducidas = {
     "hp": "Puntos de Salud",
@@ -29,23 +29,11 @@ function cargarDetallePokemon(pokemonId) {
         return;
     }
 
-    const description = obtenerDescripcion(poke);
+    const speciesData = JSON.parse(localStorage.getItem('pokemonSpecies'))?.[pokemonId];
+    const description = speciesData?.flavor_text_entries?.find(entry => entry.language.name === "es")?.flavor_text.replace(/\n/g, " ") || "No hay descripción disponible.";
+
     obtenerEfectividades(poke.types);
-
-    // Mostrar los detalles del Pokémon
-    mostrarDetalle(poke, description);
-}
-
-// Obtener descripción del Pokémon
-function obtenerDescripcion(poke) {
-    const speciesData = JSON.parse(localStorage.getItem('pokemonSpecies')) || {};
-    const species = speciesData[poke.id];
-    if (!species || !species.flavor_text_entries) {
-        return 'Descripción no disponible.';
-    }
-
-    const flavorTextEntry = species.flavor_text_entries.find(entry => entry.language.name === 'es');
-    return flavorTextEntry ? flavorTextEntry.flavor_text.replace(/\n/g, ' ') : 'Descripción no disponible.';
+    mostrarDetalle(poke, description, speciesData);
 }
 
 // Obtener efectividades del Pokémon
@@ -58,18 +46,28 @@ function obtenerEfectividades(tipos) {
         const efectividades = {
             doble_dano: [],
             mitad_dano: [],
-            sin_dano: []
+            sin_dano: [],
+            inflige_doble_dano: [],
+            inflige_mitad_dano: [],
+            inflige_sin_dano: []
         };
 
         datosTipos.forEach(data => {
+            // Daños recibidos
             data.damage_relations.double_damage_from.forEach(tipo => efectividades.doble_dano.push(tipo.name));
             data.damage_relations.half_damage_from.forEach(tipo => efectividades.mitad_dano.push(tipo.name));
             data.damage_relations.no_damage_from.forEach(tipo => efectividades.sin_dano.push(tipo.name));
+            
+            // Daños infligidos
+            data.damage_relations.double_damage_to.forEach(tipo => efectividades.inflige_doble_dano.push(tipo.name));
+            data.damage_relations.half_damage_to.forEach(tipo => efectividades.inflige_mitad_dano.push(tipo.name));
+            data.damage_relations.no_damage_to.forEach(tipo => efectividades.inflige_sin_dano.push(tipo.name));
         });
 
-        efectividades.doble_dano = [...new Set(efectividades.doble_dano)];
-        efectividades.mitad_dano = [...new Set(efectividades.mitad_dano)];
-        efectividades.sin_dano = [...new Set(efectividades.sin_dano)];
+        // Eliminar duplicados
+        for (const key in efectividades) {
+            efectividades[key] = [...new Set(efectividades[key])];
+        }
 
         generarTablaEfectividades(efectividades);
     }).catch(error => console.error('Error al obtener las efectividades:', error));
@@ -98,6 +96,22 @@ function generarTablaEfectividades(efectividades) {
                     </tr>
                 </tbody>
             </table>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Inflige Doble Daño</th>
+                        <th>Inflige Mitad de Daño</th>
+                        <th>No Inflige Daño</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>${crearTiposHTML(efectividades.inflige_doble_dano) || 'Ninguno'}</td>
+                        <td>${crearTiposHTML(efectividades.inflige_mitad_dano) || 'Ninguno'}</td>
+                        <td>${crearTiposHTML(efectividades.inflige_sin_dano) || 'Ninguno'}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     `;
 
@@ -105,7 +119,8 @@ function generarTablaEfectividades(efectividades) {
 }
 
 // Mostrar los detalles del Pokémon en el DOM
-function mostrarDetalle(poke, description) {
+function mostrarDetalle(poke, description, speciesData) {
+
     const pokeId = poke.id.toString().padStart(3, '0');
     const tiposHTML = poke.types.map(type => `<p class="${type} tipo">${type}</p>`).join('');
     const stats = poke.stats.map(stat => {
@@ -114,58 +129,97 @@ function mostrarDetalle(poke, description) {
     }).join('');
     const height = (poke.height / 10).toFixed(1);
     const weight = (poke.weight / 10).toFixed(1);
+    const abilities = poke.ability.map(ability => ability).join(", ") || "No disponible";
+
+    let genderHTML = "";
+    const genderRate = poke.gender;
+
+    if (genderRate === -1) {
+        genderHTML = "Desconocido";
+    } else if (genderRate === 0) {
+        genderHTML = `<img src="./img/macho.png" alt="Macho">`;
+    } else if (genderRate === 8) {
+        genderHTML = `<img src="./img/hembra.png" alt="Hembra">`;
+    } else {
+        genderHTML = `<img src="./img/macho.png" alt="Macho"><img src="./img/hembra.png" alt="Hembra">`;
+    }
 
     pokemonDetailDiv.innerHTML = `
         <div class="pokemon">
             <div>
-                <div class="pokemon-imagen">
-                    <img src="${poke.image}" alt="${poke.name}">
+                <div class="imagenes">
+                    <img class="pokemon-imagen" src="${poke.image}" alt="${poke.name}">
+                    
+                    <div class="sprites">
+                        <div class="pokemon-sprites">
+                            <img src="${poke.sprites.front_default}" alt="${poke.name}">
+                            <img src="${poke.sprites.back_default}" alt="${poke.name}">
+                        </div>
+                        <div class="pokemon-sprites-shiny">
+                            <img src="${poke.sprites.front_shiny}" alt="${poke.name}">
+                            <img src="${poke.sprites.back_shiny}" alt="${poke.name}">
+                    </div>
                 </div>
+            </div>
             </div>
             <div class="pokemon-info">
                 <div class="nombre-contenedor">
                     <p class="pokemon-id">#${pokeId}</p>
                     <h2 class="pokemon-nombre">${poke.name.toUpperCase()}</h2>
+                    <br>
                 </div>
+
                 <h3>Descripción</h3>
                 <div class="pokemon-descripcion">
-                    <p>${description}</p>
+                    <p>${poke.description}</p>
                 </div>
-                <h3>Características</h3>
+
                 <div class="pokemon-caracteristicas">
                     <p><span>Altura:</span> ${height} m</p>
                     <p><span>Peso:</span> ${weight} kg</p>
+                    <p><span>Habilidad:</span> ${abilities}</p>
+                    <div class="genero">
+                        <p class="sexo"><span>Sexo:</span></p>
+                        <div class="genero-img">
+                            <p class="sexo"> ${genderHTML}</p>
+                        </div>
+                    </div>
                 </div>
+
                 <h3>Tipo</h3>
                 <div class="pokemon-tipos">
                     ${tiposHTML}
+                    <br>
                 </div>
+
                 <h3>Estadísticas</h3>
                 <div class="pokemon-stats">
                     ${stats}
+                    <br>
                 </div>
-                <div class="tabla-efect"></div>
+
+                <div class="tabla-efect">
+
+                </div>
             </div>
         </div>
     `;
 }
 
-// Navegación entre Pokémon
+// Navegación
 document.querySelector('.btn-volver').addEventListener('click', () => {
     window.location.href = './index.html';
 });
 
 document.querySelector('.btn-siguiente').addEventListener('click', () => {
-    const siguienteId = pokemonId < 1025 ? pokemonId + 1 : 1;
-    window.location.href = `./detalle.html?id=${siguienteId}`;
+    window.location.href = `./detalle.html?id=${pokemonId + 1}`;
 });
 
 document.querySelector('.btn-anterior').addEventListener('click', () => {
-    const anteriorId = pokemonId > 1 ? pokemonId - 1 : 1025;
-    window.location.href = `./detalle.html?id=${anteriorId}`;
+    window.location.href = `./detalle.html?id=${pokemonId - 1}`;
 });
 
-// Comparar Pokémon desde la página de detalles
+// Comparar Pokémon
 document.querySelector('.btn-comparar').addEventListener('click', () => {
     const pokemones = JSON.parse(localStorage.getItem('allPokemons'));
     const poke = pokemones.find(pokemon => pokemon.id === pokemonId);
@@ -178,5 +232,5 @@ document.querySelector('.btn-comparar').addEventListener('click', () => {
     }
 });
 
-// Cargar el detalle del Pokémon al iniciar
+// Iniciar carga del detalle
 cargarDetallePokemon(pokemonId);
