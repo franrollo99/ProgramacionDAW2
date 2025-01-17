@@ -4,7 +4,7 @@
 <h1 class="text-3xl font-bold underline">Ver detalles del animal {{$animal['especie']}}</h1>
 <div class="detalles">
     <div>
-        <img src="{{ asset('img/' . $animal['imagen']) }}" alt="">
+        <img src="{{ asset('assets/img/' . $animal['imagen']) }}" alt="">
     </div>
     <div>
         <p>Peso: {{$animal['peso']}}</p>
@@ -14,6 +14,6 @@
         <p>Descripcion: {{$animal['descripcion']}}</p>
     </div>
 </div>
-<button>Editar animal</button>
-<button>Volver al listado</button>
+<button><a href="./0/editar">Editar animal</a></button>
+<button><a href="../">Volver al listado</a></button>
 @endsection
