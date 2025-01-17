@@ -1,4 +1,3 @@
-// https://veekun.com/dex/gadgets/compare_pokemon?pokemon=bulbasur&pokemon=charmander
 const buscadores = document.querySelectorAll('.barraBusqueda');
 const listasPokemon = document.querySelectorAll('.pokemon-todos');
 const divsComparadores = document.querySelectorAll('.comparadorPokemon');
@@ -32,6 +31,16 @@ buscadores.forEach((buscador, indice) => {
 document.addEventListener('DOMContentLoaded', () => {
     if (!localStorage.getItem('allPokemons')) {
         worker.postMessage({ tipo: 'cargarTodos' });
+    }
+
+    // COMPARAR POKEMON DESDE DETALLES
+    const pokemonComparar = localStorage.getItem('pokemonParaComparar');
+    if (pokemonComparar) {
+        const pokemon = JSON.parse(pokemonComparar);
+        // Mostrar el Pokémon en el comparador (por ejemplo, en el lado izquierdo)
+        mostrarPokemonAComparar(pokemon, divsComparadores[0], 0);
+        // Limpiar localStorage para evitar conflictos en el futuro
+        localStorage.removeItem('pokemonParaComparar');
     }
 });
 
