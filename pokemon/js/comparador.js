@@ -33,13 +33,12 @@ document.addEventListener('DOMContentLoaded', () => {
         worker.postMessage({ tipo: 'cargarTodos' });
     }
 
-    // COMPARAR POKEMON DESDE DETALLES
+    // Cargar Pokémon para comparar desde detalles
     const pokemonComparar = localStorage.getItem('pokemonParaComparar');
     if (pokemonComparar) {
-        const pokemon = JSON.parse(pokemonComparar);
-        // Mostrar el Pokémon en el comparador (por ejemplo, en el lado izquierdo)
-        mostrarPokemonAComparar(pokemon, divsComparadores[0], 0);
-        // Limpiar localStorage para evitar conflictos en el futuro
+        const { poke, indice } = JSON.parse(pokemonComparar);
+        mostrarPokemonAComparar(poke, divsComparadores[indice], indice);
+        // Limpiar localStorage para evitar conflictos futuros
         localStorage.removeItem('pokemonParaComparar');
     }
 });
@@ -51,8 +50,9 @@ worker.onmessage = function (event) {
 
     loading.forEach(indicador => {
         indicador.style.display = 'none';
-    })
+    });
 };
+
 
 function iniciar() {
     const cachedPokemones = localStorage.getItem('allPokemons');

@@ -28,7 +28,7 @@ async function fetchPokemon(id) {
             stats: data.stats,
             ability: data.abilities.map(entry => entry.ability.name),
             description: flavorTextEntry ? flavorTextEntry.flavor_text.replace(/\n/g, " ") : "No hay descripción disponible.",
-            gender: data2.gender_rate
+            gender: data2.gender_rate,
         };
     } catch (error) {
         console.error(`Error en fetchPokemon(${id}):`, error);

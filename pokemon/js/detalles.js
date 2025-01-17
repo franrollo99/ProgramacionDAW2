@@ -29,11 +29,8 @@ function cargarDetallePokemon(pokemonId) {
         return;
     }
 
-    const speciesData = JSON.parse(localStorage.getItem('pokemonSpecies'))?.[pokemonId];
-    const description = speciesData?.flavor_text_entries?.find(entry => entry.language.name === "es")?.flavor_text.replace(/\n/g, " ") || "No hay descripción disponible.";
-
     obtenerEfectividades(poke.types);
-    mostrarDetalle(poke, description, speciesData);
+    mostrarDetalle(poke);
 }
 
 // Obtener efectividades del Pokémon
@@ -119,7 +116,7 @@ function generarTablaEfectividades(efectividades) {
 }
 
 // Mostrar los detalles del Pokémon en el DOM
-function mostrarDetalle(poke, description, speciesData) {
+function mostrarDetalle(poke) {
 
     const pokeId = poke.id.toString().padStart(3, '0');
     const tiposHTML = poke.types.map(type => `<p class="${type} tipo">${type}</p>`).join('');
@@ -150,16 +147,7 @@ function mostrarDetalle(poke, description, speciesData) {
                 <div class="imagenes">
                     <img class="pokemon-imagen" src="${poke.image}" alt="${poke.name}">
                     
-                    <div class="sprites">
-                        <div class="pokemon-sprites">
-                            <img src="${poke.sprites.front_default}" alt="${poke.name}">
-                            <img src="${poke.sprites.back_default}" alt="${poke.name}">
-                        </div>
-                        <div class="pokemon-sprites-shiny">
-                            <img src="${poke.sprites.front_shiny}" alt="${poke.name}">
-                            <img src="${poke.sprites.back_shiny}" alt="${poke.name}">
-                    </div>
-                </div>
+                    
             </div>
             </div>
             <div class="pokemon-info">
@@ -206,17 +194,25 @@ function mostrarDetalle(poke, description, speciesData) {
     `;
 }
 
-// Navegación
+// Navegación entre Pokémon
 document.querySelector('.btn-volver').addEventListener('click', () => {
-    window.location.href = './index.html';
+    window.location.href = 'index.html';
 });
 
 document.querySelector('.btn-siguiente').addEventListener('click', () => {
-    window.location.href = `./detalle.html?id=${pokemonId + 1}`;
+    if (pokemonId < 1025) {
+        window.location.href = './detalle.html?id=' + (pokemonId + 1);
+    } else {
+        window.location.href = './detalle.html?id=1';
+    }
 });
 
 document.querySelector('.btn-anterior').addEventListener('click', () => {
-    window.location.href = `./detalle.html?id=${pokemonId - 1}`;
+    if (pokemonId > 1) {
+        window.location.href = './detalle.html?id=' + (pokemonId - 1);
+    } else {
+        window.location.href = './detalle.html?id=1025';
+    }
 });
 
 // Comparar Pokémon
@@ -225,12 +221,15 @@ document.querySelector('.btn-comparar').addEventListener('click', () => {
     const poke = pokemones.find(pokemon => pokemon.id === pokemonId);
 
     if (poke) {
-        localStorage.setItem('pokemonParaComparar', JSON.stringify(poke));
+        // Guarda el Pokémon seleccionado en localStorage
+        localStorage.setItem('pokemonParaComparar', JSON.stringify({ poke, indice: 0 }));
+        // Redirige al comparador
         window.location.href = './comparador.html';
     } else {
         console.error('Error: Pokémon no encontrado para comparar.');
     }
 });
+
 
 // Iniciar carga del detalle
 cargarDetallePokemon(pokemonId);
