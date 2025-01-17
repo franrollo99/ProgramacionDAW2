@@ -1,4 +1,3 @@
-// https://veekun.com/dex/gadgets/compare_pokemon?pokemon=bulbasur&pokemon=charmander
 const buscadores = document.querySelectorAll('.barraBusqueda');
 const listasPokemon = document.querySelectorAll('.pokemon-todos');
 const divsComparadores = document.querySelectorAll('.comparadorPokemon');
@@ -27,6 +26,22 @@ buscadores.forEach((buscador, indice) => {
         const divComparador = divsComparadores[indice];
         filtrarPokemon(searchTerm, buscador, listaPokemon, divComparador, indice);
     });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (!localStorage.getItem('allPokemons')) {
+        worker.postMessage({ tipo: 'cargarTodos' });
+    }
+
+    // COMPARAR POKEMON DESDE DETALLES
+    const pokemonComparar = localStorage.getItem('pokemonParaComparar');
+    if (pokemonComparar) {
+        const pokemon = JSON.parse(pokemonComparar);
+        // Mostrar el Pokémon en el comparador (por ejemplo, en el lado izquierdo)
+        mostrarPokemonAComparar(pokemon, divsComparadores[0], 0);
+        // Limpiar localStorage para evitar conflictos en el futuro
+        localStorage.removeItem('pokemonParaComparar');
+    }
 });
 
 worker.onmessage = function (event) {
@@ -110,7 +125,7 @@ function mostrarPokemonAComparar(poke, divComparador, indice) {
     let tipos = poke.types.map(type => `<p class="${type} tipo">${type}</p>`).join('');
     let stats = poke.stats.map(stat => {
         const statsEsp = statsTraducidas[stat.stat.name] || stat.stat.name;
-        return `<p class="stat"><b>${statsEsp}:</b> ${stat.base_stat}</p>`;
+        return `<p class="stat" data-stat="${stat.stat.name}">${statsEsp}: ${stat.base_stat}</p>`;
     }).join('');
     let totalStats = 0;
     poke.stats.forEach(stat => {
@@ -129,7 +144,7 @@ function mostrarPokemonAComparar(poke, divComparador, indice) {
                 </div>
                 <div class="pokemon-stats">
                     ${stats}
-                    <p class="stat"><b>Base Total Estadisticas:</b> ${totalStats}</p>
+                    <p class="stat">Base Total Estadisticas: ${totalStats}</p>
                 </div>
             </div>
         </div>
@@ -158,11 +173,8 @@ function compararPokemons() {
     stats1.forEach((stat1, index) => {
         const stat2 = stats2[index];
 
-
-    // REVISAR
-
-        // const statElement1 = div1.querySelector();
-        // const statElement2 = div2.querySelector();
+        const statElement1 = div1.querySelector(`[data-stat="${stat1.stat.name}"]`);
+        const statElement2 = div2.querySelector(`[data-stat="${stat2.stat.name}"]`);
 
         if (stat1.base_stat > stat2.base_stat) {
             statElement1.style.color = 'green';
@@ -189,7 +201,10 @@ function compararPokemons() {
     } else if (total1 < total2) {
         comparador1.style.backgroundColor = 'lightcoral';
         comparador2.style.backgroundColor = 'lightgreen';
-    }
+    } else {
+        comparador1.style.backgroundColor = 'gray';
+        comparador2.style.backgroundColor = 'gray';
+        }
 }
 
 

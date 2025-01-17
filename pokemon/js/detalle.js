@@ -219,3 +219,26 @@ document.querySelector('.btn-anterior').addEventListener('click', () => {
         window.location.href = './detalle.html?id=1025';
     }
 });
+
+document.querySelector('.btn-comparar').addEventListener('click', () => {
+    // Preparar los datos del Pokémon actual
+    const pokemonData = {
+        id: pokemonId,
+        name: pokemonDetailDiv.querySelector('.pokemon-nombre').textContent,
+        image: pokemonDetailDiv.querySelector('.pokemon-imagen img').src,
+        types: [...pokemonDetailDiv.querySelectorAll('.pokemon-tipos p')].map(tipo => tipo.textContent),
+        stats: [...pokemonDetailDiv.querySelectorAll('.pokemon-stats .stat')].map(stat => {
+            const [name, value] = stat.textContent.split(': ');
+            return {
+                name: name.trim(),
+                value: parseInt(value)
+            };
+        })
+    };
+
+    // Guardar en localStorage
+    localStorage.setItem('pokemonParaComparar', JSON.stringify(pokemonData));
+
+    // Redirigir al comparador
+    window.location.href = './comparador.html';
+});

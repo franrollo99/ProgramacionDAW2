@@ -46,4 +46,5 @@ main{
 
 .pokemon-stats p {
     font-size: 1em;
+    font-weight: bold;
 }
