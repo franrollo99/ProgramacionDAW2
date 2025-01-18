@@ -120,7 +120,7 @@ h3 {
 }
 
 .pokemon-sprites img:hover, .pokemon-sprites-shiny img:hover {
-    scale: 2;
+    scale: 3;
     background-color: rgba(211, 211, 211, 0.459);
 }
 

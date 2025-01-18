@@ -141,13 +141,22 @@ function mostrarDetalle(poke) {
         genderHTML = `<img src="./img/macho.png" alt="Macho"><img src="./img/hembra.png" alt="Hembra">`;
     }
 
+    const otherImagesHTML = Object.values(poke.otherImages)
+        .filter(url => url !== null) // Filtrar las URLs que no sean null
+        .map(url => `<img src="${url}" alt="Imagen adicional de ${poke.name}" class="other-image">`) // Crear elementos img
+        .join('');
+
     pokemonDetailDiv.innerHTML = `
         <div class="pokemon">
-            <div>
-                <div class="imagenes">
-                    <img class="pokemon-imagen" src="${poke.image}" alt="${poke.name}">
-                    
-                    
+            <div class="imagenes">
+                <img class="pokemon-imagen" src="${poke.image}" alt="${poke.name}">
+                <div class="sprites">
+                    <div class="pokemon-sprites">
+                        <img src="${poke.otherImages.front_default}" alt="${poke.name}">
+                    </div>
+                    <div class="pokemon-sprites-shiny">
+                        <img src="${poke.otherImages.front_shiny}" alt="${poke.name}">
+                    </div>
             </div>
             </div>
             <div class="pokemon-info">

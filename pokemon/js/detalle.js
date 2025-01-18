@@ -158,20 +158,19 @@ function mostrarDetalle(poke, description, speciesData, tipos) {
 
     pokemonDetailDiv.innerHTML = `
         <div class="pokemon">
-            <div>
-                <div class="imagenes">
-                    <img class="pokemon-imagen" src="${poke.sprites.other["official-artwork"].front_default}" alt="${poke.name}">
-                    
-                    <div class="sprites">
-                        <div class="pokemon-sprites">
-                            <img src="${poke.sprites.front_default}" alt="${poke.name}">
-                            <img src="${poke.sprites.back_default}" alt="${poke.name}">
-                        </div>
-                        <div class="pokemon-sprites-shiny">
-                            <img src="${poke.sprites.front_shiny}" alt="${poke.name}">
-                            <img src="${poke.sprites.back_shiny}" alt="${poke.name}">
+            <div class="imagenes">
+                <img class="pokemon-imagen" src="${poke.sprites.other["official-artwork"].front_default}" alt="${poke.name}">
+                
+                <div class="sprites">
+                    <div class="pokemon-sprites">
+                        <img src="${poke.sprites.front_default}" alt="${poke.name}">
+                        <img src="${poke.sprites.back_default}" alt="${poke.name}">
                     </div>
-                </div>
+                    <div class="pokemon-sprites-shiny">
+                        <img src="${poke.sprites.front_shiny}" alt="${poke.name}">
+                        <img src="${poke.sprites.back_shiny}" alt="${poke.name}">
+                    </div>
+                <div>
             </div>
             </div>
             <div class="pokemon-info">
