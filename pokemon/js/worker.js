@@ -33,7 +33,8 @@ async function fetchPokemon(id) {
                 Object.entries(data.sprites).filter(([key, value]) => 
                     (key === "front_default" || key === "front_shiny") && value !== null
                 )
-            )
+            ),
+            
         };
     } catch (error) {
         console.error(`Error en fetchPokemon(${id}):`, error);
