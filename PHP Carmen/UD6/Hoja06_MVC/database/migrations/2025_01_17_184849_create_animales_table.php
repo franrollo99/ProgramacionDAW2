@@ -9,21 +9,22 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('animales', function (Blueprint $table) {
             $table->id();
             $table->string('especie')->unique();
             $table->string('slug')->unique();
-            $table->decimal('peso', total: 6, precision: 1);
-            $table->decimal('altura', total: 6, precision: 1);
+            $table->double('peso', 6, 1);
+            $table->double('altura', 6, 1);
             $table->date('fechaNacimiento');
             $table->string('imagen')->nullable();
-            $table->string('alimentacion', length: 20)->nullable();
-            $table->longText('descripcion')->nullable();
+            $table->string('alimentacion', 20)->nullable();
+            $table->text('descripcion')->nullable();
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.

@@ -19,5 +19,11 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        // Elimino los datos previos de la tabla animales
+        DB::table('animales')->delete();
+        // Llamo al seeder AnimalSeeder
+        $this->call(AnimalSeeder::class);
+
     }
 }

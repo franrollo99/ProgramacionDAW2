@@ -8,10 +8,18 @@
     @vite('resources/css/app.css')
 </head>
 <body>
-    @include('layouts.partials.nav')
-    <div class="container">
-        @yield('contenido')
+    <div class="flex flex-col min-h-screen ">
+
+        {{-- Menu de navegacion --}}
+        @include('layouts.partials.nav')
+
+        {{-- Contenedor con el contenido main --}}
+        <main class="flex-grow container mx-auto px-52 ">
+            @yield('contenido')
+        </main>
+
+        {{-- Footer --}}
+        @include('layouts.partials.footer')
     </div>
-    @include('layouts.partials.footer')
 </body>
 </html>
