@@ -29,7 +29,10 @@ class AnimalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $animal = new Animal();
+        $animal->
+
+        return route('animales.show', $animal);
     }
 
     /**
