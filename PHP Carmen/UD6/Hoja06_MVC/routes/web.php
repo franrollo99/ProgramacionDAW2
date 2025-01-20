@@ -36,5 +36,5 @@ Route::get('/', [InicioController::class, '__invoke'])->name('inicio');
 
 Route::get('animales', [AnimalController::class, 'index'])->name('animales.index');
 Route::get('animales/crear', [AnimalController::class, 'create'])->name('animales.create');
-Route::get('animales/{animal}', [AnimalController::class, 'show'])->name('animales.show');
-Route::get('animales/{animal}/editar', [AnimalController::class, 'edit'])->name('animales.edit');
+Route::get('animales/{especie}', [AnimalController::class, 'show'])->name('animales.show');
+Route::get('animales/{especie}/editar', [AnimalController::class, 'edit'])->name('animales.edit');

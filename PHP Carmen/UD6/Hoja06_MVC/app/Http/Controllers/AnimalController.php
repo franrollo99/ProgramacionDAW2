@@ -37,7 +37,7 @@ class AnimalController extends Controller
      */
     public function show(string $especie)
     {
-        $animal = Animal::where('especie', $especie);
+        $animal = Animal::where('especie', $especie)->first();
 
         return view('animales.show', ['animal'=>$animal]);
     }
@@ -47,7 +47,7 @@ class AnimalController extends Controller
      */
     public function edit(string $especie)
     {
-        $animal = Animal::where('especie', $especie);
+        $animal = Animal::where('especie', $especie)->first();
 
         return view('animales.edit', ['animal'=>$animal]);
     }

@@ -13,8 +13,9 @@
             </div>
             <div class="flex flex-col gap-3">
                 <h2 class="text-2xl font-bold">{{$animal->especie}}</h2>
-                <p>{{$animal['descripcion']}}</p>
-                <a class="w-max px-2 border-2 border-blue-600 bg-blue-400 rounded" href="./animales/{{$animal->especie}}">Ver Detalles</a>
+                <p class="">{{$animal['descripcion']}}</p>
+                <a class="w-max px-2 border-2 border-blue-600 bg-blue-400 rounded" href="{{url('/animales/'.$animal->especie)}}">Ver Detalles</a>
+                <a class="w-max px-2 border-2 border-blue-600 bg-blue-400 rounded" href="{{url('/animales/'.$animal->especie.'/editar')}}">Editar</a>
             </div>
         </div>
         @endforeach

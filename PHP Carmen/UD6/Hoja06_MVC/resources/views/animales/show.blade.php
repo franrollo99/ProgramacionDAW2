@@ -1,7 +1,7 @@
 @extends('layouts.plantilla')
 @section('titulo', 'Zoologico-Ver el animal'.$animal->especie)
 @section('contenido')
-<h1 class="text-3xl font-bold underline">Ver detalles del animal {{$animal['especie']}}</h1>
+<h1 class="text-3xl font-bold underline">Ver detalles del animal {{$animal->especie}}</h1>
 <div class="detalles">
     <div>
         <img src="{{ asset('assets/img/' . $animal->imagen) }}" alt="">
@@ -14,6 +14,6 @@
         <p>Descripcion: {{$animal->descripcion}}</p>
     </div>
 </div>
-<button><a href="./0/editar">Editar animal</a></button>
-<button><a href="../">Volver al listado</a></button>
+<a class="w-max px-2 border-2 border-blue-600 bg-blue-400 rounded" href="{{url('/animales')}}">Volver a la pagina principal</a>
+<a class="w-max px-2 border-2 border-blue-600 bg-blue-400 rounded" href="{{url('/animales/'.$animal->especie.'/editar')}}">Editar</a>
 @endsection

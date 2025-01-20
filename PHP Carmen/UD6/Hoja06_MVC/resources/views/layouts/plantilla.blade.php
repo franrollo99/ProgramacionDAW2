@@ -14,7 +14,7 @@
         @include('layouts.partials.nav')
 
         {{-- Contenedor con el contenido main --}}
-        <main class="flex-grow container mx-auto px-52 ">
+        <main class="flex-grow container mx-auto py-5">
             @yield('contenido')
         </main>
 
