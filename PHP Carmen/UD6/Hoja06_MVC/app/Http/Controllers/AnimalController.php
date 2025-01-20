@@ -35,20 +35,16 @@ class AnimalController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $especie)
+    public function show(Animal $animal)
     {
-        $animal = Animal::where('especie', $especie)->first();
-
         return view('animales.show', ['animal'=>$animal]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $especie)
+    public function edit(Animal $animal)
     {
-        $animal = Animal::where('especie', $especie)->first();
-
         return view('animales.edit', ['animal'=>$animal]);
     }
 

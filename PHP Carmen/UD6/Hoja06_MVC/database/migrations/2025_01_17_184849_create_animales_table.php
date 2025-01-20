@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('especie')->unique();
             $table->string('slug')->unique();
-            $table->double('peso', 6, 1);
-            $table->double('altura', 6, 1);
+            $table->decimal('peso', total: 6, places: 1);
+            $table->decimal('altura', total: 6, places: 1);
             $table->date('fechaNacimiento');
             $table->string('imagen')->nullable();
-            $table->string('alimentacion', 20)->nullable();
+            $table->string('alimentacion', length: 20)->nullable();
             $table->text('descripcion')->nullable();
             $table->timestamps();
         });

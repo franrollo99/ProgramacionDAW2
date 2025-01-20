@@ -36,5 +36,9 @@ Route::get('/', [InicioController::class, '__invoke'])->name('inicio');
 
 Route::get('animales', [AnimalController::class, 'index'])->name('animales.index');
 Route::get('animales/crear', [AnimalController::class, 'create'])->name('animales.create');
-Route::get('animales/{especie}', [AnimalController::class, 'show'])->name('animales.show');
-Route::get('animales/{especie}/editar', [AnimalController::class, 'edit'])->name('animales.edit');
+Route::get('animales/{animal}', [AnimalController::class, 'show'])->name('animales.show');
+Route::get('animales/{animal}/editar', [AnimalController::class, 'edit'])->name('animales.edit');
+
+// Usar @csrf en los formularios que envien datos mediante POST, PUT, PATCH, DELETE
+Route::post('animales', [AnimalController::class, 'store'])->name('animales.store');
+Route::put('animales/{animal}', [AnimalController::class, 'update'])->name('animales.update');

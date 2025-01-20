@@ -14,6 +14,6 @@
         <p>Descripcion: {{$animal->descripcion}}</p>
     </div>
 </div>
-<a class="w-max px-2 border-2 border-blue-600 bg-blue-400 rounded" href="{{url('/animales')}}">Volver a la pagina principal</a>
-<a class="w-max px-2 border-2 border-blue-600 bg-blue-400 rounded" href="{{url('/animales/'.$animal->especie.'/editar')}}">Editar</a>
+<a class="w-max px-2 border-2 border-blue-600 bg-blue-400 rounded" href="{{route('animales.index', $animal)}}">Volver a la pagina principal</a>
+<a class="w-max px-2 border-2 border-blue-600 bg-blue-400 rounded" href="{{route('animales.edit', $animal)}}">Editar</a>
 @endsection
