@@ -3,17 +3,14 @@ const URL2 = "https://pokeapi.co/api/v2/pokemon-species/";
 
 async function fetchPokemon(id) {
     try {
-        // Fetch del Pokémon
         const response = await fetch(URL + id);
         if (!response.ok) throw new Error(`Pokémon con ID ${id} no encontrado.`);
         const data = await response.json();
 
-        // Fetch de la especie del Pokémon
         const response2 = await fetch(URL2 + id);
         if (!response2.ok) throw new Error(`Especie del Pokémon con ID ${id} no encontrada.`);
         const data2 = await response2.json();
 
-        // Obtener la descripción en español
         const flavorTextEntry = data2.flavor_text_entries.find(
             (entry) => entry.language.name === "es"
         );
@@ -34,32 +31,41 @@ async function fetchPokemon(id) {
                     (key === "front_default" || key === "front_shiny") && value !== null
                 )
             ),
-            
         };
     } catch (error) {
         console.error(`Error en fetchPokemon(${id}):`, error);
-        return null; // Devuelve null en caso de error
+        return null;
+    }
+}
+
+// Función que carga todos los Pokémon de ambos equipos
+async function cargarEquipos(idsEquipo1, idsEquipo2) {
+    const equipo1Promesas = idsEquipo1.map(id => fetchPokemon(id));
+    const equipo2Promesas = idsEquipo2.map(id => fetchPokemon(id));
+
+    try {
+        const equipo1 = await Promise.all(equipo1Promesas);
+        const equipo2 = await Promise.all(equipo2Promesas);
+
+        postMessage([equipo1, equipo2]);  // Enviar los dos equipos al hilo principal
+    } catch (error) {
+        postMessage({ error: error.message });  // Enviar el error al hilo principal
     }
 }
 
 self.onmessage = async function (event) {
-    const { tipo } = event.data;
+    const { tipo, idsEquipo1, idsEquipo2 } = event.data;
 
     if (tipo === 'cargarTodos') {
         try {
-            // Generar las promesas para todos los Pokémon
             const promises = Array.from({ length: 1025 }, (_, i) => fetchPokemon(i + 1));
-
-            // Esperar a todas las promesas
             const pokemones = await Promise.all(promises);
-
-            // Filtrar los resultados no válidos (null)
             const pokemonesFiltrados = pokemones.filter(pokemon => pokemon !== null);
-
-            // Enviar los datos al hilo principal
             postMessage(pokemonesFiltrados);
         } catch (error) {
             console.error("Error al cargar los datos de todos los Pokémon:", error);
         }
+    } else if (tipo === 'cargarEquipos') {
+        cargarEquipos(idsEquipo1, idsEquipo2);
     }
 };

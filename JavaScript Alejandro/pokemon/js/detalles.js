@@ -1,6 +1,6 @@
 const pokemonDetailDiv = document.querySelector('#detallesPokemon');
 const urlParams = new URLSearchParams(window.location.search);
-const pokemonId = parseInt(urlParams.get('id')); // Obtener el ID del Pokémon
+const pokemonId = parseInt(urlParams.get('id'));
 
 const statsTraducidas = {
     "hp": "Puntos de Salud",
@@ -134,11 +134,11 @@ function mostrarDetalle(poke) {
     if (genderRate === -1) {
         genderHTML = "Desconocido";
     } else if (genderRate === 0) {
-        genderHTML = `<img src="./img/macho.png" alt="Macho">`;
+        genderHTML = `<img src="../img/macho.png" alt="Macho">`;
     } else if (genderRate === 8) {
-        genderHTML = `<img src="./img/hembra.png" alt="Hembra">`;
+        genderHTML = `<img src="../img/hembra.png" alt="Hembra">`;
     } else {
-        genderHTML = `<img src="./img/macho.png" alt="Macho"><img src="./img/hembra.png" alt="Hembra">`;
+        genderHTML = `<img src="../img/macho.png" alt="Macho"><img src="../img/hembra.png" alt="Hembra">`;
     }
 
     const otherImagesHTML = Object.values(poke.otherImages)
@@ -210,17 +210,17 @@ document.querySelector('.btn-volver').addEventListener('click', () => {
 
 document.querySelector('.btn-siguiente').addEventListener('click', () => {
     if (pokemonId < 1025) {
-        window.location.href = './detalle.html?id=' + (pokemonId + 1);
+        window.location.href = './detalles.html?id=' + (pokemonId + 1);
     } else {
-        window.location.href = './detalle.html?id=1';
+        window.location.href = './detalles.html?id=1';
     }
 });
 
 document.querySelector('.btn-anterior').addEventListener('click', () => {
     if (pokemonId > 1) {
-        window.location.href = './detalle.html?id=' + (pokemonId - 1);
+        window.location.href = './detalles.html?id=' + (pokemonId - 1);
     } else {
-        window.location.href = './detalle.html?id=1025';
+        window.location.href = './detalles.html?id=1025';
     }
 });
 

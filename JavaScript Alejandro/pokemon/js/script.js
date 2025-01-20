@@ -3,7 +3,7 @@ const botonesTipo = document.querySelectorAll('.btn-tipo'); // Seleccionamos los
 const botonesGen = document.querySelectorAll('.btn-gen'); // Seleccionamos los botones de generación
 const buscador = document.querySelector('#barraBusqueda');
 const loadingIndicator = document.querySelector('#loading');
-const worker = new Worker('js/worker.js');
+const worker = new Worker('../js/worker.js');
 let pokemons = []; // Array para almacenar los datos de los pokemons
 let currentPage = 1;
 const pokemonsPerPage = 30;
@@ -80,7 +80,7 @@ function mostrarPokemon(pokemons) {
         `;
 
         div.addEventListener('click', () => {
-            window.location.href = `./detalle.html?id=${poke.id}`;
+            window.location.href = `./detalles.html?id=${poke.id}`;
         });
 
         listaPokemon.appendChild(div);
@@ -173,7 +173,6 @@ function filtrarPorTipo(tipo) {
         renderPage(1);
         return;
     }
-    console.log(pokemones);
     const filteredPokemones = pokemones.filter(poke => poke.types.includes(tipo));
     
     currentPage = 1; // Reset to the first page when filtering
