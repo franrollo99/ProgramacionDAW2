@@ -12,28 +12,40 @@
                 @csrf
 
                 <label for="especie">Especie</label>
-                <input type="text" name="especie" id="especie" minlength="3" required>
-                {{-- @error
+                <input type="text" name="especie" id="especie" placeholder="Animal">
+                @error('especie')
                     <span class="text-red-500">{{$message}}</span>
-                @enderror --}}
+                @enderror
 
                 <label for="peso">Peso</label>
-                <input type="number" name="peso" id="peso" step="0.1" required>
+                <input type="string" name="peso" id="peso" placeholder="00.0">
+                @error('peso')
+                    <span class="text-red-500">{{$message}}</span>
+                @enderror
 
                 <label for="altura">Altura</label>
-                <input type="number" name="altura" id="altura" step="0.1" required>
+                <input type="string" name="altura" id="altura" placeholder="00.0">
+                @error('altura')
+                    <span class="text-red-500">{{$message}}</span>
+                @enderror
 
                 <label for="fechaNacimiento">Fecha de Nacimiento</label>
-                <input type="date" name="fechaNacimiento" id="fechaNacimiento" required>
+                <input type="string" name="fechaNacimiento" id="fechaNacimiento" placeholder="aaaa-mm-dd">
+                @error('fechaNacimiento')
+                    <span class="text-red-500">{{$message}}</span>
+                @enderror
 
                 <label for="imagen">Imagen</label>
-                <input type="file" name="imagen" id="imagen" accept=".jpeg, .png, .jpg, .svg" required>
+                <input type="file" name="imagen" id="imagen">
+                @error('imagen')
+                    <span class="text-red-500">{{$message}}</span>
+                @enderror
 
                 <label for="alimentacion">Alimentacion</label>
-                <input type="text" name="alimentacion" id="alimentacion">
+                <input type="text" name="alimentacion" id="alimentacion" placeholder="Carnívoro/Herbívoro">
 
                 <label for="descripcion">Descripcion</label>
-                <textarea name="descripcion" id="descripcion" cols="30" rows="10"></textarea>
+                <textarea name="descripcion" id="descripcion" cols="30" rows="10" placeholder="Descripcion..."></textarea>
 
                 <input class="w-max px-2 border-2 border-blue-600 bg-blue-400 rounded my-3" type="submit" value="Crear">
             </form>

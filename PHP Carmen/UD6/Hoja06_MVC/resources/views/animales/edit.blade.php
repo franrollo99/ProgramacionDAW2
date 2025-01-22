@@ -12,19 +12,41 @@
                 @method('put')
 
                 <label for="especie">Especie</label>
-                <input type="text" name="especie" id="especie" value="{{ $animal->especie }}">
+                <input type="text" name="especie" id="especie" placeholder="Animal" value="{{$animal->especie}}">
+                @error('especie')
+                    <span class="text-red-500">{{$message}}</span>
+                @enderror
+
                 <label for="peso">Peso</label>
-                <input type="number" name="peso" id="peso" value="{{ $animal->peso }}">
+                <input type="string" name="peso" id="peso" placeholder="00.0" value="{{$animal->peso}}">
+                @error('peso')
+                    <span class="text-red-500">{{$message}}</span>
+                @enderror
+
                 <label for="altura">Altura</label>
-                <input type="number" name="altura" id="altura" value="{{ $animal->altura }}">
+                <input type="string" name="altura" id="altura" placeholder="00.0" value="{{$animal->altura}}">
+                @error('altura')
+                    <span class="text-red-500">{{$message}}</span>
+                @enderror
+
                 <label for="fechaNacimiento">Fecha de Nacimiento</label>
-                <input type="date" name="fechaNacimiento" id="fechaNacimiento" value="{{ $animal->fechaNacimiento }}">
+                <input type="string" name="fechaNacimiento" id="fechaNacimiento" placeholder="aaaa-mm-dd" value="{{$animal->fechaNacimiento}}">
+                @error('fechaNacimiento')
+                    <span class="text-red-500">{{$message}}</span>
+                @enderror
+
                 <label for="imagen">Imagen</label>
                 <input type="file" name="imagen" id="imagen">
+                @error('imagen')
+                    <span class="text-red-500">{{$message}}</span>
+                @enderror
+
                 <label for="alimentacion">Alimentacion</label>
-                <input type="text" name="alimentacion" id="alimentacion" value="{{ $animal->alimentacion }}">
+                <input type="text" name="alimentacion" id="alimentacion" placeholder="Carnívoro/Herbívoro" value="{{$animal->alimentacion}}">
+
                 <label for="descripcion">Descripcion</label>
-                <textarea name="descripcion" id="descripcion" cols="30" rows="10">{{ $animal->descripcion }}</textarea>
+                <textarea name="descripcion" id="descripcion" cols="30" rows="10" placeholder="Descripcion..." value="{{$animal->descripcion}}"></textarea>
+
                 <input class="w-max px-2 border-2 border-blue-600 bg-blue-400 rounded my-3" type="submit"
                     value="Modificar animal">
             </form>

@@ -15,30 +15,36 @@ class CrearAnimalRequest extends FormRequest
         return true;
     }
 
-    public function rules(){
-        $validar = $request->validate([
-            'especie' => 'required|min:3',
-            'peso' => 'required|numeric',
-            'altura' => 'required|numeric',
-            'fechaNacimiento' => 'required|date',
-            'imagen' => 'nullable|mimes:jpeg,png,jpg,svg|max:2048',
-        ]);
-
-    }
-
-    public function messages(){
-
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
-    {
+     public function rules(){
         return [
-            //
+            'especie' => 'required|min:3',
+            'peso' => 'required|numeric',
+            'altura' => 'required|numeric',
+            'fechaNacimiento' => 'required|date',
+            'imagen' => 'required|mimes:jpeg,png,jpg,svg',
         ];
     }
+
+
+    public function messages()
+    {
+        return [
+            'especie.required' => 'El campo "especie" es obligatorio.',
+            'especie.min' => 'La especie debe tener al menos 3 caracteres.',
+            'peso.required' => 'El peso es obligatorio.',
+            'peso.numeric' => 'El peso debe ser un número.',
+            'altura.required' => 'La altura es obligatoria.',
+            'altura.numeric' => 'La altura debe ser un número.',
+            'fechaNacimiento.required' => 'La fecha de nacimiento es obligatoria.',
+            'fechaNacimiento.date' => 'La fecha de nacimiento debe ser una fecha válida.',
+            'imagen.required' => 'La imagen es obligatoria.',
+            'imagen.mimes' => 'La imagen debe ser un archivo de tipo: jpeg, png, jpg, svg.',
+        ];
+    }
+
 }
