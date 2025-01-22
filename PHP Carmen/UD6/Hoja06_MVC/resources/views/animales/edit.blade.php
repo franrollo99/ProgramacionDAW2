@@ -5,7 +5,7 @@
     <fieldset class="max-w-3xl w-full border border-gray-300 p-4 rounded-lg">
         <legend><h1 class="text-3xl font-bold underline">Editar el animal {{$animal->especie}}</h1></legend>
 
-        <form action="{{route('animales.update', $animal)}}" class="flex flex-col">
+        <form action="{{route('animales.update', $animal)}}" method="post" class="flex flex-col">
             @csrf
             @method('put')
 
@@ -27,7 +27,7 @@
         </form>
     </fieldset>
 
-    <a class="w-max px-2 my-3 border-2 border-blue-600 bg-blue-400 rounded"  href="{{route('animales.index', $animal)}}">Volver a la pagina principal</a>
+    <a class="w-max px-2 my-3 border-2 border-blue-600 bg-blue-400 rounded"  href="{{route('animales.index')}}">Volver a la pagina principal</a>
 </div>
 
 @endsection

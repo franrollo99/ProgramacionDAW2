@@ -30,9 +30,28 @@ class AnimalController extends Controller
     public function store(Request $request)
     {
         $animal = new Animal();
-        $animal->
 
-        return route('animales.show', $animal);
+        $animal->especie = $request->especie;
+        $animal->slug = \Str::slug($request->especie); // Generar un slug automáticamente
+        $animal->peso = $request->peso;
+        $animal->altura = $request->altura;
+        $animal->fechaNacimiento = $request->fechaNacimiento;
+        $animal->alimentacion = $request->alimentacion;
+
+        // Procesar la imagen
+        if ($request->hasFile('imagen')) {
+            $fileName = $request->imagen->getClientOriginalName();
+            $path = $request->imagen->storeAs('public/assets/img', $fileName);
+            $animal->imagen = $fileName;
+        }
+
+        $animal->descripcion = $request->descripcion;
+
+        // Guardar el modelo en la base de datos
+        $animal->save();
+
+        // Redirigir a la vista del animal creado
+        return redirect()->route('animales.show', $animal);
     }
 
     /**
@@ -54,10 +73,43 @@ class AnimalController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Animal $animal)
     {
-        //
+        // Validar los datos de entrada
+        $request->validate([
+            'especie' => 'required|min:3',
+            'peso' => 'required|numeric',
+            'altura' => 'required|numeric',
+            'fechaNacimiento' => 'required|date',
+            'imagen' => 'nullable|mimes:jpeg,png,jpg,svg|max:2048',
+            'alimentacion' => 'nullable|string|max:20',
+            'descripcion' => 'nullable|string',
+        ]);
+
+        // Actualizar los valores del modelo
+        $animal->especie = $request->especie;
+        $animal->slug = \Str::slug($request->especie); // Generar un nuevo slug
+        $animal->peso = $request->peso;
+        $animal->altura = $request->altura;
+        $animal->fechaNacimiento = $request->fechaNacimiento;
+        $animal->alimentacion = $request->alimentacion;
+
+        // Procesar la imagen (si se sube una nueva)
+        if ($request->hasFile('imagen')) {
+            $fileName = $request->imagen->getClientOriginalName();
+            $path = $request->imagen->storeAs('public/assets/img', $fileName);
+            $animal->imagen = $fileName;
+        }
+
+        $animal->descripcion = $request->descripcion;
+
+        // Guardar los cambios en la base de datos
+        $animal->save();
+
+        // Redirigir a la vista del animal editado
+        return redirect()->route('animales.show', $animal);
     }
+
 
     /**
      * Remove the specified resource from storage.
