@@ -37,6 +37,12 @@ return [
             'throw' => false,
         ],
 
+        // 'animales'=>[
+        //     'driver'=>'local',
+        //     'root'=>'',
+        //     ''=>'',
+        // ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),

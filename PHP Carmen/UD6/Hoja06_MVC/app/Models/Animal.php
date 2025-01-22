@@ -7,12 +7,18 @@ use Carbon\Carbon;
 
 class Animal extends Model
 {
-    // Indico explicitamente que el modelo Animal usa la tabla animales
+    // Indico explicitamente que el modelo Animal usa la tabla animales en vez de animals
     protected $table = 'animales';
+    // filleable
 
     public function getEdad()
     {
         $fechaFormateada = Carbon::parse($this->fechaNacimiento);
         return $fechaFormateada->diffInYears(Carbon::now());
+    }
+
+    // Muestra el slug en la url en vez de el id
+    public function getRouteKeyName(){
+        return 'slug';
     }
 }

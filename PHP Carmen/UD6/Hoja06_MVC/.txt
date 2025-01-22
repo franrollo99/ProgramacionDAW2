@@ -5,3 +5,8 @@ Generar la clave de aplicacion con el comando "php artisan key:generate"
 
 Ejecutamos el comando "npm run dev" para compilar los activos del frontend
 Ejecutamos el comando "php artisan serve" para iniciar el servidor
+
+
+php artisan migrate
+php artisan migrate:fresh
+php artisan db:seed

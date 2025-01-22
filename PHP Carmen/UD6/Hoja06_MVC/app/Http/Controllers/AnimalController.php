@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Animal;
+use Illuminate\Support\Str;
 
 class AnimalController extends Controller
 {
@@ -27,27 +28,31 @@ class AnimalController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    // public function store(CreateAnimalRequest $request)
     public function store(Request $request)
     {
+        // ERRORES
+        // $request -> validated();
+
         $animal = new Animal();
 
         $animal->especie = $request->especie;
-        $animal->slug = \Str::slug($request->especie); // Generar un slug automáticamente
+        $animal->slug = Str::slug($request->especie);// Generar un slug a partir de la especie
         $animal->peso = $request->peso;
         $animal->altura = $request->altura;
         $animal->fechaNacimiento = $request->fechaNacimiento;
         $animal->alimentacion = $request->alimentacion;
 
-        // Procesar la imagen
         if ($request->hasFile('imagen')) {
             $fileName = $request->imagen->getClientOriginalName();
-            $path = $request->imagen->storeAs('public/assets/img', $fileName);
+            $destinationPath = public_path('assets/img');
+            $request->file('imagen')->move($destinationPath, $fileName);
             $animal->imagen = $fileName;
         }
 
         $animal->descripcion = $request->descripcion;
 
-        // Guardar el modelo en la base de datos
+        // Guardo el modelo en la base de datos
         $animal->save();
 
         // Redirigir a la vista del animal creado
@@ -75,26 +80,23 @@ class AnimalController extends Controller
      */
     public function update(Request $request, Animal $animal)
     {
-        // Validar los datos de entrada
+        // Valido los datos de entrada
         $request->validate([
             'especie' => 'required|min:3',
             'peso' => 'required|numeric',
             'altura' => 'required|numeric',
             'fechaNacimiento' => 'required|date',
             'imagen' => 'nullable|mimes:jpeg,png,jpg,svg|max:2048',
-            'alimentacion' => 'nullable|string|max:20',
-            'descripcion' => 'nullable|string',
         ]);
 
-        // Actualizar los valores del modelo
+        // Actualizo los valores del modelo
         $animal->especie = $request->especie;
-        $animal->slug = \Str::slug($request->especie); // Generar un nuevo slug
+        $animal->slug = Str::slug($request->especie);
         $animal->peso = $request->peso;
         $animal->altura = $request->altura;
         $animal->fechaNacimiento = $request->fechaNacimiento;
         $animal->alimentacion = $request->alimentacion;
 
-        // Procesar la imagen (si se sube una nueva)
         if ($request->hasFile('imagen')) {
             $fileName = $request->imagen->getClientOriginalName();
             $path = $request->imagen->storeAs('public/assets/img', $fileName);

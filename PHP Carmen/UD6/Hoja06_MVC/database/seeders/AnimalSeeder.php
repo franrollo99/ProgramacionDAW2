@@ -10,25 +10,6 @@ use Illuminate\Support\Str;
 
 class AnimalSeeder extends Seeder
 {
-    public function run(): void
-    {
-        foreach ($this->animales as $animal)
-        {
-            $a = new Animal();
-            $a->especie = $animal['especie'];
-            $a->slug = Str::slug($animal['especie']);
-            $a->peso = $animal['peso'];
-            $a->altura = $animal['altura'];
-            $a->fechaNacimiento = $animal['fechaNacimiento'];
-            $a->imagen = $animal['imagen'];
-            $a->alimentacion = $animal['alimentacion'];
-            $a->descripcion = $animal['descripcion'];
-            $a->save();
-        }
-
-        $this->command->info('Tabla animales inicializada con datos');
-    }
-
     private $animales = array(
         array(
         'especie' => 'Bisonte',
@@ -87,5 +68,24 @@ class AnimalSeeder extends Seeder
         'alimentacion' => 'carnívoro',
         'descripcion' =>'Se encuentra en el continente asiático; es un predador carnívoro y es la especie de félido más grande del mundo junto con el león pudiendo alcanzar ambos un tamaño comparable al de los fósiles de félidos de mayor tamaño')
     );
+
+    public function run(): void
+    {
+        foreach ($this->animales as $animal)
+        {
+            $a = new Animal();
+            $a->especie = $animal['especie'];
+            $a->slug = Str::slug($animal['especie']);
+            $a->peso = $animal['peso'];
+            $a->altura = $animal['altura'];
+            $a->fechaNacimiento = $animal['fechaNacimiento'];
+            $a->imagen = $animal['imagen'];
+            $a->alimentacion = $animal['alimentacion'];
+            $a->descripcion = $animal['descripcion'];
+            $a->save();
+        }
+
+        $this->command->info('Tabla animales inicializada con datos');
+    }
 
 }
