@@ -81,16 +81,26 @@ main{
     gap: 1em;
 }
 
+.sectionTituloPagina{
+    display: flex;
+    justify-content: center;
+}
+
 .tituloPagina{
-    text-align: center;
+    display: inline-block;
+    /* text-align: center; */
     padding: 1em;
     font-size: 5em;
     animation: typing linear 3s;
+    animation-fill-mode: forwards; /* Se queda con el ultimo estado de las animaciones */
+    white-space: nowrap; /* Evita el salto de línea */
+    overflow: hidden; /* Oculta el texto que aún no se ha "escrito" */
+    text-align: center;
 }
 
 @keyframes typing{
     0%{width: 0;}
-    100%{width:  30ch; /* Cambia según el número de caracteres en .text */}
+    100%{width:  100%;}
 }
 
 .tituloVertical {
