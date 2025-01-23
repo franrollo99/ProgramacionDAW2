@@ -10,40 +10,78 @@
     <div class="contenedorPrincipal">
         <header>
             <div>
-                <h1>PARQUE NATURAL DE CANTABRIA</h1>
-                <img src="" alt="Logo">
+                <img src="img/logo.webp" alt="Logo">
             </div>
             <nav>
                 <ul>
                     <li><a href="#">INICIO</a></li>
-                    <li><a href="#">PLANIFICA TU VISITA</a></li>
-                    <li><a href="#">EXPERIENCIAS</a></li>
+                    <li><a href="#animales">ANIMALES</a></li>
+                    <li><a href="#entorno">ENTORNO</a></li>
                     <li><a href="#">NOTICIAS</a></li>
                     <li><a href="#">TICKETS</a></li>
                 </ul>
             </nav>
         </header>
+
         <main>
-            <h1>main</h1>
+
+            <section>
+                <h1 class="tituloPagina">BIENVENIDO AL ZOO DE CANTABRIA</h1>
+            </section>
+
+            <section id="animales">
+                <div class="tituloMain">
+                    <h1 class="tituloVertical">ANIMALES</h1>
+                </div>
+                <div class="imagenesSection">
+                    <img src="img/animales/guepardos.jpg" alt="guepardos" id="animacion1">
+                    <img src="img/animales/jirafas.jpg" alt="jirafas" id="animacion2">
+                    <img src="img/animales/lemur.jpg" alt="lemurs" id="animacion3">
+                    <img src="img/animales/macacos.jpg" alt="macacos" id="animacion4">
+                    <img src="img/animales/nyala.jpg" alt="nyalas" id="animacion5">
+                    <img src="img/animales/koala.jpg" alt="koalas" id="animacion6">
+                </div>
+            </section>
+
+            <img src="img/nubes.jpg" alt="nube" class="nube">
+
+            <section id="entorno">
+                <div class="imagenesSection">
+                    <h1>video</h1>
+                    <video width="640" height="480">
+                        <source src="" type="">
+                    </video>
+                </div>
+                <div class="tituloMain">
+                    <h1 class="tituloVertical">ENTORNO</h1>
+                </div>
+            </section>
+
         </main>
+
         <footer>
             <div class="copyRedes">
-                <p class="copy">&copy Pagina creada por Francisco</p>
                 <div class="redesSociales">
-                    <p><a href="#">Facebook</a></p>
-                    <p><a href="#">Instagram</a></p>
-                    <p><a href="#">Youtube</a></p>
+                    <h3>SíGUENOS 
+                        <a href="#"><img src="img/facebook.png" alt=""></a>
+                        <a href="#"><img src="img/instagram.png" alt=""></a>
+                        <a href="#"><img src="img/tik-tok.png" alt=""></a>
+                        <a href="#"><img src="img/youtube.png" alt=""></a>
+                        <a href="#"><img src="img/whatsapp.png" alt=""></a>
+                    </h3>
                 </div>
+                <p class="copy">&copy Pagina creada por Francisco</p>
             </div>
             <div class="contacto">
                 <h2>Formulario de contacto</h2>
                 <form action="">
-                    <label for="correo">Correo<input type="text" name="correo" id="correo"></label>
+                    <label for="correo">Correo<input type="text" name="correo" id="correo" placeholder="ejemplo@gmail.com"></label>
                     
                     <textarea name="textoContacto" id="textoContacto" rows="5" cols="10"></textarea>
                     <input type="submit" value="Enviar">
                 </form>
             </div>
+            <a href="#" class="volverInicio">⬆</a>
         </footer>
     </div>
 </body>
