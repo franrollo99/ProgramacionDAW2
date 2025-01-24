@@ -19,8 +19,10 @@ class DatabaseSeeder extends Seeder
         // Llamo al seeder AnimalSeeder
         $this->call(AnimalSeeder::class);
 
+        DB::table('users')->delete();
+        $this->call(UserSeeder::class);
 
-        // User::factory(10)->create();
+        User::factory(5)->create();
 
         // User::factory()->create([
         //     'name' => 'Test User',

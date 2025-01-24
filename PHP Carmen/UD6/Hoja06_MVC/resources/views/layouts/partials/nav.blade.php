@@ -13,9 +13,13 @@
                 <a href="{{route('animales.create')}}" class="text-white">Nuevo Animal</a>
             </div>
             <div class="flex flex-col text-center lg:flex-row">
-                <a href="#" class="bblanco mb-1 lg:mr-4 lg:mb-0">Iniciar Sesion</a>
-                <a href="#" class="bverde">Regístrate</a>
+                <a href="{{route('login')}}" class="bblanco mb-1 lg:mr-4 lg:mb-0">Iniciar Sesion</a>
+                <a href="{{route('register')}}" class="bverde">Regístrate</a>
             </div>
+            <form action="{{route('logout')}}" method="post">
+                @csrf
+                <button type="submit">Cerrar Sesion</button>
+            </form>
         </div>
     </div>
 </nav>

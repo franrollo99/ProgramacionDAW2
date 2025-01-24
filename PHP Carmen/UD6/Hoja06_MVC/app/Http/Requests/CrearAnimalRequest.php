@@ -20,7 +20,8 @@ class CrearAnimalRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-     public function rules(){
+     public function rules(): array
+     {
         return [
             'especie' => 'required|min:3',
             'peso' => 'required|numeric',
