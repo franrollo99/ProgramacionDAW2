@@ -4,7 +4,7 @@ const dimeHijo = (mensaje)=>{
     console.log(mensaje);
 }
 
-function Papa({nombre, children}){
+function Papa({children}){
     return(<div>
         <h1>Yo soy tu padre</h1>
         {<Hijo nombre='Diego' fnllorar={dimeHijo}/>}

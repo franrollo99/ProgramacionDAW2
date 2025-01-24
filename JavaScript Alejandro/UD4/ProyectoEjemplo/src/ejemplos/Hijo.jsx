@@ -1,5 +1,4 @@
 function Hijo({nombre='adoptado', fnllorar}){
-    // const {nombre} = PaymentResponse;
 
     function handleClick(){
         fnllorar(`${nombre} dice: No quiero ir al cole`);
@@ -7,7 +6,6 @@ function Hijo({nombre='adoptado', fnllorar}){
 
     return(
         <><h3>Soy {nombre}</h3>
-        {/* <p>No quiero ir al cole</p> */}
         <button onClick={handleClick}>Llorar a papa</button>
         </>
     );
