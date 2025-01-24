@@ -1,25 +1,25 @@
 import {useState, useEffect} from 'react'
-import './App.css'
-import {Cuadrado} from './components/cuadrados.jsx'
+import './tablero.css'
+import Casilla from './casilla.jsx'
 
 // Solo puedo hacer una exportacion por defecto por archivo
-export default function Tablero(){
+function Tablero(){
 
     // cuadrados es una constante que almacena en este caso un array de 9 valores null
     // setCuadrados es una funcion que actualiza el estado de cuadrados cada vez que se llama
     // Actualiza el valor de cuadrados y renderiza nuevamente el componente para reflejar los cambios
     // useState es una funcion de React que inicia un estado con el valor que se pasa por argumento
-    const[cuadrados, setCuadrados] = useState(Array(9).fill(null));
+    const[casillas, setCasilla] = useState(Array(9).fill(null));
     const [siguienteX, setSiguienteX] = useState(true);
     
 
-    function hadleClick(i){
+    function handleClick(i){
 
-        if(cuadrados[i] || calcularGanador(cuadrados)){
+        if(casillas[i] || calcularGanador(casillas)){
             return;
         }
 
-        const siguienteCuadrado = cuadrados.slice();
+        const siguienteCuadrado = casillas.slice();
 
         if(siguienteX){
             siguienteCuadrado[i] = "x";
@@ -27,7 +27,7 @@ export default function Tablero(){
             siguienteCuadrado[i] = "o";
         }
         
-        setCuadrados(siguienteCuadrado);
+        setCasilla(siguienteCuadrado);
         setSiguienteX(!siguienteX);
     }
 
@@ -36,7 +36,7 @@ export default function Tablero(){
     const [xGanador, setXGanador] = useState(0);
     const [oGanador, setOGanador] = useState(0);
     // Si gandor tiene un valor que no sea null se da como ganador al valor "x" o "o"
-    const ganador = calcularGanador(cuadrados, estado);
+    const ganador = calcularGanador(casillas, estado);
 
 
     // EXPLICACION
@@ -54,7 +54,7 @@ export default function Tablero(){
     }else{
         // Compruebo si el valor null esta presente en el array
         // Si es que no significa que no queda ningun hueco por rellenar y si no ha habido ganador se da empate
-        if (!cuadrados.includes(null)) {
+        if (!casillas.includes(null)) {
             estado = 'Empate';
         }else{
             estado = "Siguiente jugador: " + (siguienteX ? "x" : "o")
@@ -62,7 +62,7 @@ export default function Tablero(){
     }
 
     function reset(){
-        setCuadrados(Array(9).fill(null));
+        setCasilla(Array(9).fill(null));
     }
 
     return (
@@ -70,15 +70,23 @@ export default function Tablero(){
             <div className="contenedorPrincipal">
                 <h1>Juego de 3 en raya</h1>
                 <div className="tablero">
-                    <Cuadrado valor={cuadrados[0]} clickCuadrado={() => hadleClick(0)} />
-                    <Cuadrado valor={cuadrados[1]} clickCuadrado={() => hadleClick(1)} />
-                    <Cuadrado valor={cuadrados[2]} clickCuadrado={() => hadleClick(2)} />
-                    <Cuadrado valor={cuadrados[3]} clickCuadrado={() => hadleClick(3)} />
-                    <Cuadrado valor={cuadrados[4]} clickCuadrado={() => hadleClick(4)} />
-                    <Cuadrado valor={cuadrados[5]} clickCuadrado={() => hadleClick(5)} />
-                    <Cuadrado valor={cuadrados[6]} clickCuadrado={() => hadleClick(6)} />
-                    <Cuadrado valor={cuadrados[7]} clickCuadrado={() => hadleClick(7)} />
-                    <Cuadrado valor={cuadrados[8]} clickCuadrado={() => hadleClick(8)} />
+                <div className="tablero">
+                    <div className='fila'>
+                        <Casilla valor={casillas[0]} clickCuadrado={() => handleClick(0)}/>
+                        <Casilla valor={casillas[1]} clickCuadrado={() => handleClick(1)}/>
+                        <Casilla valor={casillas[2]} clickCuadrado={() => handleClick(2)}/>
+                    </div>
+                    <div className='fila'>
+                        <Casilla valor={casillas[3]} clickCuadrado={() => handleClick(3)}/>
+                        <Casilla valor={casillas[4]} clickCuadrado={() => handleClick(4)}/>
+                        <Casilla valor={casillas[5]} clickCuadrado={() => handleClick(5)}/>
+                    </div>
+                    <div className='fila'>
+                        <Casilla valor={casillas[6]} clickCuadrado={() => handleClick(6)}/>
+                        <Casilla valor={casillas[7]} clickCuadrado={() => handleClick(7)}/>
+                        <Casilla valor={casillas[8]} clickCuadrado={() => handleClick(8)}/>
+                    </div>
+                </div>
                 </div>
                 <h2>{estado}</h2>
                 <button className="reset" onClick={reset}>Volver a empezar</button>
@@ -118,3 +126,5 @@ function calcularGanador(cuadrados){
     }
     return null;
 }
+
+export default Tablero;

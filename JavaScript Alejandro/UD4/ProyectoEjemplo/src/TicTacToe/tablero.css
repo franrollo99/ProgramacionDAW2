@@ -8,12 +8,14 @@
 }
 
 .tablero{
-    /* border: 3px solid black; */
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    border: 1px solid black;
 }
 
-.cuadrado{
+.fila{
+    display: flex;
+}
+
+.casilla{
     width: 50px;
     height: 50px;
     display: flex;
@@ -21,6 +23,8 @@
     align-items: center;
     font-size: xx-large;
     font-weight: bold;
+    background-color: white;
+    border: 1px solid black;
 }
 
 h1{
