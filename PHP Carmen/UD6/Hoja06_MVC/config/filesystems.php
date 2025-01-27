@@ -39,7 +39,7 @@ return [
 
         // 'animales'=>[
         //     'driver'=>'local',
-        //     'root'=>'',
+        //     'root'=>'public_path('assets/img/)',
         //     ''=>'',
         // ],
 

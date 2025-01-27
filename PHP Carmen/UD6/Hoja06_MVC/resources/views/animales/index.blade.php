@@ -26,7 +26,9 @@
                         <div>
                             {{-- <a class="w-max px-2 border-2 border-blue-600 bg-blue-400 rounded" href="{{url('/animales/'.$animal)}}">Ver Detalles</a> --}}
                             <a class="w-max px-2 border-2 border-blue-600 bg-blue-400 rounded" href="{{ route('animales.show', $animal) }}">Ver Detalles</a>
+                            @auth
                             <a class="w-max px-2 border-2 border-blue-600 bg-blue-400 rounded" href="{{ route('animales.edit', $animal) }}">Editar</a>
+                            @endauth
                         </div>
 
                     </div>

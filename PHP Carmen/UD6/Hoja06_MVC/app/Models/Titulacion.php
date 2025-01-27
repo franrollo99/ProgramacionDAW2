@@ -9,4 +9,6 @@ class Titulacion extends Model
 {
     /** @use HasFactory<\Database\Factories\TitulacionFactory> */
     use HasFactory;
+
+    protected $table = 'titulaciones';
 }

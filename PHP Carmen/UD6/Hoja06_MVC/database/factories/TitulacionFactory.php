@@ -17,7 +17,7 @@ class TitulacionFactory extends Factory
      */
     public function definition(): array
     {
-        $nombre = $this->faker->name;
+        $nombre = $this->faker->sentence(3);
 
         return [
             'nombre' => $nombre,

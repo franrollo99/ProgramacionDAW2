@@ -11,6 +11,7 @@ class EditarRequest extends FormRequest
      */
     public function authorize(): bool
     {
+        // Autorizar siempre a true
         return true;
     }
 

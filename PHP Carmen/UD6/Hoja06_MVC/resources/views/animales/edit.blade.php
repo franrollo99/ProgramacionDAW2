@@ -7,7 +7,7 @@
                 <h1 class="text-3xl font-bold underline">Editar el animal {{ $animal->especie }}</h1>
             </legend>
 
-            <form action="{{ route('animales.update', $animal) }}" method="post" class="flex flex-col">
+            <form action="{{ route('animales.update', $animal) }}" method="post" enctype="multipart/form-data" class="flex flex-col">
                 @csrf
                 @method('put')
 

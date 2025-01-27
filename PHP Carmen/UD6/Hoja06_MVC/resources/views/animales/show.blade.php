@@ -27,8 +27,9 @@
             @endforeach
         </div>
     </div>
-    <a class="w-max px-2 border-2 border-blue-600 bg-blue-400 rounded" href="{{ route('animales.index') }}">Volver a la pagina
-        principal</a>
-    <a class="w-max px-2 border-2 border-blue-600 bg-blue-400 rounded" href="{{ route('animales.edit', $animal) }}">Editar</a>
-    <a class="w-max px-2 border-2 border-blue-600 bg-blue-400 rounded" href="{{ route('revisiones.create', $animal) }}">Añadir revision</a>
+    <a class="w-max px-2 border-2 border-blue-600 bg-blue-400 rounded" href="{{ route('animales.index') }}">Volver a la pagina principal</a>
+    @auth
+        <a class="w-max px-2 border-2 border-blue-600 bg-blue-400 rounded" href="{{ route('animales.edit', $animal) }}">Editar</a>
+        <a class="w-max px-2 border-2 border-blue-600 bg-blue-400 rounded" href="{{ route('revisiones.create', $animal) }}">Añadir revision</a>
+    @endauth
 @endsection

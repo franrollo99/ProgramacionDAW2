@@ -16,8 +16,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Cuidador::factory(20)->create();
+        // Creamos primero las titulaciones para luego asignarlas a los cuidadores al crearlos
         Titulacion::factory(20)->create();
+        Cuidador::factory(20)->create();
 
         // Elimino los datos previos de la tabla animales
         DB::table('animales')->delete();

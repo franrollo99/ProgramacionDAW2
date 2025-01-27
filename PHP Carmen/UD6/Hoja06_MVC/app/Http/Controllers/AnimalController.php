@@ -98,8 +98,11 @@ class AnimalController extends Controller
 
         if ($request->hasFile('imagen')) {
             $fileName = $request->imagen->getClientOriginalName();
-            $path = $request->imagen->storeAs('public/assets/img', $fileName);
+            $destinationPath = public_path('assets/img');
+            $request->file('imagen')->move($destinationPath, $fileName);
             $animal->imagen = $fileName;
+            // Usar unlink para quitar la imagen
+            // unlink(public_path())
         }
 
         $animal->descripcion = $request->descripcion;
