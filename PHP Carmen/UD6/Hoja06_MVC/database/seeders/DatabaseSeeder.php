@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\Cuidador;
+use App\Models\Titulacion;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -16,6 +17,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         Cuidador::factory(20)->create();
+        Titulacion::factory(20)->create();
 
         // Elimino los datos previos de la tabla animales
         DB::table('animales')->delete();

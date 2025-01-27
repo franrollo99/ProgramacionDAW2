@@ -15,4 +15,10 @@ class Cuidador extends Model
     public function animales(){
         return $this->belongsToMany(Animal::class);
     }
+
+    // Relacion uno a uno
+    public function titulaciones(){
+        return $this->belongsTo(Titulacion::class, 'id_titulacion1')->get()
+        ->merge($this->belongsTo(Titulacion::class, 'id_titulacion2')->get());
+    }
 }
