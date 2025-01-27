@@ -1,0 +1,28 @@
+.listaTareas{
+    padding: 3em;
+}
+
+.tarea{
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 1em;
+    
+}
+
+.agregarTarea, .tareas{
+    padding: 1em 0;
+}
+
+.filtros{
+    display: flex;
+    align-items: center;
+}
+
+.filtros button{
+    height: max-content;
+}
+
+button{
+    padding: 5px;
+    margin: 3px;
+}
