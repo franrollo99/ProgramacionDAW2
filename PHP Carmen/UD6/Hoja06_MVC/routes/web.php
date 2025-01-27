@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InicioController;
 use App\Http\Controllers\AnimalController;
+use App\Http\Controllers\RevisionController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -38,10 +39,13 @@ Route::get('animales', [AnimalController::class, 'index'])->name('animales.index
 Route::get('animales/crear', [AnimalController::class, 'create'])->name('animales.create')->middleware('auth');
 Route::get('animales/{animal}', [AnimalController::class, 'show'])->name('animales.show');
 Route::get('animales/{animal}/editar', [AnimalController::class, 'edit'])->name('animales.edit')->middleware('auth');
+Route::get('revisiones/{animal}/crear', [RevisionController::class, 'create'])->name('revisiones.create');
 
 // Usar @csrf en los formularios que envien datos mediante POST, PUT, PATCH, DELETE
 Route::post('animales', [AnimalController::class, 'store'])->name('animales.store');
 Route::put('animales/{animal}', [AnimalController::class, 'update'])->name('animales.update');
+Route::post('animales/{animal}', [RevisionController::class, 'store'])->name('revisiones.store');
+
 
 Route::middleware([
     'auth:sanctum',

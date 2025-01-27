@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Cuidador;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -14,6 +15,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        Cuidador::factory(20)->create();
+
         // Elimino los datos previos de la tabla animales
         DB::table('animales')->delete();
         // Llamo al seeder AnimalSeeder
@@ -24,9 +27,9 @@ class DatabaseSeeder extends Seeder
 
         User::factory(5)->create();
 
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        DB::table('animales_revisiones')->delete();
+        $this->call(RevisionSeeder::class);
+
+
     }
 }

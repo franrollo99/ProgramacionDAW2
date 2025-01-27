@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CrearAnimalRequest;
 use App\Http\Requests\EditarRequest;
 use App\Models\Animal;
+use App\Models\Cuidador;
 use Illuminate\Support\Str;
 
 class AnimalController extends Controller

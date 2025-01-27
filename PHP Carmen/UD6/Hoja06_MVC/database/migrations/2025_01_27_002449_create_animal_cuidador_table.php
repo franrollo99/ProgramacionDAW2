@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('animales_revisiones', function(Blueprint $table){
+        Schema::create('animal_cuidador', function (Blueprint $table) {
             $table->id();
-            $table->date('fecha');
-            $table->string('descripcion');
-            $table->foreignId('animal_id') // Clave foranea
-                ->constrained('animales') // Tabla referenciada
-                ->onDelete('cascade'); // (opcional) Elimina las revisiones al borrar el animal
+            $table-> foreignId('animal_id')
+                ->constrained('animales')
+                ->onDelete('cascade');
+            $table-> foreignId('cuidador_id')
+                ->constrained('cuidadores')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('animales_revisiones');
+        Schema::dropIfExists('animal_cuidador');
     }
 };

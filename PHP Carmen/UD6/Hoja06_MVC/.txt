@@ -2,11 +2,26 @@ Copiar el .env.example, renombrarlo a .env y configurarlo en caso de ser necesar
 Migrar la base de datos con el comando "php artisan migrate"
 Instalar la herramienta NPM (Node Pack Manager) con el comando "npm install"
 Generar la clave de aplicacion con el comando "php artisan key:generate"
+php artisan jetstream:install livewire
 
 Ejecutamos el comando "npm run dev" para compilar los activos del frontend
 Ejecutamos el comando "php artisan serve" para iniciar el servidor
 
 
-php artisan migrate
-php artisan migrate:fresh
-php artisan db:seed
+
+<--- COMANDOS --->
+
+npm run dev -> compila los archivos CSS y JS del proyecto Laravel para desarrollo, usando herramentas como Vite o Webpack
+php artisan serve -> inicia el servidor en Laravel
+php artisan route:list -> ver un listado de todas las rutas definidas en el fichero routes/web.php
+php artisan make:controller nombreControlador -> creamos un nuevo controlador
+php artisan make:controller Carpeta/nombreControlador -> crea un controlador dentro de una subcarpeta de controllers
+php artisan make:request nombreRequest -> crea una clase que contiene la logica para ciertas validaciones
+php artisan migrate -> ejecuta las migraciones de BS creando o actualizando las tablas
+php artisan make:migration create_nombreTabla_table -> crea un archivo de migracion en la carpeta datablase/migrations para definir la estructura de una tabla
+php artisan migrate:fresh -> elimina todas las tablas de la base de datos y vuelve a ejecutar todas las migraciones desde cero
+php artisan make:model nombreModelo -> crea un modelo el cual representa una tabla en la base de datos. No es obligatorio asociar un modelo a cada migracion
+php artisan db:seed -> ejecuta los seeders configurados en el arachivo DatabaseSeeder.php para insertar datos iniciales en la base de datos
+php artisan make:seeder nombreSeeder -> crea un archivo seeder en la carpeta database/seeders para definir los datos iniciales que se insertaran en una tabla
+php artisan make:factory nombreFactory -> crea un archivo de fabrica en la carpeta database/factories para generar datos ficticios de forma automatica
+php artisan make:middleware nombreMiddleware -> crea un archivo de middleware en la carpeta app/Http/Middleware para filtrar y procesar solicitudes HTTP como autenticar usuarios o verificar permisos antes de acceder a rutas
