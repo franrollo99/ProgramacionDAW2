@@ -19,7 +19,7 @@
                         <p><b>Cuidadores:</b></p>
                         <ul class="list-disc px-5">
                             @foreach($animal->cuidadores as $cuidador)
-                            <li>{{$cuidador->nombre}}</li>
+                            <li><a class="hover:text-blue-700" href="{{ route('cuidadores.show', $cuidador) }}">{{$cuidador->nombre}}</a></li>
                             @endforeach
                         </ul>
 

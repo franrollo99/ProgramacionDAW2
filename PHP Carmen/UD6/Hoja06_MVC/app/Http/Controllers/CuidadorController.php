@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cuidador;
+use App\Models\Titulacion;
 use Illuminate\Http\Request;
 
 class CuidadorController extends Controller
@@ -36,7 +37,12 @@ class CuidadorController extends Controller
      */
     public function show(Cuidador $cuidador)
     {
-        //
+
+
+        return view('cuidadores.show', [
+            'cuidador' => $cuidador,
+            'titulaciones' => $cuidador->titulaciones()
+        ]);
     }
 
     /**

@@ -21,4 +21,8 @@ class Cuidador extends Model
         return $this->belongsTo(Titulacion::class, 'id_titulacion1')->get()
         ->merge($this->belongsTo(Titulacion::class, 'id_titulacion2')->get());
     }
+
+    public function getRouteKeyName(){
+        return 'slug';
+    }
 }

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InicioController;
 use App\Http\Controllers\AnimalController;
 use App\Http\Controllers\RevisionController;
+use App\Http\Controllers\CuidadorController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -40,6 +41,8 @@ Route::get('animales/crear', [AnimalController::class, 'create'])->name('animale
 Route::get('animales/{animal}', [AnimalController::class, 'show'])->name('animales.show');
 Route::get('animales/{animal}/editar', [AnimalController::class, 'edit'])->name('animales.edit')->middleware('auth');
 Route::get('revisiones/{animal}/crear', [RevisionController::class, 'create'])->name('revisiones.create');
+Route::get('cuidadores/{cuidador}', [CuidadorController::class, 'show'])->name('cuidadores.show');
+Route::get('titulaciones/{titulacion}', [xxx]);
 
 // Usar @csrf en los formularios que envien datos mediante POST, PUT, PATCH, DELETE
 Route::post('animales', [AnimalController::class, 'store'])->name('animales.store');
