@@ -1,0 +1,5 @@
+3 estados:
+    -crupier
+    -jugador
+    -quien juega
+    -ganador?
