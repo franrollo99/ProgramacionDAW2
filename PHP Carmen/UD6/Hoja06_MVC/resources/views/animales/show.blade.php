@@ -25,6 +25,13 @@
                     <li>Descripcion: {{$revision->descripcion}}</li>
                 </ul>
             @endforeach
+            <hr>
+            <p><b>Cuidadores:</b></p>
+            <ul class="list-disc px-5">
+                @foreach($animal->cuidadores as $cuidador)
+                <li><a class="hover:text-blue-700" href="{{ route('cuidadores.show', $cuidador) }}">{{$cuidador->nombre}}</a></li>
+                @endforeach
+            </ul>
         </div>
     </div>
     <a class="w-max px-2 border-2 border-blue-600 bg-blue-400 rounded" href="{{ route('animales.index') }}">Volver a la pagina principal</a>
