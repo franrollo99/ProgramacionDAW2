@@ -1,11 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Tarea from './tarea.jsx';
 import './listaTareas.css';
 
 function ListaTareas() {
     const [tareas, setTareas] = useState([]);
-    const [idCounter, setIdCounter] = useState(1);
+    const [idContador, setIdCounter] = useState(1);
     const [filtro, setFiltro] = useState("todas");
+
+    // LOCALSTORAGE
+    // Si no pongo el await es un promise
+    // useEffect[async() => {
+    //     const TareaGuardada.await = cargarDatos.cargarDatos();
+    // },{}];
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -16,8 +22,13 @@ function ListaTareas() {
         // .trim() elimina los espacios en blanco al principio y al final de la cadena
         // !== "" verifica que el resultado no sea una cadena vacia
         if (descripcion.trim() !== "") {
-            setTareas([...tareas, { id: idCounter, descripcion, estado: "abierta" }]);
-            setIdCounter(idCounter + 1);
+            const nuevaTarea = {
+                id: idContador,
+                descripcion,
+                estado: "abierta"
+            }
+            setTareas([...tareas, nuevaTarea]);
+            setIdCounter(idContador + 1);
         }
 
         // Se limpia el formulario
@@ -25,8 +36,13 @@ function ListaTareas() {
     };
 
     const handleEliminar = (id) => {
-        // creo un nuevo array con .filter excluyendo a la tarea con el id que se pasa
-        setTareas(tareas.filter((tarea) => tarea.id !== id));
+
+        // QUE SOLO SE PUEDA ELIMINAR SI LA TAREA TIENE ESTADO CERRADO
+        if(confirm('¿Estas seguro de que quieres borrar la tarea?')){
+            // creo un nuevo array con .filter excluyendo a la tarea con el id que se pasa
+            setTareas(tareas.filter((tarea) => tarea.id !== id));
+        }
+        
     };
 
     const handleCambiarEstado = (id) => {
