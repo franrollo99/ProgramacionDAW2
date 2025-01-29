@@ -30,6 +30,7 @@
                     <li>Fecha: {{$revision->fecha}}</li>
                     <li>Descripcion: {{$revision->descripcion}}</li>
                 </ul>
+                @auth
                 <form action="{{ route('revisiones.destroy', ['revision' => $revision]) }}" method="POST">
                     @csrf
                     @method('DELETE')
@@ -37,6 +38,7 @@
                         Eliminar revision
                     </button>
                 </form>
+                @endauth
             @endforeach
             @endif
             <hr>
