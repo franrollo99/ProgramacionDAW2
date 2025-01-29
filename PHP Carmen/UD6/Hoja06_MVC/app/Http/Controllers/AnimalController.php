@@ -7,6 +7,7 @@ use App\Http\Requests\CrearAnimalRequest;
 use App\Http\Requests\EditarRequest;
 use App\Models\Animal;
 use App\Models\Cuidador;
+use App\Models\Image;
 use Illuminate\Support\Str;
 
 class AnimalController extends Controller
@@ -32,31 +33,38 @@ class AnimalController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(CrearAnimalRequest $request)
-    {
-        $animal = new Animal();
+{
+    $animal = new Animal();
 
-        $animal->especie = $request->especie;
-        $animal->slug = Str::slug($request->especie);// Generar un slug a partir de la especie
-        $animal->peso = $request->peso;
-        $animal->altura = $request->altura;
-        $animal->fechaNacimiento = $request->fechaNacimiento;
-        $animal->alimentacion = $request->alimentacion;
+    $animal->especie = $request->especie;
+    $animal->slug = Str::slug($request->especie);
+    $animal->peso = $request->peso;
+    $animal->altura = $request->altura;
+    $animal->fechaNacimiento = $request->fechaNacimiento;
+    $animal->alimentacion = $request->alimentacion;
+    $animal->descripcion = $request->descripcion;
 
-        if ($request->hasFile('imagen')) {
-            $fileName = $request->imagen->getClientOriginalName();
-            $destinationPath = public_path('assets/img');
-            $request->file('imagen')->move($destinationPath, $fileName);
-            $animal->imagen = $fileName;
-        }
+    if ($request->hasFile('imagen')) {
+        $fileName = $request->imagen->getClientOriginalName();
+        $request->file('imagen')->move(public_path('assets/img'), $fileName);
 
-        $animal->descripcion = $request->descripcion;
+        // Creamos la imagen y la guardamos en la base de datos
+        $imagen = new Image();
+        $imagen->nombre = $fileName;
+        $imagen->url = 'assets/img/' . $fileName;
+        $imagen->save();
 
-        // Guardo el modelo en la base de datos
-        $animal->save();
-
-        // Redirigir a la vista del animal creado
-        return redirect()->route('animales.show', $animal);
+        // Asignar la imagen al animal
+        $animal->image_id = $imagen->id;
     }
+
+    // Guardar el modelo en la base de datos
+    $animal->save();
+
+    // Redirigir a la vista del animal creado
+    return redirect()->route('animales.show', $animal);
+}
+
 
     /**
      * Display the specified resource.
@@ -89,12 +97,18 @@ class AnimalController extends Controller
 
         if ($request->hasFile('imagen')) {
             // Eliminamos la imagen antigua
-            unlink(public_path('assets/img/' . $animal->imagen));
+            if ($animal->imagen && file_exists(public_path($animal->imagen->url))) {
+                unlink(public_path($animal->imagen->url));
+            }
 
-            $fileName = $request->imagen->getClientOriginalName();
-            $destinationPath = public_path('assets/img');
-            $request->file('imagen')->move($destinationPath, $fileName);
-            $animal->imagen = $fileName;
+            // Guardo la imagen nueva
+            $nombreImagen = $request->imagen->getClientOriginalName();
+            $request->file('imagen')->move(public_path('assets/img'), $fileName);
+
+            // Guardo los cambios en la base de datos
+            $animal->imagen->nombre = $nombreImagen;
+            $animal->imagen->url = 'assets/img/' . $nombreImagen;
+            $animal->imagen->save();
         }
 
         $animal->descripcion = $request->descripcion;
@@ -110,8 +124,21 @@ class AnimalController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Animal $animal)
     {
-        //
+        if ($animal->image_id){
+            $imagen = Image::find($animal->image_id);
+            $rutaImagen = public_path('assets/img/' . $imagen->nombre);
+
+            if(file_exists($rutaImagen)){
+                unlink($rutaImagen);
+            }
+
+            $imagen->delete();
+        }
+
+        $animal->delete();
+
+        return redirect()->route('animales.index');
     }
 }

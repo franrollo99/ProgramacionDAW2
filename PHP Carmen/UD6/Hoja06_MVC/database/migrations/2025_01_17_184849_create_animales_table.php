@@ -18,7 +18,8 @@ return new class extends Migration
             $table->decimal('peso', total: 6, places: 1);
             $table->decimal('altura', total: 6, places: 1);
             $table->date('fechaNacimiento');
-            $table->string('imagen')->nullable();
+            // $table->string('imagen')->nullable();
+            $table->foreignId('image_id')->nullable()->constrained('images')->onDelete('cascade');
             $table->string('alimentacion', length: 20)->nullable();
             $table->text('descripcion')->nullable();
             $table->timestamps();

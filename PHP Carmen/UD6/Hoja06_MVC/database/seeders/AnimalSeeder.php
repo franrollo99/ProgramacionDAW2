@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Animal;
+use App\Models\Image;
 use Illuminate\Support\Str;
 
 
@@ -24,15 +25,22 @@ class AnimalSeeder extends Seeder
     {
         foreach ($this->animales as $animal)
         {
+            $imagen = new Image();
+            $imagen->nombre = $animal['imagen'];
+            $imagen->url = 'assets/img/' . $animal['imagen'];
+            $imagen->save();
+
+
             $a = new Animal();
             $a->especie = $animal['especie'];
             $a->slug = Str::slug($animal['especie']);
             $a->peso = $animal['peso'];
             $a->altura = $animal['altura'];
             $a->fechaNacimiento = $animal['fechaNacimiento'];
-            $a->imagen = $animal['imagen'];
+            // $a->imagen = $animal['imagen'];
             $a->alimentacion = $animal['alimentacion'];
             $a->descripcion = $animal['descripcion'];
+            $a->image_id = $imagen->id;
             $a->save();
 
             // asigno 2 cuidadores por cada animal

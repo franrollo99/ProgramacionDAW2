@@ -51,6 +51,7 @@ Route::resource('animales',AnimalController::class)->except(['create', 'edit'])-
 
 Route::post('animales/{animal}', [RevisionController::class, 'store'])->name('revisiones.store');
 Route::get('revisiones/{animal}/crear', [RevisionController::class, 'create'])->name('revisiones.create');
+Route::delete('revisiones/{revision}', [RevisionController::class, 'destroy'])->name('revisiones.destroy');
 Route::get('cuidadores/{cuidador}', [CuidadorController::class, 'show'])->name('cuidadores.show');
 Route::get('titulaciones/{titulacion}', [TitulacionController::class, 'show'])->name('titulos.show');
 

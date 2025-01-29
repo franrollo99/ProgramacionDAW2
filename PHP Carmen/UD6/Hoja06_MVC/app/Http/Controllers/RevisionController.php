@@ -69,6 +69,10 @@ class RevisionController extends Controller
      */
     public function destroy(Revision $revision)
     {
-        //
+
+        $revision->delete();
+        // Redireccion a la pagina donde se ha ejecutado el formulario
+        return redirect()->back();
     }
+
 }
