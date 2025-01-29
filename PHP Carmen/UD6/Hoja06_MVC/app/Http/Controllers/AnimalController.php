@@ -65,7 +65,7 @@ class AnimalController extends Controller
         // Redirigir a la vista del animal creado
         return redirect()->route('animales.show', $animal);
     }catch(\Exception $e){
-        return redirect()->back()->with('error', 'Hubo un problema al guardar la revisión: ' . $e->getMessage());
+        return redirect()->back()->with('error', 'Hubo un problema al guardar el animal: ' . $e->getMessage());
     }
 }
 
@@ -108,7 +108,7 @@ class AnimalController extends Controller
 
                 // Guardo la imagen nueva
                 $nombreImagen = $request->imagen->getClientOriginalName();
-                $request->file('imagen')->move(public_path('assets/img'), $fileName);
+                $request->file('imagen')->move(public_path('assets/img'), $nombreImagen);
 
                 // Guardo los cambios en la base de datos
                 $animal->imagen->nombre = $nombreImagen;
@@ -124,7 +124,7 @@ class AnimalController extends Controller
             // Redirigir a la vista del animal editado
             return redirect()->route('animales.show', $animal);
         }catch(\Exception $e){
-            return redirect()->back()->with('error', 'Hubo un problema al guardar la revisión: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Hubo un problema al actualizar el animal: ' . $e->getMessage());
         }
     }
 
