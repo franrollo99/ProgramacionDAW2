@@ -52,8 +52,12 @@
             </form>
         </fieldset>
 
-        <a class="w-max px-2 my-3 border-2 border-blue-600 bg-blue-400 rounded" href="{{ route('animales.index') }}">Volver
-            a la pagina principal</a>
+        <div class="py-5 flex gap-5">
+            <a class="w-max px-2 my-3 border-2 border-blue-600 bg-blue-400 rounded" href="{{ route('animales.index') }}">Volver
+                a la pagina principal</a>
+            <a class="w-max px-2 my-3 border-2 border-blue-600 bg-blue-400 rounded" href="{{ route('animales.show', $animal) }}">Volver
+                a detalles del animal</a>
+        </div>
     </div>
 
 @endsection

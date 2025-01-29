@@ -79,15 +79,6 @@ class AnimalController extends Controller
      */
     public function update(EditarRequest $request, Animal $animal)
     {
-        // Valido los datos de entrada
-        $request->validate([
-            'especie' => 'required|min:3',
-            'peso' => 'required|numeric',
-            'altura' => 'required|numeric',
-            'fechaNacimiento' => 'required|date',
-            'imagen' => 'nullable|mimes:jpeg,png,jpg,svg|max:2048',
-        ]);
-
         // Actualizo los valores del modelo
         $animal->especie = $request->especie;
         $animal->slug = Str::slug($request->especie);
@@ -97,12 +88,13 @@ class AnimalController extends Controller
         $animal->alimentacion = $request->alimentacion;
 
         if ($request->hasFile('imagen')) {
+            // Eliminamos la imagen antigua
+            unlink(public_path('assets/img/' . $animal->imagen));
+
             $fileName = $request->imagen->getClientOriginalName();
             $destinationPath = public_path('assets/img');
             $request->file('imagen')->move($destinationPath, $fileName);
             $animal->imagen = $fileName;
-            // Usar unlink para quitar la imagen
-            // unlink(public_path())
         }
 
         $animal->descripcion = $request->descripcion;
