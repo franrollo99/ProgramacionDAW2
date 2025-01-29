@@ -9,3 +9,7 @@
 hr{
     @apply border-green-500 my-1
 }
+
+input, textarea{
+    @apply border border-black p-1 rounded-lg
+}

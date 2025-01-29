@@ -19,12 +19,14 @@ class CuidadorFactory extends Factory
     public function definition(): array
     {
         $nombre = $this->faker->name;
+        $id_titulacion1 = Titulacion::inRandomOrder()->first()->id;
+        $id_titulacion2 = Titulacion::whereNotIn('id', [$id_titulacion1])->inRandomOrder()->first()->id;
 
         return [
             'nombre' => $nombre,
             'slug' => Str::slug($nombre),
-            'id_titulacion1' => Titulacion::inRandomOrder()->first()->id,
-            'id_titulacion2' => Titulacion::inRandomOrder()->first()->id,
+            'id_titulacion1' => $id_titulacion1,
+            'id_titulacion2' => $id_titulacion2,
         ];
     }
 }

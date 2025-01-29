@@ -11,10 +11,16 @@
                 @csrf
 
                 <label for="fecha">Fecha</label>
-                <input type="date" name="fecha" id="fecha" placeholder="aaaa-mm-dd">
+                <input type="string" name="fecha" id="fecha" placeholder="aaaa-mm-dd">
+                @error('fecha')
+                    <span class="text-red-500">{{$message}}</span>
+                @enderror
 
                 <label for="descripcion">Descripcion</label>
                 <textarea name="descripcion" id="descripcion" cols="30" rows="5" placeholder="Descripcion..."></textarea>
+                @error('descripcion')
+                    <span class="text-red-500">{{$message}}</span>
+                @enderror
 
                 <input class="w-max px-2 border-2 border-blue-600 bg-blue-400 rounded my-3" type="submit" value="Crear">
             </form>
@@ -25,6 +31,10 @@
             <a class="w-max px-2 my-3 border-2 border-blue-600 bg-blue-400 rounded" href="{{ route('animales.show', $animal) }}">Volver
                 a detalles del animal</a>
         </div>
+        @if(session('error'))
+            <div class="bg-red-500 text-white p-3 rounded mb-4" \>
+            {{ session('error') }}
+        @endif
 
     </div>
 @endsection

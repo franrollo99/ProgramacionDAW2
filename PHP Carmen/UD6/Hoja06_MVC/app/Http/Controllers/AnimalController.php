@@ -34,35 +34,39 @@ class AnimalController extends Controller
      */
     public function store(CrearAnimalRequest $request)
 {
-    $animal = new Animal();
+    try{
+        $animal = new Animal();
 
-    $animal->especie = $request->especie;
-    $animal->slug = Str::slug($request->especie);
-    $animal->peso = $request->peso;
-    $animal->altura = $request->altura;
-    $animal->fechaNacimiento = $request->fechaNacimiento;
-    $animal->alimentacion = $request->alimentacion;
-    $animal->descripcion = $request->descripcion;
+        $animal->especie = $request->especie;
+        $animal->slug = Str::slug($request->especie);
+        $animal->peso = $request->peso;
+        $animal->altura = $request->altura;
+        $animal->fechaNacimiento = $request->fechaNacimiento;
+        $animal->alimentacion = $request->alimentacion;
+        $animal->descripcion = $request->descripcion;
 
-    if ($request->hasFile('imagen')) {
-        $fileName = $request->imagen->getClientOriginalName();
-        $request->file('imagen')->move(public_path('assets/img'), $fileName);
+        if ($request->hasFile('imagen')) {
+            $fileName = $request->imagen->getClientOriginalName();
+            $request->file('imagen')->move(public_path('assets/img'), $fileName);
 
-        // Creamos la imagen y la guardamos en la base de datos
-        $imagen = new Image();
-        $imagen->nombre = $fileName;
-        $imagen->url = 'assets/img/' . $fileName;
-        $imagen->save();
+            // Creamos la imagen y la guardamos en la base de datos
+            $imagen = new Image();
+            $imagen->nombre = $fileName;
+            $imagen->url = 'assets/img/' . $fileName;
+            $imagen->save();
 
-        // Asignar la imagen al animal
-        $animal->image_id = $imagen->id;
+            // Asignar la imagen al animal
+            $animal->image_id = $imagen->id;
+        }
+
+        // Guardar el modelo en la base de datos
+        $animal->save();
+
+        // Redirigir a la vista del animal creado
+        return redirect()->route('animales.show', $animal);
+    }catch(\Exception $e){
+        return redirect()->back()->with('error', 'Hubo un problema al guardar la revisión: ' . $e->getMessage());
     }
-
-    // Guardar el modelo en la base de datos
-    $animal->save();
-
-    // Redirigir a la vista del animal creado
-    return redirect()->route('animales.show', $animal);
 }
 
 
@@ -87,37 +91,41 @@ class AnimalController extends Controller
      */
     public function update(EditarRequest $request, Animal $animal)
     {
-        // Actualizo los valores del modelo
-        $animal->especie = $request->especie;
-        $animal->slug = Str::slug($request->especie);
-        $animal->peso = $request->peso;
-        $animal->altura = $request->altura;
-        $animal->fechaNacimiento = $request->fechaNacimiento;
-        $animal->alimentacion = $request->alimentacion;
+        try{
+            // Actualizo los valores del modelo
+            $animal->especie = $request->especie;
+            $animal->slug = Str::slug($request->especie);
+            $animal->peso = $request->peso;
+            $animal->altura = $request->altura;
+            $animal->fechaNacimiento = $request->fechaNacimiento;
+            $animal->alimentacion = $request->alimentacion;
 
-        if ($request->hasFile('imagen')) {
-            // Eliminamos la imagen antigua
-            if ($animal->imagen && file_exists(public_path($animal->imagen->url))) {
-                unlink(public_path($animal->imagen->url));
+            if ($request->hasFile('imagen')) {
+                // Eliminamos la imagen antigua
+                if ($animal->imagen && file_exists(public_path($animal->imagen->url))) {
+                    unlink(public_path($animal->imagen->url));
+                }
+
+                // Guardo la imagen nueva
+                $nombreImagen = $request->imagen->getClientOriginalName();
+                $request->file('imagen')->move(public_path('assets/img'), $fileName);
+
+                // Guardo los cambios en la base de datos
+                $animal->imagen->nombre = $nombreImagen;
+                $animal->imagen->url = 'assets/img/' . $nombreImagen;
+                $animal->imagen->save();
             }
 
-            // Guardo la imagen nueva
-            $nombreImagen = $request->imagen->getClientOriginalName();
-            $request->file('imagen')->move(public_path('assets/img'), $fileName);
+            $animal->descripcion = $request->descripcion;
 
-            // Guardo los cambios en la base de datos
-            $animal->imagen->nombre = $nombreImagen;
-            $animal->imagen->url = 'assets/img/' . $nombreImagen;
-            $animal->imagen->save();
+            // Guardar los cambios en la base de datos
+            $animal->save();
+
+            // Redirigir a la vista del animal editado
+            return redirect()->route('animales.show', $animal);
+        }catch(\Exception $e){
+            return redirect()->back()->with('error', 'Hubo un problema al guardar la revisión: ' . $e->getMessage());
         }
-
-        $animal->descripcion = $request->descripcion;
-
-        // Guardar los cambios en la base de datos
-        $animal->save();
-
-        // Redirigir a la vista del animal editado
-        return redirect()->route('animales.show', $animal);
     }
 
 

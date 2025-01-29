@@ -58,6 +58,10 @@
             <a class="w-max px-2 my-3 border-2 border-blue-600 bg-blue-400 rounded" href="{{ route('animales.show', $animal) }}">Volver
                 a detalles del animal</a>
         </div>
+        @if(session('error'))
+            <div class="bg-red-500 text-white p-3 rounded mb-4" \>
+            {{ session('error') }}
+        @endif
     </div>
 
 @endsection

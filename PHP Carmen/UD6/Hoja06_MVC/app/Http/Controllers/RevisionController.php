@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Revision;
 use Illuminate\Http\Request;
 use App\Models\Animal;
+use App\Http\Requests\CrearRevisionRequest;
+use Exception;
 
 class RevisionController extends Controller
 {
@@ -27,17 +29,21 @@ class RevisionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, Animal $animal)
+    public function store(CrearRevisionRequest $request, Animal $animal)
     {
-        $revision = new Revision();
+        try{
+            $revision = new Revision();
 
-        $revision->fecha = $request->fecha;
-        $revision->descripcion = $request->descripcion;
-        $revision->animal_id = $animal->id;
+            $revision->fecha = $request->fecha;
+            $revision->descripcion = $request->descripcion;
+            $revision->animal_id = $animal->id;
 
-        $revision->save();
+            $revision->save();
 
-        return redirect()->route('animales.show', $animal);
+            return redirect()->route('animales.show', $animal);
+        }catch(Exception $e){
+            return redirect()->back()->with('error', 'Hubo un problema al guardar la revisión: ' . $e->getMessage());
+        }
     }
 
     /**
