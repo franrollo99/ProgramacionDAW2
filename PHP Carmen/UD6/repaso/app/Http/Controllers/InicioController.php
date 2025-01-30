@@ -11,6 +11,6 @@ class InicioController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return 'Pantalla principal';
+        return redirect()->route('animales.index');
     }
 }
