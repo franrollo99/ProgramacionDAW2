@@ -7,7 +7,7 @@
     </legend>
 
     {{-- ponemos enctype="multipart/form-data" porque vamos a subir imagenes --}}
-    <form action="" method="post" enctype="multipart/form-data" class="flex flex-col">
+    <form action="{{route('animales.store')}}" method="post" enctype="multipart/form-data" class="flex flex-col">
         @csrf
 
         <label for="especie">Especie</label>

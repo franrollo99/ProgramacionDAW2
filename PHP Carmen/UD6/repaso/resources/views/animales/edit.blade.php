@@ -7,31 +7,33 @@
     </legend>
 
     {{-- ponemos enctype="multipart/form-data" porque vamos a subir imagenes --}}
-    <form action="" method="post" enctype="multipart/form-data" class="flex flex-col">
+    <form action="{{route('animales.update', $animal)}}" method="post" enctype="multipart/form-data" class="flex flex-col">
         @csrf
+        @method('PUT')
 
         <label for="especie">Especie</label>
-        <input type="text" name="especie" id="especie" placeholder="Animal" value="{{$animal['especie']}}">
+        <input type="text" name="especie" id="especie" placeholder="Animal" value="{{$animal->especie}}">
 
         <label for="peso">Peso</label>
-        <input type="string" name="peso" id="peso" placeholder="00.0" value="{{$animal['peso']}}">
+        <input type="string" name="peso" id="peso" placeholder="00.0" value="{{$animal->peso}}">
 
         <label for="altura">Altura</label>
-        <input type="string" name="altura" id="altura" placeholder="00.0" value="{{$animal['altura']}}">
+        <input type="string" name="altura" id="altura" placeholder="00.0" value="{{$animal->altura}}">
 
         <label for="fechaNacimiento">Fecha de Nacimiento</label>
-        <input type="string" name="fechaNacimiento" id="fechaNacimiento" placeholder="aaaa-mm-dd" value="{{$animal['fechaNacimiento']}}">
+        <input type="string" name="fechaNacimiento" id="fechaNacimiento" placeholder="aaaa-mm-dd" value="{{$animal->fechaNacimiento}}">
 
         <label for="imagen">Imagen</label>
         <input type="file" name="imagen" id="imagen">
 
         <label for="alimentacion">Alimentacion</label>
-        <input type="text" name="alimentacion" id="alimentacion" placeholder="Carnívoro/Herbívoro" value="{{$animal['alimentacion']}}">
+        <input type="text" name="alimentacion" id="alimentacion" placeholder="Carnívoro/Herbívoro" value="{{$animal->alimentacion}}">
 
         <label for="descripcion">Descripcion</label>
-        <textarea name="descripcion" id="descripcion" cols="30" rows="5" placeholder="Descripcion...">{{$animal['descripcion']}}</textarea>
+        <textarea name="descripcion" id="descripcion" cols="30" rows="5" placeholder="Descripcion...">{{$animal->descripcion}}</textarea>
 
-        <input class="w-max px-2 border-2 border-blue-600 bg-blue-400 rounded my-3" type="submit" value="Crear">
+        <input class="w-max px-2 border-2 border-blue-600 bg-blue-400 rounded my-3" type="submit" value="Modificar">
     </form>
 </fieldset>
+<a class="border border-blue-700 bg-blue-400 p-1 rounded-lg" href="{{route('animales.index')}}">Volver al listado</a>
 @endsection

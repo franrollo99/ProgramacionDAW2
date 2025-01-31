@@ -10,11 +10,22 @@
             <div class="flex flex-col mb-8 lg:flex-row lg:mb-0 mx-auto">
                 <a href="{{route('inicio')}}" class="text-white mb-1 lg:ml-16 lg:mr-16 lg:mb-8">Inicio</a>
                 <a href="{{route('animales.index')}}" class="text-white mb-1 lg:mr-16 lg:mb-8">Listado de Animales</a>
+                @auth
                 <a href="{{route('animales.create')}}" class="text-white">Nuevo Animal</a>
+                @endauth
             </div>
             <div class="flex flex-col text-center lg:flex-row">
-                <a href="#" class="bblanco mb-1 lg:mr-4 lg:mb-0">Iniciar Sesion</a>
-                <a href="#" class="bverde">Regístrate</a>
+                @guest
+                <a href="{{route('login')}}" class="bblanco mb-1 lg:mr-4 lg:mb-0">Iniciar Sesion</a>
+                <a href="{{route('register')}}" class="bverde">Regístrate</a>
+                @endguest
+                @auth
+                <p>Bienvenido {{Auth::user()->name}}</p>
+                <form action="{{route('logout')}}" method="post">
+                @csrf
+                <input type="submit" value="Cerrar Sesion">
+                </form>
+                @endauth
             </div>
         </div>
     </div>
