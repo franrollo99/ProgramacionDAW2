@@ -1,4 +1,4 @@
-import {Link} from "react-route-doom";
+import {Link} from "react-router-dom";
 import "./AppMenu.css";
 
 function AppMenu(){

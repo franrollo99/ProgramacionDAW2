@@ -1,5 +1,5 @@
 import {useContext, useStat} from "react";
-import {SeguridadContext} from ".../context/SeguridadProvider";
+import {SeguridadContext} from "../context/SeguridadProvider";
 
 function HomePage(){
     const {datos, logIn, logOut} = useContext(SeguridadContext);
