@@ -1,27 +1,32 @@
-import { createContext, useState } from "react";
+import { useState, createContext } from "react";
 
+/* Creamos el contexto */
 const SeguridadContext = createContext();
-
-function SeguridadProvider(children){
+function SeguridadProvider({ children }) {
     const [datos, setDatos] = useState({
-        usuario: "",
-        tienePermisos: false
+        usuario: "", tienePermisos: false
     });
-
-    const logIn = async(nombre)=>{
-        let nuevosDatos = {...datos, usuario: nombre, tienePermisos: true}
-        setDatos(nuevosDatos);
-    }
-
-    const logOut = async()=>{
-        let nuevosDatos = {...datos, usuario: "", tienePermisos: false}
-        setDatos(nuevosDatos);
-    }
-
-    return <SeguridadContext.Provider value={{datos, logIn, logOut}}>
-        {children}
-        </SeguridadContext.Provider>;
+    const logIn = async (nombre) => {
+        /* Validar contra un servicio real */
+        let nuevoDatos = { ...datos, usuario: nombre, tienePermisos: true };
+        setDatos(nuevoDatos);
+    };
+    const logOut = async () => {
+        let nuevoDatos = { ...datos, usuario: "", tienePermisos: false };
+        setDatos(nuevoDatos);
+    };
+    /* Por convenio nombre.Provider */
+    return (
+        <SeguridadContext.Provider
+            value={{
+                datos,
+                logIn,
+                logOut,
+            }}
+        >
+            {children}
+        </SeguridadContext.Provider>
+    );
 }
 
-export  {SeguridadContext};
-export default SeguridadProvider;
+export { SeguridadContext, SeguridadProvider };

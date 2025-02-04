@@ -1,45 +1,50 @@
-import {useContext, useStat} from "react";
-import {SeguridadContext} from "../context/SeguridadProvider";
+import { useContext, useState } from "react";
+import { SeguridadContext } from "../context/SeguridadProvider.jsx";
 
-function HomePage(){
-    const {datos, logIn, logOut} = useContext(SeguridadContext);
-    const [nombre, setNombre] = useStat("");
-
-    function handleClick(){
-        if(datos.tienePermisos){
+function HomePage() {
+    const { datos, logIn, logOut } = useContext(SeguridadContext);
+    const [nombre, setNombre] = useState("");
+    function handleClick() {
+        if (datos.tienePermisos) {
             setNombre("");
             logOut();
-        }else{
-            if(nombre == ""){
+        } else {
+            if (nombre === "") {
                 return;
             }
+            /* No es recomendable buscar directamente */
+            //const nombre =
+            document.querySelector('input[name="nombre"]').value;
             logIn(nombre);
         }
     }
-
-    const handleChange = (e) =>{
+    const handleChange = (e) => {
         setNombre(e.target.value);
-    }
-
+    };
     return (
         <>
-            <h1>Pagina de inicio</h1>
+            <h1>Página de inicio</h1>
             <div>
-                {datos.tienePermisos ?(
+                {datos.tienePermisos ? (
                     <>
-                        <span>Hola {datos.usuario}</span>
-                        <button>Salir</button>
+                        <span>Hola {datos.usuario} </span>
+                        <button onClick={handleClick}>Salir</button>
                     </>
-                ):(
+                ) : (
                     <>
                         <span>Nombre: </span>
-                        <input type="text" name="nombre" value={nombre} onChange={handleChange}/>
+                        <input
+                            type="text"
+                            name="nombre"
+                            value={nombre}
+                            onChange={handleChange}
+                        ></input>
                         <button onClick={handleClick}>Entrar</button>
                     </>
                 )}
             </div>
         </>
-    )
+    );
 }
 
 export default HomePage;
