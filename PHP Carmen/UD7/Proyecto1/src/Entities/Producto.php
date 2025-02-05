@@ -2,9 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace APP\Entities;
+namespace App\Entities;
 
-use App\Services\DBConnection;
+use App\Services\ConexionBD;
 use PDO;
 
 final class Producto
@@ -13,7 +13,7 @@ final class Producto
 
     public function __construct()
     {
-        $this->db = DBConnection::getInstance()->getConexion();
+        $this->db = ConexionBD::getConexion();
         $this-> createTable();
     }
 
@@ -45,6 +45,70 @@ final class Producto
         $stmt->execute(params: $data);
 
         return $this->db->lastInsertId();
+    }
+
+
+
+
+     /**
+     * Método para obtener todos los productos
+     * @return array Retorna un array con todos los productos
+     */
+    public function get(): array
+    {
+        $sql = 'SELECT * FROM productos';
+        $stmt = $this->db->query($sql);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Método para buscar un producto por ID
+     * @param int $id
+     * @return array|null Retorna el producto si existe, null si no se encuentra
+     */
+    public function find(int $id): ?array
+    {
+        $sql = 'SELECT * FROM productos WHERE id = :id';
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(['id' => $id]);
+        $producto = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $producto ?: null;
+    }
+
+    /**
+     * Método para actualizar un producto
+     * @param int $id
+     * @param array<string, mixed> $data
+     * @return bool Retorna true si se actualizó, false si falló
+     */
+    public function update(int $id, array $data): bool
+    {
+        $sql = '
+            UPDATE productos 
+            SET nombre = :nombre, descripcion = :descripcion, precio = :precio 
+            WHERE id = :id
+        ';
+
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute([
+            'id' => $id,
+            'nombre' => $data['nombre'],
+            'descripcion' => $data['descripcion'],
+            'precio' => $data['precio']
+        ]);
+    }
+
+    /**
+     * Método para eliminar un producto por ID
+     * @param int $id
+     * @return bool Retorna true si se eliminó, false si falló
+     */
+    public function delete(int $id): bool
+    {
+        $sql = 'DELETE FROM productos WHERE id = :id';
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute(['id' => $id]);
     }
 
 }

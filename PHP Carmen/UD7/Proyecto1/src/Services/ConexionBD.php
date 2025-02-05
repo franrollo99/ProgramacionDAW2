@@ -1,28 +1,28 @@
 <?php
-    namespace Src;
+    namespace App\Services;
     
     use PDO;
     use PDOException;
 
-    $dotenv = \Dotenv\Dotenv::createImmutable(dirname(__DIR__, 1));
+    $dotenv = \Dotenv\Dotenv::createImmutable(dirname(__DIR__, 2));
     $dotenv->load();
 
-    final class conexionBD{
+    final class ConexionBD{
         
-        private static ?PDO $connection = null;
+        private static ?PDO $conexion = null;
 
         final private function __construct() {}
 
-        final public static function getConnection(): ?PDO
+        final public static function getConexion(): ?PDO
         {
             try {
-                if ( ! self::$connection) {
-                    self::$connection = new PDO(
+                if ( ! self::$conexion) {
+                    self::$conexion = new PDO(
                         dsn: $_ENV['DB_DSN'],
                         username: $_ENV['DB_USERNAME'],
                         password: $_ENV['DB_PASSWORD'],
                     );
-                    self::$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                    self::$conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 }
             } catch (PDOException $e) {
                 echo match ($e->getCode()) {
@@ -32,8 +32,8 @@
                     default => 'Error desconocido',
                 };
             }
-
-            return self::$connection;
+            // var_dump(self::$conexion); // Depuracion para ver que devuelve self::$conexion
+            return self::$conexion;
         }
         private function __clone() {}
     }
