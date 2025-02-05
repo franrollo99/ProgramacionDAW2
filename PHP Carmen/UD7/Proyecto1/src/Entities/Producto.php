@@ -23,7 +23,7 @@ final class Producto
             id INT AUTO_INCREMENT PRIMARY KEY,
             nombre VARCHAR(50) NOT NULL,
             descripcion VARCHAR(255) NOT NULL,
-            precio DECIMAL(10, 2) NOT NULL,
+            precio DECIMAL(8, 2) NOT NULL,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )';
 
@@ -47,13 +47,6 @@ final class Producto
         return $this->db->lastInsertId();
     }
 
-
-
-
-     /**
-     * Método para obtener todos los productos
-     * @return array Retorna un array con todos los productos
-     */
     public function get(): array
     {
         $sql = 'SELECT * FROM productos';
@@ -61,27 +54,15 @@ final class Producto
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    /**
-     * Método para buscar un producto por ID
-     * @param int $id
-     * @return array|null Retorna el producto si existe, null si no se encuentra
-     */
-    public function find(int $id): ?array
+    public function find(int $id): bool
     {
-        $sql = 'SELECT * FROM productos WHERE id = :id';
+        $sql = 'SELECT COUNT(*) FROM productos WHERE id = :id';
         $stmt = $this->db->prepare($sql);
         $stmt->execute(['id' => $id]);
-        $producto = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        return $producto ?: null;
+        return (bool) $stmt->fetchColumn(); // fetchColumn() devuelve el numero de coincidencias
     }
 
-    /**
-     * Método para actualizar un producto
-     * @param int $id
-     * @param array<string, mixed> $data
-     * @return bool Retorna true si se actualizó, false si falló
-     */
     public function update(int $id, array $data): bool
     {
         $sql = '
@@ -99,11 +80,6 @@ final class Producto
         ]);
     }
 
-    /**
-     * Método para eliminar un producto por ID
-     * @param int $id
-     * @return bool Retorna true si se eliminó, false si falló
-     */
     public function delete(int $id): bool
     {
         $sql = 'DELETE FROM productos WHERE id = :id';
