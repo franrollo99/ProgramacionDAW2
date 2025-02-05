@@ -1,0 +1,10 @@
+.tablaPacientes{
+    margin: 1em auto;
+    padding: 1em;
+    border: 3px solid #6CB4EE;
+}
+
+.cabeceraTablaPacientes{
+    display: grid;
+    grid-template-columns: repeat(3, 2fr);
+}

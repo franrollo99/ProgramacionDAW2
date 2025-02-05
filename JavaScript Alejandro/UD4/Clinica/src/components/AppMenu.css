@@ -1,0 +1,23 @@
+nav{
+    background-color: rgb(74, 129, 248);
+    height: 3em;
+    display: flex;
+    align-items: center;
+}
+
+ul{
+    padding-left: 3em;
+    display: flex;
+    gap: 1em;
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+a:hover{
+    border-bottom: 1px solid blue;
+    color: blue;
+}

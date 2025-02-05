@@ -1,0 +1,13 @@
+.lista{
+    margin: 1em auto;
+    width: 100%;
+    padding: 5px;
+    display: grid;
+    grid-template-columns: repeat(2, 2fr) repeat(2, 1fr);
+
+}
+
+button{
+    width: max-content;
+    height: max-content;
+}
