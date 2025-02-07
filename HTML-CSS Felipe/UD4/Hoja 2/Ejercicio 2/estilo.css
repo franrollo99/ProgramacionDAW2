@@ -1,0 +1,42 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.contenedorPrincipal{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.articulo{
+    width: 700px;
+    margin-top: 3em;
+    padding: 1em;
+    border: 1px solid gray;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(199, 248, 250);
+    height: max-content;
+}
+
+h2{
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+button{
+    width: max-content;
+    padding: 1em;
+    margin: 1em;
+}
+
+.oculto{
+    display: none;
+}
