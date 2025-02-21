@@ -1,0 +1,10 @@
+-No crea equipos entrando como admin
+-Quitar boton inscribirse de equipos??? solo puede crear equipos el admin
+-Quitar crearEquipos de rutas publicas?? y dejarlo solo para que pueda acceder el admin, sino redirigir a una pagina que diga que no tienes permisos
+-No muestra los patrocinadores en detalles de equipos
+-Faltan botones para volver a ciertas paginas (detalles equipos para volver a equipos, detalles jugadores para volver a su equipo)
+-Imagenes??? en la base de datos o donde van a ir???
+-Arreglar menu lateral y superior al cambiar tamaños (margin???)
+-Arreglar nombre de estadisticasPage
+-Quitar algunos datos de detalles jugadores como DNI o correo
+-Quitar pagina jugador, es igual que detallesJugador

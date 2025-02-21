@@ -1,0 +1,4 @@
+-Quitado validacion de DNI en jugadoresRequest
+
+-Cambiado el estudio y estudioResource para acceder al nombre del centro y del ciclo desde jugador
+-Paginas Equipospage, DetallesEquipo, DetallesJugador

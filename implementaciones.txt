@@ -1,0 +1,7 @@
+-Cambiar lo de grupos a la hora de crear equipos
+-Al crear un equipo que el id del usuario que lo crea se ponga de forma automatica, no manual
+-Imagenes equipos???
+-Descripcion equipos???
+-Cambiar URL al entrar en detalles (equipos, jugadores) y poner slug para hacerla mas amigable
+-Agregr patrocinadores a equipos?
+-Poner el footer abajo del todo en caso de que la pagina no ocupe todo el alto
