@@ -1,0 +1,30 @@
+{
+    "name": "fran/hoja07_api_01",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "franrollo99",
+            "email": "fran.5oct99@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require-dev": {
+        "phpstan/phpstan": "^2.1",
+        "friendsofphp/php-cs-fixer": "^3.70"
+    },
+    "require": {
+        "vlucas/phpdotenv": "^5.6",
+        "pecee/simple-router": "^5.4"
+    },
+    "scripts": {
+        "start": "php -S localhost:8000 -t public"
+    }
+}
