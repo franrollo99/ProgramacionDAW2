@@ -58,7 +58,7 @@ final class Producto
 
     public function get(): array
     {
-        $sql = 'SELECT nombre, descripcion, precio from productos';
+        $sql = 'SELECT id, nombre, descripcion, precio from productos';
 
         $stmt = $this->db->query(query: $sql);
         
