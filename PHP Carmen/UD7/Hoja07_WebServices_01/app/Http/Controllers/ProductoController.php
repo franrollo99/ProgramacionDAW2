@@ -15,6 +15,16 @@ use App\Http\Requests\ProductoRequest;
  *     @OA\Server(url="http://localhost:8000"),
  *     @OA\Contact(email="email@gmail.com")
  * )
+ *
+ * @OA\SecurityScheme(
+ *     type="http",
+ *     description="Use a token to authenticate",
+ *     name="Authorization",
+ *     in="header",
+ *     scheme="bearer",
+ *     bearerFormat="JWT",
+ *     securityScheme="bearerAuth"
+ * )
  */
 class ProductoController extends Controller
 {
@@ -46,18 +56,29 @@ class ProductoController extends Controller
      *  description="Crear un producto",
      *  operationId="store",
      *  tags={"productos"},
+     *  security={{"bearerAuth":{}}},
+     *
      *  @OA\RequestBody(
      *      required=true,
-     *      @OA\JsonContent(ref="#/components/schemas/ProductoRequest")
+     *      description="Datos del producto",
+     *      @OA\JsonContent(
+     *          required={"nombre", "precio", "stock"},
+     *          @OA\Property(property="nombre", type="string", example="Producto 1"),
+     *          @OA\Property(property="descripcion", type="string", example="Descripción del producto"),
+     *          @OA\Property(property="precio", type="number", format="float", example="10.5"),
+     *          @OA\Property(property="stock", type="integer", example="10"),
+     *          @OA\Property(property="categoria_id", type="integer", example="1")
+     *      )
      *  ),
-     *  @OA\Response(
-     *      response=201,
-     *      description="Producto creado",
+     *
+     *  @OA\Response(response=201, description="Producto creado",
      *      @OA\JsonContent(ref="#/components/schemas/Producto")
      *  ),
-     *  @OA\Response(response=422, description="Error de validación")
+     *  @OA\Response(response=422, description="Error de validación"),
+     *  @OA\Response(response=401, description="No autorizado")
      * )
      */
+
     public function store(ProductoRequest $request)
     {
         $producto = Producto::create($request->validated());
@@ -99,6 +120,7 @@ class ProductoController extends Controller
      *  description="Actualizar un producto existente",
      *  operationId="update",
      *  tags={"productos"},
+     *  security={{"bearerAuth":{}}},
      *  @OA\Parameter(
      *      name="id",
      *      in="path",
@@ -116,7 +138,8 @@ class ProductoController extends Controller
      *      @OA\JsonContent(ref="#/components/schemas/Producto")
      *  ),
      *  @OA\Response(response=404, description="Producto no encontrado"),
-     *  @OA\Response(response=422, description="Error de validación")
+     *  @OA\Response(response=422, description="Error de validación"),
+     *  @OA\Response(response=401, description="No autorizado")
      * )
      */
     public function update(ProductoRequest $request, Producto $producto)
@@ -133,6 +156,7 @@ class ProductoController extends Controller
      *  description="Eliminar un producto por su id",
      *  operationId="destroy",
      *  tags={"productos"},
+     *  security={{"bearerAuth":{}}},
      *  @OA\Parameter(
      *      name="id",
      *      in="path",
@@ -140,8 +164,9 @@ class ProductoController extends Controller
      *      required=true,
      *      @OA\Schema(type="integer", example=1)
      *  ),
-     *  @OA\Response(response=204, description="Producto eliminado"),
-     *  @OA\Response(response=404, description="Producto no encontrado")
+     *  @OA\Response(response=200, description="Producto eliminado"),
+     *  @OA\Response(response=404, description="Producto no encontrado"),
+     *  @OA\Response(response=401, description="No autorizado")
      * )
      */
     public function destroy(Producto $producto)

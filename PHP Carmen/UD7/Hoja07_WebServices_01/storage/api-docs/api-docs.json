@@ -184,6 +184,109 @@
                 }
             }
         },
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "login"
+                ],
+                "summary": "Login",
+                "description": "Login del usuario",
+                "operationId": "login",
+                "requestBody": {
+                    "description": "Datos del usuario",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "prueba@prueba.es"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "12345678"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login correcto",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "user": {
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "email": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "token": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "No autorizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/logout": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Cerrar sesión",
+                "description": "Cerrar sesión y eliminar el token",
+                "operationId": "logout",
+                "responses": {
+                    "200": {
+                        "description": "Sesión cerrada correctamente"
+                    },
+                    "401": {
+                        "description": "No autorizado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/productos": {
             "get": {
                 "tags": [
@@ -216,11 +319,40 @@
                 "description": "Crear un producto",
                 "operationId": "store",
                 "requestBody": {
+                    "description": "Datos del producto",
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/ProductoRequest"
+                                "required": [
+                                    "nombre",
+                                    "precio",
+                                    "stock"
+                                ],
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Producto 1"
+                                    },
+                                    "descripcion": {
+                                        "type": "string",
+                                        "example": "Descripción del producto"
+                                    },
+                                    "precio": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "10.5"
+                                    },
+                                    "stock": {
+                                        "type": "integer",
+                                        "example": "10"
+                                    },
+                                    "categoria_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
                             }
                         }
                     }
@@ -238,8 +370,16 @@
                     },
                     "422": {
                         "description": "Error de validación"
+                    },
+                    "401": {
+                        "description": "No autorizado"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/api/productos/{id}": {
@@ -323,8 +463,16 @@
                     },
                     "422": {
                         "description": "Error de validación"
+                    },
+                    "401": {
+                        "description": "No autorizado"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "delete": {
                 "tags": [
@@ -346,13 +494,21 @@
                     }
                 ],
                 "responses": {
-                    "204": {
+                    "200": {
                         "description": "Producto eliminado"
                     },
                     "404": {
                         "description": "Producto no encontrado"
+                    },
+                    "401": {
+                        "description": "No autorizado"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         }
     },
@@ -453,12 +609,30 @@
                 },
                 "type": "object"
             }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "description": "Use a token to authenticate",
+                "name": "Authorization",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
         }
     },
     "tags": [
         {
             "name": "categorias",
             "description": "categorias"
+        },
+        {
+            "name": "login",
+            "description": "login"
+        },
+        {
+            "name": "auth",
+            "description": "auth"
         },
         {
             "name": "productos",
