@@ -1,0 +1,468 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Productos",
+        "description": "API de productos",
+        "contact": {
+            "email": "email@gmail.com"
+        },
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/categorias": {
+            "get": {
+                "tags": [
+                    "categorias"
+                ],
+                "summary": "Listado de categorias",
+                "description": "Obtener un listado de categorias",
+                "operationId": "indexCategoria",
+                "responses": {
+                    "200": {
+                        "description": "Listado de categorias",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Categoria"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "categorias"
+                ],
+                "summary": "Crear una categoria",
+                "description": "Crear una categoria",
+                "operationId": "storeCategoria",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CategoriaRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Categoria creada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Categoria"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error de validación"
+                    }
+                }
+            }
+        },
+        "/api/categorias/{categoria}": {
+            "get": {
+                "tags": [
+                    "categorias"
+                ],
+                "summary": "Mostrar una categoria",
+                "description": "Obtener una categoria",
+                "operationId": "showCategoria",
+                "parameters": [
+                    {
+                        "name": "categoria",
+                        "in": "path",
+                        "description": "ID de la categoria",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Categoria",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Categoria"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Categoria no encontrada"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "categorias"
+                ],
+                "summary": "Actualizar una categoria",
+                "description": "Actualizar una categoria",
+                "operationId": "updateCategoria",
+                "parameters": [
+                    {
+                        "name": "categoria",
+                        "in": "path",
+                        "description": "ID de la categoria",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CategoriaRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Categoria actualizada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Categoria"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error de validación"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "categorias"
+                ],
+                "summary": "Eliminar una categoria",
+                "description": "Eliminar una categoria",
+                "operationId": "destroyCategoria",
+                "parameters": [
+                    {
+                        "name": "categoria",
+                        "in": "path",
+                        "description": "ID de la categoria",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Categoria eliminada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Categoria no encontrada"
+                    }
+                }
+            }
+        },
+        "/api/productos": {
+            "get": {
+                "tags": [
+                    "productos"
+                ],
+                "summary": "Listado de productos",
+                "description": "Obtener un listado de productos",
+                "operationId": "index",
+                "responses": {
+                    "200": {
+                        "description": "Listado de productos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Producto"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "productos"
+                ],
+                "summary": "Crear un producto",
+                "description": "Crear un producto",
+                "operationId": "store",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ProductoRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Producto creado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Producto"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error de validación"
+                    }
+                }
+            }
+        },
+        "/api/productos/{id}": {
+            "get": {
+                "tags": [
+                    "productos"
+                ],
+                "summary": "Obtener un producto",
+                "description": "Obtener un producto por su id",
+                "operationId": "show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id del producto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Producto encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Producto"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Producto no encontrado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "productos"
+                ],
+                "summary": "Actualizar un producto",
+                "description": "Actualizar un producto existente",
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id del producto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ProductoRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Producto actualizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Producto"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Producto no encontrado"
+                    },
+                    "422": {
+                        "description": "Error de validación"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "productos"
+                ],
+                "summary": "Eliminar un producto",
+                "description": "Eliminar un producto por su id",
+                "operationId": "destroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id del producto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Producto eliminado"
+                    },
+                    "404": {
+                        "description": "Producto no encontrado"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "CategoriaRequest": {
+                "title": "CategoriaRequest",
+                "required": [
+                    "nombre"
+                ],
+                "properties": {
+                    "nombre": {
+                        "description": "Nombre de la categoría",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "ProductoRequest": {
+                "title": "ProductoRequest",
+                "required": [
+                    "nombre",
+                    "precio",
+                    "stock"
+                ],
+                "properties": {
+                    "nombre": {
+                        "description": "Nombre del producto",
+                        "type": "string"
+                    },
+                    "descripcion": {
+                        "description": "Descripción del producto",
+                        "type": "string"
+                    },
+                    "precio": {
+                        "description": "Precio del producto",
+                        "type": "number"
+                    },
+                    "stock": {
+                        "description": "Stock del producto",
+                        "type": "integer"
+                    },
+                    "categoria_id": {
+                        "description": "ID de la categoría del producto",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "Categoria": {
+                "title": "Categoria",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "nombre": {
+                        "type": "string",
+                        "example": "Categoria 1"
+                    }
+                },
+                "type": "object"
+            },
+            "Producto": {
+                "title": "Producto",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "nombre": {
+                        "type": "string",
+                        "example": "Producto 1"
+                    },
+                    "descripcion": {
+                        "type": "string",
+                        "example": "Descripción del producto"
+                    },
+                    "precio": {
+                        "type": "number",
+                        "format": "float",
+                        "example": "19.99"
+                    },
+                    "categoria_id": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-03-03T12:00:00Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-03-03T12:00:00Z"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "categorias",
+            "description": "categorias"
+        },
+        {
+            "name": "productos",
+            "description": "productos"
+        }
+    ]
+}
