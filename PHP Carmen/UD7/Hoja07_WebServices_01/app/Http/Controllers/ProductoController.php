@@ -148,6 +148,6 @@ class ProductoController extends Controller
     {
         $producto->delete();
 
-        return response()->json(['message' => 'Producto eliminado correctamente'], 204);
+        return response()->json(['message' => 'Producto eliminado correctamente'], 200);
     }
 }
