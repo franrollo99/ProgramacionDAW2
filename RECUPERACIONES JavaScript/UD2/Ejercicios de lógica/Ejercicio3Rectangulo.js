@@ -22,10 +22,10 @@ do{
 }while(isNaN(entrada))
 
 
-function crearRectangulo(lado)
+function crearRectangulo(base, altura)
 {
     // let resultado = '';
-    let filas = new Array(lado);
+    let filas = new Array(base);
 
     for(let fila=0; fila<lado; fila++){
 
