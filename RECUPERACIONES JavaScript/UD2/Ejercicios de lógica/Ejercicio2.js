@@ -18,7 +18,6 @@ do{
 }while(numeroIntroducido !== 0);
 
 if(numeros.length > 0){
-    // console.log(numeros);
     
     for(let i=0; i<numeros.length; i++){
         sumaNumeros += numeros[i];
