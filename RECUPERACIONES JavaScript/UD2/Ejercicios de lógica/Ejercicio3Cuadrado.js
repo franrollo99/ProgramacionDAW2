@@ -19,6 +19,7 @@ do{
     }else{
         alert('Debes introducir un numero');
     }
+    
 }while(isNaN(entrada))
 
 
