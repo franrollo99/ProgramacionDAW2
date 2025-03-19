@@ -22,13 +22,13 @@ do{
 
 }while(isNaN(entrada) || entrada%2 !== 1);
 
-function crearRombo(altura)
+function crearRombo(diagonal)
 {
-    let filas = new Array(altura);
-    let filas1 = new Array(Math.ceil(altura/2)); // Redondeo hacia arriba
-    let filas2 = new Array(Math.floor(altura/2)); // Redondeo hacia abajo
+    let filas = new Array(diagonal);
+    let filas1 = new Array(Math.ceil(diagonal/2)); // Redondeo hacia arriba
+    let filas2 = new Array(Math.floor(diagonal/2)); // Redondeo hacia abajo
 
-    // Primer triangulo de con altura/2 redondeado hacia arriba
+    // Primer triangulo de con diagonal/2 redondeado hacia arriba
     for(let fila=0; fila<filas1.length; fila++){
         filas1[fila] = '';
 
@@ -41,7 +41,7 @@ function crearRombo(altura)
         }
     }
 
-    // Segundo triangulo invertido de con altura/2 redondeado hacia abajo
+    // Segundo triangulo invertido de con diagonal/2 redondeado hacia abajo
     for(let fila=0; fila<filas2.length; fila++){
         filas2[fila] = '';
 

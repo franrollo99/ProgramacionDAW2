@@ -7,7 +7,7 @@ do{
     entrada = parseInt(prompt('Introduce un numero para indicar el tamaño del cuadrado'));
 
     if(!isNaN(entrada)){
-        cuadrado = crearRectangulo(entrada);
+        cuadrado = crearCuadrado(entrada);
 
         cuadradoPintado = '';
 
@@ -23,7 +23,7 @@ do{
 }while(isNaN(entrada))
 
 
-function crearRectangulo(lado)
+function crearCuadrado(lado)
 {
     // let resultado = '';
     let filas = new Array(lado);
@@ -48,5 +48,3 @@ function crearRectangulo(lado)
     // console.log(resultado);
     return filas;
 }
-
-
