@@ -15,7 +15,7 @@ do{
         console.log(trianguloPintado);
 
     }else{
-        console.log('Debes introducir un numero');
+        alert('Debes introducir un numero');
     }
 
 }while(isNaN(entrada));

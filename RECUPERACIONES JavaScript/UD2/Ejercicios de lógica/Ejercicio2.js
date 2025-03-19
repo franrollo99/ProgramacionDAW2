@@ -11,7 +11,7 @@ do{
 
     if(isNaN(numeroIntroducido)){
         alert('Debes introducir un numero');
-    }if(!isNaN(numeroIntroducido) && numeroIntroducido !== 0){
+    }else if(!isNaN(numeroIntroducido) && numeroIntroducido !== 0){
         numeros.push(numeroIntroducido);
     }
 
