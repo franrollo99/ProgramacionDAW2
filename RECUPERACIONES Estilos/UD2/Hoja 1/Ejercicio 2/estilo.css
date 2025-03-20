@@ -20,7 +20,7 @@ body{
 header, footer{
     background-color: black;
     color: white;
-    display: flex;
+    display: grid;
     align-items: center;
     justify-content: center;
 }
