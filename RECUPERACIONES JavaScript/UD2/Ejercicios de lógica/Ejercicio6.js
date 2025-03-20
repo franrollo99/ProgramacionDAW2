@@ -13,21 +13,21 @@ do{
         switch (entrada1){
             case 1:
                 valor1 = prompt('Introduce un numero para indicar el tamaño del cuadrado');
-                crearCuadrado(valor1);
+                console.log(crearCuadrado(valor1));
                 break
             case 2:
                 valor1 = prompt('Introduce un numero para indicar la base del rectángulo');
                 valor2 = prompt('Introduce un numero para indicar la altura del rectángulo');
-                crearRectangulo(valor1, valor2);
+                console.log(crearRectangulo(valor1, valor2));
                 break
             case 3:
                 valor1 = prompt('Introduce un numero para indicar la altura del triangulo');
-                crearTriangulo(valor1);
+                console.log(crearTriangulo(valor1));
                 break
             case 4:
                 valor1 = prompt('Introduce un numero IMPAR para indicar la altura del rombo');
                 if(valor1%2 === 1){
-                    crearRombo(valor1);
+                    console.log(crearRombo(valor1));
                 }else{
                     alert('No has introducido un numero IMPAR');
                 }
@@ -64,7 +64,7 @@ function crearCuadrado(lado)
         resultado += filas[fila] + '\n';
     }
 
-    console.log(resultado);
+    return resultado;
 }
 
 function crearRectangulo(base, altura)
@@ -88,7 +88,8 @@ function crearRectangulo(base, altura)
 
         resultado += filas[fila] + '\n';
     }
-    console.log(resultado);
+
+    return resultado;
 }
 
 function crearTriangulo(altura)
@@ -110,7 +111,7 @@ function crearTriangulo(altura)
         resultado += filas[fila] + '\n';
     }
 
-    console.log(resultado);
+    return resultado;
 }
 
 function crearRombo(altura)
@@ -150,5 +151,5 @@ function crearRombo(altura)
         resultado += filas2[fila] + '\n';
     }
     
-    console.log(resultado);
+    return resultado;
 }

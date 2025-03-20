@@ -8,7 +8,6 @@ let mediaNumeros;
 do{
     numeroIntroducido = parseInt(prompt('Introduzca un número'));
 
-
     if(isNaN(numeroIntroducido)){
         alert('Debes introducir un numero');
     }else if(!isNaN(numeroIntroducido) && numeroIntroducido !== 0){

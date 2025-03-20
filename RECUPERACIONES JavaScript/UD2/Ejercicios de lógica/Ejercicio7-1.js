@@ -1,5 +1,4 @@
 let numero;
-let resultado;
 
 do{
     numero = parseInt(prompt('Introduce un numero entre 0 y 10 para hacer su tabla de multiplicar'));
@@ -15,9 +14,11 @@ do{
 }while(numero<0 || numero>10 || isNaN(numero));
 
 function tablaMultiplicar(num){
-    resultado = '';
+    let resultado = '';
 
     for(let i=0; i<=10; i++){
-        console.log(`${num} x ${i} = ` + num*i); // Cambiar
+        resultado += `${num} x ${i} = ${num*i} \n`;
     }
+
+    console.log(resultado);
 }
