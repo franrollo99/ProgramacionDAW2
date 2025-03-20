@@ -16,7 +16,8 @@ do{
     
 }while(entrada != '0');
 
-function parametrosPorTipo(params){
+function parametrosPorTipo(params)
+{
     let resultado = '';
     let tipo = [];
 

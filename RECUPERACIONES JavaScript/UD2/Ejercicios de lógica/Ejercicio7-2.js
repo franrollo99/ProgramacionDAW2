@@ -25,7 +25,8 @@ do{
     
 }while(numero1<0 || numero1>10 || isNaN(numero1));
 
-function tablaMultiplicar(num1, num2){
+function tablaMultiplicar(num1, num2)
+{
     let resultado = '';
 
     if(num1<num2){

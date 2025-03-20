@@ -15,7 +15,8 @@ do{
     
 }while(numero !== 0);
 
-function calcularFactorial(num){
+function calcularFactorial(num)
+{
     let resultado='';
     let total = 1;
 

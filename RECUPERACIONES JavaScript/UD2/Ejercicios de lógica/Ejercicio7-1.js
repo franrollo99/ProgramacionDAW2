@@ -13,7 +13,8 @@ do{
     
 }while(numero<0 || numero>10 || isNaN(numero));
 
-function tablaMultiplicar(num){
+function tablaMultiplicar(num)
+{
     let resultado = '';
 
     for(let i=0; i<=10; i++){
