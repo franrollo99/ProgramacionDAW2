@@ -20,14 +20,12 @@ body{
     font-size: 70%;
 }
 
-
-
+/* HEADER */
 header, .siguenosEnRedes{
     background-color: rgb(48, 48, 48);
 }
 
-
-
+/* MAIN */
 main{
     display: grid;
     grid-template-rows: repeat(2, 1fr);
@@ -46,6 +44,16 @@ main{
     gap: 10px;
 }
 
+/* FOOTER */
+footer{
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 10px;
+}
+
+
+
+/* COLORES */
 .marketing, .clientes, .nuestrosServicios{
     background-color: rgb(0, 132, 255);
 }
@@ -59,17 +67,7 @@ main{
     color: black;
 }
 
-
-
-footer{
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    gap: 10px;
-}
-
-
-
-
+/* TEXTO CENTRADO */
 .textoCentrado{
     display: flex;
     justify-content: center;
