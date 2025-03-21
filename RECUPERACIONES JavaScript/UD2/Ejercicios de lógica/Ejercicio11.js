@@ -97,7 +97,6 @@ function esMultiplo(num1, num2)
 function esPrimo(numPrimo)
 {
     if(numPrimo <= 1) return false;
-    if(numPrimo === 2) return true;
 
     for(let p=2; p<=Math.sqrt(numPrimo); p++){
         if(numPrimo%p === 0){
