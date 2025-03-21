@@ -51,6 +51,7 @@ function esMultiplo(num1, num2)
         }
     }
 
+    
     resultado += 'De los siguientes numeros: ';
 
     for(let numero of numeros){
