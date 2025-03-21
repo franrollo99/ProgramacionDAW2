@@ -1,7 +1,7 @@
 let entrada;
 
 // Formula para numero aleatorio -> Math.random() * (max - min + 1) + min);
-let numSecreto = parseInt(Math.random()*100);
+let numSecreto = parseInt(Math.random()*101); // Con la formula seria (Math.random()*(100 + 0 - 1) + 1)
 
 for(let i=0; i<5; i++){
     do{
