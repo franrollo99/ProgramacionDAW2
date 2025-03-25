@@ -5,31 +5,31 @@ let numeroMinimo;
 let sumaNumeros = 0;
 let mediaNumeros;
 
-do{
+do {
     numeroIntroducido = parseInt(prompt('Introduzca un número'));
 
-    if(isNaN(numeroIntroducido)){
+    if (isNaN(numeroIntroducido)) {
         alert('Debes introducir un numero');
-    }else if(!isNaN(numeroIntroducido) && numeroIntroducido !== 0){
+    } else if (!isNaN(numeroIntroducido) && numeroIntroducido !== 0) {
         numeros.push(numeroIntroducido);
     }
 
-}while(numeroIntroducido !== 0);
+} while (numeroIntroducido !== 0);
 
-if(numeros.length > 0){
-    
-    for(let i=0; i<numeros.length; i++){
+if (numeros.length > 0) {
+
+    for (let i = 0; i < numeros.length; i++) {
         sumaNumeros += numeros[i];
 
-        if(i===0){
+        if (i === 0) {
             numeroMaximo = numeros[i];
             numeroMinimo = numeros[i];
-        }else{
-            if(numeroMaximo < numeros[i]){
+        } else {
+            if (numeroMaximo < numeros[i]) {
                 numeroMaximo = numeros[i];
             }
 
-            if(numeroMinimo > numeros[i]){
+            if (numeroMinimo > numeros[i]) {
                 numeroMinimo = numeros[i];
             }
         }
@@ -42,7 +42,7 @@ if(numeros.length > 0){
     console.log('La cantidad de números introducidos es de: ' + numeros.length);
     console.log('El numero mas alto es: ' + numeroMaximo);
     console.log('El numero mas bajo es: ' + numeroMinimo);
-}else{
+} else {
     console.log('No has introducido ningun numero');
 }
 

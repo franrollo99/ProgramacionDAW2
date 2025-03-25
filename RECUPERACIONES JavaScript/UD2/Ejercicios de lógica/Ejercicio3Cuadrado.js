@@ -3,41 +3,40 @@ let cuadrado;
 
 // Bucle que se repite mientras que entrada no sea un numero
 // isNaN(entrada) devuelve false si el valor es un numero
-do{
+do {
     entrada = parseInt(prompt('Introduce un numero para indicar el tamaño del cuadrado'));
 
-    if(!isNaN(entrada)){
+    if (!isNaN(entrada)) {
         cuadrado = crearCuadrado(entrada);
 
         cuadradoPintado = '';
 
-        for(let i=0; i<entrada; i++){
+        for (let i = 0; i < entrada; i++) {
             cuadradoPintado += cuadrado[i] + '\n';
         }
 
         console.log(cuadradoPintado);
-    }else{
+    } else {
         alert('Debes introducir un numero');
     }
-    
-}while(isNaN(entrada))
+
+} while (isNaN(entrada))
 
 
-function crearCuadrado(lado)
-{
+function crearCuadrado(lado) {
     // let resultado = '';
     let filas = new Array(lado);
 
-    for(let fila=0; fila<lado; fila++){
+    for (let fila = 0; fila < lado; fila++) {
 
         filas[fila] = '';
 
-        for(let col=0; col<lado; col++){
+        for (let col = 0; col < lado; col++) {
 
-            if(fila===0 || fila===(lado-1) || col===0 || col===(lado-1)){
+            if (fila === 0 || fila === (lado - 1) || col === 0 || col === (lado - 1)) {
                 filas[fila] += '* ';
 
-            }else{
+            } else {
                 filas[fila] += '  ';
             }
         }
