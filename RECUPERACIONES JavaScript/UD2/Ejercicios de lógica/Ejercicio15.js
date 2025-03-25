@@ -1,5 +1,5 @@
 let trabajador = [
     {
-        codigo: ''
+        codigo: 'a'
     }
 ]
