@@ -1,0 +1,123 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    height: 100vh;
+}
+
+.contenedorPrincipal{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 10px;
+}
+
+header{
+    display: flex;
+    /* flex-direction: row; */
+    /* justify-content: space-between; */
+    align-items: center;
+    background-color: #002B5B;
+    padding: 10px 30px;
+    color: white;
+    border-radius: 5px;
+    height: 100px;
+}
+
+.logo{
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: left;
+}
+
+nav{
+    flex: 1;
+}
+
+nav ul{
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    list-style: none;
+}
+
+nav a{
+    text-decoration: none;
+    color: white;
+}
+
+.inicioSesion{
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: right;
+}
+
+.inicioSesion button{
+    border: 0px;
+    border-radius: 5px;
+    padding: 5px 10px;
+    background-color: #00A6FB;
+    color: white;
+}
+
+
+
+main{
+    flex: 1;
+}
+
+
+
+footer{
+    min-height: 250px;
+    background-color: #222;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 10px;
+}
+
+.superior{
+    display: flex;
+    text-align: center;
+}
+
+.superior p{
+    flex: 1;
+    /* display: flex; */
+    /* justify-content: center; */
+}
+
+.inferior{
+    display: flex;
+    justify-content: space-around;
+}
+
+.inferior div{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.tituloFooter{
+    font-weight: bold;
+}
+
+.inferior ul{
+    list-style: none;
+}
+
+.inferior li{
+    padding: 2px 0;
+}
+
+.inferior a{
+    text-decoration: none;
+    color: white;
+}
