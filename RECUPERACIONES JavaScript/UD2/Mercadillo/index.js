@@ -41,16 +41,13 @@ const $negocio = (function () {
     // console.log(actualizarInventario('manzanas', -1100));
     // console.log(ordenarProductosPorPrecio());
     // console.log(imprimirInventario());
-    // let resultado = 'Lista de productos:\n';
-    // resultado += `-Nombre: ${producto.nombre} -Categoría: ${producto.categoria} -Cantidad: ${producto.cantidad} -Precio: ${producto.precio} -Total: ${(producto.cantidad * producto.precio).toFixed(2)} \n`; // Con toFixed() limito los decimales
-    console.log(filtrarProductosPorCategoria('fruta'));
-
+    // console.log(filtrarProductosPorCategoria('fruta'));
     // console.log(productos);
 
 
     function agregarProducto(nombre, cantidad, precio, categoria) {
-        for(producto of productos){
-            if(producto.nombre === nombre){
+        for (producto of productos) {
+            if (producto.nombre === nombre) {
                 alert('Este producto ya existe');
                 return null;
             }
@@ -67,9 +64,9 @@ const $negocio = (function () {
     }
 
     function eliminarProducto(nombre) {
-        for(let producto of productos){
-            if(producto.nombre === nombre){
-                productos = productos.filter( p => p.nombre !== nombre);
+        for (let producto of productos) {
+            if (producto.nombre === nombre) {
+                productos = productos.filter(p => p.nombre !== nombre);
                 return null;
             }
         }
@@ -81,7 +78,7 @@ const $negocio = (function () {
     function buscarProducto(nombre) {
         let resultados = productos.filter(producto => producto.nombre === nombre);
 
-        if (resultados.length > 0){
+        if (resultados.length > 0) {
             return resultados[0];
         }
 
@@ -90,15 +87,15 @@ const $negocio = (function () {
     }
 
     function actualizarInventario(nombre, cantidad) {
-        for(let producto of productos){
-            if(producto.nombre === nombre){
-                if(producto.cantidad >= (-cantidad)){
+        for (let producto of productos) {
+            if (producto.nombre === nombre) {
+                if (producto.cantidad >= (-cantidad)) {
                     producto.cantidad += cantidad;
-                }else{
+                } else {
                     alert('No hay stock suficiente');
                 }
 
-                if(producto.cantidad === 0){
+                if (producto.cantidad === 0) {
                     alert('Se solicita reposicion del producto');
                 }
 
@@ -117,9 +114,9 @@ const $negocio = (function () {
     }
 
     function imprimirInventario() {
-        let inventario = productos.map(producto => ({...producto})); // ...p expande las propiedades del objeto, {...p} crea un nuevo objeto, se envuelve entre parentesis para que lo tome como un objeto en vez de como una funcion
+        let inventario = productos.map(producto => ({ ...producto })); // ...p expande las propiedades del objeto, {...p} crea un nuevo objeto, se envuelve entre parentesis para que lo tome como un objeto en vez de como una funcion
 
-        for(let producto of inventario){
+        for (let producto of inventario) {
             producto.total = (producto.cantidad * producto.precio).toFixed(2);
         }
 
@@ -128,9 +125,9 @@ const $negocio = (function () {
 
     function filtrarProductosPorCategoria(categoria) {
         let productosFiltrados = [];
-        
-        for(producto of productos){
-            if(producto.categoria === categoria){
+
+        for (producto of productos) {
+            if (producto.categoria === categoria) {
                 productosFiltrados.push({
                     nombre: producto.nombre,
                     cantidad: producto.cantidad,
@@ -139,22 +136,57 @@ const $negocio = (function () {
             }
         }
 
-        // return productosFiltrados;
-        return JSON.stringify(productosFiltrados);
+        return productosFiltrados;
     }
+
+    return {
+        agregarProducto,
+        eliminarProducto,
+        actualizarInventario,
+        buscarProducto,
+        ordenarProductosPorPrecio,
+        imprimirInventario,
+        filtrarProductosPorCategoria
+    };
 
 })();
 
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('hola');
+window.addEventListener('load', () => {
+
+    document.getElementById('btn-listarProductos').addEventListener('click', () => {
+        const resultado = $negocio.imprimirInventario();
+        contenedorResultado.innerHTML = '<h2>Listado de productos</h2><ul>';
+
+        for (let producto of resultado) {
+            contenedorResultado.innerHTML += `<li>${producto.nombre.toLocaleUpperCase()}</li><ul><li>Categoria: ${producto.categoria}</li><li>Cantidad: ${producto.cantidad}</li><li>Precio: ${producto.precio}</li><li>Total: ${producto.total}</li></ul>`;
+        }
+
+        contenedorResultado.innerHTML += '</ul>';
+    });
+
+    document.getElementById('btn-ordenarPrecio').addEventListener('click', () => {
+        const resultado = $negocio.ordenarProductosPorPrecio();
+
+        contenedorResultado.innerHTML = '<h2>Listado de productos</h2><ul>';
+
+        for (let producto of resultado) {
+            contenedorResultado.innerHTML += `<li>${producto.nombre.toLocaleUpperCase()}</li><ul><li>Categoria: ${producto.categoria}</li><li>Cantidad: ${producto.cantidad}</li><li>Precio: ${producto.precio}</li></ul>`;
+        }
+
+        contenedorResultado.innerHTML += '</ul>';
+    });
+
+    document.getElementById('filtrarEnviar').addEventListener('click', () => {
+        event.preventDefault();
+        const filtro = document.getElementById('filtrarCategoria').value;
+        const resultado = $negocio.filtrarProductosPorCategoria(filtro);
+
+        contenedorResultado.innerHTML = '<h2>Listado de productos</h2><ul>';
+
+        for (let producto of resultado) {
+            contenedorResultado.innerHTML += `<li>${producto.nombre.toLocaleUpperCase()}</li><ul><li>Cantidad: ${producto.cantidad}</li><li>Precio: ${producto.precio}</li></ul>`;
+        }
+
+        contenedorResultado.innerHTML += '</ul>';
+    });
 });
-
-
-
-
-
-
-
-
-
-

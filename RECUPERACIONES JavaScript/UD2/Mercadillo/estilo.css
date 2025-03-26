@@ -1,0 +1,20 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.contenedorPrincipal{
+    display: flex;
+    justify-content: space-around;
+}
+
+.contenedorSecundario{
+    /* border: 1px solid black; */
+    border-radius: 5px;
+    padding: 10px;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+}
