@@ -1,0 +1,181 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+main{
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+h2, h3{
+    color: rgb(0, 0, 110);
+}
+
+/*********** SECCION PRINCIPAL ***********/
+.principal{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.banner{
+    background-color: rgb(0, 56, 141);
+    color: white;
+    padding: 30px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.banner div{
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+}
+
+.banner p{
+    font-size: 80%;
+}
+
+.banner a{
+    width: 90%;
+    text-decoration: none;
+    color: white;
+    font-weight: 700;
+    background-color: rgb(58, 160, 255);   
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.caracteristicas{
+    display: flex;
+    gap: 10px;
+}
+
+.caracteristicas .tituloTarjeta{
+    font-weight: bold;
+}
+
+.caracteristicas .tarjeta{
+    padding: 20px;
+    background-color: white;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 3px 3px 10px 1px gray;
+}
+
+.caracteristicas .tarjeta p{
+    text-align: center;
+}
+
+.caracteristicas img{
+    width: 50px;
+}
+
+.principal .abajo{
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+.principal .abajo a{
+    text-decoration: none;
+    color: white;
+    font-weight: 700;
+    background-color: rgb(58, 160, 255);   
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+/*********** SOBRE NOSOTROS ***********/
+.sobreNosotros{
+    padding: 30px;
+    max-width: 1100px;
+    min-height: 400px;
+    background-color: #f4f4f4;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.izquierda{
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.izquierda a{
+    width: max-content;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    background-color: rgb(58, 160, 255);
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+.derecha{
+    flex: 2;
+}
+
+.derecha img{
+    width: 100%;
+    border-radius: 5px;
+}
+
+/*********** TARIFAS ***********/
+.tarifas{
+    padding: 20px 100px;
+    background-color: #f4f4f4;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.tarifas .tarjetas{
+    display: flex;
+    gap: 10px;
+}
+
+.tarifas .tarjeta{
+    padding: 20px;
+    background-color: white;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 3px 3px 10px 1px gray;
+}
+
+h4{
+    color: rgb(58, 160, 255);
+}
+
+.tarifas .tarjeta ul{
+    list-style: none;
+}
+
+.tarifas .tarjeta a{
+    width: max-content;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    background-color: rgb(58, 160, 255);   
+    padding: 10px 15px;
+    border-radius: 5px;
+}
