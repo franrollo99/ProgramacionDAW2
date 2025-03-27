@@ -1,4 +1,8 @@
 const contenedorResultado = document.getElementById('resultados');
+const formCrearProducto = document.getElementById('form-crear');
+const formEliminarProducto = document.getElementById('form-eliminar');
+const formBuscarProducto = document.getElementById('form-buscar');
+const formFiltrarCategoria = document.getElementById('form-filtrar');
 
 const $negocio = (function () {
 
@@ -46,7 +50,7 @@ const $negocio = (function () {
 
 
     function agregarProducto(nombre, cantidad, precio, categoria) {
-        for (producto of productos) {
+        for (let producto of productos) {
             if (producto.nombre === nombre) {
                 alert('Este producto ya existe');
                 return null;
@@ -65,7 +69,7 @@ const $negocio = (function () {
 
     function eliminarProducto(nombre) {
         for (let producto of productos) {
-            if (producto.nombre === nombre) {
+            if (producto.nombre.toLowerCase() === nombre.toLowerCase()) {
                 productos = productos.filter(p => p.nombre !== nombre);
                 return null;
             }
@@ -114,6 +118,7 @@ const $negocio = (function () {
     }
 
     function imprimirInventario() {
+        // Tambien se puede hacer la copia con un for
         let inventario = productos.map(producto => ({ ...producto })); // ...p expande las propiedades del objeto, {...p} crea un nuevo objeto, se envuelve entre parentesis para que lo tome como un objeto en vez de como una funcion
 
         for (let producto of inventario) {
@@ -126,8 +131,8 @@ const $negocio = (function () {
     function filtrarProductosPorCategoria(categoria) {
         let productosFiltrados = [];
 
-        for (producto of productos) {
-            if (producto.categoria === categoria) {
+        for (let producto of productos) {
+            if (producto.categoria.toLowerCase() === categoria.toLowerCase()) {
                 productosFiltrados.push({
                     nombre: producto.nombre,
                     cantidad: producto.cantidad,
@@ -153,9 +158,79 @@ const $negocio = (function () {
 
 window.addEventListener('load', () => {
 
-    document.getElementById('btn-listarProductos').addEventListener('click', () => {
+    formCrearProducto.addEventListener('submit', () => {
+        event.preventDefault();
+        const nombreProducto = document.getElementById('crearNombre').value;
+        const cantidadProducto = document.getElementById('crearCantidad').value;
+        const precioProducto = document.getElementById('crearPrecio').value;
+        const categoriaProducto = document.getElementById('crearCategoria').value;
+        $negocio.agregarProducto(nombreProducto, cantidadProducto, precioProducto, categoriaProducto);
+
+        contenedorResultado.innerHTML = '';
         const resultado = $negocio.imprimirInventario();
-        contenedorResultado.innerHTML = '<h2>Listado de productos</h2><ul>';
+        contenedorResultado.innerHTML += '<h2>Listado de productos</h2><ul>';
+
+        for (let producto of resultado) {
+            contenedorResultado.innerHTML += `<li>${producto.nombre.toLocaleUpperCase()}</li><ul><li>Categoria: ${producto.categoria}</li><li>Cantidad: ${producto.cantidad}</li><li>Precio: ${producto.precio}</li><li>Total: ${producto.total}</li></ul>`;
+        }
+
+        contenedorResultado.innerHTML += '</ul>';
+    });
+
+    formEliminarProducto.addEventListener('submit', () => {
+        event.preventDefault();
+        contenedorResultado.innerHTML = '';
+        const productoEliminado = document.getElementById('eliminarNombre').value;
+        $negocio.eliminarProducto(productoEliminado);
+        const resultado = $negocio.imprimirInventario();
+
+        contenedorResultado.innerHTML += '<h2>Listado de productos</h2><ul>';
+
+        for (let producto of resultado) {
+            contenedorResultado.innerHTML += `<li>${producto.nombre.toLocaleUpperCase()}</li><ul><li>Categoria: ${producto.categoria}</li><li>Cantidad: ${producto.cantidad}</li><li>Precio: ${producto.precio}</li><li>Total: ${producto.total}</li></ul>`;
+        }
+
+        contenedorResultado.innerHTML += '</ul>';
+    });
+
+    formBuscarProducto.addEventListener('submit', () => {
+        event.preventDefault();
+        contenedorResultado.innerHTML = '';
+        const filtro = document.getElementById('buscarNombre').value;
+        const resultado = $negocio.buscarProducto(filtro);
+
+        if(resultado){
+            contenedorResultado.innerHTML += `<ul><li>${resultado.nombre.toLocaleUpperCase()}</li><li>Categoria: ${resultado.categoria}</li><li>Cantidad: ${resultado.cantidad}</li><li>Precio: ${resultado.precio}</li></ul>`;
+        }
+
+        formBuscarProducto.reset();
+    });
+
+    formFiltrarCategoria.addEventListener('submit', () => {
+        event.preventDefault();
+        contenedorResultado.innerHTML = '';
+        const filtro = document.getElementById('filtrarCategoria').value;
+        const resultado = $negocio.filtrarProductosPorCategoria(filtro);
+
+        if(resultado.length > 0){
+            contenedorResultado.innerHTML += '<h2>Listado de productos</h2><ul>';
+
+            for (let producto of resultado) {
+                contenedorResultado.innerHTML += `<li>${producto.nombre.toLocaleUpperCase()}</li><ul><li>Cantidad: ${producto.cantidad}</li><li>Precio: ${producto.precio}</li></ul>`;
+            }
+
+            contenedorResultado.innerHTML += '</ul>';
+        }else{
+            contenedorResultado.innerHTML = '<p>No se ha encontrado ningun producto con esa categoria</p>';
+        }
+
+        formFiltrarCategoria.reset();
+    });
+
+    document.getElementById('btn-listarProductos').addEventListener('click', () => {
+        contenedorResultado.innerHTML = '';
+        const resultado = $negocio.imprimirInventario();
+        contenedorResultado.innerHTML += '<h2>Listado de productos</h2><ul>';
 
         for (let producto of resultado) {
             contenedorResultado.innerHTML += `<li>${producto.nombre.toLocaleUpperCase()}</li><ul><li>Categoria: ${producto.categoria}</li><li>Cantidad: ${producto.cantidad}</li><li>Precio: ${producto.precio}</li><li>Total: ${producto.total}</li></ul>`;
@@ -165,26 +240,13 @@ window.addEventListener('load', () => {
     });
 
     document.getElementById('btn-ordenarPrecio').addEventListener('click', () => {
+        contenedorResultado.innerHTML = '';
         const resultado = $negocio.ordenarProductosPorPrecio();
 
-        contenedorResultado.innerHTML = '<h2>Listado de productos</h2><ul>';
+        contenedorResultado.innerHTML += '<h2>Listado de productos</h2><ul>';
 
         for (let producto of resultado) {
             contenedorResultado.innerHTML += `<li>${producto.nombre.toLocaleUpperCase()}</li><ul><li>Categoria: ${producto.categoria}</li><li>Cantidad: ${producto.cantidad}</li><li>Precio: ${producto.precio}</li></ul>`;
-        }
-
-        contenedorResultado.innerHTML += '</ul>';
-    });
-
-    document.getElementById('filtrarEnviar').addEventListener('click', () => {
-        event.preventDefault();
-        const filtro = document.getElementById('filtrarCategoria').value;
-        const resultado = $negocio.filtrarProductosPorCategoria(filtro);
-
-        contenedorResultado.innerHTML = '<h2>Listado de productos</h2><ul>';
-
-        for (let producto of resultado) {
-            contenedorResultado.innerHTML += `<li>${producto.nombre.toLocaleUpperCase()}</li><ul><li>Cantidad: ${producto.cantidad}</li><li>Precio: ${producto.precio}</li></ul>`;
         }
 
         contenedorResultado.innerHTML += '</ul>';
