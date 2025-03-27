@@ -158,8 +158,8 @@ const $negocio = (function () {
 
 window.addEventListener('load', () => {
 
-    formCrearProducto.addEventListener('submit', () => {
-        event.preventDefault();
+    formCrearProducto.addEventListener('submit', (e) => {
+        e.preventDefault();
         const nombreProducto = document.getElementById('crearNombre').value;
         const cantidadProducto = document.getElementById('crearCantidad').value;
         const precioProducto = document.getElementById('crearPrecio').value;
@@ -175,10 +175,11 @@ window.addEventListener('load', () => {
         }
 
         contenedorResultado.innerHTML += '</ul>';
+        formCrearProducto.reset();
     });
 
-    formEliminarProducto.addEventListener('submit', () => {
-        event.preventDefault();
+    formEliminarProducto.addEventListener('submit', (e) => {
+        e.preventDefault();
         contenedorResultado.innerHTML = '';
         const productoEliminado = document.getElementById('eliminarNombre').value;
         $negocio.eliminarProducto(productoEliminado);
@@ -191,10 +192,11 @@ window.addEventListener('load', () => {
         }
 
         contenedorResultado.innerHTML += '</ul>';
+        formEliminarProducto.reset();
     });
 
-    formBuscarProducto.addEventListener('submit', () => {
-        event.preventDefault();
+    formBuscarProducto.addEventListener('submit', (e) => {
+        e.preventDefault();
         contenedorResultado.innerHTML = '';
         const filtro = document.getElementById('buscarNombre').value;
         const resultado = $negocio.buscarProducto(filtro);
@@ -206,8 +208,8 @@ window.addEventListener('load', () => {
         formBuscarProducto.reset();
     });
 
-    formFiltrarCategoria.addEventListener('submit', () => {
-        event.preventDefault();
+    formFiltrarCategoria.addEventListener('submit', (e) => {
+        e.preventDefault();
         contenedorResultado.innerHTML = '';
         const filtro = document.getElementById('filtrarCategoria').value;
         const resultado = $negocio.filtrarProductosPorCategoria(filtro);
