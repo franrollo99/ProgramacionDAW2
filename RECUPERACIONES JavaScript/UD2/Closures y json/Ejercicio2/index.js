@@ -32,7 +32,7 @@ const alumnos = [
     {
         nombre: 'Aymane',
         nota: 6,
-        modulo: 'DWEC',
+        modulo: 'DWES',
         convocatoria: 2
     },
 ];
@@ -55,8 +55,38 @@ function alumnosSuspensos(){
     return alumnosSuspensos;
 }
 
-function estadisticasPorModulo(){
-    
+function estadisticasPorModulo(m){
+    let estadisticasModulo = [];
+    let modulos = {};
+
+    // Creo el objeto modulos con todos datos
+    for(let alumno of alumnos){
+        if(!modulos[alumno.modulo]){
+            modulos[alumno.modulo] = {
+                totalNotas: alumno.nota,
+                totalConvocatorias: alumno.convocatoria,
+                numAlumnos: 1
+            };
+        }else{
+            modulos[alumno.modulo].totalNotas += alumno.nota;
+            modulos[alumno.modulo].totalConvocatorias += alumno.convocatoria;
+            modulos[alumno.modulo].numAlumnos ++;
+        }
+    }
+
+    // Calculo la media de notas y convocatorias
+    for(let alumno of alumnos){
+        modulos[alumno.modulo].totalNotas += alumno.nota;
+        modulos[alumno.modulo].totalConvocatorias += alumno.convocatoria;
+        modulos[alumno.modulo].numAlumnos ++;
+    }
+
+    console.log(modulos);
+
+
+
+    return estadisticasModulo;
 }
 
-console.log(alumnosSuspensos());
+// console.log(alumnosSuspensos());
+console.log(estadisticasPorModulo('DWEC'));
