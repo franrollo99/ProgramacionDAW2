@@ -3,10 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mercadillo</title>
-    <script src="index.js"></script>
+    <title>Mercadillo 2.0</title>
+    <script src="index.js" defer></script>
+    <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
-    
+    <div class="contenedorPrincipal">
+        <div class="contenedorSecundario izquierda">
+            <div>
+                <h2>Crear producto</h2>
+                <form id="form-crear">
+                    <label for="crearNombre">Nombre</label>
+                    <input type="text" id="crearNombre">
+                    <label for="crearCantidad">Cantidad</label>
+                    <input type="text" id="crearCantidad">
+                    <label for="crearPrecio">Precio</label>
+                    <input type="text" id="crearPrecio">
+                    <label for="crearCategoria">Categoria</label>
+                    <input type="text" id="crearCategoria">
+                    <button type="submit" id="crearEnviar">Crear</button>
+                </form>
+            </div>
+
+            <div>
+                <h2>Eliminar producto</h2>
+                <form id="form-eliminar">
+                    <label for="eliminarNombre">Nombre</label>
+                    <input type="text" id="eliminarNombre">
+                    <button type="submit" id="eliminarEnviar">Eliminar</button>
+                </form>
+            </div>
+
+            <div>
+                <h2>Buscar producto</h2>
+                <form id="form-buscar">
+                    <label for="buscarNombre">Nombre</label>
+                    <input type="text" id="buscarNombre">
+                    <button type="submit" id="buscarEnviar">Buscar</button>
+                </form>
+            </div>
+
+            <div>
+                <h2>Actualizar producto</h2>
+                <form id="form-actualizar">
+                    <label for="actualizarNombre">Nombre</label>
+                    <input type="text" id="actualizarNombre">
+                    <label for="actualizarCantidad">Cantidad</label>
+                    <input type="text" id="actualizarCantidad">
+                    <button type="submit" id="actualizarEnviar">Actualizar</button>
+                </form>
+            </div>
+
+            <div>
+                <h2>Filtrar productos por categoria</h2>
+                <form id="form-filtrar">
+                    <label for="filtrarCategoria">Categoria</label>
+                    <input type="text" id="filtrarCategoria">
+                    <button type="submit" id="filtrarEnviar">Filtrar</button>
+                </form>
+            </div>
+        </div>
+        <div class="contenedorSecundario derecha">
+            
+            <button id="btn-listarProductos">Mostrar productos</button>
+            <button id="btn-ordenarPrecio">Ordenar por precio</button>
+            
+            <div id="resultados"></div>
+        </div>
+    </div>
 </body>
 </html>
