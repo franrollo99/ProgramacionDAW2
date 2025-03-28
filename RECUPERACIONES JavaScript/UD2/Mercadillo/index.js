@@ -2,6 +2,7 @@ const contenedorResultado = document.getElementById('resultados');
 const formCrearProducto = document.getElementById('form-crear');
 const formEliminarProducto = document.getElementById('form-eliminar');
 const formBuscarProducto = document.getElementById('form-buscar');
+const formActualizarProducto = document.getElementById('form-actualizar');
 const formFiltrarCategoria = document.getElementById('form-filtrar');
 
 const $negocio = (function () {
@@ -42,7 +43,7 @@ const $negocio = (function () {
     // console.log(agregarProducto('producto', 20, 20.20, 'categoria'));
     // console.log(eliminarProducto('manzanas'));
     // console.log(buscarProducto('manzanas'));
-    // console.log(actualizarInventario('manzanas', -1100));
+    // console.log(actualizarInventario('patatas', 100));
     // console.log(ordenarProductosPorPrecio());
     // console.log(imprimirInventario());
     // console.log(filtrarProductosPorCategoria('fruta'));
@@ -92,7 +93,7 @@ const $negocio = (function () {
 
     function actualizarInventario(nombre, cantidad) {
         for (let producto of productos) {
-            if (producto.nombre === nombre) {
+            if (producto.nombre.toLowerCase() === nombre.toLowerCase()) {
                 if (producto.cantidad >= (-cantidad)) {
                     producto.cantidad += cantidad;
                 } else {
@@ -161,8 +162,8 @@ window.addEventListener('load', () => {
     formCrearProducto.addEventListener('submit', (e) => {
         e.preventDefault();
         const nombreProducto = document.getElementById('crearNombre').value;
-        const cantidadProducto = document.getElementById('crearCantidad').value;
-        const precioProducto = document.getElementById('crearPrecio').value;
+        const cantidadProducto = parseInt(document.getElementById('crearCantidad').value);
+        const precioProducto = parseFloat(document.getElementById('crearPrecio').value);
         const categoriaProducto = document.getElementById('crearCategoria').value;
         $negocio.agregarProducto(nombreProducto, cantidadProducto, precioProducto, categoriaProducto);
 
@@ -206,6 +207,23 @@ window.addEventListener('load', () => {
         }
 
         formBuscarProducto.reset();
+    });
+
+    formActualizarProducto.addEventListener('submit', (e) => {
+        e.preventDefault();
+        contenedorResultado.innerHTML = '';
+        const nombreProducto = document.getElementById('actualizarNombre').value;
+        const cantidadProducto = parseInt(document.getElementById('actualizarCantidad').value);
+        $negocio.actualizarInventario(nombreProducto, cantidadProducto);
+        const resultado = $negocio.imprimirInventario();
+        contenedorResultado.innerHTML += '<h2>Listado de productos</h2><ul>';
+
+        for (let producto of resultado) {
+            contenedorResultado.innerHTML += `<li>${producto.nombre.toLocaleUpperCase()}</li><ul><li>Categoria: ${producto.categoria}</li><li>Cantidad: ${producto.cantidad}</li><li>Precio: ${producto.precio}</li><li>Total: ${producto.total}</li></ul>`;
+        }
+
+        contenedorResultado.innerHTML += '</ul>';
+        formActualizarProducto.reset();
     });
 
     formFiltrarCategoria.addEventListener('submit', (e) => {
