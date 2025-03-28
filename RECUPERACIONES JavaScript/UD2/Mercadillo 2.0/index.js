@@ -107,10 +107,10 @@ const $negocio = (function(){
 
                 return null;
             }
-
-            alert('Este producto no existe');
-            return null;
         }
+
+        alert('Este producto no existe');
+        return null;
     }
 
     function ordenarProductosPorPrecio(){
