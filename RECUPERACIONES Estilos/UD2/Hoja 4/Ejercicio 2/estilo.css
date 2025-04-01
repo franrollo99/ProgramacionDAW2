@@ -68,19 +68,19 @@ aside a{
 }
 
 .fotoPerfil img{
-    width: 200px;
+    width: 190px;
     height: 150px;
     object-fit: cover;
-    border-radius: 50%;
+    border-radius: 47%;
   }
   
 .navPerfil{
     display: flex;
-    gap: 10px;
+    gap: 20px;
 }
 
 .navPerfil a{
-    padding: 5px 10px;
+    padding: 10px 15px;
     text-decoration: none;
     border-radius: 5px;
     color: white;
