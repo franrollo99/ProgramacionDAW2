@@ -1,0 +1,120 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    height: 100vh;
+}
+
+.contenedorPrincipal{
+    padding: 10px;
+    height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    display: grid;
+    grid-template-rows: 1fr auto;
+}
+
+
+
+/****************************** MAIN ******************************/
+main{
+    display: grid;
+    grid-template-columns: auto 1fr;
+}
+
+aside{
+    padding: 30px 20px;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #004492;
+    color: white;
+    border-top-left-radius: 5px;
+}
+
+aside ul{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+aside a{
+    color: white;
+    text-decoration: none;
+}
+
+.contenidoPrincipal{
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
+
+.arriba{
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: #e2e2e2;
+    border-top-right-radius: 5px;
+}
+
+.fotoPerfil{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.fotoPerfil img{
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  
+.navPerfil{
+    display: flex;
+    gap: 10px;
+}
+
+.navPerfil a{
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 5px;
+    color: white;
+    background-color: #279eee;
+}
+
+.abajo{
+    padding: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.tarjetas{
+    padding: 30px 20px;
+    width: 300px;
+    height: 300px;;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border: 1px solid rgb(228, 228, 228);
+    border-radius: 5px;
+
+}
+
+
+/****************************** FOOTER ******************************/
+footer{
+    padding: 20px;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    background-color: #002B5B;
+    color: white;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
