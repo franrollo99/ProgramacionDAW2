@@ -1,4 +1,5 @@
 const contenedorResultado = document.getElementById('resultados');
+const formJSON = document.getElementById('form-nuevoJSON');
 
 const $yedra = (function () {
 
@@ -148,7 +149,7 @@ window.addEventListener('load', () => {
         contenedorResultado.innerHTML = '';
         contenedorResultado.innerHTML += '<h2>Listado de alumnos suspensos</h2>';
 
-        for(let alumno of resultado){
+        for (let alumno of resultado) {
             contenedorResultado.innerHTML += `
                 <ul>
                     <li>Nombre: ${alumno.nombre}</li>
@@ -165,7 +166,7 @@ window.addEventListener('load', () => {
         contenedorResultado.innerHTML = '';
         contenedorResultado.innerHTML += '<h2>Listado de estadisticas por modulo</h2>';
 
-        for(let modulo of resultado){
+        for (let modulo of resultado) {
             contenedorResultado.innerHTML += `
                 <ul>
                     <li>Nombre: ${modulo.nombre}</li>
@@ -184,4 +185,14 @@ window.addEventListener('load', () => {
 
         contenedorResultado.innerHTML += `<p>${resultado}</p>`;
     });
-})
+
+    formJSON.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const resultado = document.getElementById('nuevoJSON').value;
+
+        console.log($yedra.formatearCadenasAObjetos(resultado));
+
+        formJSON.reset();
+    });
+});
