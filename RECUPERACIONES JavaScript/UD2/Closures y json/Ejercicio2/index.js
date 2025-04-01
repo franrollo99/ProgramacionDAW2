@@ -61,7 +61,7 @@ const $yedra = (function () {
         return alumnosSuspensos;
     }
 
-    function estadisticasPorModulo(m) {
+    function estadisticasPorModulo() {
         let estadisticasModulos = [];
         let modulos = {};
 
