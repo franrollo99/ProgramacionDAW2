@@ -1,3 +1,5 @@
+const contenedorResultado = document.getElementById('resultados');
+
 const $yedra = (function () {
 
     const alumnos = [
@@ -139,4 +141,47 @@ const $yedra = (function () {
     }
 })();
 
+window.addEventListener('load', () => {
+    document.getElementById('listarAlumnos').addEventListener('click', () => {
+        const resultado = $yedra.alumnosSuspensos();
 
+        contenedorResultado.innerHTML = '';
+        contenedorResultado.innerHTML += '<h2>Listado de alumnos suspensos</h2>';
+
+        for(let alumno of resultado){
+            contenedorResultado.innerHTML += `
+                <ul>
+                    <li>Nombre: ${alumno.nombre}</li>
+                    <li>Módulo: ${alumno.modulo}</li>
+                    <li>Nota: ${alumno.nota}</li>
+                </ul>
+            `;
+        }
+    });
+
+    document.getElementById('estadisticasModulos').addEventListener('click', () => {
+        const resultado = $yedra.estadisticasPorModulo();
+
+        contenedorResultado.innerHTML = '';
+        contenedorResultado.innerHTML += '<h2>Listado de estadisticas por modulo</h2>';
+
+        for(let modulo of resultado){
+            contenedorResultado.innerHTML += `
+                <ul>
+                    <li>Nombre: ${modulo.nombre}</li>
+                    <li>Nota media: ${modulo.notasMedia}</li>
+                    <li>Convocatorias media: ${modulo.convocatoriasMedia}</li>
+                </ul>
+            `;
+        }
+    });
+
+    document.getElementById('alumnosCadena').addEventListener('click', () => {
+        const resultado = $yedra.formatearObjetosACadenas();
+
+        contenedorResultado.innerHTML = '';
+        contenedorResultado.innerHTML += '<h2>Datos de alumnos en formato JSON</h2>';
+
+        contenedorResultado.innerHTML += `<p>${resultado}</p>`;
+    });
+})
