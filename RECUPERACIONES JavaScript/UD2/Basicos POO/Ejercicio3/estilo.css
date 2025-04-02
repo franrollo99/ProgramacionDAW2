@@ -1,0 +1,28 @@
+*{
+
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    height: 90vh;
+}
+
+.contenedorPrincipal{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.izquierda{
+    /* border: 1px solid black; */
+}
+
+.derecha{
+    height: 100%;
+    /* border: 1px solid black; */
+}
+
+.factura{
+    height: 100%;
+    border: 1px solid gray;
+}

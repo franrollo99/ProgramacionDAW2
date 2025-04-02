@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3</title>
+    <script type="module" src="index.js"></script>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+
+<body>
+    <div class="contenedorPrincipal">
+
+        <div class="izquierda">
+            <form id="form-crearFactura">
+                <fieldset>
+                    <legend><h2>Crear Factura</h2></legend>
+                    <label for="clienteNIF">NIF:</label>
+                    <input type="text" id="clienteNIF">
+                    <br><br>
+                    <label for="fecha">Fecha:</label>
+                    <input type="text" id="fecha" placeholder="dd/mm/aaaa">
+                    <br><br>
+                    <label for="hora">Hora:</label>
+                    <input type="text" id="hora" placeholder="hh:mm">
+                    <br><br>
+                    <label for="pagada">Pagado:</label>
+                    <input type="checkbox" id="pagada">
+                    <br><br>
+                    <input type="submit" value="Actualizar">
+                </fieldset>
+            </form>
+
+            <form id="form-lineasFactura">
+                <fieldset>
+                    <legend><h2>Introducir lineas en la factura</h2></legend>
+                    <label for="concepto">Concepto:</label>
+                    <input type="text" id="concepto">
+                    <br><br>
+                    <label for="cantidad">Cantidad:</label>
+                    <input type="number" id="cantidad">
+                    <br><br>
+                    <label for="precio">Precio:</label>
+                    <input type="number" id="precio">
+                    <br><br>
+                    <input type="submit" value="Agregar linea">
+                    <button id="btn-eliminarLinea">Eliminar ultima linea</button>
+                </fieldset>
+            </form>
+
+            <form id="form-serializarDeserializar">
+                <fieldset>
+                    <legend><h2>Serializa o deserializa la factura</h2></legend>
+                    <label for="entrada">Entrada</label>
+                    <input type="text" id="entrada">
+                    <br><br>
+                    <label for="salida">Salida</label>
+                    <br>
+                    <textarea id="salida"></textarea>
+                    <br><br>
+                    <button>Serializar</button>
+                    <button>Deserializar</button>
+                </fieldset>
+            </form>
+        </div>
+
+        <div class="derecha">
+            <button id="imprimirFactura">Imprimir factura</button>
+            <br><br>
+            <div class="factura"></div>
+        </div>
+    </div>
+</body>
+
+</html>
