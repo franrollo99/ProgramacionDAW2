@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca</title>
+    <script type="module" src="gestorBiblioteca.js"></script>
+</head>
+<body>
+
+    <nav>
+        <button id="btn-listarAutores">Listado de autores</button>
+        <button id="btn-listarLibros">Listado de libros</button>
+        <button id="btn-listarBibliotecas">Listado de bibliotecas</button>
+    </nav>
+
+    <form id="form-buscador">
+        <fieldset>
+            <legend><h2>Buscador</h2></legend>
+            <input type="radio" name="filtro" id="libro" value="libro">
+            <label for="libro">Libro</label>
+            <input type="radio" name="filtro" id="autor" value="autor">
+            <label for="autor">Autor</label>
+            <br><br>
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre">
+            <br><br>
+            <input type="submit" value="Buscar">
+        </fieldset>
+    </form>
+
+    <div id="app"></div>
+
+    <div id="propiedadesAutor">
+        <p>Nombre: </p>
+        <p>Ubicacion: </p>
+        <p>Libros:</p>
+        <ul>
+            <li>libro</li>
+        </ul>
+        <button>Añadir libros</button>
+        <button>Eliminar libros</button>
+    </div>
+
+</body>
+</html>
