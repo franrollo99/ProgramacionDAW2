@@ -22,7 +22,7 @@ body{
     /* border: 1px solid black; */
 }
 
-.factura{
+#factura{
     height: 100%;
     border: 1px solid gray;
 }
