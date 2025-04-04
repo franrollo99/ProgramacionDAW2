@@ -24,13 +24,20 @@ class Biblioteca{
         `;
     }
 
-    generarHTMLPropiedades(){
-        
-    }
-
     generarHTMLEdicion(){
         return `
-        
+            <form id="form-editarBiblioteca">
+                <fieldset>
+                    <legend><h2>Editar biblioteca</h2></legend>
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" value="${this.nombre}">
+                    <br><br>
+                    <label for="ubicacion">Ubicacion</label>
+                    <input type="text" id="ubicacion" value="${this.ubicacion}">
+                    <br><br>
+                    <input type="submit" value="Editar">
+                </fieldset>
+            </form>   
         `;
     }
 }

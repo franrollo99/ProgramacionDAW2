@@ -52,10 +52,10 @@ class Autor{
                     <input type="text" id="nombre" value="${this.nombre}">
                     <br><br>
                     <label for="nacionalidad">Nacionalidad</label>
-                    <input type="text" id="nacionalidad">
+                    <input type="text" id="nacionalidad" value="${this.nacionalidad}">
                     <br><br>
                     <label for="biografia">Biografia</label>
-                    <input type="text" id="biografia">
+                    <input type="text" id="biografia" value="${this.biografia}">
                     <br><br>
                     <input type="submit" value="Editar">
                 </fieldset>
