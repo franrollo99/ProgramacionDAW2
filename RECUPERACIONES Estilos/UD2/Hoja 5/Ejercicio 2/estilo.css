@@ -1,0 +1,64 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+
+}
+
+.contenedorPrincipal{
+    padding: 10px;
+}
+
+
+/***************** HEADER *****************/
+header{
+    padding: 10px 30px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    background-color: black;
+    color: white;
+    border-top-left-radius: 5px;
+    border-top-right-radius:  5px;
+}
+
+header span{
+    color: bisque;
+}
+
+header nav ul{
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    list-style: none;
+}
+
+header nav a{
+    color: white;
+    text-decoration: none;
+}
+
+
+
+/***************** MAIN *****************/
+main{
+    background-color: bisque;
+    display: grid;
+    grid-template-rows: 2fr 1fr;
+    justify-content: center;
+    align-items: center;
+}
+
+.principal{
+    display: grid;
+}
+
+
+
+
+
+
+/***************** FOOTER *****************/

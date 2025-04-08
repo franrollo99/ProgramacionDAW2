@@ -10,9 +10,10 @@ body{
 
 .contenedorPrincipal{
     padding: 10px;
+    font-size: 150%;
 }
 
-p{
+p, a{
     font-size: 80%;
 }
 
@@ -20,7 +21,6 @@ p{
     padding: 5px 15px;
     width: max-content;
     background-color: rgb(0, 162, 255);
-    font-weight: 600;
     color: white;
     text-decoration: none;
     border-radius: 5px;
@@ -31,8 +31,8 @@ p{
 /***************** HEADER *****************/
 header{
     padding: 10px 30px;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     align-items: center;
     background-color: #000272;
     color: white;
@@ -42,6 +42,7 @@ header{
 
 nav ul{
     display: flex;
+    justify-content: flex-end;
     gap: 15px;
     list-style: none;
 }
@@ -54,6 +55,11 @@ nav ul a{
 
 
 /***************** MAIN *****************/
+main{
+    display: grid;
+    grid-template-rows: 3fr 1fr 1fr;
+}
+
 .principal{
     display: flex;
     justify-content: space-between;
@@ -61,19 +67,27 @@ nav ul a{
     background-color: #d3d3d3;
 }
 
-.izquierda{
+.principal .izquierda{
+    flex: 1;
     padding: 30px;
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.izquierda h1{
+.principal .izquierda h1{
     color: #000272;
 }
 
-.derecha img{
+.principal .derecha{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.principal .derecha img{
     padding: 30px;
+    width: 100%;
     border-radius: 40px;
 }
 
@@ -84,6 +98,7 @@ nav ul a{
 }
 
 .tarjetas{
+    flex: 1;
     padding: 15px 20px;
     display: flex;
     flex-direction: column;
@@ -98,16 +113,20 @@ nav ul a{
 }
 
 .testimonios{
-    padding: 40px 15px;
+    padding: 40px 30px;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
     background-color: #e7e7e7;
 }
 
 .testimonios div{
+    flex: 1;
     padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
     background-color: white;
     border-radius: 5px;
 }
@@ -119,3 +138,44 @@ nav ul a{
 
 
 /***************** FOOTER *****************/
+footer{
+    display: grid;
+    grid-template-rows: 300px auto;
+    color: white;
+}
+
+footer .arriba{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background-color: #000397;
+}
+
+footer .abajo{
+    display: flex;
+    background-color: #000153;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+footer .abajo div{
+    flex: 1;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+footer .abajo ul{
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+footer .abajo a{
+    text-decoration: none;
+    color: white;
+}
