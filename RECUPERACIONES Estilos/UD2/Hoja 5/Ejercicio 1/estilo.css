@@ -1,0 +1,121 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.contenedorPrincipal{
+    padding: 10px;
+}
+
+p{
+    font-size: 80%;
+}
+
+.boton{
+    padding: 5px 15px;
+    width: max-content;
+    background-color: rgb(0, 162, 255);
+    font-weight: 600;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+
+
+/***************** HEADER *****************/
+header{
+    padding: 10px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000272;
+    color: white;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+nav ul{
+    display: flex;
+    gap: 15px;
+    list-style: none;
+}
+
+nav ul a{
+    color: white;
+    text-decoration: none;
+}
+
+
+
+/***************** MAIN *****************/
+.principal{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #d3d3d3;
+}
+
+.izquierda{
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.izquierda h1{
+    color: #000272;
+}
+
+.derecha img{
+    padding: 30px;
+    border-radius: 40px;
+}
+
+.servicios{
+    padding: 30px;
+    display: flex;
+    gap: 15px;
+}
+
+.tarjetas{
+    padding: 15px 20px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 5px;
+    background-color: #d3d3d3;
+    border-radius: 5px;
+}
+
+.tarjetas h3{
+    color: #000272;
+}
+
+.testimonios{
+    padding: 40px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background-color: #e7e7e7;
+}
+
+.testimonios div{
+    padding: 10px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.autor{
+    font-weight: bold;
+}
+
+
+
+/***************** FOOTER *****************/
