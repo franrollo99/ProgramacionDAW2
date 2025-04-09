@@ -11,24 +11,19 @@ const $biblio = (function(){
     let autores = datos.autores.map(autor => new Autor(autor.autorId, autor.nombre, autor.nacionalidad, autor.biografia, autor.libros));
     let bibliotecas = datos.bibliotecas.map(biblioteca => new Biblioteca(biblioteca.bibliotecaId, biblioteca.nombre, biblioteca.ubicacion));
 
-    // console.log(libros);
-    // console.log(autores);
-    // console.log(bibliotecas);
-
-
     function generarHTMLListadoAutores(){
         let resultado = '';
 
         autores.forEach(autor => {
             resultado += `
-                <div class="contenedorListado" id="autor${autor.autorId}">
+                <div class="contenedorListado" data-id="${autor.autorId}">
                     <p><b>Nombre:</b> ${autor.nombre}</p>
                     <p><b>Nacionalidad:</b> ${autor.nacionalidad}</p>
                     <p><b>Biografia:</b> ${autor.biografia}</p>
-                    <button data-id="${autor.autorId}">Crear</button>
-                    <button id="btn-verAutor${autor.autorId}">Ver</button>
-                    <button id="btn-editarAutor${autor.autorId}">Editar</button>
-                    <button id="btn-borrarAutor${autor.autorId}">Borrar</button>
+                    <button data-action="crear-autor" data-id="${autor.autorId}">Crear</button>
+                    <button data-action="ver-autor" data-id="${autor.autorId}">Ver</button>
+                    <button data-action="editar-autor" data-id="${autor.autorId}">Editar</button>
+                    <button data-action="borrar-autor" data-id="${autor.autorId}">Borrar</button>
                 </div>
             `;
         });
@@ -41,13 +36,13 @@ const $biblio = (function(){
 
         bibliotecas.forEach(biblioteca => {
             resultado += `
-                <div class="contenedorListado" id="biblioteca${biblioteca.bibliotecaId}">
+                <div class="contenedorListado" data-id="${biblioteca.bibliotecaId}">
                     <p><b>Nombre:</b> ${biblioteca.nombre}</p>
                     <p><b>Ubicacion:</b> ${biblioteca.ubicacion}</p>
-                    <button data-id="${biblioteca.bibliotecaId}">Crear</button>
-                    <button id="btn-verBiblioteca${biblioteca.bibliotecaId}">Ver</button>
-                    <button id="btn-editarBiblioteca${biblioteca.bibliotecaId}">Editar</button>
-                    <button id="btn-borrarBiblioteca${biblioteca.bibliotecaId}">Borrar</button>
+                    <button data-action="crear-biblioteca" data-id="${biblioteca.bibliotecaId}">Crear</button>
+                    <button data-action="ver-biblioteca" data-id="btn-verBiblioteca${biblioteca.bibliotecaId}">Ver</button>
+                    <button data-action="editar-biblioteca" data-id="btn-editarBiblioteca${biblioteca.bibliotecaId}">Editar</button>
+                    <button data-action="borrar-biblioteca" data-id="btn-borrarBiblioteca${biblioteca.bibliotecaId}">Borrar</button>
                 </div>
             `;
         });
@@ -59,14 +54,19 @@ const $biblio = (function(){
         let resultado = '';
 
         libros.forEach(libro => {
+            const autor = autores.filter(a => a.autorId === libro.autorId)[0];
+            const biblioteca = bibliotecas.filter(b => b.bibliotecaId === libro.bibliotecaId)[0];
+
             resultado += `
-                <div class="contenedorListado" id="libro${libro.libroId}">
+                <div class="contenedorListado" data-id="${libro.libroId}">
                     <p><b>Titulo:</b> ${libro.titulo}</p>
+                    <p><b>Autor:</b> ${autor.nombre}</p>
                     <p><b>ISBN:</b> ${libro.ISBN}</p>
-                    <button id="btn-crearLibro${libro.libroId}">Crear</button>
-                    <button id="btn-verLibro${libro.libroId}">Ver</button>
-                    <button id="btn-editarLibro${libro.libroId}">Editar</button>
-                    <button id="btn-borrarLibro${libro.libroId}">Borrar</button>
+                    <p><b>Biblioteca:</b> ${biblioteca.nombre}</p>
+                    <button data-action="crear-libro" data-id="${libro.libroId}">Crear</button>
+                    <button data-action="ver-libro" data-id="${libro.libroId}">Ver</button>
+                    <button data-action="editar-libro" data-id="${libro.libroId}">Editar</button>
+                    <button data-action="borrar-libro" data-id="${libro.libroId}">Borrar</button>
                 </div>
             `;
         });
@@ -96,13 +96,13 @@ const $biblio = (function(){
         if(resultados){
             resultados.forEach(resultado => {
                 resultadoHTML += `
-                    <div class="contenedorListado" id="libro${resultado.libroId}">
+                    <div class="contenedorListado" data-libro-id="${libro.libroId}"">
                         <p><b>Titulo:</b> ${resultado.titulo}</p>
                         <p><b>ISBN:</b> ${resultado.ISBN}</p>
-                        <button id="btn-crearLibro${resultado.libroId}">Crear</button>
-                        <button id="btn-verLibro${resultado.libroId}">Ver</button>
-                        <button id="btn-editarLibro${resultado.libroId}">Editar</button>
-                        <button id="btn-borrarLibro${resultado.libroId}">Borrar</button>
+                        <button data-action="crear-libro" data-id="${libro.libroId}">Crear</button>
+                        <button data-action="crear-libro" data-id="${libro.libroId}">Ver</button>
+                        <button data-action="crear-libro" data-id="${libro.libroId}">Editar</button>
+                        <button data-action="crear-libro" data-id="${libro.libroId}">Borrar</button>
                     </div>
                 `;
             });
@@ -112,7 +112,6 @@ const $biblio = (function(){
 
         return resultadoHTML;
     }
-console.log(buscarLibro(101));
 
     function buscarLibro(libroId){
         return libros.filter(libro => libro.libroId === libroId)[0]; // Devuelvo solo el objeto con [0] en vez de un array
@@ -127,27 +126,39 @@ console.log(buscarLibro(101));
     }
 
     function crearLibro(libro){
+        libros.push(new Libro(libro.libroId, libro.titulo, libro.ISBN, libro.autorId, libro.bibliotecaId));
 
+        return null;
     }
 
     function crearAutor(autor){
+        autores.push(new Autor(autor.autorId, autor.nombre, autor.nacionalidad, autor.biografia, autor.libros));
 
+        return null;
     }
 
     function crearBiblioteca(biblioteca){
+        bibliotecas.push(new Biblioteca(biblioteca.bibliotecaId, biblioteca.nombre, biblioteca.ubicacion));
 
+        return null;
     }
 
     function borrarLibro(libroId){
+        libros = libros.filter(libro => libro.libroId !== libroId);
 
+        return null;
     }
 
     function borrarAutor(autorId){
+        autores = autores.filter(autor => autor.autorId !== autorId);
         
+        return null;
     }
 
     function borrarBiblioteca(bibliotecaId){
-        
+        bibliotecas = bibliotecas.filter(biblioteca => biblioteca.bibliotecaId !==bibliotecaId);
+
+        return null;
     }
 
     function devolverPrestamo(libro){
@@ -206,7 +217,7 @@ window.addEventListener('load', () =>{
         contenedorResultados.innerHTML += resultado;
     });
 
-    formBuscador.addEventListener('submit', (e) => {
+    formBuscador.addEventListener('input', (e) => {
         e.preventDefault();
 
         let resultadoBuscador;
