@@ -49,39 +49,41 @@ class Libro {
     
 
     generarHTMLPropiedades() {
-        
+        const autor = autores.filter(autor => autor.autorId === this.autorId)[0];
+        const biblioteca = bibliotecas.filter(biblioteca =>biblioteca.bibliotecaId === this.bibliotecaId)[0];
 
         return `
-        <div class="contenedorListado" data-id="${libro.libroId}">
-                    <p><b>Titulo:</b> ${this.titulo}</p>
-                    <p><b>Autor:</b> ${this.autorId}</p>
-                    <p><b>ISBN:</b> ${this.ISBN}</p>
-                    <p><b>Biblioteca:</b> ${this.bibliotecaId}</p>
-                    <button data-action="crear-libro" data-id="${this.libroId}">Crear</button>
-                    <button data-action="ver-libro" data-id="${this.libroId}">Ver</button>
-                    <button data-action="editar-libro" data-id="${this.libroId}">Editar</button>
-                    <button data-action="borrar-libro" data-id="${this.libroId}">Borrar</button>
-                </div>
-
-            <div class="contenedorListado" id="propiedadesLibro">
-                <p>Titulo: ${this.titulo}</p>
-                <p>ISBN: ${this.ISBN}</p>
-                <p>Autor: </p>
-                <p>Biblioteca: </p>
-                <p>Préstamos:</p>
+        <div class="contenedorListado" data-id="${this.libroId}">
+            <p><b>Titulo:</b> ${this.titulo}</p>
+            <p><b>Autor:</b> ${autor.nombre}</p>
+            <p><b>ISBN:</b> ${this.ISBN}</p>
+            <p><b>Biblioteca:</b> ${biblioteca.nombre}</p>
+            <p>Préstamos:</p>
                 <ul>
                     <li>prestamo</li>
                 </ul>
-                <button>Editar</button>
-                <button>Borrar</button>
-                <button>Listar préstamos</button>
-                <button>Crear préstamo</button>
-                <button>Devolver préstamo</button>
-            </div>
+            <button data-action="editar-libro" data-id="${this.libroId}">Editar</button>
+            <button data-action="borrar-libro" data-id="${this.libroId}">Borrar</button>
+            <button data-action="listar-prestamos" data-id="${this.libroId}">Listar préstamos</button>
+            <button data-action="crear-prestamo" data-id="${this.libroId}">Crear préstamo</button>
+            <button data-action="devolver-prestamo" data-id="${this.libroId}">Devolver préstamos</button>
+        </div>
         `;
     }
 
     generarHTMLEdicion() {
+        let opcionesAutores = '';
+        for (let autor of autores) {
+            opcionesAutores += `<option value="${autor.autorId}">${autor.nombre}</option>`;
+        }
+
+        let opcionesBibliotecas = '';
+        for (let biblioteca of bibliotecas) {
+            opcionesBibliotecas += `<option value="${biblioteca.bibliotecaId}">${biblioteca.nombre}</option>`;
+        }
+
+        // Poner predeterminado el autor y biblioteca del libro
+        
         return `
         <form id="form-editarLibro">
             <fieldset>
@@ -91,12 +93,12 @@ class Libro {
                 <br><br>
                 <label for="autor">Autor</label>
                 <select id="autor">
-                    <option value="autor">Autor</option>
+                    ${opcionesAutores}
                 </select>
                 <br><br>
                 <label for="biblioteca">Biblioteca</label>
                 <select id="biblioteca">
-                    <option value="biblioteca">Biblioteca</option>
+                    ${opcionesBibliotecas}
                 </select>
                 <br><br>
                 <input type="submit" value="Editar">

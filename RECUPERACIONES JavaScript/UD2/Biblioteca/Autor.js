@@ -1,3 +1,7 @@
+import datos from './datos.js';
+
+const libros = datos.libros;
+
 class Autor{
     constructor(autorId, nombre, nacionalidad, biografia, libros = []){
         this.autorId = autorId;
@@ -28,14 +32,22 @@ class Autor{
     }
 
     generarHTMLPropiedades(){
+        let librosAutor = '';
+
+        libros.forEach(libro => {
+            if(libro.autorId ===  this.autorId){
+                librosAutor += `<li>${libro.titulo}</li>`;
+            }
+        });
+
         return `
-            <div id="propiedadesAutor">
-                <p>Nombre: </p>
-                <p>Nacionalidad: </p>
-                <p>Biografia: </p>
-                <p>Libros:</p>
+            <div class="contenedorListado" data-id="${this.autorId}">
+                <p><b>Nombre:</b> ${this.nombre}</p>
+                <p><b>Nacionalidad:</b> ${this.nacionalidad}</p>
+                <p><b>Biografia:</b> ${this.biografia}</p>
+                <p><b>Libros:</b></p>
                 <ul>
-                    <li>libro</li>
+                    ${librosAutor}
                 </ul>
                 <button>Añadir libros</button>
                 <button>Eliminar libros</button>

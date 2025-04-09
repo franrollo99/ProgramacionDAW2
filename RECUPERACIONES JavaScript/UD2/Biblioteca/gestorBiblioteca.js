@@ -40,9 +40,9 @@ const $biblio = (function(){
                     <p><b>Nombre:</b> ${biblioteca.nombre}</p>
                     <p><b>Ubicacion:</b> ${biblioteca.ubicacion}</p>
                     <button data-action="crear-biblioteca" data-id="${biblioteca.bibliotecaId}">Crear</button>
-                    <button data-action="ver-biblioteca" data-id="btn-verBiblioteca${biblioteca.bibliotecaId}">Ver</button>
-                    <button data-action="editar-biblioteca" data-id="btn-editarBiblioteca${biblioteca.bibliotecaId}">Editar</button>
-                    <button data-action="borrar-biblioteca" data-id="btn-borrarBiblioteca${biblioteca.bibliotecaId}">Borrar</button>
+                    <button data-action="ver-biblioteca" data-id="${biblioteca.bibliotecaId}">Ver</button>
+                    <button data-action="editar-biblioteca" data-id="${biblioteca.bibliotecaId}">Editar</button>
+                    <button data-action="borrar-biblioteca" data-id="${biblioteca.bibliotecaId}">Borrar</button>
                 </div>
             `;
         });
@@ -247,33 +247,90 @@ window.addEventListener('load', () =>{
 
     // EVENTOS DE ACTION EN LOS LISTADOS
     contenedorResultados.addEventListener('click', (e) => {
-        // querySelector()?
-        const boton = e.target; // Capturo el elemento donde se origino el evento click
-        const id = parseInt(boton.dataset.id);
+        const disparador = e.target; // Capturo el elemento donde se origino el evento click
 
-        const libro = $biblio.buscarLibro(id);
-        const autor = $biblio.buscarAutor(id);
-        const biblioteca = $biblio.buscarBiblioteca(id);
+        if(disparador.dataset.action){
+            const id = parseInt(disparador.dataset.id);
 
-        if(libro || autor || biblioteca){
-            switch (boton.dataset.action){
-                case 'crear-libro':
-                    contenedorResultados.innerHTML = libro.generarHTMLCreacion();
-                    break;
-                case 'ver-libro':
-                    contenedorResultados.innerHTML = libro.generarHTMLPropiedades();
-                    break;
-                case 'editar-libro':
-                    contenedorResultados.innerHTML = libro.generarHTMLEdicion();
-                    break;
-                case 'borrar-libro':
-                    contenedorResultados.innerHTML = $biblio.borrarLibro(id);
-                    break;
+            const libro = $biblio.buscarLibro(id);
+            const autor = $biblio.buscarAutor(id);
+            const biblioteca = $biblio.buscarBiblioteca(id);
+
+            console.log(autor);
+
+            if(libro || autor || biblioteca){
+                switch (disparador.dataset.action){
+                    // METODOS LIBROS
+                    case 'crear-libro':
+                        contenedorResultados.innerHTML = libro.generarHTMLCreacion();
+                        break;
+
+                    case 'ver-libro':
+                        contenedorResultados.innerHTML = libro.generarHTMLPropiedades();
+                        break;
+
+                    case 'editar-libro':
+                        contenedorResultados.innerHTML = libro.generarHTMLEdicion();
+                        break;
+
+                    case 'borrar-libro':
+                        contenedorResultados.innerHTML = $biblio.borrarLibro(id);
+                        break;
+
+
+
+                    // METODOS AUTORES
+                    case 'crear-autor':
+                        contenedorResultados.innerHTML = autor.generarHTMLCreacion();
+                        break;
+
+                    case 'ver-autor':
+                        contenedorResultados.innerHTML = autor.generarHTMLPropiedades();
+                        break;
+
+                    case 'editar-autor':
+                        contenedorResultados.innerHTML = autor.generarHTMLEdicion();
+
+                        const formEditorAutor = document.getElementById('form-editarAutor');
+
+                        formEditorAutor.addEventListener('submit', (e) => {
+                            e.preventDefault();
+
+                            const nombre = document.getElementById('nombre').value;
+                            const nacionalidad = document.getElementById('nacionalidad').value;
+                            const biografia = document.getElementById('biografia').value;
+                    
+                            autor.nombre = nombre;
+                        });
+                        break;
+
+                    case 'borrar-autor':
+                        contenedorResultados.innerHTML = $biblio.borrarAutor(id);
+                        break;
+
+
+
+                    // METODOS BIBLIOTECA
+                    case 'crear-biblioteca':
+                        contenedorResultados.innerHTML = biblioteca.generarHTMLCreacion();
+                        break;
+
+                    case 'ver-biblioteca':
+                        contenedorResultados.innerHTML = biblioteca.generarHTMLPropiedades();
+                        break;
+
+                    case 'editar-biblioteca':
+                        contenedorResultados.innerHTML = biblioteca.generarHTMLEdicion();
+                        break;
+
+                    case 'borrar-biblioteca':
+                        contenedorResultados.innerHTML = $biblio.borrarBiblioteca(id);
+                        break;
+                }
             }
         }
-
-        console.log('a');
     });
+
 
     
 });

@@ -24,6 +24,17 @@ class Biblioteca{
         `;
     }
 
+    generarHTMLPropiedades(){
+        return `
+            <div class="contenedorListado" data-id="${this.bibliotecaId}">
+                <p><b>Nombre:</b> ${this.nombre}</p>
+                <p><b>Ubicacion:</b> ${this.ubicacion}</p>
+                <button>Añadir libros</button>
+                <button>Eliminar libros</button>
+            </div>
+        `;
+    }
+
     generarHTMLEdicion(){
         return `
             <form id="form-editarBiblioteca">
