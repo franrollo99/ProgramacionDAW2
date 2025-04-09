@@ -1,3 +1,8 @@
+import datos from './datos.js';
+
+const autores = datos.autores;
+const bibliotecas = datos.bibliotecas;
+
 class Libro {
     constructor(libroId, titulo, ISBN, autorId, bibliotecaId, prestamos = []) {
         this.libroId = libroId;
@@ -9,6 +14,16 @@ class Libro {
     }
 
     generarHTMLCreacion() {
+        let opcionesAutores = '';
+        for (let autor of autores) {
+            opcionesAutores += `<option value="${autor.autorId}">${autor.nombre}</option>`;
+        }
+
+        let opcionesBibliotecas = '';
+        for (let biblioteca of bibliotecas) {
+            opcionesBibliotecas += `<option value="${biblioteca.bibliotecaId}">${biblioteca.nombre}</option>`;
+        }
+    
         return `
             <form id="form-crearLibro">
                 <fieldset>
@@ -18,12 +33,12 @@ class Libro {
                     <br><br>
                     <label for="autor">Autor</label>
                     <select id="autor">
-                        <option value="autor">Autor</option>
+                        ${opcionesAutores}
                     </select>
                     <br><br>
                     <label for="biblioteca">Biblioteca</label>
                     <select id="biblioteca">
-                        <option value="biblioteca">Biblioteca</option>
+                        ${opcionesBibliotecas}
                     </select>
                     <br><br>
                     <input type="submit" value="Crear">
@@ -31,10 +46,24 @@ class Libro {
             </form>
         `;
     }
+    
 
     generarHTMLPropiedades() {
+        
+
         return `
-            <div id="propiedadesLibro">
+        <div class="contenedorListado" data-id="${libro.libroId}">
+                    <p><b>Titulo:</b> ${this.titulo}</p>
+                    <p><b>Autor:</b> ${this.autorId}</p>
+                    <p><b>ISBN:</b> ${this.ISBN}</p>
+                    <p><b>Biblioteca:</b> ${this.bibliotecaId}</p>
+                    <button data-action="crear-libro" data-id="${this.libroId}">Crear</button>
+                    <button data-action="ver-libro" data-id="${this.libroId}">Ver</button>
+                    <button data-action="editar-libro" data-id="${this.libroId}">Editar</button>
+                    <button data-action="borrar-libro" data-id="${this.libroId}">Borrar</button>
+                </div>
+
+            <div class="contenedorListado" id="propiedadesLibro">
                 <p>Titulo: ${this.titulo}</p>
                 <p>ISBN: ${this.ISBN}</p>
                 <p>Autor: </p>

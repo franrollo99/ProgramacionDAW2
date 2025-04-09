@@ -91,26 +91,31 @@ const $biblio = (function(){
     }
 
     function generarHTMLResultadoBuscador(resultados){
-        let resultadoHTML = '';
+        let resultado = '';
 
         if(resultados){
-            resultados.forEach(resultado => {
-                resultadoHTML += `
-                    <div class="contenedorListado" data-libro-id="${libro.libroId}"">
-                        <p><b>Titulo:</b> ${resultado.titulo}</p>
-                        <p><b>ISBN:</b> ${resultado.ISBN}</p>
-                        <button data-action="crear-libro" data-id="${libro.libroId}">Crear</button>
-                        <button data-action="crear-libro" data-id="${libro.libroId}">Ver</button>
-                        <button data-action="crear-libro" data-id="${libro.libroId}">Editar</button>
-                        <button data-action="crear-libro" data-id="${libro.libroId}">Borrar</button>
-                    </div>
+            resultados.forEach(libro => {
+                const autor = autores.filter(a => a.autorId === libro.autorId)[0];
+                const biblioteca = bibliotecas.filter(b => b.bibliotecaId === libro.bibliotecaId)[0];
+
+                resultado += `
+                    <div class="contenedorListado" data-id="${libro.libroId}">
+                    <p><b>Titulo:</b> ${libro.titulo}</p>
+                    <p><b>Autor:</b> ${autor.nombre}</p>
+                    <p><b>ISBN:</b> ${libro.ISBN}</p>
+                    <p><b>Biblioteca:</b> ${biblioteca.nombre}</p>
+                    <button data-action="crear-libro" data-id="${libro.libroId}">Crear</button>
+                    <button data-action="ver-libro" data-id="${libro.libroId}">Ver</button>
+                    <button data-action="editar-libro" data-id="${libro.libroId}">Editar</button>
+                    <button data-action="borrar-libro" data-id="${libro.libroId}">Borrar</button>
+                </div>
                 `;
             });
         }else{
-            resultadoHTML += '<p>No se ha encontrado ningun libro</p>';
+            resultado += '<p>No se ha encontrado ningun libro</p>';
         }
 
-        return resultadoHTML;
+        return resultado;
     }
 
     function buscarLibro(libroId){
@@ -146,19 +151,19 @@ const $biblio = (function(){
     function borrarLibro(libroId){
         libros = libros.filter(libro => libro.libroId !== libroId);
 
-        return null;
+        return generarHTMLListadoLibros();
     }
 
     function borrarAutor(autorId){
         autores = autores.filter(autor => autor.autorId !== autorId);
         
-        return null;
+        return generarHTMLListadoAutores();
     }
 
     function borrarBiblioteca(bibliotecaId){
         bibliotecas = bibliotecas.filter(biblioteca => biblioteca.bibliotecaId !==bibliotecaId);
 
-        return null;
+        return generarHTMLListadoBibliotecas();
     }
 
     function devolverPrestamo(libro){
@@ -193,6 +198,7 @@ const $biblio = (function(){
 
 window.addEventListener('load', () =>{
 
+    // EVENTOS DE LISTADO
     document.getElementById('btn-listarAutores').addEventListener('click', () => {
 
         let resultado = $biblio.generarHTMLListadoAutores();
@@ -217,7 +223,8 @@ window.addEventListener('load', () =>{
         contenedorResultados.innerHTML += resultado;
     });
 
-    formBuscador.addEventListener('input', (e) => {
+    // EVENTOS DE FILTRADO
+    formBuscador.addEventListener('submit', (e) => {
         e.preventDefault();
 
         let resultadoBuscador;
@@ -236,6 +243,36 @@ window.addEventListener('load', () =>{
         }
 
         formBuscador.reset();
+    });
+
+    // EVENTOS DE ACTION EN LOS LISTADOS
+    contenedorResultados.addEventListener('click', (e) => {
+        // querySelector()?
+        const boton = e.target; // Capturo el elemento donde se origino el evento click
+        const id = parseInt(boton.dataset.id);
+
+        const libro = $biblio.buscarLibro(id);
+        const autor = $biblio.buscarAutor(id);
+        const biblioteca = $biblio.buscarBiblioteca(id);
+
+        if(libro || autor || biblioteca){
+            switch (boton.dataset.action){
+                case 'crear-libro':
+                    contenedorResultados.innerHTML = libro.generarHTMLCreacion();
+                    break;
+                case 'ver-libro':
+                    contenedorResultados.innerHTML = libro.generarHTMLPropiedades();
+                    break;
+                case 'editar-libro':
+                    contenedorResultados.innerHTML = libro.generarHTMLEdicion();
+                    break;
+                case 'borrar-libro':
+                    contenedorResultados.innerHTML = $biblio.borrarLibro(id);
+                    break;
+            }
+        }
+
+        console.log('a');
     });
 
     
