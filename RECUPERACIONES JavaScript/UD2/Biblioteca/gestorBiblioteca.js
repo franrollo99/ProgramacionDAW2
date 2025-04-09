@@ -25,7 +25,7 @@ const $biblio = (function(){
                     <p><b>Nombre:</b> ${autor.nombre}</p>
                     <p><b>Nacionalidad:</b> ${autor.nacionalidad}</p>
                     <p><b>Biografia:</b> ${autor.biografia}</p>
-                    <button id="btn-crearAutor${autor.autorId}">Crear</button>
+                    <button data-id="${autor.autorId}">Crear</button>
                     <button id="btn-verAutor${autor.autorId}">Ver</button>
                     <button id="btn-editarAutor${autor.autorId}">Editar</button>
                     <button id="btn-borrarAutor${autor.autorId}">Borrar</button>
@@ -44,7 +44,7 @@ const $biblio = (function(){
                 <div class="contenedorListado" id="biblioteca${biblioteca.bibliotecaId}">
                     <p><b>Nombre:</b> ${biblioteca.nombre}</p>
                     <p><b>Ubicacion:</b> ${biblioteca.ubicacion}</p>
-                    <button id="btn-crearBiblioteca${biblioteca.bibliotecaId}">Crear</button>
+                    <button data-id="${biblioteca.bibliotecaId}">Crear</button>
                     <button id="btn-verBiblioteca${biblioteca.bibliotecaId}">Ver</button>
                     <button id="btn-editarBiblioteca${biblioteca.bibliotecaId}">Editar</button>
                     <button id="btn-borrarBiblioteca${biblioteca.bibliotecaId}">Borrar</button>
@@ -91,27 +91,39 @@ const $biblio = (function(){
     }
 
     function generarHTMLResultadoBuscador(resultados){
-        const resultadoHTML = '';
+        let resultadoHTML = '';
 
         if(resultados){
-            console.log(resultados);
-            return null;
+            resultados.forEach(resultado => {
+                resultadoHTML += `
+                    <div class="contenedorListado" id="libro${resultado.libroId}">
+                        <p><b>Titulo:</b> ${resultado.titulo}</p>
+                        <p><b>ISBN:</b> ${resultado.ISBN}</p>
+                        <button id="btn-crearLibro${resultado.libroId}">Crear</button>
+                        <button id="btn-verLibro${resultado.libroId}">Ver</button>
+                        <button id="btn-editarLibro${resultado.libroId}">Editar</button>
+                        <button id="btn-borrarLibro${resultado.libroId}">Borrar</button>
+                    </div>
+                `;
+            });
+        }else{
+            resultadoHTML += '<p>No se ha encontrado ningun libro</p>';
         }
 
-        console.log('nada');
-        return null;
+        return resultadoHTML;
     }
+console.log(buscarLibro(101));
 
     function buscarLibro(libroId){
-
+        return libros.filter(libro => libro.libroId === libroId)[0]; // Devuelvo solo el objeto con [0] en vez de un array
     }
 
     function buscarAutor(autorId){
-
+        return autores.filter(autor => autor.autorId === autorId)[0];
     }
 
     function buscarBiblioteca(bibliotecaId){
-
+        return bibliotecas.filter(biblioteca => biblioteca.bibliotecaId === bibliotecaId)[0];
     }
 
     function crearLibro(libro){
@@ -207,15 +219,13 @@ window.addEventListener('load', () =>{
             }else{
                 resultadoBuscador = $biblio.buscarLibrosPorAutor(filtro);
             }
+            contenedorResultados.innerHTML = $biblio.generarHTMLResultadoBuscador(resultadoBuscador);
+        }else{
+            contenedorResultados.innerHTML = '';
         }
-
-        // console.log(resultadoBuscador);
-        $biblio.generarHTMLResultadoBuscador(resultadoBuscador);
 
         formBuscador.reset();
     });
 
-
-
-
+    
 });
