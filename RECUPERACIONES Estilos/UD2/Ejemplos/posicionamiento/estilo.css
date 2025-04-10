@@ -1,0 +1,156 @@
+.contenedorPrincipal{
+    width: 300px;
+    height: 200px;
+    background-color: lightgray;
+    margin: 40px auto;
+    border: 2px solid gray;
+    position: relative;
+}
+
+/* STATIC: comportamiento por defecto, ubica el elemento en su posicion natural según 
+el flujo del documento, no tienen efecto las propiedades top, right, bottom, left y z-index */
+.caja1 {
+    background-color: lightblue;
+    padding: 20px;
+    position: static;
+}
+
+/* RELATIVE: ubica el elemento en su posicion natural según el flujo del documento, permite 
+desplazar los elementos en relacion a la posicion que tendría en modo estático mediante los 
+valores top, rigth, bottom y left, sin alterar la posición de los demás elementos */
+.caja2 {
+    background-color: lightcoral;
+    padding: 20px;
+    position: relative;
+    top: 20px;
+    left: 20px;
+}
+
+.caja3 {
+    background-color: lightgreen;
+    padding: 20px;
+    position: static;
+}
+
+/* ABSOLUTE: el elemento se elimina del flujo del documento y se posicione en relacion con 
+su elemento padre. Su posicion final se determina según los valores top, rigth, bottom y 
+left. El resto de los elementos se posicionan como si los elementos absolutos no existieran */
+.caja4{
+    background-color: lightcoral;
+    padding: 10px;
+    border-radius: 10px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+.margen{
+    margin-bottom: 800px;
+}
+
+/* body{
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 20px;
+    line-height: 1.5;
+} */
+
+.contenido-largo{
+    max-width: 600px;
+    margin: auto;
+}
+
+.boton-ayuda{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: lightblue;
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+
+
+
+
+
+
+
+
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header{
+    background-color: gray;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+main{
+    margin-left: 240px;
+    padding: 20px;
+}
+
+aside{
+    position: sticky;
+    top: 20px;
+    background-color: lightcyan;
+    padding: 10px;
+    width: 200px;
+    margin-right: 20px;
+    float: left;
+}
+
+
+
+
+
+
+
+
+
+.bloque1{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-color: lightsalmon;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.bloque2{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-color: lightblue;
+    top: 20px;
+    left: 20px;
+    z-index: 3;
+}
+
+.bloque3{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-color: lightgreen;
+    top: 40px;
+    left: 40px;
+    z-index: 2;
+}

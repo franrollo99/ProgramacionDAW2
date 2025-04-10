@@ -5,11 +5,19 @@
 }
 
 body{
-
+    height: 100vh;
 }
 
 .contenedorPrincipal{
     padding: 10px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    font-size: 130%;
+}
+
+p{
+    font-size: 90%;
 }
 
 
@@ -22,7 +30,6 @@ header{
     background-color: black;
     color: white;
     border-top-left-radius: 5px;
-    border-top-right-radius:  5px;
 }
 
 header span{
@@ -45,20 +52,100 @@ header nav a{
 
 /***************** MAIN *****************/
 main{
+    flex: 1;
     background-color: bisque;
     display: grid;
-    grid-template-rows: 2fr 1fr;
     justify-content: center;
     align-items: center;
 }
 
-.principal{
+.contenedorMain{
     display: grid;
+    grid-template-rows: 2fr 1fr;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
 }
 
+.principal{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 15px;
+}
 
+.principal .izquierda{
+    display: grid;
+    grid-template-rows: 2fr 1fr;
+    gap: 15px;
+}
+.principal .derecha{
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.articulo1{
+    padding: 30px;
+    border-radius: 5px;
+    background-color: rgb(29, 29, 29);
+    color: bisque;
+}
+
+.articulo2{
+    padding: 20px;
+    border-radius: 5px;
+    background-color: rgb(235, 213, 195);
+}
+
+.tarjetas{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.tarjeta{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.tarjeta img{
+    border-radius: 5px;
+}
 
 
 
 
 /***************** FOOTER *****************/
+footer{
+    padding: 30px 30px 15px;
+    display: flex;
+    gap: 30px;
+    background-color: black;
+    color: white;
+    border-bottom-left-radius: 5px;
+}
+
+footer .columna{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+footer ul{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    list-style: none;
+}
+
+footer ul a{
+    color: white;
+    text-decoration: none;
+}
