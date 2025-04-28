@@ -1,0 +1,113 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100vh;
+}
+
+.contenedorPrincipal{
+    height: 100%;
+    display: grid;
+    grid-template-columns: auto 1fr;
+}
+
+.pagina{
+    display: flex;
+    flex-direction: column;
+}
+
+.contenido{
+    flex: 1;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background-color: rgb(218, 223, 228);
+}
+
+/*********************** ASIDE ***********************/
+aside{
+    padding: 20px;
+    padding-right: 50px;
+    background-color: rgb(7, 31, 68);
+    color: white;
+}
+
+aside ul{
+    padding-top: 30px;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+aside a{
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+
+/*********************** HEADER ***********************/
+header h1{
+    padding: 15px;
+    background-color: white;
+    color: rgb(7, 31, 68);
+    border-radius: 5px;
+}
+
+/*********************** MAIN ***********************/
+main{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.panelBienvenida{
+    padding: 15px;
+    text-align: justify;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.tarjetas{
+    display: flex;
+    gap: 15px;
+}
+
+.tarjeta{
+    flex: 1;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.tarjeta h2{
+    color: rgb(7, 31, 68);
+}
+
+
+
+/*********************** FOOTER ***********************/
+footer{
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: gray;
+}
+
+footer a{
+    padding: 10px;
+    color: white;
+    background-color: dodgerblue;
+    text-decoration: none;
+    border-radius: 5px;
+}
