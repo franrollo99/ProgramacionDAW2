@@ -42,7 +42,7 @@ nav li{
 
 #ficha{
     border: 2px solid black;
-
+    display: none;
 }
 
 .filaCabecera{
@@ -52,21 +52,25 @@ nav li{
 
 .casillaCabecera{
     flex: 1;
-    padding: 5px;
+    padding: 10px;
     text-align: center;
     border: 1px solid black;
 }
 
 .filaAlumno{
     display: flex;
+    border: 1px solid black;
 }
 
+.casillaAlumno{
+    padding: 10px;
+    flex: 1;
+    white-space: nowrap; /* Evita que haga saltos de linea */
+    overflow: hidden; /* Oculta el contenido que se sale del contenedor */
+    text-overflow: ellipsis; /* Pone 3 puntos al truncar */
+    text-align: center;
+}
 
-
-/* .truncado {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 200px;
-  } */
-  
+.seleccionado{
+    background-color: yellow;
+}
