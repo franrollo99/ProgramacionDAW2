@@ -50,49 +50,58 @@ for (let alumno of alumnos) {
     divFila.setAttribute('class', 'filaAlumno');
     divDetalles.appendChild(divFila);
 
-    // Creo casillas para cada propiedad
-    detallesAlumno = document.createElement('div');
-    detallesAlumno.setAttribute('class', 'casillaAlumno');
-    detallesAlumno.innerHTML = alumno.nombre;
-    divFila.appendChild(detallesAlumno);
+    // Creo casillas para cada propiedad aprovechando el array de la cabecera
+    camposCabecera.forEach(campo => {
+        detallesAlumno = document.createElement('div');
+        detallesAlumno.setAttribute('class', 'casillaAlumno');
+        detallesAlumno.innerHTML = alumno[campo.toLocaleLowerCase()];
 
-    detallesAlumno = document.createElement('div');
-    detallesAlumno.setAttribute('class', 'casillaAlumno');
-    detallesAlumno.innerHTML = alumno.curso;
-    divFila.appendChild(detallesAlumno);
-
-    detallesAlumno = document.createElement('div');
-    detallesAlumno.setAttribute('class', 'casillaAlumno');
-    detallesAlumno.innerHTML = alumno.telefono;
-    divFila.appendChild(detallesAlumno);
-
-    detallesAlumno = document.createElement('div');
-    detallesAlumno.setAttribute('class', 'casillaAlumno');
-    detallesAlumno.innerHTML = alumno.email;
-    divFila.appendChild(detallesAlumno);
+        divFila.appendChild(detallesAlumno);
+    });
 }
 
 
 
 window.addEventListener('load', () => {
 
-    divApp.addEventListener('click', (e)=>{
-        if(e.target.className === 'casillaAlumno'){
+    // divDetalles.setAttribute('class', 'oculto');
+    // divFicha.setAttribute('class', 'oculto');
+
+    // Evento para mostrar detalles o fichas
+    document.addEventListener('click', (e) => {
+        if (e.target.className === 'btn-detalles') {
+            divDetalles.setAttribute('class', 'visible');
+            divFicha.setAttribute('class', 'oculto');
+        } else if (e.target.className === 'btn-ficha') {
+            divFicha.setAttribute('class', 'visible');
+            divDetalles.setAttribute('class', 'oculto');
+        }
+    });
+
+    // Eventos para tabla de detalles
+    divDetalles.addEventListener('mouseenter', (e)=>{
+        if (e.target.classList.contains('casillaAlumno')) {
+            // console.log('a');        REVISAR
+            e.target.classList.add('selecionado');
+        }
+    });
+
+    divDetalles.addEventListener('click', (e) => {
+        if (e.target.classList.contains('casillaAlumno')) {
             let alumnoSeleccionado = e.target;
             let seleccionado = alumnoSeleccionado.parentNode; // Selecciono el nodo padre (fila) de la casilla que he seleccionado
 
             const filas = document.querySelectorAll('.filaAlumno');
-            
-            for(let fila of filas){
+
+            for (let fila of filas) {
                 // Compruebo si cada fila contiene la clase seleccionado
-                if(fila.classList.contains('seleccionado')){
+                if (fila.classList.contains('seleccionado') && fila !== seleccionado) {
                     fila.classList.remove('seleccionado');
                     break;
                 }
             }
 
             seleccionado.classList.toggle('seleccionado');
-
         }
     });
 });
