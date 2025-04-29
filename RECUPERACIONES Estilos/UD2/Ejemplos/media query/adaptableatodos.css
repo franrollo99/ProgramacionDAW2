@@ -1,0 +1,13 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: chocolate;
+}
+
+@media (max-width: 480px){
+    body{
+        margin: 0;
+        padding: 0;
+        background-color: lightblue;
+    }   
+}

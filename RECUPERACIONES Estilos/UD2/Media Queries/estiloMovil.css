@@ -1,0 +1,8 @@
+header nav{
+    background-color: red;
+}
+
+main section{
+    display: flex;
+    flex-direction: column;
+}

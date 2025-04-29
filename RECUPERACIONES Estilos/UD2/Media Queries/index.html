@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Queries</title>
+    <link rel="stylesheet" href="estilo.css">
+    <link rel="stylesheet" href="estiloMovil.css" media="(max-width: 767px)">
+</head>
+
+<body>
+    <div class="contenedorPrincipal">
+
+        <header>
+            <div>
+                <h1>Bienvenidos a INMO</h1>
+                <a href="#">Get Started</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Pisos</a></li>
+                    <li><a href="#">Adosados</a></li>
+                    <li><a href="#">Chalets</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <section>
+                <div class="pisos">
+                    <h2>Piso 1</h2>
+                    <img src="img/img2.jpg" alt="Piso 1">
+                </div>
+                <div class="pisos">
+                    <h2>Piso 2</h2>
+                    <img src="img/img3.jpg" alt="Piso 2">
+                </div>
+                <div class="pisos">
+                    <h2>Piso 3</h2>
+                    <img src="img/img4.jpg" alt="Piso 3">
+                </div>
+                <div class="pisos">
+                    <h2>Piso 4</h2>
+                    <img src="img/img5.jpg" alt="Piso 4">
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <form class="contacto">
+                <h2>Contactamos contigo</h2>
+                <div class="camposFormulario">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" name="nombre" id="nombre" placeholder="Nombre">
+                </div>
+                <div class="camposFormulario">
+                    <label for="telefono">Telefono</label>
+                    <input type="text" name="telefono" id="telefono" placeholder="Telefono">
+                </div>
+                <div class="camposFormulario">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" id="email" placeholder="Email">
+                </div>
+                <input type="submit" value="Enviar" id="enviar">
+            </form>
+
+            <div class="siguenos">
+                <h2>Siguenos</h2>
+                <div class="iconos">
+                    <img src="img/img6.webp" alt="Icono Facebook">
+                    <img src="img/img7.webp" alt="Icono Instagram">
+                    <img src="img/img8.webp" alt="Icono Twitter">
+                </div>
+            </div>
+
+            <div class="politicas">
+                <h2>Políticas</h2>
+                <ul>
+                    <li><a href="#">Política de cookies</a></li>
+                    <li><a href="#">Política de privacidad</a></li>
+                    <li><a href="#">Política de calidad</a></li>
+                    <li><a href="#">Política de seguridad</a></li>
+                </ul>
+            </div>
+        </footer>
+
+    </div>
+</body>
+
+</html>
