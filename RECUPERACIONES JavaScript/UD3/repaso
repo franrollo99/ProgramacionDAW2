@@ -1,0 +1,7 @@
+createElement
+children, no childNodes, solo elementos
+classList
+classList.toggle
+
+atributo data-
+element.dataset.nombreAtributo
