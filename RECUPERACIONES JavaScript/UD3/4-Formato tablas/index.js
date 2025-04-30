@@ -78,14 +78,6 @@ window.addEventListener('load', () => {
         }
     });
 
-    // Eventos para tabla de detalles
-    divDetalles.addEventListener('mouseenter', (e)=>{
-        if (e.target.classList.contains('casillaAlumno')) {
-            // console.log('a');        REVISAR
-            e.target.classList.add('selecionado');
-        }
-    });
-
     divDetalles.addEventListener('click', (e) => {
         if (e.target.classList.contains('casillaAlumno')) {
             let alumnoSeleccionado = e.target;

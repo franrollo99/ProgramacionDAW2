@@ -1,0 +1,33 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.contenedorPrincipal{
+    display: flex;
+}
+
+#formulario{
+    padding: 10px;
+}
+
+input:valid{
+    border: 2px solid green;
+}
+
+input:invalid{
+    border: 2px solid red;
+}
+
+/* fieldset{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+} */
+
+
+.error{
+    color: red;
+}
