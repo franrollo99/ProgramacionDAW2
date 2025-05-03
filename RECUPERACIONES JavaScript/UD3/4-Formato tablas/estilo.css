@@ -4,65 +4,61 @@
     box-sizing: border-box;
 }
 
-body{
+body {
     font-family: Arial, Helvetica, sans-serif;
-    height: 100vh;
-    background-color: gray;
+    /* background-color: gray; */
 }
 
-.principal{
-    height: 100%;
+.principal {
+    padding: 10px;
     display: flex;
     flex-direction: column;
-    padding: 10px;
-
+    gap: 10px;
 }
 
-nav ul{
+nav ul {
     display: flex;
     gap: 10px;
     list-style: none;
 }
 
-nav li{
+nav li {
     padding: 5px;
     border: 1px solid black;
     border-radius: 5px;
 }
 
-#app{
+#app {
     flex: 1;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    /* justify-content: center;
+    align-items: center; */
 }
 
-#detalles{
-    border: 2px solid black;
+#detalles {
+    flex-direction: column;
+    /* border: 2px solid black; */
 }
 
-#ficha{
-    border: 2px solid black;
-}
 
-.filaCabecera{
+.filaCabecera {
     width: 100%;
     display: flex;
 }
 
-.casillaCabecera{
+.casillaCabecera {
     flex: 1;
     padding: 10px;
     text-align: center;
     border: 1px solid black;
 }
 
-.filaAlumno{
+.filaAlumno {
     display: flex;
     border: 1px solid black;
 }
 
-.casillaAlumno{
+.casillaAlumno {
     padding: 10px;
     flex: 1;
     white-space: nowrap; /* Evita que haga saltos de linea */
@@ -71,17 +67,55 @@ nav li{
     text-align: center;
 }
 
-
-
-/* Estilos dinamicos */
-.seleccionado{
+/* Aplico un estilo a todas las casillas cuando paso el cursor por encima de las filas */
+.filaAlumno:hover .casillaAlumno {
+    overflow: visible;
+    white-space: normal;
+    text-overflow: unset;
     background-color: yellow;
 }
 
-.visible{
-    display: block;
+
+
+#ficha {
+    flex-wrap: wrap;
+    gap: 30px;
+    /* border: 2px solid black; */
 }
 
-.oculto{
+.tarjeta {
+    height: max-content;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+.tarjeta:hover {
+    background-color: yellow;
+}
+
+.listadoAtributos {
+    display: flex;
+    flex-direction: column;
+    gap: 5px
+    ;
+    list-style: none;
+}
+
+.listadoAsignaturas {
+    padding-top: 5px;
+    padding-left: 30px;
+}
+
+
+/* Estilos dinamicos */
+.seleccionado {
+    background-color: yellow;
+}
+
+.visible {
+    display: flex;
+}
+
+.oculto {
     display: none;
 }

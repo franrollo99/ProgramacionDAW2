@@ -4,6 +4,7 @@ import datos from './datos.js';
 const alumnos = datos.map(alumno => new Alumno(alumno.nombre, alumno.dni, alumno.curso, alumno.asignaturas, alumno.telefono, alumno.email));
 
 
+
 // ESTRUCTURA PRINCIPAL
 const divPrincipal = document.querySelector('.principal');
 
@@ -18,6 +19,7 @@ divApp.appendChild(divDetalles);
 const divFicha = document.createElement('div');
 divFicha.setAttribute('id', 'ficha');
 divApp.appendChild(divFicha);
+
 
 
 // CREACION DE CABECERA DE DETALLES
@@ -37,8 +39,6 @@ camposCabecera.forEach(campo => {
 
 divDetalles.appendChild(divFilaCabecera);
 divFilaCabecera.setAttribute('class', 'filaCabecera');
-
-
 
 // CREACION DE FILAS DE DETALLES
 let divFila;
@@ -62,10 +62,60 @@ for (let alumno of alumnos) {
 
 
 
+// CREACION DE TARJETAS
+let divTarjeta;
+let listado;
+let listaAtributos;
+let listadoAsignaturas;
+let listaAsignaturas;
+
+for (let alumno of alumnos) {
+    divTarjeta = document.createElement('div');
+    divTarjeta.setAttribute('class', 'tarjeta');
+    listado = document.createElement('ul');
+    listado.setAttribute('class', 'listadoAtributos')
+    divTarjeta.appendChild(listado);
+
+    listaAtributos = document.createElement('li');
+    listaAtributos.innerHTML = 'Nombre: ' + alumno.nombre;
+    listado.appendChild(listaAtributos);
+
+    listaAtributos = document.createElement('li');
+    listaAtributos.innerHTML = 'DNI: ' + alumno.dni;
+    listado.appendChild(listaAtributos);
+
+    listaAtributos = document.createElement('li');
+    listaAtributos.innerHTML = 'Asignaturas: ';
+    listado.appendChild(listaAtributos);
+
+    listadoAsignaturas = document.createElement('ul');
+    listadoAsignaturas.setAttribute('class', 'listadoAsignaturas')
+    listaAtributos.appendChild(listadoAsignaturas);
+
+    alumno.asignaturas.forEach(asignatura=>{
+        listaAsignaturas = document.createElement('li');
+        listaAsignaturas.innerHTML = asignatura;
+        listadoAsignaturas.appendChild(listaAsignaturas);
+    });
+
+    listaAtributos = document.createElement('li');
+    listaAtributos.innerHTML = 'Teléfono: ' + alumno.telefono;
+    listado.appendChild(listaAtributos);
+
+    listaAtributos = document.createElement('li');
+    listaAtributos.innerHTML = 'Email: ' + alumno.email;
+    listado.appendChild(listaAtributos);
+
+    divFicha.appendChild(divTarjeta);
+}
+
+
+
+// EVENTOS
 window.addEventListener('load', () => {
 
-    // divDetalles.setAttribute('class', 'oculto');
-    // divFicha.setAttribute('class', 'oculto');
+    divDetalles.setAttribute('class', 'oculto');
+    divFicha.setAttribute('class', 'oculto');
 
     // Evento para mostrar detalles o fichas
     document.addEventListener('click', (e) => {
@@ -78,22 +128,41 @@ window.addEventListener('load', () => {
         }
     });
 
+    // Evento para resaltar una fila
     divDetalles.addEventListener('click', (e) => {
-        if (e.target.classList.contains('casillaAlumno')) {
-            let alumnoSeleccionado = e.target;
-            let seleccionado = alumnoSeleccionado.parentNode; // Selecciono el nodo padre (fila) de la casilla que he seleccionado
+        const alumnoSeleccionado = e.target.closest('.filaAlumno');
 
-            const filas = document.querySelectorAll('.filaAlumno');
+        if(!alumnoSeleccionado) return;
 
-            for (let fila of filas) {
-                // Compruebo si cada fila contiene la clase seleccionado
-                if (fila.classList.contains('seleccionado') && fila !== seleccionado) {
-                    fila.classList.remove('seleccionado');
-                    break;
-                }
+        const filas = document.querySelectorAll('.filaAlumno');
+
+        for (let fila of filas) {
+            // Compruebo si cada fila contiene la clase seleccionado
+            if (fila.classList.contains('seleccionado') && fila !== alumnoSeleccionado) {
+                fila.classList.remove('seleccionado');
+                break;
             }
-
-            seleccionado.classList.toggle('seleccionado');
         }
+
+        alumnoSeleccionado.classList.toggle('seleccionado');
+    });
+
+    // Evento para resaltar una tarjeta
+    divFicha.addEventListener('click', (e) => {
+        const tarjetaSeleccionada = e.target.closest('.tarjeta');
+
+        if(!tarjetaSeleccionada) return;
+
+        const tarjetas = document.querySelectorAll('.tarjeta');
+
+        for (let tarjeta of tarjetas) {
+            // Compruebo si cada fila contiene la clase seleccionado
+            if (tarjeta.classList.contains('seleccionado') && tarjeta !== tarjetaSeleccionada) {
+                tarjeta.classList.remove('seleccionado');
+                break;
+            }
+        }
+
+        tarjetaSeleccionada.classList.toggle('seleccionado');
     });
 });
