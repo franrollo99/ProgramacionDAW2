@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,95 +8,58 @@
     <script src="index.js" defer></script>
     <link rel="stylesheet" href="estilos.css">
 </head>
+
 <body>
     <div class="contenedorPrincipal">
-        <form id="formulario" name="formulario">
-            <label for="nombre">Nombre</label>
-            <input type="text" name="nombre" id="nombre" minlength="3" pattern="^[A-Za-z]+$" required>
-            <span class="error" id="errorNombre"></span>
-            <br><br>
-            <!-- <label for="correoElectronico">Correo electrónico</label>
-            <input type="email" name="correoElectronico" id="correoElectronico" required>
-            <span class="error" id="errorCorreoElectronico"></span>
-            <br><br>
-            <label for="contraseña">Contraseña</label>
-            <input type="password" name="contraseña" id="contraseña" minlength="8" required>
-            <span class="error" id="errorContraseña"></span>
-            <br><br>
-            <label for="confirmarContraseña">Confirmar contraseña</label>
-            <input type="password" name="confirmarContraseña" id="confirmarContraseña" required>
-            <span class="error" id="errorConfirmarContraseña"></span>
-            <br><br>
-            <label for="fechaNacimiento">Fecha de nacimiento</label>
-            <input type="date" name="fechaNacimiento" id="fechaNacimiento">
-            <span class="error" id="errorFechaNacimiento"></span>
-            <br><br>
-            <label for="telefono">Teléfono</label>
-            <input type="tel" name="telefono" id="telefono" min="9" max="9">
-            <span class="error" id="errorTelefono"></span>
-            <br><br>
-            <label for="genero">Género</label>
-            <select name="genero" id="genero" required>
-                <option value="seleccione">Seleccione</option>
-                <option value="masculino">Masculino</option>
-                <option value="femenino">Femenino</option>
-                <option value="otro">Otro</option>
-            </select>
-            <span class="error" id="errorGenero"></span>
-            <br><br>
-            <label for="terminosCondiciones">Terminos y condiciones</label>
-            <input type="checkbox" name="terminosCondiciones" id="terminosCondiciones" required>
-            <span class="error" id="errorTerminosCondiciones"></span>
-            <br><br> -->
-            <button>Enviar</button>
+        <!-- novalidate quita las validaciones por defecto del formulario -->
+        <form name="formulario" >
+            <fieldset>
+                <legend>
+                    <h1>Formulario</h1>
+                </legend>
+                <div>
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" name="nombre" minlength="3" required>
+                </div>
+                <div>
+                    <label for="correoElectronico">Correo electrónico</label>
+                    <input type="email" id="correoElectronico" name="correoElectronico" required>
+                </div>
+                <div>
+                    <label for="contraseña">Contraseña</label>
+                    <input type="password" id="contraseña" name="contraseña" minlength="8" required>
+                </div>
+                <div>
+                    <label for="confirmarContraseña">Confirmar contraseña</label>
+                    <input type="password" id="confirmarContraseña" name="confirmarContraseña" required>
+                </div>
+                <div>
+                    <label for="fechaNacimiento">Fecha de nacimiento</label>
+                    <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
+                </div>
+                <div>
+                    <label for="telefono">Teléfono</label>
+                    <input type="tel" id="telefono" name="telefono">
+                </div>
+                <div>
+                    <label for="genero">Género</label>
+                    <select id="genero" name="genero">
+                        <option value="seleccione">Seleccione</option>
+                        <option value="masculino">Masculino</option>
+                        <option value="femenino">Femenino</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="terminosCondiciones">Terminos y condiciones</label>
+                    <input type="checkbox" id="terminosCondiciones" name="terminosCondiciones" required>
+                </div>
+
+                <button type="submit">Enviar</button>
+            </fieldset>
         </form>
+
     </div>
 </body>
+
 </html>
-
-
-
-
-<!-- <form id="formulario" name="formulario">
-    <fieldset>
-        <legend><h1>Formulario</h1></legend>
-        <div>
-            <label for="nombre">Nombre</label>
-            <input type="text" id="nombre" maxlength="3" required>
-        </div>
-        <div>
-            <label for="correoElectronico">Correo electrónico</label>
-            <input type="email" id="correoElectronico" required>
-        </div>
-        <div>
-            <label for="contraseña">Contraseña</label>
-            <input type="password" id="contraseña" minlength="8" required>
-        </div>
-        <div>
-            <label for="confirmarContraseña">Confirmar contraseña</label>
-            <input type="password" id="confirmarContraseña" required>
-        </div>
-        <div>
-            <label for="fechaNacimiento">Fecha de nacimiento</label>
-            <input type="date" id="fechaNacimiento">
-        </div>
-        <div>
-            <label for="telefono">Teléfono</label>
-            <input type="tel" id="telefono" min="9" max="9">
-        </div>
-        <div>
-            <label for="genero">Género</label>
-            <select id="genero" required>
-                <option value="seleccione">Seleccione</option>
-                <option value="masculino">Masculino</option>
-                <option value="femenino">Femenino</option>
-                <option value="otro">Otro</option>
-            </select>
-        </div>
-        <div>
-            <label for="terminosCondiciones">Terminos y condiciones</label>
-            <input type="checkbox" id="terminosCondiciones" required>
-        </div>
-        <input type="submit" value="Enviar">
-    </fieldset>
-</form> -->

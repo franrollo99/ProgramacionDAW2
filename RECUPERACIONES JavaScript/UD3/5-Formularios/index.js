@@ -1,4 +1,11 @@
-const formulario = document.getElementById('formulario');
+const formulario = document.forms['formulario'];
+
+console.log(formulario.elements['nombre']);
+console.log(formulario.elements['nombre']);
+
+// console.log(formulario);
+// console.log(formularioName);
+
 const campoNombre = document.getElementById('nombre');
 const errorNombre = document.getElementById('errorNombre');
 
@@ -9,26 +16,26 @@ formulario.addEventListener('submit', (e)=>{
     e.preventDefault();
 
 
-    Array.from(formulario.elements).forEach(element => {
+    // Array.from(formulario.elements).forEach(element => {
 
-        element.addEventListener('blur', () => {
-            let esValido = true;
-            let mensaje = '';
+    //     element.addEventListener('blur', () => {
+    //         let esValido = true;
+    //         let mensaje = '';
             
-            for(let campo of formulario.elements){
-                if(!campo.checkValidity()){
-                    esValido = false;
-                    mensaje += 'error';
-                }
-            }
+    //         for(let campo of formulario.elements){
+    //             if(!campo.checkValidity()){
+    //                 esValido = false;
+    //                 mensaje += 'error';
+    //             }
+    //         }
             
-            if(esValido){
-                errorNombre.innerHTML = '';
-            }else{
-                errorNombre.innerHTML = mensaje;
-            }
-        });
-    });
+    //         if(esValido){
+    //             errorNombre.innerHTML = '';
+    //         }else{
+    //             errorNombre.innerHTML = mensaje;
+    //         }
+    //     });
+    // });
 
     // if(!campoNombre.checkValidity()){
     //     console.log('mal');

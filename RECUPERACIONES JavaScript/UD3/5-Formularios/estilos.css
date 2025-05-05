@@ -20,12 +20,12 @@ input:invalid{
     border: 2px solid red;
 }
 
-/* fieldset{
+fieldset{
     padding: 10px;
     display: flex;
     flex-direction: column;
     gap: 5px;
-} */
+}
 
 
 .error{
