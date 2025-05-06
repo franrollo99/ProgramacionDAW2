@@ -1,0 +1,48 @@
+body {
+    font-size: 300%;
+}
+
+a {
+    padding: 20px;
+    display: block;
+    text-decoration: none;
+    color: white;
+}
+
+.menu {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background-color: black;
+}
+
+.menu li {
+    display: inline-block;
+    position: relative;
+}
+
+.menu li:hover {
+    background-color: gray;
+}
+
+/* Ponemos el submenu en posicion absoluta */
+.submenu {
+    margin: 0;
+    padding: 0;
+    min-width: 150px;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    list-style: none;
+    background-color: gray;
+}
+
+.submenu a:hover{
+    background-color: lightslategray;
+}
+
+/* Cuando pasemos el cursor por encima del li que contiene el submenu se muestra */
+.menu > li:hover > .submenu {
+    display: block;
+}
