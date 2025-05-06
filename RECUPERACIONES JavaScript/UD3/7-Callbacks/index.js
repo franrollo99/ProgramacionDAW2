@@ -1,45 +1,46 @@
 import ValidacionError from "./ValidacionError.js";
 
 const formulario = document.getElementById('formulario');
-let mensajeError;
 
 const nombre = document.getElementById('nombre');
-const nombreError = document.getElementById('nombreError');
-
 const contraseña = document.getElementById('contraseña');
-const contraseñaError = document.getElementById('contraseñaError');
-
 const email = document.getElementById('email');
-const emailError = document.getElementById('emailError');
-
 const fechaNacimiento = document.getElementById('fechaNacimiento');
-const fechaNacimientoError = document.getElementById('fechaNacimientoError');
-
 
 
 formulario.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    validarNombre(nombre.value, (valor, error) => {
-        
+    validarNombre(nombre.value, (valor1, error1) => {
+        if (error1) return;
+
+        validarContraseña(contraseña.value, (valor2, error2) => {
+            if (error2) return;
+
+            validarEmail(email.value, (valor3, error3) => {
+                if (error3) return;
+
+                validarFechaNacimiento(fechaNacimiento.value, (valor4, error4) => {
+                    if (error4) return;
+
+                    alert('El formulario ha sido validado correctamente');
+                });
+            });
+        });
     });
 });
 
 
-
 function validarNombre(valor, callback) {
-    nombreError.innerHTML = '';
-
     if (valor.length < 3) {
-        mensajeError = 'El nombre debe tener al menos 3 caracteres';
-        nombreError.innerHTML += mensajeError;
-
-        callback(null, new ValidacionError(mensajeError, nombre));
-    } else if (contieneNumeros(valor)) {
-        nombreError.innerHTML += 'El nombre no debe tener numeros';
-    } else {
-        // callback(valor, );
+        return callback(null, new ValidacionError('El nombre debe tener al menos 3 caracteres', nombre));
     }
+
+    if (contieneNumeros(valor)) {
+        return callback(null, new ValidacionError('El nombre no debe tener numeros', nombre));
+    }
+
+    callback(valor, null);
 }
 
 function validarContraseña(valor, callback) {
