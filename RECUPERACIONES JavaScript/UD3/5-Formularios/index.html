@@ -12,7 +12,7 @@
 <body>
     <div class="contenedorPrincipal">
         <!-- novalidate quita las validaciones por defecto del formulario -->
-        <form name="formulario" >
+        <form name="formulario" novalidate>
             <fieldset>
                 <legend>
                     <h1>Formulario</h1>
@@ -20,26 +20,38 @@
                 <div>
                     <label for="nombre">Nombre</label>
                     <input type="text" id="nombre" name="nombre" minlength="3" required>
+                    <br>
+                    <span class="error" id="errorNombre"></span>
                 </div>
                 <div>
-                    <label for="correoElectronico">Correo electrónico</label>
-                    <input type="email" id="correoElectronico" name="correoElectronico" required>
+                    <label for="correo">Correo electrónico</label>
+                    <input type="email" id="correo" name="correo" required>
+                    <br>
+                    <span class="error" id="errorCorreo"></span>
                 </div>
                 <div>
                     <label for="contraseña">Contraseña</label>
                     <input type="password" id="contraseña" name="contraseña" minlength="8" required>
+                    <br>
+                    <span class="error" id="errorContraseña"></span>
                 </div>
                 <div>
                     <label for="confirmarContraseña">Confirmar contraseña</label>
                     <input type="password" id="confirmarContraseña" name="confirmarContraseña" required>
+                    <br>
+                    <span class="error" id="errorConfirmarContraseña"></span>
                 </div>
                 <div>
                     <label for="fechaNacimiento">Fecha de nacimiento</label>
                     <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
+                    <br>
+                    <span class="error" id="errorFechaNacimiento"></span>
                 </div>
                 <div>
                     <label for="telefono">Teléfono</label>
                     <input type="tel" id="telefono" name="telefono">
+                    <br>
+                    <span class="error" id="errorTelefono"></span>
                 </div>
                 <div>
                     <label for="genero">Género</label>
@@ -49,10 +61,14 @@
                         <option value="femenino">Femenino</option>
                         <option value="otro">Otro</option>
                     </select>
+                    <br>
+                    <span class="error" id="errorGenero"></span>
                 </div>
                 <div>
                     <label for="terminosCondiciones">Terminos y condiciones</label>
                     <input type="checkbox" id="terminosCondiciones" name="terminosCondiciones" required>
+                    <br>
+                    <span class="error" id="errorTerminosCondiciones"></span>
                 </div>
 
                 <button type="submit">Enviar</button>

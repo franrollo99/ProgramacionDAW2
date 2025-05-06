@@ -1,33 +1,43 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-.contenedorPrincipal{
+.contenedorPrincipal {
+    display: flex;
+    padding: 30px;
+}
+
+form {
+    width: 400px;
     display: flex;
 }
 
-#formulario{
-    padding: 10px;
-}
-
-input:valid{
-    border: 2px solid green;
-}
-
-input:invalid{
-    border: 2px solid red;
-}
-
-fieldset{
+fieldset {
     padding: 10px;
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
+input, button{
+    padding: 3px 5px;
+    border-radius: 5px;
+}
 
-.error{
+button {
+    width: max-content;
+}
+
+.valid {
+    border: 2px solid green;
+}
+
+.invalid {
+    border: 2px solid red;
+}
+
+.error {
     color: red;
 }
