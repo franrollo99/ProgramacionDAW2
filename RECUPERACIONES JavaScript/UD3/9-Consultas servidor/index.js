@@ -1,0 +1,5 @@
+fetch('https://jsonplaceholder.typicode.com/todos/1')
+    // .then(response => console.log(response))
+    .then(response => console.log(response.json()))
+    // .then(response => response.json())
+    // .then(json => console.log(json))
