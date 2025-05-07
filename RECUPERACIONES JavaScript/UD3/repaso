@@ -5,3 +5,9 @@ classList.toggle
 
 atributo data-
 element.dataset.nombreAtributo
+
+la api con post y get solo,
+
+para post pasar un objeto
+para delete pasar un id
+para put pasar el objeto y el id
