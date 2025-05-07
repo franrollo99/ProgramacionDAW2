@@ -25,6 +25,7 @@ formulario.addEventListener('submit', (e) => {
 
     validarNombre(nombre.value, (valor1, error1) => {
         if (error1) return mostrarError(error1);
+        // Usar nombre en vez de error1.campoFallido ya que error1 es null en caso de haberse validado de forma exitosa
         nombre.classList.remove('error');
 
         validarContraseña(contraseña.value, (valor2, error2) => {
