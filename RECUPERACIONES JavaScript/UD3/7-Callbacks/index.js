@@ -27,7 +27,7 @@ formulario.addEventListener('submit', (e) => {
                     if (error4) return mostrarError(error4);
                     fechaNacimiento.classList.remove('error');
 
-                    
+
                     alert('El formulario ha sido validado correctamente');
 
                     localStorage.clear();
@@ -136,7 +136,6 @@ function validarFechaNacimiento(valor, callback) {
 }
 
 
-
 function contieneNumeros(valor) {
     for (let caracter of valor) {
         if (!isNaN(caracter)) {
@@ -146,6 +145,7 @@ function contieneNumeros(valor) {
 
     return false;
 }
+
 
 function mostrarError(error) {
     alert(error.message);
