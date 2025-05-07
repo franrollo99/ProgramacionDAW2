@@ -1,7 +1,7 @@
-class ValidacionError extends Error{
+class ValidacionError extends Error {
 
-    constructor(mensaje, campoFallido){
-        // this.mensaje = mensaje;
+    constructor(mensaje, campoFallido) {
+        // Llama al constructor de la clase Error para establecer el mensaje mediante message
         super(mensaje);
         this.campoFallido = campoFallido;
     }
