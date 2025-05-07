@@ -12,16 +12,20 @@ formulario.addEventListener('submit', (e) => {
     e.preventDefault();
 
     validarNombre(nombre.value, (valor1, error1) => {
-        if (error1) return;
+        if (error1) return mostrarError(error1);
+        nombre.classList.remove('error');
 
         validarContraseña(contraseña.value, (valor2, error2) => {
-            if (error2) return;
+            if (error2) return mostrarError(error2);
+            contraseña.classList.remove('error');
 
             validarEmail(email.value, (valor3, error3) => {
-                if (error3) return;
+                if (error3) return mostrarError(error3);
+                email.classList.remove('error');
 
                 validarFechaNacimiento(fechaNacimiento.value, (valor4, error4) => {
-                    if (error4) return;
+                    if (error4) return mostrarError(error4);
+                    fechaNacimiento.classList.remove('error');
 
                     alert('El formulario ha sido validado correctamente');
                 });
@@ -43,62 +47,80 @@ function validarNombre(valor, callback) {
     callback(valor, null);
 }
 
-function validarContraseña(valor, callback) {
-    contraseñaError.innerHTML = '';
 
-    let contraseñaValida = false;
-    let contieneMayusculas = false;
-    let contieneMinusculas = false;
-    let contieneNumeros = false;
+function validarContraseña(valor, callback) {
+    let tieneMayuscula = false;
+    let tieneMinuscula = false;
+    let tieneNumero = false;
 
     for (let caracter of valor) {
-        if (contieneNumeros(caracter)) contieneNumeros = true;
-        if (caracter.toUpperCase()) contieneMayusculas = true;
-        if (caracter.toLowerCase()) contieneMinusculas = true;
+        if (!isNaN(caracter)) tieneNumero = true;
+        else if (caracter === caracter.toUpperCase()) tieneMayuscula = true;
+        else if (caracter === caracter.toLowerCase()) tieneMinuscula = true;
     }
 
-    if (contieneMayusculas && contieneMinusculas && contieneNumeros) {
-        contraseñaValida = true;
+    if (valor.length < 8) {
+        return callback(null, new ValidacionError('La contraseña debe tener al menos 8 caracteres', contraseña));
+    }
+
+    if (!tieneMayuscula || !tieneMinuscula || !tieneNumero) {
+        return callback(null, new ValidacionError('La contraseña debe incluir al menos una letra mayúscula, una minúscula y un número', contraseña));
     }
 
 
-    if (!contraseñaValida) {
-        contraseñaError.innerHTML += 'La contraseña debe incluir al menos una letra mayuscula, una minuscula y un numero';
-    } else if (valor.length < 8) {
-        contraseñaError.innerHTML += 'La contraseña debe tener al menos 8 caracteres';
-    } else {
-        callback(email.value, validarEmail());
-    }
+    callback(valor, null);
 }
+
 
 function validarEmail(valor, callback) {
-    emailError.innerHTML = '';
-
-    let emailValido = false;
-
-
-
-    if (emailValido) {
-        emailError.innerHTML += 'El email debe contener una unica @, text antes y despues de la @, y terminar con un punto y seguido de 2 o 3 letras';
-    } else {
-        callback(fechaNacimiento.value);
+    const partesArroba = valor.split('@');
+    if (partesArroba.length !== 2) {
+        return callback(null, new ValidacionError('El email debe contener una única @', email));
     }
 
+    // Esto es igual que   const dominio = partesPunto[0];   const extension = partesPunto[1];
+    const [parteAntes, parteDespues] = partesArroba;
+
+    if (parteAntes.length === 0 || parteDespues.length === 0) {
+        return callback(null, new ValidacionError('Debe haber texto antes y después de la @', email));
+    }
+
+    const partesPunto = parteDespues.split('.');
+    if (partesPunto.length !== 2) {
+        return callback(null, new ValidacionError('El email debe contener un único punto después de la @', email));
+    }
+
+    const [dominio, extension] = partesPunto;
+
+    if (dominio.length === 0 || extension.length < 2 || extension.length > 3) {
+        return callback(null, new ValidacionError('El email debe tener dominio y terminar en un punto seguido de 2 o 3 letras', email));
+    }
+
+    for (let c of extension) {
+        if (!isNaN(c)) {
+            return callback(null, new ValidacionError('La extensión del email no debe tener números', email));
+        }
+    }
+
+    callback(valor, null);
 }
 
-function validarFechaNacimiento(valor) {
-    fechaNacimientoError.innerHTML = '';
+
+function validarFechaNacimiento(valor, callback) {
+    if(!valor){
+        return callback(null, new ValidacionError('Introduce una fecha', fechaNacimiento));
+    }
 
     const fechaActual = new Date();
-    const fecha = new Date(valor);
+    const fechaNacimientoFormateada = new Date(valor);
 
-    const edad = (fechaActual - fecha) / 100 / 60 / 60 / 24 / 365;
+    const edad = (fechaActual - fechaNacimientoFormateada) / 1000 / 60 / 60 / 24 / 365;
 
-    if (edad < 18 && fecha > 24) {
-        fechaNacimientoError.innerHTML += 'Debes tener entre 18 y 24 años';
-    } else {
-        console.log('todo ok');
+    if (edad < 18 || edad > 24) {
+        return callback(null, new ValidacionError('Debes tener entre 18 y 24 años', fechaNacimiento));
     }
+
+    callback(valor, null);
 }
 
 
@@ -111,4 +133,9 @@ function contieneNumeros(valor) {
     }
 
     return false;
+}
+
+function mostrarError(error) {
+    alert(error.message);
+    error.campoFallido.classList.add('error');
 }
