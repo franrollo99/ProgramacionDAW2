@@ -27,7 +27,19 @@ formulario.addEventListener('submit', (e) => {
                     if (error4) return mostrarError(error4);
                     fechaNacimiento.classList.remove('error');
 
+                    
                     alert('El formulario ha sido validado correctamente');
+
+                    localStorage.clear();
+
+                    const datos = {
+                        nombre: nombre.value,
+                        contraseña: contraseña.value,
+                        email: email.value,
+                        fechaNacimiento: fechaNacimiento.value
+                    };
+
+                    localStorage.setItem('datosFormulario', JSON.stringify(datos));
                 });
             });
         });
