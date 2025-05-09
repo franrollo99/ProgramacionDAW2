@@ -1,14 +1,29 @@
 const formulario = document.forms['formulario'];
+const errores = [];
+let mensajeError;
 
 // Validacion nombre
 const campoNombre = formulario.elements['nombre'];
 const errorNombre = document.getElementById('errorNombre');
 
 campoNombre.addEventListener('blur', () => {
+    let tieneNumeros = false;
+
+    for(let caracter of campoNombre.value){
+        if(!isNaN(caracter)){
+            tieneNumeros = true;
+        }
+    }
+
     if (!campoNombre.checkValidity()) {
-        errorNombre.innerHTML = campoNombre.validationMessage;
+        mensajeError = campoNombre.validationMessage;
+        errorNombre.innerHTML = mensajeError;
         campoNombre.setAttribute('class', 'invalid');
-    } else {
+    }else if(tieneNumeros){
+        mensajeError = 'No debe contener numeros';
+        errorNombre.innerHTML = mensajeError;
+        campoNombre.setAttribute('class', 'invalid');
+    } else{
         errorNombre.innerHTML = '';
         campoNombre.setAttribute('class', 'valid');
     }
@@ -20,7 +35,8 @@ const errorCorreo = document.getElementById('errorCorreo');
 
 campoCorreo.addEventListener('blur', () => {
     if (!campoCorreo.checkValidity()) {
-        errorCorreo.innerHTML = campoCorreo.validationMessage;
+        mensajeError = campoCorreo.validationMessage;
+        errorCorreo.innerHTML = mensajeError;
         campoCorreo.setAttribute('class', 'invalid');
     } else {
         errorCorreo.innerHTML = '';
@@ -33,10 +49,36 @@ const campoContraseña = formulario.elements['contraseña'];
 const errorContraseña = document.getElementById('errorContraseña');
 
 campoContraseña.addEventListener('blur', () => {
+    let caracteresEspeciales = ['!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~'];
+    let tieneMayuscula = false;
+    let tieneNumero = false;
+    let tieneCaracterEspecial = false;
+
+    for(let caracter of campoContraseña.value){
+        for(let caracterEspecial of caracteresEspeciales){
+            if(caracter === caracterEspecial){
+                tieneCaracterEspecial = true;
+            }
+        }
+
+        if(!isNaN(caracter)){
+            tieneNumero = true;
+        }
+
+        if(caracter === caracter.toUpperCase()){
+            tieneMayuscula = true;
+        }
+    }
+
     if (!campoContraseña.checkValidity()) {
-        errorContraseña.innerHTML = campoContraseña.validationMessage;
+        mensajeError = campoContraseña.validationMessage;
+        errorContraseña.innerHTML = mensajeError;+
         campoContraseña.setAttribute('class', 'invalid');
-    } else {
+    } else if(!tieneCaracterEspecial || !tieneMayuscula || !tieneNumero){
+        mensajeError =
+        errorContraseña.innerHTML = 'Debe tener al menos una letra mayuscula, un numero y un caracter especial';
+        campoContraseña.setAttribute('class', 'invalid');
+    }else {
         errorContraseña.innerHTML = '';
         campoContraseña.setAttribute('class', 'valid');
     }
@@ -48,9 +90,11 @@ const errorConfirmarContraseña = document.getElementById('errorConfirmarContras
 
 campoConfirmarContraseña.addEventListener('blur', () => {
     if (!campoConfirmarContraseña.checkValidity()) {
+        mensajeError =
         errorConfirmarContraseña.innerHTML = campoConfirmarContraseña.validationMessage;
         campoConfirmarContraseña.setAttribute('class', 'invalid');
     } else if (campoConfirmarContraseña.value !== campoContraseña.value) {
+        mensajeError =
         errorConfirmarContraseña.innerHTML = 'La contraseña no coincide';
         campoConfirmarContraseña.setAttribute('class', 'invalid');
     } else {
@@ -69,9 +113,11 @@ campoFechaNacimiento.addEventListener('blur', () => {
     const calcularEdad = (fechaActual - fechaNacimientoFormateada) / 100 / 60 / 60 / 24 / 365;
 
     if (!campoFechaNacimiento.checkValidity()) {
+        mensajeError =
         errorFechaNacimiento.innerHTML = campoFechaNacimiento.validationMessage;
         campoFechaNacimiento.setAttribute('class', 'invalid');
     } else if (calcularEdad < 16) {
+        mensajeError =
         errorFechaNacimiento.innerHTML = 'Debes tener al menos 16 años';
         campoFechaNacimiento.setAttribute('class', 'invalid');
     } else {
@@ -85,12 +131,31 @@ const campoTelefono = formulario.elements['telefono'];
 const errorTelefono = document.getElementById('errorTelefono');
 
 campoTelefono.addEventListener('blur', () => {
-    if (!campoTelefono.checkValidity()) {
-        errorTelefono.innerHTML = errorTelefono.validationMessage;
-        campoTelefono.setAttribute('class', 'invalid');
-    } else {
+    if(campoTelefono.value){
+        let soloNumeros = true;
+
+        for(let digito of campoTelefono.value){
+            if(isNaN(digito)){
+                soloNumeros = false;
+                break;
+            }
+        }
+
+        if(!soloNumeros){
+            mensajeError =
+            errorTelefono.innerHTML = 'Debe tener solo numeros';
+            campoTelefono.setAttribute('class', 'invalid');
+        } else if (campoTelefono.value.length !== 9 ) {
+            mensajeError =
+            errorTelefono.innerHTML = 'Debe tener exactamente 9 digitos';
+            campoTelefono.setAttribute('class', 'invalid');
+        } else {
+            errorTelefono.innerHTML = '';
+            campoTelefono.setAttribute('class', 'valid');
+        }
+    }else{
         errorTelefono.innerHTML = '';
-        campoTelefono.setAttribute('class', 'valid');
+        campoTelefono.classList.remove('invalid');
     }
 });
 
@@ -100,7 +165,8 @@ const errorGenero = document.getElementById('errorGenero');
 
 campoGenero.addEventListener('blur', () => {
     const genero = campoGenero.value;
-    if (genero !== 'masculino' || genero !== 'femenino' || genero !== 'otro' ) {
+    if (genero === 'seleccione') {
+        mensajeError =
         errorGenero.innerHTML = 'Debe seleccionar una de las opciones disponibles';
         campoGenero.setAttribute('class', 'invalid');
     } else {
@@ -117,11 +183,23 @@ formulario.addEventListener('submit', (e) => {
     e.preventDefault();
 
     if (!campoTerminosCondiciones.checkValidity()) {
+        mensajeError =
         errorTerminosCondiciones.innerHTML = 'Debes marcar esta casilla';
         campoTerminosCondiciones.setAttribute('class', 'invalid');
     } else {
         errorTerminosCondiciones.innerHTML = '';
         campoTerminosCondiciones.setAttribute('class', 'valid');
     }
+
+    const datos = {
+        nombre: campoNombre.value,
+        correo: campoCorreo.value,
+        contraseña: campoContraseña.value,
+        fechaNacimiento: campoFechaNacimiento.value,
+        telefono: campoTelefono.value,
+        genero: campoGenero.value
+    };
+
+    console.log(datos);
 
 });
