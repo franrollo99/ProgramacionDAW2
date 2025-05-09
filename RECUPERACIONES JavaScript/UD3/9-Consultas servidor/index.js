@@ -1,5 +1,39 @@
-fetch('https://jsonplaceholder.typicode.com/todos/1')
-    // .then(response => console.log(response))
-    .then(response => console.log(response.json()))
-    // .then(response => response.json())
-    // .then(json => console.log(json))
+(function () {
+    class App {
+        cargarDatos(endpoint) {
+            const peticion = fetch(`https://jsonplaceholder.typicode.com/${endpoint}`);
+
+            peticion.then(response => response.json())
+                .then(data => console.log(data))
+                .catch((error) => console.error("Error en la solicitud:", error.message))
+        }
+    }
+})();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// fetch("https://jsonplaceholder.typicode.com/posts", {
+//     method: "POST",
+//     headers: {
+//     "Content-Type": "application/json"
+//     ,
+//     },
+//     body: JSON.stringify({ nombre: "Juan", edad: 30 })
+// })
+// .then((response) => response.json())
+// .then((data) => console.log("Datos enviados correctamente:", data))
+// .catch((error) => console.error("Error al enviar los datos:",
+// error));
