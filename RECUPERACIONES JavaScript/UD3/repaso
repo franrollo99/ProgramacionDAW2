@@ -1,3 +1,5 @@
+doom y comunicacion con el servidor
+
 createElement
 children, no childNodes, solo elementos
 classList
@@ -11,3 +13,8 @@ la api con post y get solo,
 para post pasar un objeto
 para delete pasar un id
 para put pasar el objeto y el id
+
+
+mirar las entidades mas comunes para trabajar con ellas
+altas bajas modificaciones con apis, usando un formulario con validaciones,
+ y mostrando los datos en una tabla
