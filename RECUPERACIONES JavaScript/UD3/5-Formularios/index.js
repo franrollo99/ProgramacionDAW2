@@ -1,12 +1,11 @@
 const formulario = document.forms['formulario'];
 const errores = [];
-let mensajeError;
 
 // Validacion nombre
 const campoNombre = formulario.elements['nombre'];
 const errorNombre = document.getElementById('errorNombre');
 
-campoNombre.addEventListener('blur', () => {
+campoNombre.addEventListener('input', () => {
     let tieneNumeros = false;
 
     for(let caracter of campoNombre.value){
@@ -16,16 +15,11 @@ campoNombre.addEventListener('blur', () => {
     }
 
     if (!campoNombre.checkValidity()) {
-        mensajeError = campoNombre.validationMessage;
-        errorNombre.innerHTML = mensajeError;
-        campoNombre.setAttribute('class', 'invalid');
-    }else if(tieneNumeros){
-        mensajeError = 'No debe contener numeros';
-        errorNombre.innerHTML = mensajeError;
-        campoNombre.setAttribute('class', 'invalid');
+        validarCampo(campoNombre, errorNombre, campoNombre.validationMessage);
+    } else if(tieneNumeros){
+        validarCampo(campoNombre, errorNombre, 'No debe contener numeros');
     } else{
-        errorNombre.innerHTML = '';
-        campoNombre.setAttribute('class', 'valid');
+        validarCampo(campoNombre, errorNombre);
     }
 });
 
@@ -33,14 +27,11 @@ campoNombre.addEventListener('blur', () => {
 const campoCorreo = formulario.elements['correo'];
 const errorCorreo = document.getElementById('errorCorreo');
 
-campoCorreo.addEventListener('blur', () => {
+campoCorreo.addEventListener('input', () => {
     if (!campoCorreo.checkValidity()) {
-        mensajeError = campoCorreo.validationMessage;
-        errorCorreo.innerHTML = mensajeError;
-        campoCorreo.setAttribute('class', 'invalid');
+        validarCampo(campoCorreo, errorCorreo, campoCorreo.validationMessage);
     } else {
-        errorCorreo.innerHTML = '';
-        campoCorreo.setAttribute('class', 'valid');
+        validarCampo(campoCorreo, errorCorreo);
     }
 });
 
@@ -48,7 +39,7 @@ campoCorreo.addEventListener('blur', () => {
 const campoContraseña = formulario.elements['contraseña'];
 const errorContraseña = document.getElementById('errorContraseña');
 
-campoContraseña.addEventListener('blur', () => {
+campoContraseña.addEventListener('input', () => {
     let caracteresEspeciales = ['!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~'];
     let tieneMayuscula = false;
     let tieneNumero = false;
@@ -71,16 +62,11 @@ campoContraseña.addEventListener('blur', () => {
     }
 
     if (!campoContraseña.checkValidity()) {
-        mensajeError = campoContraseña.validationMessage;
-        errorContraseña.innerHTML = mensajeError;+
-        campoContraseña.setAttribute('class', 'invalid');
+        validarCampo(campoContraseña, errorContraseña, campoContraseña.validationMessage);
     } else if(!tieneCaracterEspecial || !tieneMayuscula || !tieneNumero){
-        mensajeError =
-        errorContraseña.innerHTML = 'Debe tener al menos una letra mayuscula, un numero y un caracter especial';
-        campoContraseña.setAttribute('class', 'invalid');
-    }else {
-        errorContraseña.innerHTML = '';
-        campoContraseña.setAttribute('class', 'valid');
+        validarCampo(campoContraseña, errorContraseña, 'Debe tener al menos una letra mayuscula, un numero y un caracter especial');
+    } else {
+        validarCampo(campoContraseña, errorContraseña);
     }
 });
 
@@ -88,18 +74,13 @@ campoContraseña.addEventListener('blur', () => {
 const campoConfirmarContraseña = formulario.elements['confirmarContraseña'];
 const errorConfirmarContraseña = document.getElementById('errorConfirmarContraseña');
 
-campoConfirmarContraseña.addEventListener('blur', () => {
+campoConfirmarContraseña.addEventListener('input', () => {
     if (!campoConfirmarContraseña.checkValidity()) {
-        mensajeError =
-        errorConfirmarContraseña.innerHTML = campoConfirmarContraseña.validationMessage;
-        campoConfirmarContraseña.setAttribute('class', 'invalid');
+        validarCampo(campoConfirmarContraseña, errorConfirmarContraseña, campoConfirmarContraseña.validationMessage);
     } else if (campoConfirmarContraseña.value !== campoContraseña.value) {
-        mensajeError =
-        errorConfirmarContraseña.innerHTML = 'La contraseña no coincide';
-        campoConfirmarContraseña.setAttribute('class', 'invalid');
+        validarCampo(campoConfirmarContraseña, errorConfirmarContraseña, 'La contraseña no coincide');
     } else {
-        errorConfirmarContraseña.innerHTML = '';
-        campoConfirmarContraseña.setAttribute('class', 'valid');
+        validarCampo(campoConfirmarContraseña, errorConfirmarContraseña);
     }
 });
 
@@ -108,21 +89,16 @@ const campoFechaNacimiento = formulario.elements['fechaNacimiento'];
 const errorFechaNacimiento = document.getElementById('errorFechaNacimiento');
 const fechaActual = new Date();
 
-campoFechaNacimiento.addEventListener('blur', () => {
+campoFechaNacimiento.addEventListener('input', () => {
     const fechaNacimientoFormateada = new Date(campoFechaNacimiento.value);
     const calcularEdad = (fechaActual - fechaNacimientoFormateada) / 100 / 60 / 60 / 24 / 365;
 
     if (!campoFechaNacimiento.checkValidity()) {
-        mensajeError =
-        errorFechaNacimiento.innerHTML = campoFechaNacimiento.validationMessage;
-        campoFechaNacimiento.setAttribute('class', 'invalid');
+        validarCampo(campoFechaNacimiento, errorFechaNacimiento, campoFechaNacimiento.validationMessage);
     } else if (calcularEdad < 16) {
-        mensajeError =
-        errorFechaNacimiento.innerHTML = 'Debes tener al menos 16 años';
-        campoFechaNacimiento.setAttribute('class', 'invalid');
+        validarCampo(campoFechaNacimiento, errorFechaNacimiento, 'Debes tener al menos 16 años');
     } else {
-        errorFechaNacimiento.innerHTML = '';
-        campoFechaNacimiento.setAttribute('class', 'valid');
+        validarCampo(campoFechaNacimiento, errorFechaNacimiento);
     }
 });
 
@@ -130,7 +106,7 @@ campoFechaNacimiento.addEventListener('blur', () => {
 const campoTelefono = formulario.elements['telefono'];
 const errorTelefono = document.getElementById('errorTelefono');
 
-campoTelefono.addEventListener('blur', () => {
+campoTelefono.addEventListener('input', () => {
     if(campoTelefono.value){
         let soloNumeros = true;
 
@@ -142,16 +118,11 @@ campoTelefono.addEventListener('blur', () => {
         }
 
         if(!soloNumeros){
-            mensajeError =
-            errorTelefono.innerHTML = 'Debe tener solo numeros';
-            campoTelefono.setAttribute('class', 'invalid');
+            validarCampo(campoTelefono, errorTelefono, 'Debe tener solo numeros');
         } else if (campoTelefono.value.length !== 9 ) {
-            mensajeError =
-            errorTelefono.innerHTML = 'Debe tener exactamente 9 digitos';
-            campoTelefono.setAttribute('class', 'invalid');
+            validarCampo(campoTelefono, errorTelefono, 'Debe tener exactamente 9 digitos');
         } else {
-            errorTelefono.innerHTML = '';
-            campoTelefono.setAttribute('class', 'valid');
+            validarCampo(campoTelefono, errorTelefono);
         }
     }else{
         errorTelefono.innerHTML = '';
@@ -166,12 +137,9 @@ const errorGenero = document.getElementById('errorGenero');
 campoGenero.addEventListener('blur', () => {
     const genero = campoGenero.value;
     if (genero === 'seleccione') {
-        mensajeError =
-        errorGenero.innerHTML = 'Debe seleccionar una de las opciones disponibles';
-        campoGenero.setAttribute('class', 'invalid');
+        validarCampo(campoGenero, errorGenero, 'Debe seleccionar una de las opciones disponibles');
     } else {
-        errorGenero.innerHTML = '';
-        campoGenero.setAttribute('class', 'valid');
+        validarCampo(campoGenero, errorGenero);
     }
 });
 
@@ -180,26 +148,37 @@ const campoTerminosCondiciones = formulario.elements['terminosCondiciones'];
 const errorTerminosCondiciones = document.getElementById('errorTerminosCondiciones');
 
 formulario.addEventListener('submit', (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Deshabilito el envio del formulario
 
     if (!campoTerminosCondiciones.checkValidity()) {
-        mensajeError =
-        errorTerminosCondiciones.innerHTML = 'Debes marcar esta casilla';
-        campoTerminosCondiciones.setAttribute('class', 'invalid');
+        validarCampo(campoTerminosCondiciones, errorTerminosCondiciones, 'Debes marcar esta casilla');
     } else {
-        errorTerminosCondiciones.innerHTML = '';
-        campoTerminosCondiciones.setAttribute('class', 'valid');
+        validarCampo(campoTerminosCondiciones, errorTerminosCondiciones);
+
+        const datos = {
+            nombre: campoNombre.value,
+            correo: campoCorreo.value,
+            contraseña: campoContraseña.value,
+            fechaNacimiento: campoFechaNacimiento.value,
+            telefono: campoTelefono.value,
+            genero: campoGenero.value
+        };
+
+        console.log(datos);
     }
 
-    const datos = {
-        nombre: campoNombre.value,
-        correo: campoCorreo.value,
-        contraseña: campoContraseña.value,
-        fechaNacimiento: campoFechaNacimiento.value,
-        telefono: campoTelefono.value,
-        genero: campoGenero.value
-    };
-
-    console.log(datos);
-
+    
 });
+
+function validarCampo(campo, campoError, mensaje = null){
+    campo.classList.remove('valid', 'invalid');
+
+    if (mensaje) {
+        campoError.textContent = mensaje;
+        campo.classList.add('invalid');
+        errores.push(mensaje)
+    } else {
+        campoError.textContent = '';
+        campo.classList.add('valid');
+    }
+}
