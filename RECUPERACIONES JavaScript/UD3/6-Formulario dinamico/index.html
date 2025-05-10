@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario dinamico</title>
+    <script src="index.js" defer></script>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <div id="app">
+        <form>
+            <div class="filtro">
+
+                <label for="filtrarPorCiclo">Filtrar por ciclo: </label>
+                <select name="filtrarPorCiclo" id="filtrarPorCiclo">
+                    <option value="todos">Todos</option>
+                    <option value="asir">ASIR</option>
+                    <option value="daw">DAW</option>
+                    <option value="dam">DAM</option>
+                </select>
+            </div>
+
+            <div class="listadoYFormulario">
+                <div class="tabla" id="listado">
+                    <div>
+                        <h3>Lista de Alumnos</h3>
+                    </div>
+                    <div class="cabecera">
+                        <div>Nombre</div>
+                        <div>Ciclo</div>
+                    </div>
+                    <div class="listadoAlumnos" id="alumnos"></div>
+                </div>
+
+                <div id="flechas">
+                    <div class="boton">🠖</div>
+                    <div class="boton">🠔</div>
+                </div>
+                
+                <div class="tabla" id="listado">
+                    <div>
+                        <h3>Formulario Seleccionados</h3>
+                    </div>
+                    <div class="cabecera">
+                        <div>Nombre</div>
+                        <div>Ciclo</div>
+                        <div>Acciones</div>
+                    </div>
+                    <div class="listadoAlumnos" id="alumnosSeleccionados"></div>
+                </div>
+            </div>
+            <input type="submit" value="Enviar" class="boton">
+        </form>
+    </div>
+</body>
+</html>
