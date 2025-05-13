@@ -26,6 +26,7 @@ function cargarListadoUsers(datos) {
     for(let dato of datos){
         const filaListado = document.createElement('div');
         filaListado.classList.add('fila');
+        filaListado.setAttribute('data-id', dato.id);
     
         filaListado.innerHTML += `
             <div>${dato.username}</div>
@@ -35,6 +36,12 @@ function cargarListadoUsers(datos) {
             <div>${dato.phone}</div>
             <div>${dato.company.name}</div>
             <div>${dato.website}</div>
+            <div>
+                <!-- Filtrar por id de usuario -->
+                <a href="./posts.html">Pendientes</a>
+                <a href="./albums.html">Albumes</a>
+                <a href="./posts.html">Post</a>
+            </div>
         `;
 
         listado.appendChild(filaListado);

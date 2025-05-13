@@ -4,6 +4,7 @@ import * as utilidades from '../utilidades.js';
 const filtro = document.getElementById('filtro');
 const elementosPorPagina = document.getElementById('numElementos');
 const paginaActual = 1;
+const listado = document.getElementById('listado');
 
 window.addEventListener('load', () => {
     const users = JSON.parse(localStorage.getItem('users'));
@@ -25,6 +26,16 @@ window.addEventListener('load', () => {
     elementosPorPagina.addEventListener('change', () => {
         usuariosPorPagina = elementosPorPagina.value === 'todos' ? usuariosFiltrados.length : parseInt(elementosPorPagina.value);
         listarConPaginador(1, usuariosFiltrados, usuariosPorPagina);
+    });
+
+    // Mandar datos al formulario
+    listado.addEventListener('click', (e) => {
+        const filaSeleccionada = e.target.closest('.fila');
+        if(filaSeleccionada){
+            const id = filaSeleccionada.dataset.id;
+            const urlPropiedadesUser = `../propiedades/user.html?id=${id}`;
+            window.location.href = urlPropiedadesUser;
+        }
     });
 });
 

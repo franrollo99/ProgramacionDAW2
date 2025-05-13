@@ -1,9 +1,8 @@
 import * as utilidades from './utilidades.js';
 
 const App = (function () {
-    class App {
         // Una funcion async siempre devuelve una promesa
-        async cargarDatos(endpoint) {
+        async function descargarDatos(endpoint) {
             try {
                 const peticion = await fetch(`https://jsonplaceholder.typicode.com/${endpoint}`);
 
@@ -18,30 +17,59 @@ const App = (function () {
             }
         }
 
-        obtenerArrayPaginado(array, elementosPorPagina, paginaActual){
+        async function actualizarDatos(endpoint, datos) {
+            try{
+                const peticion = await fetch(`https://jsonplaceholder.typicode.com/${endpoint}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(datos),
+                });
+
+                const data = await peticion.json();
+
+                return data;
+            } catch(error){
+                console.error("Error en la solicitud:", error.message);
+            }
+        }
+
+
+
+
+
+        function obtenerArrayPaginado(array, elementosPorPagina, paginaActual){
             const comienzo = (paginaActual - 1) * elementosPorPagina;
             const final = comienzo + elementosPorPagina;
 
             return array.slice(comienzo, final);
         }
 
-        calcularTotalPaginas(totalElementos, elementosPorPagina){
+        function calcularTotalPaginas(totalElementos, elementosPorPagina){
             return Math.ceil(totalElementos / elementosPorPagina);
         }
-    }
 
-    return new App();
-
+        return {
+            descargarDatos,
+            actualizarDatos,
+            obtenerArrayPaginado,
+            calcularTotalPaginas
+        };
 })();
 
 window.addEventListener('load', async () => {
     if(!localStorage.getItem('users')){
         const nombreEntidades = ['users', 'todos', 'posts', 'comments', 'albums', 'photos'];
-        // Si fuera una sola promesa con await App.cargarDatos('ejemplo') tendriamos los datos
+        // Si fuera una sola promesa con await descargarDatos('ejemplo') tendriamos los datos
         // Array de promesas
-        const promesas = nombreEntidades.map(e => App.cargarDatos(e));
+        const promesas = nombreEntidades.map(e => descargarDatos(e));
         // Resolvemos todas las promesas en paralelo en vez de en serie
         const resultados = await Promise.all(promesas);
+
+        // Cambiar y hacerlo con then para resolver las promesas en funcion de la demanda
+        // Promise.all(promesas).then(
+        //     (resultado)=>{})
         
         utilidades.guardarLocalStorage(resultados, nombreEntidades);
     }
