@@ -1,22 +1,45 @@
-import App from './app.js';
-
-const contenedorApp = document.getElementById('app');
-
-async function cargarTarjetas(){
-    const users = await App.cargarDatos('users');
-    // crear contenedor tarjetas y meter dentro todas, luego ponerla que es hija del principal
-    let resultado = '';
-    
-    // for(let user of users){
-        resultado = `
-            <div class="tarjeta" id="usuarios">
-                <p>Nombre: Usuarios</p>
-                <p>Nº elementos: ${users.length}</p>
-            </div>
-        `;
-    // }
-
-    contenedorApp.innerHTML = resultado;
+// Metodo para guardar los datos de la API en localStorage
+function guardarLocalStorage(datos, entidades) {
+    for (let n = 0; n < datos.length; n++) {
+        localStorage.setItem(entidades[n], JSON.stringify(datos[n]));
+    }
 }
 
-cargarTarjetas();
+// Metodo para cargar las tarjetas de cada entidad de la API
+function cargarTarjetas(nombre, cantidad) {
+    const tarjeta = document.createElement('div');
+    tarjeta.classList.add('tarjeta');
+    tarjeta.setAttribute('id', nombre);
+
+    tarjeta.innerHTML = `
+        <p>Nombre: <b>${nombre.toUpperCase()}</b></p>
+        <p>Nº elementos: <b>${cantidad}</b></p>
+    `;
+
+    return tarjeta;
+}
+
+function cargarListadoUsers(datos) {
+    const listado = document.getElementById('listado');
+    listado.innerHTML = '';
+
+    for(let dato of datos){
+        const filaListado = document.createElement('div');
+        filaListado.classList.add('fila');
+    
+        filaListado.innerHTML += `
+            <div>${dato.username}</div>
+            <div>${dato.name}</div>
+            <div>${dato.email}</div>
+            <div>${dato.address.city}, ${dato.address.street}</div>
+            <div>${dato.phone}</div>
+            <div>${dato.company.name}</div>
+            <div>${dato.website}</div>
+        `;
+
+        listado.appendChild(filaListado);
+    }
+}
+
+
+export {guardarLocalStorage, cargarTarjetas, cargarListadoUsers};
