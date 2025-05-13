@@ -89,3 +89,28 @@ input, select{
 .fila:hover > div {
     white-space: wrap;
 }
+
+.paginador{
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+}
+
+.btn-paginador{
+    padding: 10px;
+    font-weight: bold;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+}
+
+.activo {
+    background-color: dodgerblue;
+}
+
+.activo:hover{
+    cursor: pointer;
+}
+
+.inactivo {
+    background-color: lightgray;
+}

@@ -17,6 +17,17 @@ const App = (function () {
                 console.error("Error en la solicitud:", error.message);
             }
         }
+
+        obtenerArrayPaginado(array, elementosPorPagina, paginaActual){
+            const comienzo = (paginaActual - 1) * elementosPorPagina;
+            const final = comienzo + elementosPorPagina;
+
+            return array.slice(comienzo, final);
+        }
+
+        calcularTotalPaginas(totalElementos, elementosPorPagina){
+            return Math.ceil(totalElementos / elementosPorPagina);
+        }
     }
 
     return new App();
@@ -32,7 +43,7 @@ window.addEventListener('load', async () => {
         // Resolvemos todas las promesas en paralelo en vez de en serie
         const resultados = await Promise.all(promesas);
         
-        utilidades.guardarLocalStorage(resultados, entidades);
+        utilidades.guardarLocalStorage(resultados, nombreEntidades);
     }
 
     // Guardamos los datos de cada entidad en una variable
@@ -45,35 +56,37 @@ window.addEventListener('load', async () => {
 
     // Codigo para generar las tarjetas
     const contenedorApp = document.getElementById('app');
-    const contenedorTarjetas = document.createElement('div');
-
-    contenedorTarjetas.classList.add('contenedorTarjetas');
-    contenedorApp.innerHTML = '<h1>Listado de entidades</h1>';
-
-    // Creamos un array de entidades con el nombre y los datos de cada entidad
-    const entidades = [
-        { nombre: 'users', datos: users },
-        { nombre: 'todos', datos: todos },
-        { nombre: 'posts', datos: posts },
-        { nombre: 'comments', datos: comments },
-        { nombre: 'albums', datos: albums },
-        { nombre: 'photos', datos: photos }
-    ];
-
-    for(let entidad of entidades) {
-        const tarjeta = utilidades.cargarTarjetas(entidad.nombre, entidad.datos.length)
-
-        contenedorTarjetas.appendChild(tarjeta);
-        contenedorApp.appendChild(contenedorTarjetas);
-    }
-
-    // Evento para acceder a las paginas de mantenimiento de cada entidad
-    contenedorTarjetas.addEventListener('click', (e)=>{
-        if(e.target.closest('.tarjeta')){
-            const tarjeta = e.target.closest('.tarjeta').id;
-            window.location.href = `./mantenimiento/${tarjeta}.html`;
+    if(contenedorApp){
+        const contenedorTarjetas = document.createElement('div');
+    
+        contenedorTarjetas.classList.add('contenedorTarjetas');
+        contenedorApp.innerHTML = '<h1>Listado de entidades</h1>';
+    
+        // Creamos un array de entidades con el nombre y los datos de cada entidad
+        const entidades = [
+            { nombre: 'users', datos: users },
+            { nombre: 'todos', datos: todos },
+            { nombre: 'posts', datos: posts },
+            { nombre: 'comments', datos: comments },
+            { nombre: 'albums', datos: albums },
+            { nombre: 'photos', datos: photos }
+        ];
+    
+        for(let entidad of entidades) {
+            const tarjeta = utilidades.cargarTarjetas(entidad.nombre, entidad.datos.length)
+    
+            contenedorTarjetas.appendChild(tarjeta);
+            contenedorApp.appendChild(contenedorTarjetas);
         }
-    });
+    
+        // Evento para acceder a las paginas de mantenimiento de cada entidad
+        contenedorTarjetas.addEventListener('click', (e)=>{
+            if(e.target.closest('.tarjeta')){
+                const tarjeta = e.target.closest('.tarjeta').id;
+                window.location.href = `./mantenimiento/${tarjeta}.html`;
+            }
+        });
+    }
 });
 
 export default App;

@@ -1,3 +1,4 @@
+import App from '../index.js';
 import * as utilidades from '../utilidades.js';
 
 const filtro = document.getElementById('filtro');
@@ -15,8 +16,8 @@ window.addEventListener('load', () => {
 
     // Evento de filtro de users por nombre
     filtro.addEventListener('input', () => {
-        usersFilatrados = users.filter(user => user.username.toLowerCase().startsWith(filtro.value));
-        listarConPaginador(1, usuariosFiltrados, elementosPorPagina);
+        usuariosFiltrados = users.filter(user => user.username.toLowerCase().startsWith(filtro.value.toLowerCase()));
+        listarConPaginador(1, usuariosFiltrados, usuariosPorPagina);
     });
 
 
