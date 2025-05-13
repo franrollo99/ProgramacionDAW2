@@ -75,3 +75,5 @@ window.addEventListener('load', async () => {
         }
     });
 });
+
+export default App;
