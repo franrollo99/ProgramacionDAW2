@@ -40,7 +40,6 @@ window.addEventListener('load', () => {
 });
 
 
-
 // Funcion para listar los usuarios en funcion de la pagina
 function listarConPaginador(paginaActual, usuarios, elementosPorPagina) {
     const elementosPaginados = App.obtenerArrayPaginado(usuarios, elementosPorPagina, paginaActual);
