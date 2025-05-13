@@ -48,5 +48,25 @@ function cargarListadoUsers(datos) {
     }
 }
 
+function cargarListadoTodos(datos){
+    const listado = document.getElementById('listado');
+    listado.innerHTML = '';
 
-export {guardarLocalStorage, cargarTarjetas, cargarListadoUsers};
+    for(let dato of datos){
+        const filaListado = document.createElement('div');
+        filaListado.classList.add('fila');
+        filaListado.setAttribute('data-id', dato.id);
+    
+        // Cambiar userId por nombre de autor
+        filaListado.innerHTML += `
+            <div>${dato.userId}</div>
+            <div>${dato.title}</div>
+            <div>${dato.completed ? 'Si' : 'No'}</div>
+        `;
+
+        listado.appendChild(filaListado);
+    }
+}
+
+
+export {guardarLocalStorage, cargarTarjetas, cargarListadoUsers, cargarListadoTodos};

@@ -43,17 +43,11 @@ window.addEventListener('load', () => {
 
 // Funcion para listar los usuarios en funcion de la pagina
 function listarConPaginador(paginaActual, usuarios, elementosPorPagina) {
-    const comienzo = (paginaActual - 1) * elementosPorPagina;
-    const final = comienzo + elementosPorPagina;
-
-    // Devuelvo una copia de una porcion del array con los valores indicados en el rango
-    const elementosPaginados = usuarios.slice(comienzo, final);
+    const elementosPaginados = App.obtenerArrayPaginado(usuarios, elementosPorPagina, paginaActual);
 
     utilidades.cargarListadoUsers(elementosPaginados);
     cargarPaginador(paginaActual, usuarios.length, elementosPorPagina, usuarios);
 }
-
-
 
 // Cargo el paginador en funcion del numero total de elementos totales y elementos por pagina
 function cargarPaginador(paginaActual, elementosTotales, elementosPorPagina, usuarios) {

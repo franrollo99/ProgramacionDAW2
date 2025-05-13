@@ -35,26 +35,18 @@ const App = (function () {
             }
         }
 
-
-
-
-
         function obtenerArrayPaginado(array, elementosPorPagina, paginaActual){
             const comienzo = (paginaActual - 1) * elementosPorPagina;
             const final = comienzo + elementosPorPagina;
 
+            // Devuelvo una copia de una porcion del array con los valores indicados en el rango
             return array.slice(comienzo, final);
-        }
-
-        function calcularTotalPaginas(totalElementos, elementosPorPagina){
-            return Math.ceil(totalElementos / elementosPorPagina);
         }
 
         return {
             descargarDatos,
             actualizarDatos,
             obtenerArrayPaginado,
-            calcularTotalPaginas
         };
 })();
 
