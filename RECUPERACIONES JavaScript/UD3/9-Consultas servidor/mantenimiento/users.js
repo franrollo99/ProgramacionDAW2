@@ -8,13 +8,14 @@ const paginador = document.getElementById('paginador');
 
 let paginaActual = 1;
 let totalUsuarios = 0;
-let textoFiltro = '';
 
 window.addEventListener('load', () => {
+    // Cargo el listado al entrar a la pagina
     actualizarListado();
 
     filtro.addEventListener('input', () => {
-        textoFiltro = filtro.value.trim().toLowerCase();
+        // Cojo el valor del filtro, quito los espacios en blanco y lo convierto a minusculas
+        const textoFiltro = filtro.value.trim().toLowerCase();
         paginaActual = 1;
         actualizarListado();
     });
