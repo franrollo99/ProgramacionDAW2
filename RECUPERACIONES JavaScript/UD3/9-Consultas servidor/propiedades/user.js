@@ -14,41 +14,41 @@ window.addEventListener('load', () => {
     const parametros = new URLSearchParams(window.location.search);
     const idUsuario = parseInt(parametros.get('id'));
 
-    const users = JSON.parse(localStorage.getItem('users'));
+    App.obtenerDatos('users').then((users)=>{
+        // Si recupera el id del usuario continua el codigo
+        if (idUsuario) {
+            const usuarioEditar = users.filter(user => user.id === idUsuario)[0];
 
-    // Si recupera el id del usuario continua el codigo
-    if (idUsuario) {
-        const usuarioEditar = users.filter(user => user.id === idUsuario)[0];
+            nombre.value = usuarioEditar.username;
+            apellidos.value = usuarioEditar.name;
+            email.value = usuarioEditar.email;
+            direccion.value = usuarioEditar.address.street;
+            telefono.value = usuarioEditar.phone;
+            compañia.value = usuarioEditar.company.name;
+            web.value = usuarioEditar.website;
 
-        nombre.value = usuarioEditar.username;
-        apellidos.value = usuarioEditar.name;
-        email.value = usuarioEditar.email;
-        direccion.value = usuarioEditar.address.street;
-        telefono.value = usuarioEditar.phone;
-        compañia.value = usuarioEditar.company.name;
-        web.value = usuarioEditar.website;
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
 
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
+                usuarioEditar.username = nombre.value;
+                usuarioEditar.name = apellidos.value;
+                usuarioEditar.email = email.value;
+                usuarioEditar.address.street = direccion.value;
+                usuarioEditar.phone = telefono.value;
+                usuarioEditar.company.name = compañia.value;
+                usuarioEditar.website = web.value;
 
-            usuarioEditar.username = nombre.value;
-            usuarioEditar.name = apellidos.value;
-            usuarioEditar.email = email.value;
-            usuarioEditar.address.street = direccion.value;
-            usuarioEditar.phone = telefono.value;
-            usuarioEditar.company.name = compañia.value;
-            usuarioEditar.website = web.value;
+                // Almaceno la promesa
+                const promesa = App.actualizarDatos(`users/${idUsuario}`, usuarioEditar);
 
-            // Almaceno la promesa
-            const promesa = App.actualizarDatos(`users/${idUsuario}`, usuarioEditar);
-
-            // Resuelvo la promesa
-            promesa.then((response) => {
-                console.log(response);
-            }).catch((error) => {
-                console.error('Error en la solicitud: ', error.message);
-            });
-        })
-    }
+                // Resuelvo la promesa
+                promesa.then((response) => {
+                    console.log(response);
+                }).catch((error) => {
+                    console.error('Error en la solicitud: ', error.message);
+                });
+            })
+        }
+    });
 
 });

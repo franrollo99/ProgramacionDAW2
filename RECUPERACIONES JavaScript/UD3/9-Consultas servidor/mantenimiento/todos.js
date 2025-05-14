@@ -3,61 +3,105 @@ import * as utilidades from '../utilidades.js';
 
 const filtro = document.getElementById('filtro');
 const elementosPorPagina = document.getElementById('numElementos');
-const paginaActual = 1;
+const listado = document.getElementById('listado');
 const paginador = document.getElementById('paginador');
-const todos = JSON.parse(localStorage.getItem('todos'));
 
-
-
-
-console.log(todos[0]);
+let paginaActual = 1;
+let totalTareas = 0;
+let textoFiltro = '';
+let idUsuario;
 
 window.addEventListener('load', () => {
-    let todosFiltrados = [...todos];
+    const url = new URLSearchParams(window.location.search);
+    // idUsuario = parseInt(url.get('id'));
+    idUsuario = parseInt(url.get('id'));
 
-    listarConPaginador(todosFiltrados, elementosPorPagina.value, paginaActual)
-    // utilidades.cargarListadoTodos(todosFiltrados);
+    // Cargo el listado al entrar a la pagina
+    actualizarListado();
 
-    // filtro.addEventListener('input', ()=>{
-    //         todosFiltrados = todosFiltrados.filter(todo => todo.title.toLowerCase().startsWith(filtro.value.toLowerCase()));
+    filtro.addEventListener('input', () => {
+        // Cojo el valor del filtro, quito los espacios en blanco y lo convierto a minusculas
+        textoFiltro = filtro.value.trim().toLowerCase();
+        paginaActual = 1;
+        actualizarListado();
+    });
 
-    //         utilidades.cargarListadoTodos(todosFiltrados);
-    // });
+    elementosPorPagina.addEventListener('change', () => {
+        paginaActual = 1;
+        actualizarListado();
+    });
 
-    // elementosPorPagina.addEventListener('change', ()=>{
-
-    // });
+    listado.addEventListener('click', (e) => {
+        const fila = e.target.closest('.fila');
+        if (fila) {
+            const id = fila.dataset.id;
+            window.location.href = `../propiedades/todo.html?id=${id}`;
+        }
+    });
 });
 
-
-function listarConPaginador(todos, elementosPorPagina, paginaActual) {
-    const elementosPaginados = App.obtenerArrayPaginado(todos, elementosPorPagina, paginaActual);
-
-    utilidades.cargarListadoTodos(elementosPaginados);
-    cargarPaginador(paginaActual, todos.length, elementosPorPagina, elementosPaginados);
+function actualizarListado() {
+    App.obtenerDatos('users').then(users => {
+        App.obtenerDatos('todos').then(tareas => {
+            let tareasFiltradas;
+    
+            // Si le paso id por la url que solo muestre sus tareas pendientes
+            if(idUsuario){
+                tareasFiltradas = App.filtrarDatos(tareas, 'userId', idUsuario);
+    
+                if (textoFiltro) {
+                    tareasFiltradas = App.filtrarDatos(tareasFiltradas, 'title', textoFiltro);
+                } else {
+                    tareasFiltradas = tareasFiltradas;
+                }
+            }else{
+                // Compruebo si hay texto en el filtro para mostrar las las tareas o filtrarlas
+                if (textoFiltro) {
+                    tareasFiltradas = App.filtrarDatos(tareas, 'title', textoFiltro);
+                } else {
+                    tareasFiltradas = tareas;
+                }
+            }
+    
+    
+            totalTareas = tareasFiltradas.length;
+    
+            let porPagina;
+            // Calculo cuantos elementos muestro por pagina
+            if (elementosPorPagina.value === 'todos') {
+                porPagina = tareasFiltradas.length;
+            } else {
+                porPagina = parseInt(elementosPorPagina.value);
+            }
+    
+            const datosPagina = App.obtenerArrayPaginado(tareasFiltradas, porPagina, paginaActual);
+    
+            utilidades.cargarListadoTareas(datosPagina, users);
+            cargarPaginador(totalTareas, porPagina);
+        });
+    })
 }
 
-function cargarPaginador(paginaActual, elementosTotales, elementosPorPagina, todos) {
-    const paginador = document.getElementById('paginador');
+function cargarPaginador(total, porPagina) {
     paginador.innerHTML = '';
+    if (elementosPorPagina.value === 'todos') return;
 
-    const totalPaginas = Math.ceil(elementosTotales / elementosPorPagina);
+    const totalPaginas = Math.ceil(total / porPagina);
 
-    for (let pag = 1; pag <= totalPaginas; pag++) {
+    for (let i = 1; i <= totalPaginas; i++) {
         const btn = document.createElement('button');
-        btn.innerHTML = pag;
+        btn.textContent = i;
         btn.classList.add('btn-paginador');
-
-        if (pag === paginaActual) {
-            btn.classList.add('inactivo')
+        if (i === paginaActual) {
+            btn.classList.add('inactivo');
+            btn.disabled = true;
         } else {
-            btn.classList.add('activo')
-
+            btn.classList.add('activo');
             btn.addEventListener('click', () => {
-                listarConPaginador(todos, elementosPorPagina, paginaActual);
+                paginaActual = i;
+                actualizarListado();
             });
         }
-
         paginador.appendChild(btn);
     }
 }

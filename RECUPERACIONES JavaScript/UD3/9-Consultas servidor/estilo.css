@@ -6,7 +6,7 @@
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background-color: gray;
+    /* background-color: gray; */
 }
 
 .contenedorPrincipal {
@@ -43,11 +43,6 @@ body {
 .filtroVolver {
     display: flex;
     justify-content: space-between;
-}
-
-.paginador {
-    display: flex;
-    align-items: center;
 }
 
 a {
@@ -106,7 +101,7 @@ input, select{
 
 .paginador{
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
     gap: 5px;
 }
 

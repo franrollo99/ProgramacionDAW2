@@ -40,9 +40,15 @@ const App = (function () {
     }
 
     function filtrarDatos(array, campo, valor) {
-        return array.filter(item =>
-            item[campo].toLowerCase().startsWith(valor.toLowerCase())
-        );
+        if(isNaN(valor)){
+            return array.filter(entidad =>
+                entidad[campo].toLowerCase().startsWith(valor.toLowerCase())
+            );
+        }
+
+        return array.filter(entidad =>
+                entidad[campo] === valor
+            );
     }
 
     return {

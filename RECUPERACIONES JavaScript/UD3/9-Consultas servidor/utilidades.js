@@ -19,26 +19,26 @@ function cargarTarjetas(nombre, cantidad) {
     return tarjeta;
 }
 
-function cargarListadoUsers(datos) {
+function cargarListadoUsers(usuarios) {
     const listado = document.getElementById('listado');
     listado.innerHTML = '';
 
-    for(let dato of datos){
+    for(let usuario of usuarios){
         const filaListado = document.createElement('div');
         filaListado.classList.add('fila');
-        filaListado.setAttribute('data-id', dato.id);
+        filaListado.setAttribute('data-id', usuario.id);
     
         filaListado.innerHTML += `
-            <div>${dato.username}</div>
-            <div>${dato.name}</div>
-            <div>${dato.email}</div>
-            <div>${dato.phone}</div>
-            <div>${dato.company.name}</div>
-            <div>${dato.website}</div>
+            <div>${usuario.username}</div>
+            <div>${usuario.name}</div>
+            <div>${usuario.email}</div>
+            <div>${usuario.phone}</div>
+            <div>${usuario.company.name}</div>
+            <div>${usuario.website}</div>
             <div class="acciones">
-                <a href="./posts.html?id=${dato.id}">Pendientes</a>
-                <a href="./albums.html">Albumes</a>
-                <a href="./posts.html">Post</a>
+                <a href="./todos.html?id=${usuario.id}">Pendientes</a>
+                <a href="./albums.html?id=${usuario.id}">Albumes</a>
+                <a href="./posts.html?id=${usuario.id}">Post</a>
             </div>
         `;
 
@@ -46,20 +46,26 @@ function cargarListadoUsers(datos) {
     }
 }
 
-function cargarListadoTodos(datos){
+function cargarListadoTareas(tareas, usuarios){
     const listado = document.getElementById('listado');
     listado.innerHTML = '';
+    let nombreUsuario;
 
-    for(let dato of datos){
+    for(let tarea of tareas){
+        // Recorro todos los usuarios para sustituir el userId por el nombre del autor
+        for(let usuario of usuarios){
+            if(usuario.id == tarea.userId) nombreUsuario = usuario.username;
+        }
+
         const filaListado = document.createElement('div');
         filaListado.classList.add('fila');
-        filaListado.setAttribute('data-id', dato.id);
+        filaListado.setAttribute('data-id', tarea.id);
     
         // Cambiar userId por nombre de autor
         filaListado.innerHTML += `
-            <div>${dato.userId}</div>
-            <div>${dato.title}</div>
-            <div>${dato.completed ? 'Si' : 'No'}</div>
+            <div>${nombreUsuario}</div>
+            <div>${tarea.title}</div>
+            <div>${tarea.completed ? 'Si' : 'No'}</div>
         `;
 
         listado.appendChild(filaListado);
@@ -67,4 +73,4 @@ function cargarListadoTodos(datos){
 }
 
 
-export {guardarLocalStorage, cargarTarjetas, cargarListadoUsers, cargarListadoTodos};
+export {guardarLocalStorage, cargarTarjetas, cargarListadoUsers, cargarListadoTareas};

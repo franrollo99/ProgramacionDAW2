@@ -8,6 +8,7 @@ const paginador = document.getElementById('paginador');
 
 let paginaActual = 1;
 let totalUsuarios = 0;
+let textoFiltro = '';
 
 window.addEventListener('load', () => {
     // Cargo el listado al entrar a la pagina
@@ -15,7 +16,7 @@ window.addEventListener('load', () => {
 
     filtro.addEventListener('input', () => {
         // Cojo el valor del filtro, quito los espacios en blanco y lo convierto a minusculas
-        const textoFiltro = filtro.value.trim().toLowerCase();
+        textoFiltro = filtro.value.trim().toLowerCase();
         paginaActual = 1;
         actualizarListado();
     });
@@ -35,14 +36,14 @@ window.addEventListener('load', () => {
 });
 
 function actualizarListado() {
-    App.obtenerDatos('users').then(todos => {
+    App.obtenerDatos('users').then(users => {
         let usuariosFiltrados;
 
         // Compruebo si hay texto en el filtro para mostrar todos los users o filtrarlos
         if (textoFiltro) {
-            usuariosFiltrados = App.filtrarDatos(todos, 'username', textoFiltro);
+            usuariosFiltrados = App.filtrarDatos(users, 'username', textoFiltro);
         } else {
-            usuariosFiltrados = todos;
+            usuariosFiltrados = users;
         }
 
         totalUsuarios = usuariosFiltrados.length;
