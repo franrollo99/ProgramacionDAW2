@@ -3,74 +3,85 @@ import * as utilidades from '../utilidades.js';
 
 const filtro = document.getElementById('filtro');
 const elementosPorPagina = document.getElementById('numElementos');
-const paginaActual = 1;
 const listado = document.getElementById('listado');
+const paginador = document.getElementById('paginador');
+
+let paginaActual = 1;
+let totalUsuarios = 0;
+let textoFiltro = '';
 
 window.addEventListener('load', () => {
-    const users = JSON.parse(localStorage.getItem('users'));
+    actualizarListado();
 
-    let usuariosFiltrados = [...users];
-    let usuariosPorPagina = elementosPorPagina.value === 'todos' ? usuariosFiltrados.length : parseInt(elementosPorPagina.value);
-
-    listarConPaginador(paginaActual, usuariosFiltrados, usuariosPorPagina);
-
-
-    // Evento de filtro de users por nombre
     filtro.addEventListener('input', () => {
-        usuariosFiltrados = users.filter(user => user.username.toLowerCase().startsWith(filtro.value.toLowerCase()));
-        listarConPaginador(1, usuariosFiltrados, usuariosPorPagina);
+        textoFiltro = filtro.value.trim().toLowerCase();
+        paginaActual = 1;
+        actualizarListado();
     });
 
-
-    // Evento de listar users por X cantidad
     elementosPorPagina.addEventListener('change', () => {
-        usuariosPorPagina = elementosPorPagina.value === 'todos' ? usuariosFiltrados.length : parseInt(elementosPorPagina.value);
-        listarConPaginador(1, usuariosFiltrados, usuariosPorPagina);
+        paginaActual = 1;
+        actualizarListado();
     });
 
-    // Mandar datos al formulario
     listado.addEventListener('click', (e) => {
-        const filaSeleccionada = e.target.closest('.fila');
-        if(filaSeleccionada){
-            const id = filaSeleccionada.dataset.id;
-            const urlPropiedadesUser = `../propiedades/user.html?id=${id}`;
-            window.location.href = urlPropiedadesUser;
+        const fila = e.target.closest('.fila');
+        if (fila) {
+            const id = fila.dataset.id;
+            window.location.href = `../propiedades/user.html?id=${id}`;
         }
     });
 });
 
+// ✅ Descarga los datos paginados y los pinta
+function actualizarListado() {
+    const cantidad = elementosPorPagina.value === 'todos' ? 10000 : parseInt(elementosPorPagina.value);
+    const start = (paginaActual - 1) * cantidad;
 
-// Funcion para listar los usuarios en funcion de la pagina
-function listarConPaginador(paginaActual, usuarios, elementosPorPagina) {
-    const elementosPaginados = App.obtenerArrayPaginado(usuarios, elementosPorPagina, paginaActual);
+    
 
-    utilidades.cargarListadoUsers(elementosPaginados);
-    cargarPaginador(paginaActual, usuarios.length, elementosPorPagina, usuarios);
+    App.obtenerDatos(`users?_start=${start}&_limit=${cantidad}`)
+        .then(datos => {
+            utilidades.cargarListadoUsers(datos);
+
+            // Si estás filtrando, la API devuelve solo esos, no hace falta calcular más
+            if (textoFiltro !== '') {
+                totalUsuarios = datos.length;
+            } else {
+                // Solo calcular total si no hay filtro
+                App.obtenerDatos('users')
+                    .then(todos => {
+                        totalUsuarios = todos.length;
+                        cargarPaginador(totalUsuarios, cantidad);
+                    });
+            }
+
+            if (textoFiltro !== '') {
+                cargarPaginador(datos.length, cantidad);
+            }
+        });
 }
 
-// Cargo el paginador en funcion del numero total de elementos totales y elementos por pagina
-function cargarPaginador(paginaActual, elementosTotales, elementosPorPagina, usuarios) {
-    const paginador = document.getElementById('paginador');
+function cargarPaginador(total, porPagina) {
     paginador.innerHTML = '';
+    if (elementosPorPagina.value === 'todos') return;
 
-    const totalPaginas = Math.ceil(elementosTotales / elementosPorPagina);
+    const totalPaginas = Math.ceil(total / porPagina);
 
-    for (let pag = 1; pag <= totalPaginas; pag++) {
+    for (let i = 1; i <= totalPaginas; i++) {
         const btn = document.createElement('button');
-        btn.innerHTML = pag;
-
+        btn.textContent = i;
         btn.classList.add('btn-paginador');
-
-        if (pag === paginaActual) {
+        if (i === paginaActual) {
             btn.classList.add('inactivo');
+            btn.disabled = true;
         } else {
             btn.classList.add('activo');
-
             btn.addEventListener('click', () => {
-                listarConPaginador(pag, usuarios, elementosPorPagina);
+                paginaActual = i;
+                actualizarListado();
             });
         }
-
         paginador.appendChild(btn);
     }
 }
