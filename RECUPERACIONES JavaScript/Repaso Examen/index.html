@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repaso examen</title>
+    <script src="index.js" defer></script>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+
+<body>
+    <div class="contenedorPrincipal">
+        <form id="form" class="form" novalidate>
+            <fieldset>
+                <legend><h2>Formulario</h2></legend>
+                <div>
+                    <label for="nombre">Nombre</label>
+                    <input type="text" name="nombre" id="nombre" required>
+                    <br>
+                    <span id="nombreError"></span>
+                </div>
+                <div>
+                    <label for="email">Email</label>
+                    <input type="text" name="email" id="email" required>
+                    <br>
+                    <span id="emailError"></span>
+                </div>
+                <div>
+                    <label for="contraseña">Contraseña</label>
+                    <input type="text" name="contraseña" id="contraseña" required>
+                    <br>
+                    <span id="contraseñaError"></span>
+                </div>
+                <div>
+                    <label for="confirmarContraseña">Confirmar contraseña</label>
+                    <input type="text" name="confirmarContraseña" id="confirmarContraseña" required>
+                    <br>
+                    <span id="confirmarContraseñaError"></span>
+                </div>
+                <div>
+                    <label for="telefono">Telefono</label>
+                    <input type="text" name="telefono" id="telefono">
+                    <br>
+                    <span id="telefonoError"></span>
+                </div>
+                <div>
+                    <label for="genero">Genero</label>
+                    <select name="genero" id="genero">
+                        <option value="seleccioneGenero">Seleccione genero</option>
+                        <option value="masculino">Masculino</option>
+                        <option value="femenino">Femenino</option>
+                    </select>
+                    <br>
+                    <span id="generoError"></span>
+                </div>
+                <div>
+                    <label for="terminos">Terminos</label>
+                    <input type="checkbox" name="terminos" id="terminos" required>
+                    <br>
+                    <span id="terminosError"></span>
+                </div>
+                <input type="submit" value="Enviar">
+            </fieldset>
+        </form>
+        <div class="filtro">
+            <label for="filtro">Filtro:</label>
+            <input type="text" name="filtro" id="filtro">
+        </div>
+        <div id="listado" class="listado">
+            <div class="cabecera">
+                <div>Nombre</div>
+                <div>Email</div>
+                <div>Teléfono</div>
+            </div>
+            <div id="listarUsuarios" class="listarUsuarios"></div>
+        </div>
+    </div>
+</body>
+
+</html>
