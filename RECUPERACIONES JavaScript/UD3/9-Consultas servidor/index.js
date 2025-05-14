@@ -39,10 +39,17 @@ const App = (function () {
         return array.slice(comienzo, final);
     }
 
+    function filtrarDatos(array, campo, valor) {
+        return array.filter(item =>
+            item[campo].toLowerCase().startsWith(valor.toLowerCase())
+        );
+    }
+
     return {
         obtenerDatos,
         actualizarDatos,
         obtenerArrayPaginado,
+        filtrarDatos
     };
 })();
 

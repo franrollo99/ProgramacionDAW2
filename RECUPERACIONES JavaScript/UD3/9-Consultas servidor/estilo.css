@@ -85,7 +85,6 @@ input, select{
 .fila > div {
     padding: 10px;
     flex: 1;
-    white-space: nowrap; /* No permite saltos de linea */
     overflow: hidden; /* Ocultar el texto que se sale del contenedor */
     text-overflow: ellipsis; /* Muestra ... al final */
     border: 1px solid black;
@@ -93,6 +92,16 @@ input, select{
 
 .fila:hover > div {
     white-space: wrap;
+}
+
+.acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.acciones a {
+    padding: 5px;
 }
 
 .paginador{

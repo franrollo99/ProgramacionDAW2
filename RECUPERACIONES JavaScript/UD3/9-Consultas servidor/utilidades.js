@@ -32,13 +32,11 @@ function cargarListadoUsers(datos) {
             <div>${dato.username}</div>
             <div>${dato.name}</div>
             <div>${dato.email}</div>
-            <div>${dato.address.city}, ${dato.address.street}</div>
             <div>${dato.phone}</div>
             <div>${dato.company.name}</div>
             <div>${dato.website}</div>
-            <div>
-                <!-- Filtrar por id de usuario -->
-                <a href="./posts.html">Pendientes</a>
+            <div class="acciones">
+                <a href="./posts.html?id=${dato.id}">Pendientes</a>
                 <a href="./albums.html">Albumes</a>
                 <a href="./posts.html">Post</a>
             </div>

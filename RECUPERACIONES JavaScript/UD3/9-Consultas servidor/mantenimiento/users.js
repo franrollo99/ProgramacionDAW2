@@ -33,33 +33,32 @@ window.addEventListener('load', () => {
     });
 });
 
-// ✅ Descarga los datos paginados y los pinta
 function actualizarListado() {
-    const cantidad = elementosPorPagina.value === 'todos' ? 10000 : parseInt(elementosPorPagina.value);
-    const start = (paginaActual - 1) * cantidad;
+    App.obtenerDatos('users').then(todos => {
+        let usuariosFiltrados;
 
-    
+        // Compruebo si hay texto en el filtro para mostrar todos los users o filtrarlos
+        if (textoFiltro) {
+            usuariosFiltrados = App.filtrarDatos(todos, 'username', textoFiltro);
+        } else {
+            usuariosFiltrados = todos;
+        }
 
-    App.obtenerDatos(`users?_start=${start}&_limit=${cantidad}`)
-        .then(datos => {
-            utilidades.cargarListadoUsers(datos);
+        totalUsuarios = usuariosFiltrados.length;
 
-            // Si estás filtrando, la API devuelve solo esos, no hace falta calcular más
-            if (textoFiltro !== '') {
-                totalUsuarios = datos.length;
-            } else {
-                // Solo calcular total si no hay filtro
-                App.obtenerDatos('users')
-                    .then(todos => {
-                        totalUsuarios = todos.length;
-                        cargarPaginador(totalUsuarios, cantidad);
-                    });
-            }
+        let porPagina;
+        // Calculo cuantos elementos muestro por pagina
+        if (elementosPorPagina.value === 'todos') {
+            porPagina = usuariosFiltrados.length;
+        } else {
+            porPagina = parseInt(elementosPorPagina.value);
+        }
 
-            if (textoFiltro !== '') {
-                cargarPaginador(datos.length, cantidad);
-            }
-        });
+        const datosPagina = App.obtenerArrayPaginado(usuariosFiltrados, porPagina, paginaActual);
+
+        utilidades.cargarListadoUsers(datosPagina);
+        cargarPaginador(totalUsuarios, porPagina);
+    });
 }
 
 function cargarPaginador(total, porPagina) {
