@@ -13,7 +13,6 @@ let idUsuario;
 
 window.addEventListener('load', () => {
     const url = new URLSearchParams(window.location.search);
-    // idUsuario = parseInt(url.get('id'));
     idUsuario = parseInt(url.get('id'));
 
     // Cargo el listado al entrar a la pagina
