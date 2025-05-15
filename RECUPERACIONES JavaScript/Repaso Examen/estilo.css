@@ -58,3 +58,15 @@ input[type="submit"] {
     padding: 3px 5px;
     width: max-content;
 }
+
+.error {
+    color: red;
+}
+
+.invalid {
+    border: 1px solid red;
+}
+
+.valid {
+    border: 1px solid green;
+}
