@@ -6,6 +6,31 @@ const App = (function () {
         return peticion.json();
     }
 
+    async function insertarDatos(endpoint, datos) {
+        const peticion = await fetch(`https://jsonplaceholder.typicode.com${endpoint}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(datos),
+
+        });
+
+        return await peticion.json();
+    }
+
+    async function actualizarDatos(endpoint, datos) {
+        const peticion = await fetch(`https://jsonplaceholder.typicode.com${endpoint}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(datos),
+        });
+
+        return await peticion.json();
+    }
+
     // Metodo para renderizar el listado
     function renderizarListado(usuarios) {
         // Primero vacio el listado, porque sino no va a parar de añadir usuarios
@@ -31,22 +56,22 @@ const App = (function () {
 
     // Valido el nombre
     function validarNombre(campo) {
-    const nombre = campo.value;
+        const nombre = campo.value;
 
-    if (!campo.checkValidity()) {
-        return campo.validationMessage;
+        if (!campo.checkValidity()) {
+            return campo.validationMessage;
+        }
+
+        if (nombre.length < 3) {
+            return 'El nombre debe tener al menos 3 letras';
+        }
+
+        if (contieneNumeros(nombre)) {
+            return 'El nombre no debe contener números';
+        }
+
+        return ''; // Todo bien
     }
-
-    if (nombre.length < 3) {
-        return 'El nombre debe tener al menos 3 letras';
-    }
-
-    if (contieneNumeros(nombre)) {
-        return 'El nombre no debe contener números';
-    }
-
-    return ''; // Todo bien
-}
 
 
     // Valido el email
@@ -217,7 +242,7 @@ const App = (function () {
         campo.classList.remove('valid');
         campo.classList.remove('invalid');
 
-        if(!campo.checkValidity()){
+        if (!campo.checkValidity()) {
             campoError.innerHTML = campo.validationMessage;
             return false;
         }
@@ -237,6 +262,8 @@ const App = (function () {
 
     return {
         obtenerDatos,
+        insertarDatos,
+        actualizarDatos,
         renderizarListado,
         validarNombre,
         validarEmail,
@@ -244,7 +271,7 @@ const App = (function () {
         validarConfirmarContraseña,
         validarTelefono,
         validarGenero,
-        validarTerminos
+        validarTerminos,
     }
 })();
 
@@ -270,6 +297,11 @@ const generoError = document.getElementById('generoError');
 const terminos = document.getElementById('terminos');
 const terminosError = document.getElementById('terminosError');
 
+// Otros
+const limpiarFormulario = document.getElementById('limpiar');
+const eliminarFila = document.getElementById('eliminarFila');
+const guardarSesion = document.getElementById('guardarSesion');
+const cargarSesion = document.getElementById('cargarSesion');
 
 window.addEventListener('load', () => {
     // Obtengo todos los usuarios
@@ -284,10 +316,12 @@ window.addEventListener('load', () => {
             }
         });
 
+        let filaSeleccionada;
+
         listado.addEventListener('click', (e) => {
             // Capturo el evento cuando el click sea en el elemento contenedor con clase fila
             if (e.target.closest('.fila')) {
-                const filaSeleccionada = e.target.closest('.fila');
+                filaSeleccionada = e.target.closest('.fila');
                 const filas = document.querySelectorAll('.fila');
 
                 for (let fila of filas) {
@@ -296,15 +330,17 @@ window.addEventListener('load', () => {
                 }
 
                 filaSeleccionada.classList.toggle('seleccionada');
+
+                if (!filaSeleccionada.classList.contains('seleccionada')) filaSeleccionada = null;
             }
         });
 
         ///////////////// IMPORTANTE
         // Si hay error entonces pongo la clase invalido y quito valido, y pongo en el span el error
 
-        nombre.addEventListener('blur', ()=>{
+        nombre.addEventListener('blur', () => {
             const error = App.validarNombre(nombre);
-            if(error){
+            if (error) {
                 nombre.classList.add('invalid');
                 nombre.classList.remove('valid');
                 nombreError.innerHTML = error;
@@ -313,7 +349,7 @@ window.addEventListener('load', () => {
 
         ///////////////// IMPORTANTE
         // Si no hay error quito la clase invalido, pongo valido y quito el mensaje del span
-        nombre.addEventListener('input', ()=>{
+        nombre.addEventListener('input', () => {
             const error = App.validarNombre(nombre);
             if (!error) {
                 nombre.classList.remove('invalid');
@@ -325,12 +361,70 @@ window.addEventListener('load', () => {
         form.addEventListener('submit', (e) => {
             e.preventDefault();
 
-            if(App.validarNombre(nombre, nombreError) && App.validarEmail(email, emailError) && App.validarContraseña(contraseña, contraseñaError) && App.validarConfirmarContraseña(confirmarContraseña, confirmarContraseñaError) && App.validarTelefono(telefono, telefonoError) && App.validarGenero(genero, generoError) && App.validarTerminos(terminos, terminosError)){
-                form.submit();
+            if (App.validarNombre(nombre, nombreError) && App.validarEmail(email, emailError) && App.validarContraseña(contraseña, contraseñaError) && App.validarConfirmarContraseña(confirmarContraseña, confirmarContraseñaError) && App.validarTelefono(telefono, telefonoError) && App.validarGenero(genero, generoError) && App.validarTerminos(terminos, terminosError)) {
+                const datos = {
+                    nombre: nombre.value,
+                    email: email.value,
+                    contraseña: contraseña.value,
+                    telefono: telefono.value,
+                    genero: genero.value
+                };
+
+                if (filaSeleccionada) {
+                    for (let usuario of usuarios) {
+                        console.log(usuario);
+                        if (usuario.id == filaSeleccionada.dataset.id) {
+                            usuario.username = nombre.value;
+                            const promesa = App.actualizarDatos(`/users/${usuario.id}`, datos);
+
+                            promesa.then((response) => {
+                                console.log(response);
+                            });
+
+                            App.renderizarListado(usuarios);
+                        }
+                    }
+                } else {
+                    const promesa = App.insertarDatos('/users', datos);
+
+                    promesa.then((response) => {
+                        console.log(response);
+                    });
+                }
+
+                alert(JSON.stringify(datos));
+
+            }
+        });
+
+        // Limpiamos el formulario, tanto sus campos como sus estilos de valido o invalido y sus mensajes de error, 
+        // además quitamos el estilo a la fila seleccionada en caso de que haya una y filaseleccionada lo ponemos a null
+        limpiarFormulario.addEventListener('click', (e) => {
+            e.preventDefault();
+            form.reset();
+            document.querySelectorAll('.error').forEach(error => error.innerHTML = '');
+            if (filaSeleccionada) filaSeleccionada.classList.remove('seleccionada');
+            filaSeleccionada = null;
+        });
+
+        eliminarFila.addEventListener('click', () => {
+            if (filaSeleccionada) {
+                usuarios = usuarios.filter(usuario => usuario.id !== parseInt(filaSeleccionada.dataset.id));
+                App.renderizarListado(usuarios);
+
+            }
+        });
+
+        guardarSesion.addEventListener('click', () => {
+            sessionStorage.setItem('usuarios', JSON.stringify(usuarios));
+        });
+
+        cargarSesion.addEventListener('click', () => {
+            datosGuardados = sessionStorage.getItem('usuarios');
+            if(datosGuardados){
+                usuarios = JSON.parse(datosGuardados);
+                App.renderizarListado(usuarios);
             }
         });
     });
 });
-
-
-

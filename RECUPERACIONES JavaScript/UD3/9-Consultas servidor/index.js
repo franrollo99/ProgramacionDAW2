@@ -59,7 +59,7 @@ const App = (function () {
     };
 })();
 
-window.addEventListener('load', async () => {
+window.addEventListener('load', () => {
     const entidades = ['users', 'todos', 'posts', 'comments', 'albums', 'photos'];
     const contenedorApp = document.getElementById('app');
 
