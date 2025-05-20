@@ -7,6 +7,8 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
+    // La etiqueta <Fragment>...</Fragment> o <>...</> envuelve multiples nodos
+    // en el mismo nivel ya que solo se puede un nodo en el return
     <>
       <div>
         <a href="https://vite.dev" target="_blank">
