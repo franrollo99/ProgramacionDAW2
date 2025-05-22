@@ -1,0 +1,65 @@
+body{
+    padding: 50px;
+}
+
+.caja{
+    width: 100px;
+    height: 100px;
+    position: relative;
+}
+
+.caja1{
+    animation-name: moverColor;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease;
+}
+
+@keyframes moverColor{
+    from{
+        left: 0;
+        background-color: lightcoral;
+    }
+
+    to{
+        left: 500px;
+        background-color: lightseagreen;
+    }
+}
+
+.caja2{
+    animation: cambioForma 3s ease 0s infinite normal;
+}
+
+@keyframes cambioForma{
+    0%{
+        left: 0;
+        border-radius: 0;
+        background-color: lightcoral;
+    }
+    
+    25%{
+        left: 100px;
+        border-radius: 25%;
+        background-color: salmon;
+    }
+
+    50%{
+        left: 200px;
+        border-radius: 50%;
+        background-color: skyblue;
+    }
+    
+    75%{
+        left: 100px;
+        border-radius: 25%;
+        background-color: lightgreen;
+    }
+
+    100%{
+        left: 0;
+        border-radius: 0;
+        background-color: lightcoral;
+    }
+}
