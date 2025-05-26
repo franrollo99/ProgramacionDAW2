@@ -1,7 +1,8 @@
-function Hijo({mensaje}){
+function Hijo({mensaje, enviarMensaje}){
     return(
         <>
-        {mensaje}
+        <button onClick={enviarMensaje}>Recibir mensaje</button>
+        <div>{mensaje}</div>
         </>
     );
 }
