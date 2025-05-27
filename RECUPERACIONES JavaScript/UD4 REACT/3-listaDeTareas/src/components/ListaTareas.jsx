@@ -5,7 +5,7 @@ function ListaTareas(){
 
     const [tareas, setTareas] = useState([]);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
         const nombreTarea = formData.get('nombreTarea');
@@ -18,6 +18,18 @@ function ListaTareas(){
         });
 
         setTareas(copiaTareas);
+    };
+
+    const handleClickTodas = () => {
+
+    };
+
+    const handleClickAbiertas = () => {
+        
+    };
+
+    const handleClickCerradas = () => {
+        
     };
 
 
@@ -36,7 +48,7 @@ function ListaTareas(){
             <ul>
                 {tareas.map((tarea, indice) => {
                     return (
-                        <ListaTareas datos={tarea} key={indice} />
+                        <Tarea datos={tarea} key={indice + 1} />
                     );
                 })}
             </ul>
