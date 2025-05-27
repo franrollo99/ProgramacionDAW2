@@ -1,0 +1,65 @@
+h1{
+    animation: aparicion 2s linear 0s;
+}
+
+@keyframes aparicion{
+    from{
+        transform: translateY(30px);
+    }
+}
+
+img{
+    width: 400px;
+    height: 200px;
+    object-fit: cover;
+    animation: animacion1 3s infinite 0s, sombra 3s linear 1s;
+}
+
+/* img:hover{
+    animation: borde 1s linear 0s, sombra 3s linear 1s;
+    animation-fill-mode: forwards;
+} */
+
+@keyframes borde{
+    to{
+        border-radius: 50%;
+    }
+}
+
+@keyframes sombra{
+    from{
+
+    }
+
+    to{
+        box-shadow: 0 0 30px 10px;
+    }
+}
+
+
+
+/* Animacion */
+@keyframes animacion1{
+    0%{
+        opacity: 0.7;
+        transform: scale(1);
+    }
+
+    50%{
+        opacity: 1;
+        transform: 1.1;
+    }
+
+    100%{
+        opacity: 0.7;
+        scale: 1;
+    }
+}
+
+/* Transicion */
+img:hover{
+    /* Se detiene la animacion y se inicia la transicion */
+    animation-play-state: paused;
+    box-shadow: 0 0 20px rgba(180, 180, 180, 0.75);
+    border: 5px solid rgb(5, 5, 155);
+}
