@@ -1,13 +1,13 @@
-function Tarea(){
+function Tarea({datos}){
 
 
     return (
-        <div>
-            <p>nombre</p>
-            <p>estado</p>
+        <li>
+            <p>{datos.nombre}</p>
+            <p>{datos.estado}</p>
             <button>Eliminar</button> {/* Con confirmacion */}
             <button>Cambiar estado</button> {/* Abierto o cerrado */}
-        </div>
+        </li>
     );
 }
 
