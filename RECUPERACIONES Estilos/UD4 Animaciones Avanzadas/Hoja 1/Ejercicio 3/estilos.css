@@ -21,21 +21,104 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 30px;
+    gap: 50px;
     text-align: center;
 }
 
 .contenedorTitulo {
+    padding: 10px 20px;
     display: flex;
-    gap: 5px;
+    animation: bordeTitulo 1s ease-in 0s;
+    border: 1px solid darkorange;
 }
 
-.titulo {
-    display: flex;
+@keyframes bordeTitulo {
+    from{
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+span {
+    display: inline-block; /* Permite animar y aplicar estilos a spans sin romper el flujo */
+    opacity: 0;
+    animation: aparicionLetras 0.5s ease-in forwards; /* forwards para que se quede el estado final de la animacion */
+}
+
+@keyframes aparicionLetras {
+    from{
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+span:nth-child(1){animation-delay: 1s;}
+span:nth-child(2){animation-delay: 1.1s;}
+span:nth-child(3){animation-delay: 1.2s;}
+span:nth-child(4){animation-delay: 1.3s;}
+span:nth-child(5){animation-delay: 1.4s;}
+span:nth-child(6){animation-delay: 1.5s;}
+span:nth-child(7){animation-delay: 1.6s;}
+span:nth-child(8){animation-delay: 1.7s;}
+
+p {
+    opacity: 0;
+    animation: aparicionParrafo 1s ease-in 2s forwards;
+}
+
+@keyframes aparicionParrafo {
+    from{
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 button {
     padding: 5px 10px;
+    opacity: 0;
+    scale: 0;
     border-radius: 5px;
     font-weight: bold;
+    animation: aparicionBoton 1s ease-in 3s forwards, brillo 1s linear 4s infinite;
+}
+
+@keyframes aparicionBoton {
+    from{
+        opacity: 0;
+        scale: 0;
+    }
+
+    to{
+        opacity: 1;
+        scale: 1;
+    }
+}
+
+@keyframes brillo {
+    0%{
+        background-color: white;
+    }
+
+    50%{
+        background-color: yellow;
+    }
+
+    100%{
+        background-color: white;
+    }
 }
