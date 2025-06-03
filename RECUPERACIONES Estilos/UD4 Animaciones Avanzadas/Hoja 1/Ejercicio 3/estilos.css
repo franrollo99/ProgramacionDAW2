@@ -46,10 +46,15 @@ body {
 span {
     display: inline-block; /* Permite animar y aplicar estilos a spans sin romper el flujo */
     opacity: 0;
-    animation: aparicionLetras 0.5s ease-in forwards; /* forwards para que se quede el estado final de la animacion */
+    animation: aparicion 0.5s ease-in forwards; /* forwards para que se quede el estado final de la animacion */
 }
 
-@keyframes aparicionLetras {
+p {
+    opacity: 0;
+    animation: aparicion 1s ease-in 2s forwards;
+}
+
+@keyframes aparicion {
     from{
         opacity: 0;
         transform: translateY(-30px);
@@ -70,23 +75,6 @@ span:nth-child(6){animation-delay: 1.5s;}
 span:nth-child(7){animation-delay: 1.6s;}
 span:nth-child(8){animation-delay: 1.7s;}
 
-p {
-    opacity: 0;
-    animation: aparicionParrafo 1s ease-in 2s forwards;
-}
-
-@keyframes aparicionParrafo {
-    from{
-        opacity: 0;
-        transform: translateY(-30px);
-    }
-
-    to{
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 button {
     padding: 5px 10px;
     opacity: 0;
@@ -99,7 +87,8 @@ button {
 @keyframes aparicionBoton {
     from{
         opacity: 0;
-        scale: 0;
+        /* scale: 0; */
+        transform: scale(0); /* Forma correcta y estandar de aplicar una transformacion en css */
     }
 
     to{

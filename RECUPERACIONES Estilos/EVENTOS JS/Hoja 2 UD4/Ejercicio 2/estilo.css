@@ -1,0 +1,43 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.5rem;
+}
+
+#desplegable, .opciones{
+    padding: 5px;
+    width: max-content;
+    background-color: lightgray;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+.oculto{
+    display: none;
+}
+
+.opciones{
+    opacity: 0;
+    animation: aparicion 1s ease-in forwards;
+}
+
+.opciones:nth-child(1){animation-delay: 0.2s;}
+.opciones:nth-child(2){animation-delay: 0.4s;}
+.opciones:nth-child(3){animation-delay: 0.6s;}
+
+@keyframes aparicion {
+    from{
+        display: block;
+        opacity: 0;
+    }
+
+    to{
+        opacity: 1;
+    }
+}
+
+#resultado{
+    width: max-content;
+    border: 2px solid dodgerblue;
+    border-radius: 5px;
+    background-color: lightblue;
+}
