@@ -1,0 +1,23 @@
+.fila{
+    display: flex;
+}
+
+.cabecera div{
+    font-weight: bold;
+    background-color: lightgray;
+    justify-content: center;
+}
+
+.fila div{
+    padding: 10px 5px;
+    flex: 1;
+    border: 1px solid black;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.fila:hover div{
+    white-space: wrap;
+    text-overflow: clip;
+}

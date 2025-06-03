@@ -1,0 +1,10 @@
+.navegacion ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navegacion ul li {
+    display: inline;
+    padding-right: 10px;
+}
