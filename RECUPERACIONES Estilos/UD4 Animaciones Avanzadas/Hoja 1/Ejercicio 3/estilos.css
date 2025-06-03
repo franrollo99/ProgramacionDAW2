@@ -15,7 +15,6 @@ body {
 }
 
 .cajaCentrada {
-    width: 470px;
     height: max-content;
     display: flex;
     flex-direction: column;
@@ -94,7 +93,7 @@ button {
     scale: 0;
     border-radius: 5px;
     font-weight: bold;
-    animation: aparicionBoton 1s ease-in 3s forwards, brillo 1s linear 4s infinite;
+    animation: aparicionBoton 1s ease-in 3s forwards, brillo 0.5s linear 4s infinite;
 }
 
 @keyframes aparicionBoton {
