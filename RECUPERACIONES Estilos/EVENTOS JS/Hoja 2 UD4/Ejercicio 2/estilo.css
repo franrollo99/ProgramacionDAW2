@@ -11,9 +11,6 @@ body{
     border-radius: 5px;
 }
 
-.oculto{
-    display: none;
-}
 
 .opciones{
     opacity: 0;
@@ -29,15 +26,21 @@ body{
         display: block;
         opacity: 0;
     }
-
+    
     to{
         opacity: 1;
     }
 }
 
 #resultado{
+    margin-top: 10px;
+    padding: 5px;
     width: max-content;
     border: 2px solid dodgerblue;
     border-radius: 5px;
     background-color: lightblue;
+}
+
+.oculto{
+    display: none;
 }

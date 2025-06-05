@@ -5,16 +5,25 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const resultado = document.getElementById('resultado');
     
     listaOpciones.classList.add('oculto');
+    resultado.classList.add('oculto');
 
     desplegable.addEventListener('click', ()=>{
-        listaOpciones.classList.remove('oculto');
-        resultado.textContent = '';
+        if(listaOpciones.classList.contains('oculto')){
+            listaOpciones.classList.remove('oculto');
+            
+            if(!resultado.classList.contains('oculto')){
+                resultado.classList.add('oculto');
+            }
+        }else{
+            listaOpciones.classList.add('oculto');
+        }
     });
 
     listaOpciones.addEventListener('click', (e)=>{
         const valor = e.target.textContent;
         resultado.textContent = valor;
 
+        resultado.classList.remove('oculto');
         listaOpciones.classList.add('oculto');
     });
 });
