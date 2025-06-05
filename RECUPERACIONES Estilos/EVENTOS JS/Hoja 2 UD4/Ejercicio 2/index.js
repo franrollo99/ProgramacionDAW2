@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', ()=>{
     const desplegable = document.getElementById('desplegable');
     const listaOpciones = document.getElementById('opciones');
-    const opciones = document.querySelectorAll('.opciones');
     const resultado = document.getElementById('resultado');
     
     listaOpciones.classList.add('oculto');
@@ -20,11 +19,12 @@ document.addEventListener('DOMContentLoaded', ()=>{
     });
 
     listaOpciones.addEventListener('click', (e)=>{
-        // Comporbar que pasa si no selecciono ninguna opcion pero clico dentro del contenedor
-        const valor = e.target.textContent;
-        resultado.textContent = valor;
-
-        resultado.classList.remove('oculto');
-        listaOpciones.classList.add('oculto');
+        if(e.target.closest('.opciones')){
+            const valor = e.target.textContent;
+            resultado.textContent = valor;
+    
+            resultado.classList.remove('oculto');
+            listaOpciones.classList.add('oculto');
+        }
     });
 });
