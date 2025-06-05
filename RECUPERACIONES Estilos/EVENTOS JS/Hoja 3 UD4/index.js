@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
     contenedorProductos.addEventListener('click', (e)=>{
         if(e.target.classList.contains('btn-añadir')){
-            console.log(e.target.closest('.precio'));
+            console.log(e.target.closest('.cantidad'));
         }
     });
 });
