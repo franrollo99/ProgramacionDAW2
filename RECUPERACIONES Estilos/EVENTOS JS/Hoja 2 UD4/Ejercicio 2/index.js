@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     });
 
     listaOpciones.addEventListener('click', (e)=>{
+        // Comporbar que pasa si no selecciono ninguna opcion pero clico dentro del contenedor
         const valor = e.target.textContent;
         resultado.textContent = valor;
 

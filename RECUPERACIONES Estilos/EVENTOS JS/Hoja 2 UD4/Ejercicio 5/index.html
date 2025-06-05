@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 5</title>
+    <link rel="stylesheet" href="estilo.css">
+    <script src="index.js"></script>
+</head>
+<body>
+    <form id="form" novalidate>
+        <fieldset>
+            <legend>Formulario</legend>
+            <div>
+                <label for="usuario">Usuario</label>
+                <input type="text" name="usuario" id="usuario" pattern="[A-Za-z0-9ñÑ]+"> <!-- El + hace que acepte uno o mas caracteres del patron en vez de solo 1 -->
+            </div>
+            <span id="mensaje"></span>
+            <input type="submit" value="Enviar">
+        </fieldset>
+    </form>
+</body>
+</html>
