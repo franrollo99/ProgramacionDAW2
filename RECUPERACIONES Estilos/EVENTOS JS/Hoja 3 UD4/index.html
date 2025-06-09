@@ -9,44 +9,42 @@
 </head>
 <body>
     <div class="contenedorPrincipal">
-        <h1>EcoMarket - Tu Tienda Verde</h1>
         <div class="tienda">
+            <h1>EcoMarket - Tu Tienda Verde</h1>
             <input type="text" name="buscador" id="buscador" placeholder="Buscar productos...">
             <div class="productos">
                 <div class="producto">
                     <img src="./img/cepillo.png" alt="">
                     <p class="nombreProducto">Cepillo de bambú</p>
-                    <p class="precio">Precio: 3€</p>
-                    <input type="number" name="cantidad1" id="cantidad1" class="cantidad">
+                    <p class="precio" data-precio="3">Precio: 3€</p>
+                    <input type="number" name="cantidad1" id="cantidad1" class="cantidad" value="1">
                     <button class="btn-añadir">Añadir</button>
                 </div>
                 <div class="producto">
                     <img src="./img/jabon.png" alt="">
                     <p class="nombreProducto">Jabón natural</p>
-                    <p class="precio">Precio: 5€</p>
-                    <input type="text" name="cantidad2" id="cantidad2" class="cantidad">
+                    <p class="precio" data-precio="5">Precio: 5€</p>
+                    <input type="number" name="cantidad2" id="cantidad2" class="cantidad" value="1">
                     <button class="btn-añadir">Añadir</button>
                 </div>
                 <div class="producto">
                     <img src="./img/bolsa.png" alt="">
                     <p class="nombreProducto">Bolsa de tela</p>
-                    <p class="precio">Precio: 4€</p>
-                    <input type="text" name="cantidad3" id="cantidad3" class="cantidad">
+                    <p class="precio" data-precio="4">Precio: 4€</p>
+                    <input type="number" name="cantidad3" id="cantidad3" class="cantidad" value="1">
                     <button class="btn-añadir">Añadir</button>
                 </div>
             </div>
-            <p class="acumulado">Total acumulado: 0€</p>
+            <p id="acumulado"></p>
         </div>
         <div class="encuesta">
             <h2>¿Cuánto sabes sobre sostenibilidad?</h2>
             <div class="preguntas">
-                <p>Pregunta 1 de 3</p>
-                <div class="respuestas">
-                    <button class="respuesta">Vidrio</button>
-                    <button class="respuesta">Metal</button>
-                    <button class="respuesta">Papel</button>
-                </div>
+                <p id="numPregunta"></p>
+                <p id="pregunta"></p>
+                <div class="respuestas"></div>
             </div>
+            <div class="resultadoPreguntas"></div>
         </div>
     </div>
 </body>
