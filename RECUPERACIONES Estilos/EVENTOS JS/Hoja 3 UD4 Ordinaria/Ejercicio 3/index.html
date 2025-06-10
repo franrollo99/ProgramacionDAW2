@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3</title>
+    <link rel="stylesheet" href="estilos.css">
+    <script src="index.js"></script>
+</head>
+
+<body>
+    <div class="contenedorPrincipal">
+        <h1>Formulario de registro</h1>
+        <form>
+            <div>
+                <label for="usuario">Usuario <span>*</span>:</label>
+                <input type="text" name="usuario" id="usuario" placeholder="Introduzca el nombre de usuario">
+            </div>
+            <div>
+                <label for="contraseña">Contraseña <span>*</span>:</label>
+                <input type="password" name="contraseña" id="contraseña" placeholder="Introduzca la contraseña">
+            </div>
+            <div>
+                <label for="edad">Edad:</label>
+                <input type="number" name="edad" id="edad" placeholder="Introduzca su edad">
+            </div>
+            <div>
+                <label for="email">Email <span>*</span>:</label>
+                <input type="email" name="email" id="email" placeholder="correo@dominio">
+            </div>
+            <div>
+                <label for="usuario">Usuario <span>*</span>:</label>
+                <input type="text" name="usuario" id="usuario" placeholder="Introduzca su numero de teléfono">
+            </div>
+            <div>
+                <label>¿Como nos has conocido?<span>*</span></label>
+                <div>
+                    <input type="radio" name="conocido" id="internet">
+                    <label for="internet">Internet</label>
+                    <input type="radio" name="conocido" id="familiarAmigo">
+                    <label for="familiarAmigo">Familiar o Amigo</label>
+                    <input type="radio" name="conocido" id="publicidad">
+                    <label for="publicidad">Publicidad</label>
+                </div>
+            </div>
+            <div>
+                <label>¿Que idiomas hablas?</label>
+                <div>
+                    <input type="checkbox" name="español" id="español">
+                    <label for="español">Español</label>
+                    <input type="checkbox" name="ingles" id="ingles">
+                    <label for="español">Inglés</label>
+                    <input type="checkbox" name="frances" id="frances">
+                    <label for="español">Francés</label>
+                </div>
+            </div>
+            <div>
+                <label for="nacionalidad">Nacionalidad <span>*</span>:</label>
+                <select name="nacionalidad" id="nacionalidad">
+                    <option value="española">Española</option>
+                    <option value="inglesa">Inglesa</option>
+                    <option value="francesa">Francesa</option>
+                    <option value="otra">Otra</option>
+                </select>
+            </div>
+            <div>
+                <label for="fechaNacimiento">Fecha de nacimiento:</label>
+                <input type="date" name="fechaNacimiento" id="fechaNacimiento">
+            </div>
+            <div>
+                <label for="colorPreferido">Color preferido:</label>
+                <input type="color" name="colorPreferido" id="colorPreferido">
+            </div>
+            <label for="descripcion">Descripcion personal:</label>
+            <textarea name="descripcion" id="descripcion" placeholder="Descríbete brevemente"></textarea>
+            <div class="botones">
+                <input type="submit" value="Registrar usuario">
+                <input type="reset" value="Borrar datos">
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
