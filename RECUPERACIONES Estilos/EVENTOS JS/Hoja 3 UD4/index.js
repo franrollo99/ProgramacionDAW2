@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const preguntas = ['¿Cual es el material más fácil de reciclar?', '¿Cuál es una fuente de energía renovable?', '¿Qué significa “consumo responsable”?'];
     const respuestas = [['Vidrio', 'Metal', 'Papel'], ['Carbon', 'Energía solar', 'Gas natural'], ['Comprar solo lo que realmente necesitas', 'Comprar lo más barato aunque no sea sostenible', 'Usar productos desechables siempre que sea posible']];
-    const respuestasCorrectas = [0, 1, 0];
+    const respuestasCorrectas = [2, 1, 0];
 
     let nombreProductos = [];
     let precioTotal = 0;
@@ -27,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
     for (let i = 0; i < respuestas[0].length; i++) {
         contenedorRespuestas.innerHTML += `<button class="respuesta">${respuestas[0][i]}</button>`;
     }
-
 
     for (let producto of productos) {
         // Recojo los nombres de los productos y los meto a un array
@@ -87,13 +86,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 // En funcion del numero de aciertos sale una cosa u otra
                 switch (numAciertos) {
                     case 0:
-                        resultadosPreguntas.textContent += 'Has sacado un 0';
+                        resultadosPreguntas.textContent += 'Hay que estudiar, has sacado un 0';
                         break;
                     case 1:
-                        resultadosPreguntas.textContent += 'Has sacado un 3';
+                        resultadosPreguntas.textContent += 'Hay que estudiar un poco más, has sacado un 3';
                         break;
                     case 2:
-                        resultadosPreguntas.textContent += 'Has sacado un 7';
+                        resultadosPreguntas.textContent += 'Muy bien, has sacado un 7';
                         break;
                     case 3:
                         resultadosPreguntas.textContent += 'Enhorabuena, has sacado un 10';
