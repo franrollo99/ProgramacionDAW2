@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
         nombreProductos.push(producto.children[1].textContent);
     }
 
+    // Evento de buscador
     buscador.addEventListener('input', () => {
         // Cojo el valor del buscador
         const valor = buscador.value;
@@ -48,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Evento de añadir producto
     contenedorProductos.addEventListener('click', (e) => {
         if (e.target.classList.contains('btn-añadir')) {
             const producto = e.target.closest('.producto');
@@ -63,6 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Evento de encuesta
     encuesta.addEventListener('click', (e) => {
         if (e.target.classList.contains('respuesta')) {
             if (e.target.textContent === respuestas[numPregunta - 1][respuestasCorrectas[numPregunta - 1]]) {
@@ -81,6 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 resultadosPreguntas.textContent = `Has acertado ${numAciertos} de 3 preguntas. `;
 
+                // En funcion del numero de aciertos sale una cosa u otra
                 switch (numAciertos) {
                     case 0:
                         resultadosPreguntas.textContent += 'Has sacado un 0';
@@ -92,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         resultadosPreguntas.textContent += 'Has sacado un 7';
                         break;
                     case 3:
-                        resultadosPreguntas.textContent += 'Has sacado un 10';
+                        resultadosPreguntas.textContent += 'Enhorabuena, has sacado un 10';
                         break;
                 }
 
