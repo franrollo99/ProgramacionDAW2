@@ -1,0 +1,25 @@
+.contenedorPrincipal {
+    width: 550px;
+    padding: 10px;
+    border: 1px solid lightgray;
+}
+
+h1 {
+    text-align: center;
+}
+
+button {
+    padding: 10px;
+    width: max-content;
+    height: max-content;
+}
+
+.alineacion {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.alineacion p {
+    font-weight: bold;
+}
