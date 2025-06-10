@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     for (let i = 0; i < respuestas[0].length; i++) {
         contenedorRespuestas.innerHTML += `<button class="respuesta">${respuestas[0][i]}</button>`;
-}
+    }
 
 
     for (let producto of productos) {
@@ -62,14 +62,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
-    
+
     encuesta.addEventListener('click', (e) => {
         if (e.target.classList.contains('respuesta')) {
             if (e.target.textContent === respuestas[numPregunta - 1][respuestasCorrectas[numPregunta - 1]]) {
                 numAciertos++;
             }
 
-            if (numPregunta < 3) {
+            if (numPregunta < preguntas.length) {
                 textoPregunta.textContent = preguntas[numPregunta];
                 contenedorRespuestas.innerHTML = '';
 
