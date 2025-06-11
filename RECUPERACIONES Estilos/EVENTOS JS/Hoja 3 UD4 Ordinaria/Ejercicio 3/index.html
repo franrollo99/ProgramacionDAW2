@@ -15,7 +15,7 @@
         <form>
             <div>
                 <label for="usuario">Usuario <span>*</span>:</label>
-                <input type="text" name="usuario" id="usuario" placeholder="Introduzca el nombre de usuario">
+                <input type="text" name="usuario" id="usuario" placeholder="Introduzca el nombre de usuario" required>
             </div>
             <div>
                 <label for="contraseña">Contraseña <span>*</span>:</label>
@@ -27,38 +27,38 @@
             </div>
             <div>
                 <label for="email">Email <span>*</span>:</label>
-                <input type="email" name="email" id="email" placeholder="correo@dominio">
+                <input type="email" name="email" id="email" placeholder="correo@dominio" required>
             </div>
             <div>
-                <label for="telefono">Teléfono <span>*</span>:</label>
+                <label for="telefono">Teléfono:</label>
                 <input type="tel" name="telefono" id="telefono" placeholder="Introduzca su numero de teléfono">
             </div>
             <div>
                 <label>¿Como nos has conocido?<span>*</span></label>
                 <div>
-                    <input type="radio" name="conocido" id="internet">
+                    <input type="radio" name="conocido" id="internet" class="conocido">
                     <label for="internet">Internet</label>
-                    <input type="radio" name="conocido" id="familiarAmigo">
+                    <input type="radio" name="conocido" id="familiarAmigo" class="conocido">
                     <label for="familiarAmigo">Familiar o Amigo</label>
-                    <input type="radio" name="conocido" id="publicidad" checked>
+                    <input type="radio" name="conocido" id="publicidad" class="conocido" checked>
                     <label for="publicidad">Publicidad</label>
                 </div>
             </div>
             <div>
                 <label>¿Que idiomas hablas?</label>
                 <div>
-                    <input type="checkbox" name="español" id="español">
+                    <input type="checkbox" name="español" id="español" class="idioma" checked>
                     <label for="español">Español</label>
-                    <input type="checkbox" name="ingles" id="ingles">
-                    <label for="español">Inglés</label>
-                    <input type="checkbox" name="frances" id="frances">
-                    <label for="español">Francés</label>
+                    <input type="checkbox" name="ingles" id="ingles" class="idioma">
+                    <label for="ingles">Inglés</label>
+                    <input type="checkbox" name="frances" id="frances" class="idioma">
+                    <label for="frances">Francés</label>
                 </div>
             </div>
             <div>
                 <label for="nacionalidad">Nacionalidad <span>*</span>:</label>
                 <select name="nacionalidad" id="nacionalidad">
-                    <option value="española">Española</option>
+                    <option value="española" selected>Española</option>
                     <option value="inglesa">Inglesa</option>
                     <option value="francesa">Francesa</option>
                     <option value="otra">Otra</option>
@@ -75,8 +75,8 @@
             <label for="descripcion">Descripcion personal:</label>
             <textarea name="descripcion" id="descripcion" placeholder="Descríbete brevemente"></textarea>
             <div class="botones">
-                <input type="submit" value="Registrar usuario">
-                <input type="reset" value="Borrar datos">
+                <input type="submit" value="Registrar usuario" id="registrar">
+                <input type="reset" value="Borrar datos" id="borrar">
             </div>
         </form>
     </div>
