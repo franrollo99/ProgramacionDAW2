@@ -60,6 +60,18 @@ header:hover {
     filter: invert(1);
 }
 
+.latido{
+    animation: latido 1s linear 0s infinite;
+}
+
+@keyframes latido {
+    0%{transform: scale(1);}
+    15%{transform: scale(1.2);}
+    30%{transform: scale(1);}
+    45%{transform: scale(1.2);}
+    1000%{transform: scale(1);}
+}
+
 p,
 h5 {
     margin: 0 !important;
@@ -81,6 +93,8 @@ li:hover .submenu {
 }
 
 #buscador {
+    width: 0;
+    height: 0;
     transform: scale(0);
     opacity: 0;
     transition: transform 0.3s ease, opacity 0.3s ease; /* IMPORTANTE */
@@ -90,6 +104,8 @@ li:hover .submenu {
 #buscador.activo {
     transform: scale(1);
     opacity: 1;
+    width: auto;
+    height: auto;
 }
 
 .textoVerMas{
@@ -140,4 +156,14 @@ li:hover .submenu {
     50%{transform: translateY(0px);}
     75%{transform: translateY(-10px);}
     100%{transform: translateY(0px);}
+}
+
+.glitch{
+    animation: glitch 0.5s linear 0s infinite;
+    font-size: 3rem;
+}
+
+@keyframes glitch {
+    from{text-shadow: 0 0, 0 0;}
+    to{text-shadow: 3px 3px yellow, -3px -3px orange;}
 }

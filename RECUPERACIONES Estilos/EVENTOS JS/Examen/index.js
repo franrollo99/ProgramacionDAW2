@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <p class="peliFinal">Accion</p>
                         </div>
                     </div>
-                    <div class="resultadoPeli"></div>`;
+                    <div class="d-flex justify-content-center resultadoPeli">`;
         } else if (e.target.closest('.series')) {
             pregunta.innerHTML = `<p>?Varias temporadas o miniserie</p>
                     <div class="d-flex gap-3 justify-content-center">
@@ -38,17 +38,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>`;
         }
 
-
         if (e.target.closest('.peliFinal')) {
             const contenedorPeli = document.querySelector('.resultadoPeli');
 
             switch (e.target.closest('.peliFinal').textContent) {
                 case 'Comedia':
                     contenedorPeli.innerHTML = `<img src="./img/diablo.jpg" alt="" width="50%">`;
-
             }
-
         }
     });
-
 });
